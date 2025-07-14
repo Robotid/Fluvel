@@ -1,2 +1,6 @@
-Project: 
-Languages: Python --Version: 3.12.10
+# **Fluvel** - Micro-Framework Python
+
+### Python
+  - -- Version: *3.12.10*
+### PostgreSql
+  - -- Version: *17.6*
