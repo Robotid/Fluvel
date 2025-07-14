@@ -85,12 +85,15 @@ class App(QMainWindow):
         label_size = QLabel(f"Tamaño de Ventana: {self.window_width}x{self.window_height}.")
 
         normal_button = QPushButton("Boton Normal")
+        normal_button.setObjectName("PrimaryButton")
 
         
         stylized_button = QPushButton("Boton Estilizado")
+        stylized_button.setObjectName("SecondaryButton")
+
         
         # Estilo del boton (en una variable por si se quiere aplicar a muchos)
-        btn_style_content = load_style_sheet("primary_button.qss")
+        btn_style_content = load_style_sheet("button_style.qss")
 
         # Se aplican los estilos
         stylized_button.setStyleSheet(btn_style_content)

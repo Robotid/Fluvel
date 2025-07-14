@@ -16,7 +16,6 @@ QPushButton:hover {
     /* Estilos al pasar el ratón (hover) */
     background-color: #0056b3; /* Azul ligeramente más oscuro */
     border-color: #0056b3; /* Borde más oscuro */
-    cursor: pointer;
 }
 
 QPushButton:pressed {
