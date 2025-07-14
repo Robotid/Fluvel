@@ -1,7 +1,8 @@
 import sys
 import os
 import json
-from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget, QPushButton
+from utils.resource_loader import get_resource_path, load_style_sheet
 
 class App(QMainWindow):
     def __init__(self):
@@ -83,10 +84,24 @@ class App(QMainWindow):
         label_theme = QLabel(f"Tema: {self.theme}")
         label_size = QLabel(f"Tamaño de Ventana: {self.window_width}x{self.window_height}.")
 
+        normal_button = QPushButton("Boton Normal")
+
+        
+        stylized_button = QPushButton("Boton Estilizado")
+        
+        # Estilo del boton (en una variable por si se quiere aplicar a muchos)
+        btn_style_content = load_style_sheet("primary_button.qss")
+
+        # Se aplican los estilos
+        stylized_button.setStyleSheet(btn_style_content)
+        normal_button.setStyleSheet(btn_style_content)
+
         layout.addWidget(label_name)
         layout.addWidget(label_version)
         layout.addWidget(label_theme)
         layout.addWidget(label_size)
+        layout.addWidget(normal_button)
+        layout.addWidget(stylized_button)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

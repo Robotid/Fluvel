@@ -1,0 +1,83 @@
+QPushButton {
+    /* Estilos base del botón */
+    background-color: #007bff; /* Color primario azul (similar a Bootstrap) */
+    color: white; /* Texto blanco */
+    border: 1px solid #007bff; /* Borde del mismo color para un look sólido */
+    border-radius: 5px; /* Bordes ligeramente redondeados */
+    padding: 10px 20px; /* Espaciado interno generoso */
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
+    font-size: 14px; /* Tamaño de fuente estándar */
+    font-weight: 500; /* Peso de fuente medio */
+    text-align: center; /* Texto centrado */
+    outline: none; /* Eliminar el contorno de enfoque predeterminado */
+}
+
+QPushButton:hover {
+    /* Estilos al pasar el ratón (hover) */
+    background-color: #0056b3; /* Azul ligeramente más oscuro */
+    border-color: #0056b3; /* Borde más oscuro */
+    cursor: pointer;
+}
+
+QPushButton:pressed {
+    /* Estilos al presionar el botón */
+    background-color: #004085; /* Azul aún más oscuro */
+    border-color: #004085; /* Borde más oscuro */
+    padding-top: 11px; /* Efecto de "hundimiento" sutil */
+    padding-bottom: 9px;
+}
+
+QPushButton:disabled {
+    /* Estilos para el botón deshabilitado */
+    background-color: #e9ecef; /* Gris muy claro */
+    color: #6c757d; /* Texto gris más oscuro */
+    border: 1px solid #ced4da; /* Borde gris */
+}
+
+/* Estilo para un botón secundario (ej. "Cancelar") */
+QPushButton#SecondaryButton {
+    background-color: #6c757d; /* Gris oscuro */
+    border: 1px solid #6c757d;
+}
+
+QPushButton#SecondaryButton:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+QPushButton#SecondaryButton:pressed {
+    background-color: #494f54;
+    border-color: #444a4e;
+}
+
+/* Estilo para un botón de éxito (ej. "Guardar") */
+QPushButton#SuccessButton {
+    background-color: #28a745; /* Verde */
+    border: 1px solid #28a745;
+}
+
+QPushButton#SuccessButton:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+QPushButton#SuccessButton:pressed {
+    background-color: #1e7e34;
+    border-color: #1c7430;
+}
+
+/* Estilo para un botón de peligro (ej. "Eliminar") */
+QPushButton#DangerButton {
+    background-color: #dc3545; /* Rojo */
+    border: 1px solid #dc3545;
+}
+
+QPushButton#DangerButton:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+QPushButton#DangerButton:pressed {
+    background-color: #b21f2d;
+    border-color: #a71d2a;
+}
