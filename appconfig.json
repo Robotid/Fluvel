@@ -1,0 +1,16 @@
+{
+    "app_name": "Mi Aplicación PySide6",
+    "version": "1.0.0",
+    "window_size": {
+        "width": 800,
+        "height": 600
+    },
+    "theme": "dark",
+    "database": {
+        "host": "localhost",
+        "port": 5432,
+        "user": "admin",
+        "password": "secure_password"
+    },
+    "log_level": "INFO"
+}
