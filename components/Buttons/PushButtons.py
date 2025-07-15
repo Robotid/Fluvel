@@ -5,11 +5,11 @@ class PushButton(QPushButton):
     def __init__(self, text: str):
         super().__init__(text)
         self.name = "PrimaryButton"
-        
-        self.instantiate()
+    
+        self.instantiate() 
     
     def instantiate(self):
-        self.setObjectName(self.name)
+        self.setObjectName(self.name) # Nombre Representativo del componente en el archivos 'theme/push_button.qss'
     
 class PrimaryButton(PushButton):
     def __init__(self, text: str):
