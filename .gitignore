@@ -1,0 +1,17 @@
+# Directorios de entorno virtual
+venv/
+.venv/
+
+# Directorios de configuración de IDEs
+.vscode/
+
+# Archivos de caché de Python
+__pycache__/
+*.pyc
+
+# Archivos de registro
+*.log
+
+# Archivos de datos temporales o generados
+*.env
+.env.local

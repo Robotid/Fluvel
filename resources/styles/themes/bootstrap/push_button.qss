@@ -1,0 +1,157 @@
+QPushButton {
+    /* Estilos base del botón */
+    background-color: #007bff; /* Color primario azul (similar a Bootstrap) */
+    color: white; /* Texto blanco */
+    border: 1px solid; /* estilo de borde uniforme para todos los tipos de botones */
+    border-color: #007bff; /* Borde del mismo color para un look sólido */
+    border-radius: 0px; /* Bordes ligeramente redondeados */
+    padding: 10px 20px; /* Espaciado interno generoso */
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
+    font-size: 16px; /* Tamaño de fuente estándar */
+    font-weight: 500; /* Peso de fuente medio */
+    text-align: center; /* Texto centrado */
+    outline: none; /* Eliminar el contorno de enfoque predeterminado */
+}
+
+QPushButton:disabled {
+    /* Estilos para el botón deshabilitado */
+    background-color: #e9ecef; /* Gris muy claro */
+    color: #6c757d; /* Texto gris más oscuro */
+    border: 1px solid #ced4da; /* Borde gris */
+}
+
+/* Estilo para un botón primario*/
+QPushButton#PrimaryButton {
+    background-color: #0084ff; /* Color primario azul (similar a Bootstrap) */
+    border-color: #0084ff; /* Borde del mismo color para un look sólido */
+}
+
+QPushButton#PrimaryButton:hover {
+    /* Estilos al pasar el ratón (hover) */
+    background-color: #0056b3; /* Azul ligeramente más oscuro */
+    border-color: #0056b3; /* Borde más oscuro */
+}
+
+QPushButton#PrimaryButton:pressed {
+    /* Estilos al presionar el botón */
+    background-color: #004085; /* Azul aún más oscuro */
+    border-color: #004085; /* Borde más oscuro */
+    padding-top: 11px; /* Efecto de "hundimiento" sutil */
+    padding-bottom: 9px;
+}
+
+/* Estilo para un botón secundario (ej. "Cancelar") */
+QPushButton#SecondaryButton {
+    background-color: #858e96; /* Gris oscuro */
+    border-color:#858e96;
+}
+
+QPushButton#SecondaryButton:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+QPushButton#SecondaryButton:pressed {
+    background-color: #494f54;
+    border-color: #444a4e;
+}
+
+/* Estilo para un botón de éxito (ej. "Guardar") */
+QPushButton#SuccessButton {
+    background-color: #00a441; /* Verde */
+    border-color:#00a441;
+}
+
+QPushButton#SuccessButton:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+QPushButton#SuccessButton:pressed {
+    background-color: #1e7e34;
+    border-color: #1c7430;
+}
+
+/* Estilo para un botón de peligro (ej. "Eliminar") */
+QPushButton#DangerButton {
+    background-color: #e63a40; /* Rojo */
+    border-color: #e63a40;
+}
+
+QPushButton#DangerButton:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+QPushButton#DangerButton:pressed {
+    background-color: #b21f2d;
+    border-color: #a71d2a;
+}
+
+/* Estilo para un botón de advertencia */
+QPushButton#WarningButton {
+    background-color: #ffbe00;
+    border-color: #ffbe00;
+}
+
+QPushButton#WarningButton:hover {
+    background-color: #f8c52c;
+    border-color: #f8c52c;
+}
+
+QPushButton#WarningButton:pressed {
+    background-color: #e0b73b;
+    border-color: #e0b73b;
+}
+
+/* Estilo para un botón de info */
+QPushButton#InfoButton {
+    background-color: #00a2ba;
+    border-color: #00a2ba;
+}
+
+QPushButton#InfoButton:hover {
+    background-color: #2aabbe;
+    border-color: #2aabbe;
+}
+
+QPushButton#InfoButton:pressed {
+    background-color: #1b7f8f;
+    border-color: #1b7f8f;
+}
+
+/* Estilo para un botón claro */
+QPushButton#LightButton {
+    background-color: #f8f9fa;
+    color: #000;
+    border-color: #f8f9fa;
+}
+
+QPushButton#LightButton:hover {
+    background-color: #dee1e4;
+    color: #000;
+    border-color: #dee1e4;
+}
+
+QPushButton#LightButton:pressed {
+    background-color: #b4b6b8;
+    color: #000;
+    border-color: #b4b6b8;
+}
+
+/* Estilo para un botón oscuro */
+QPushButton#DarkButton {
+    background-color: #232629;
+    border-color: #232629;
+}
+
+QPushButton#DarkButton:hover {
+    background-color: #333a40;
+    border-color: #333a40;
+}
+
+QPushButton#DarkButton:pressed {
+    background-color: #25292c;
+    border-color: #25292c;
+}
+

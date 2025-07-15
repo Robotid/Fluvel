@@ -1,0 +1,31 @@
+# appconfig.toml
+
+# Configuración general de la aplicación
+app_name = "Mi Aplicación PySide6 desde TOML"
+version = "1.0.0"
+log_level = "INFO" # Nivel de registro: DEBUG, INFO, WARNING, ERROR, CRITICAL
+
+# Configuración del tema de la interfaz de usuario
+theme = "bootstrap" # Nombre del tema a cargar desde resources/styles/themes/
+
+# Configuración del tamaño de la ventana principal
+[window_size]
+width = 1280
+height = 720
+
+# Configuración de la base de datos (ejemplo, no se recomienda para credenciales sensibles)
+[database]
+host = "localhost"
+port = 5432
+user = "admin"
+password = "secure_password" # ¡Considera usar variables de entorno para esto en producción!
+
+# Otras configuraciones que podrías añadir
+[features]
+enable_dark_mode_toggle = true
+show_welcome_message = true
+
+[paths]
+# Rutas relativas a la raíz del proyecto para recursos específicos
+# Aunque 'utils/paths.py' manejará la lógica, puedes definir valores aquí si es necesario
+default_icon = "app_icon.png"

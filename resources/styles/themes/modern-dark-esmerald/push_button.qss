@@ -1,0 +1,180 @@
+/* Archivo push_button_emerald.qss para PySide6 - Tema 'Modern-Dark: Emerald Accents' */
+
+/* --- Colores de la Paleta 'Modern-Dark: Emerald Accents' --- */
+/*
+  Background: #1A1A1A
+  Foreground: #E0E0E0
+  Highlight/Selection: #2C2C2C
+  Border/Separator: #3A3A3A
+
+  Emerald Accent: #00C853 (Verde esmeralda)
+  Cyan Accent: #00BCD4 (Cian vibrante)
+  Orange Accent: #FF9800 (Naranja para advertencias)
+  Red Accent: #F44336 (Rojo para errores)
+*/
+
+/* --- Estilo Base para QPushButton --- */
+QPushButton {
+    background-color: #2C2C2C; /* Un gris intermedio para el estado base */
+    color: #E0E0E0; /* Texto principal */
+    border: 1px solid #3A3A3A; /* Borde sutil */
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    outline: none;
+}
+
+QPushButton:hover {
+    background-color: #3A3A3A;
+    border-color: #4A4A4A;
+}
+
+QPushButton:pressed {
+    background-color: #1F1F1F;
+    border-color: #2C2C2C;
+}
+
+QPushButton:disabled {
+    background-color: #181818;
+    color: #777777;
+    border-color: #222222;
+}
+
+/* --- Estilos por ID de Botón --- */
+
+/* #PrimaryButton (Esmeralda principal) */
+#PrimaryButton {
+    background-color: #00C853;
+    border: 1px solid #00C853;
+    color: #FFFFFF;
+}
+
+#PrimaryButton:hover {
+    background-color: #00B14A;
+    border-color: #00B14A;
+}
+
+#PrimaryButton:pressed {
+    background-color: #009940;
+    border-color: #009940;
+}
+
+/* #SecondaryButton (Cian secundario) */
+#SecondaryButton {
+    background-color: #2C2C2C;
+    border: 1px solid #00BCD4;
+    color: #00BCD4;
+}
+
+#SecondaryButton:hover {
+    background-color: #3A3A3A;
+    border-color: #00AABF;
+}
+
+#SecondaryButton:pressed {
+    background-color: #1F1F1F;
+    border-color: #0096A8;
+}
+
+/* #DangerButton */
+#DangerButton {
+    background-color: #F44336;
+    border: 1px solid #F44336;
+    color: #FFFFFF;
+}
+
+#DangerButton:hover {
+    background-color: #D32F2F;
+    border-color: #D32F2F;
+}
+
+#DangerButton:pressed {
+    background-color: #C62828;
+    border-color: #C62828;
+}
+
+/* #SuccessButton */
+#SuccessButton {
+    background-color: #00C853; /* Usamos el acento esmeralda principal */
+    border: 1px solid #00C853;
+    color: #FFFFFF;
+}
+
+#SuccessButton:hover {
+    background-color: #00B14A;
+    border-color: #00B14A;
+}
+
+#DangerButton:pressed {
+    background-color: #009940;
+    border-color: #009940;
+}
+
+/* #WarningButton */
+#WarningButton {
+    background-color: #FF9800;
+    border: 1px solid #FF9800;
+    color: #1A1A1A;
+}
+
+#WarningButton:hover {
+    background-color: #F57C00;
+    border-color: #F57C00;
+}
+
+#WarningButton:pressed {
+    background-color: #EF6C00;
+    border-color: #EF6C00;
+}
+
+/* #InfoButton */
+#InfoButton {
+    background-color: #00BCD4; /* Usamos el acento cian principal */
+    border: 1px solid #00BCD4;
+    color: #1A1A1A;
+}
+
+#InfoButton:hover {
+    background-color: #00AABF;
+    border-color: #00AABF;
+}
+
+#InfoButton:pressed {
+    background-color: #0096A8;
+    border-color: #0096A8;
+}
+
+/* #DarkButton */
+#DarkButton {
+    background-color: #1A1A1A;
+    border: 1px solid #3A3A3A;
+    color: #E0E0E0;
+}
+
+#DarkButton:hover {
+    background-color: #252525;
+    border-color: #4A4A4A;
+}
+
+#DarkButton:pressed {
+    background-color: #0D0D0D;
+    border-color: #2C2C2C;
+}
+
+/* #LightButton */
+#LightButton {
+    background-color: #E0E0E0;
+    border: 1px solid #CFCFCF;
+    color: #1A1A1A;
+}
+
+#LightButton:hover {
+    background-color: #D0D0D0;
+    border-color: #BDBDBD;
+}
+
+#LightButton:pressed {
+    background-color: #BFBFBF;
+    border-color: #A0A0A0;
+}

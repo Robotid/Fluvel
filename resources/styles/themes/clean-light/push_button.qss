@@ -1,0 +1,182 @@
+/* Archivo push_button_clean_light.qss para PySide6 - Tema 'Clean Light' */
+
+/* --- Colores de la Paleta 'Clean Light' --- */
+/*
+  Background: #F0F0F0 (Blanco muy claro)
+  Foreground: #333333 (Gris oscuro para texto)
+  Highlight/Selection: #E0E0E0
+  Border/Separator: #CCCCCC
+
+  Primary Accent: #607D8B (Gris azulado suave)
+  Secondary Accent: #9E9E9E (Gris medio)
+  Success: #8BC34A (Verde claro)
+  Danger: #EF5350 (Rojo suave)
+  Warning: #FFC107 (Amarillo ambar)
+  Info: #03A9F4 (Azul cielo)
+*/
+
+/* --- Estilo Base para QPushButton --- */
+QPushButton {
+    background-color: #E0E0E0;
+    color: #333333;
+    border: 1px solid #CCCCCC;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    outline: none;
+}
+
+QPushButton:hover {
+    background-color: #D0D0D0;
+    border-color: #BDBDBD;
+}
+
+QPushButton:pressed {
+    background-color: #C0C0C0;
+    border-color: #A0A0A0;
+}
+
+QPushButton:disabled {
+    background-color: #F8F8F8;
+    color: #BBBBBB;
+    border-color: #DDDDDD;
+}
+
+/* --- Estilos por ID de Botón --- */
+
+/* #PrimaryButton */
+#PrimaryButton {
+    background-color: #607D8B;
+    border: 1px solid #607D8B;
+    color: #FFFFFF;
+}
+
+#PrimaryButton:hover {
+    background-color: #546E7A;
+    border-color: #546E7A;
+}
+
+#PrimaryButton:pressed {
+    background-color: #455A64;
+    border-color: #455A64;
+}
+
+/* #SecondaryButton */
+#SecondaryButton {
+    background-color: #E0E0E0;
+    border: 1px solid #9E9E9E;
+    color: #616161;
+}
+
+#SecondaryButton:hover {
+    background-color: #D0D0D0;
+    border-color: #8D8D8D;
+}
+
+#SecondaryButton:pressed {
+    background-color: #C0C0C0;
+    border-color: #757575;
+}
+
+/* #DangerButton */
+#DangerButton {
+    background-color: #EF5350;
+    border: 1px solid #EF5350;
+    color: #FFFFFF;
+}
+
+#DangerButton:hover {
+    background-color: #E53935;
+    border-color: #E53935;
+}
+
+#DangerButton:pressed {
+    background-color: #D32F2F;
+    border-color: #D32F2F;
+}
+
+/* #SuccessButton */
+#SuccessButton {
+    background-color: #8BC34A;
+    border: 1px solid #8BC34A;
+    color: #FFFFFF;
+}
+
+#SuccessButton:hover {
+    background-color: #7CB342;
+    border-color: #7CB342;
+}
+
+#SuccessButton:pressed {
+    background-color: #689F38;
+    border-color: #689F38;
+}
+
+/* #WarningButton */
+#WarningButton {
+    background-color: #FFC107;
+    border: 1px solid #FFC107;
+    color: #333333;
+}
+
+#WarningButton:hover {
+    background-color: #FFB300;
+    border-color: #FFB300;
+}
+
+#WarningButton:pressed {
+    background-color: #FFA000;
+    border-color: #FFA000;
+}
+
+/* #InfoButton */
+#InfoButton {
+    background-color: #03A9F4;
+    border: 1px solid #03A9F4;
+    color: #FFFFFF;
+}
+
+#InfoButton:hover {
+    background-color: #039BE5;
+    border-color: #039BE5;
+}
+
+#InfoButton:pressed {
+    background-color: #0288D1;
+    border-color: #0288D1;
+}
+
+/* #DarkButton (para usar en fondos claros si se necesita un contraste oscuro) */
+#DarkButton {
+    background-color: #333333;
+    border: 1px solid #444444;
+    color: #FFFFFF;
+}
+
+#DarkButton:hover {
+    background-color: #4F4F4F;
+    border-color: #555555;
+}
+
+#DarkButton:pressed {
+    background-color: #222222;
+    border-color: #333333;
+}
+
+/* #LightButton (para el color base del tema) */
+#LightButton {
+    background-color: #F0F0F0;
+    border: 1px solid #CCCCCC;
+    color: #333333;
+}
+
+#LightButton:hover {
+    background-color: #E5E5E5;
+    border-color: #BBBBBB;
+}
+
+#LightButton:pressed {
+    background-color: #DBDBDB;
+    border-color: #AAAAAA;
+}

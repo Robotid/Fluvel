@@ -1,15 +1,10 @@
 from typing import Literal
 import os
 import sys
+from pathlib import Path
+from utils.helper_functions import get_root_path
 
-if getattr(sys, "frozen", False):
-    # Si la app está empaquetada
-    APP_ROOT = os.path.dirname(sys.executable)
-else:
-    # Si se ejecuta desde el código fuente
-    # os.path.dirname(os.path.abspath(__file__)) -> mi_aplicacion/utils/
-    # os.path.dirname(os.path.dirname(os.path.abspath(__file__))) -> mi_aplicacion/
-    APP_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+APP_ROOT = get_root_path()
 
 _RESOURCE_FOLDERS = {
         "style":"styles",
@@ -39,7 +34,7 @@ def get_resource_path(resource_type: Literal["style", "img", "ico", "data", "tem
     resource_full_path = os.path.join(APP_ROOT, 'resources', folder_name, filename)
     return resource_full_path
 
-def load_style_sheet(filename:str) -> str:
+def load_style_sheet(filename: str, theme: str) -> str:
     """
     Carga el contenido de un archivo de hoja de estilos (QSS).
 
@@ -49,12 +44,13 @@ def load_style_sheet(filename:str) -> str:
     Returns:
         str: El contenido de la hoja de estilos, o una cadena vacía si no se encuentra.
     """
-    file_path = get_resource_path("style", filename)
+    # file_path = get_resource_path("style", filename)
+    file_path = os.path.join(APP_ROOT, "resources", "styles", "themes", theme, filename)
 
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             style_content = f.read()
-
+            
         return style_content
         
     except FileNotFoundError:

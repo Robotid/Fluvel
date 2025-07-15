@@ -1,11 +1,11 @@
 {
-    "app_name": "Mi Aplicación PySide6",
+    "app_name": "Mi Aplicación PySide6 desde JSON",
     "version": "1.0.0",
     "window_size": {
-        "width": 800,
-        "height": 600
+        "width": 500,
+        "height": 500
     },
-    "theme": "dark",
+    "theme": "modern-dark-esmerald",
     "database": {
         "host": "localhost",
         "port": 5432,
