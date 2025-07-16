@@ -24,17 +24,17 @@ class MainWindow(QMainWindow):
         self.version = self.config.get("version", "N/A")
         self.window_width = self.config.get("window_size", {}).get("width", 640)
         self.window_height = self.config.get("window_size", {}).get("height", 480)
-        self.theme = self.config.get("theme", "light")
+        self.theme = self.config.get("theme", "clean-light")
 
         # Configuring the database data
-        self.db = self.config.get("database", "localhost")
+        self.db = self.config.get("database", {})
 
         # Inicializar UI
         self.init_ui()
 
     def init_ui(self):
         """
-        Hola :)
+        
         """
         self.setWindowTitle(f"{self.app_name} - {self.version}")
         self.setGeometry(100, 100, self.window_width, self.window_height)
@@ -42,7 +42,7 @@ class MainWindow(QMainWindow):
         # Configurando el Layout
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
-        self.layout = QVBoxLayout()
+        self.layout: QVBoxLayout = QVBoxLayout()
         central_widget.setLayout(self.layout)
 
         print(f"Configuración de la base de datos: {self.config.get('database', 'No configurada')}")
@@ -59,5 +59,8 @@ class MainWindow(QMainWindow):
         ...
     
     def set_theme(self):
-        theme_content = load_style_sheet("push_button.qss", self.theme)
-        self.setStyleSheet(theme_content)
+        label_content = load_style_sheet("Label.qss", self.theme)
+        push_button_content = load_style_sheet("PushButton.qss", self.theme)
+        check_button_content = load_style_sheet("CheckButton.qss", self.theme)
+        full_content = f"{label_content}{push_button_content}{check_button_content}"
+        self.setStyleSheet(full_content)

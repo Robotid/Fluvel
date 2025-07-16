@@ -3,7 +3,7 @@ from pathlib import Path
 
 def get_root_path() -> str:
     """
-    Esta función devuelve el Root Path del proyecto
+    This function returns the **`APP_ROOT: Path`** of the project.
     """
 
     APP_ROOT: str
@@ -19,3 +19,10 @@ def get_root_path() -> str:
         APP_ROOT = Path(__file__).parent.parent
 
     return APP_ROOT
+
+def minify_qss(qss_content: str) -> str:
+    """
+    -> **TO DO** <-\n
+    Minimiza una cadena QSS eliminando espacios en blanco y comentarios.
+    """
+    ...

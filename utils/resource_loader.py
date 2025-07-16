@@ -15,7 +15,7 @@ _RESOURCE_FOLDERS = {
         "font":"fonts"
 }
 
-def get_resource_path(resource_type: Literal["style", "img", "ico", "data", "template", "font"], filename: str) -> str:
+def get_resource_path(filename: str, resource_type: Literal["style", "img", "ico", "data", "template", "font"]) -> str:
     """
     Construye la ruta absoluta a un recurso específico.
 

@@ -35,7 +35,7 @@ def load_app_config(filename: str) -> dict:
         **IMPORTANT** Only supports TOML or JSON config files with the ***same*** configuration format.\n
         This function is responsible for loading the application's 
         global configuration provided by a JSON or TOML file.\n
-        *If you have or want to create a different configuration style (format), update the **`set_format()`** method of the **`Config`** class.*"""
+        *If you have or want to create a different configuration style (format), update the **`set_format()`** method of the **`core.Config`** class.*"""
 
         config: dict # Variable que contendrá la configuración de la aplicación
 

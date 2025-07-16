@@ -1,6 +1,7 @@
-from PySide6.QtWidgets import QLabel
 from components.Buttons.PushButtons import OutlinedButton, PrimaryButton, SecondaryButton, SuccessButton, DangerButton, DarkButton, InfoButton, WarningButton, LightButton
 from components.Main.Windows import MainWindow
+from components.Labels.Label import Label, InfoAlert, WarningAlert, SuccessAlert, DangerAlert 
+from PySide6.QtWidgets import QCheckBox
 
 class AppWindow(MainWindow):
     def __init__(self, app_config: dict):
@@ -9,10 +10,10 @@ class AppWindow(MainWindow):
     def setUpMainWindow(self):
         """ Display the `components` in the Main Window. """
         
-        label_name = QLabel(f"Nombre de la Aplicación: {self.app_name}")
-        label_version = QLabel(f"Versión: {self.version}")
-        label_theme = QLabel(f"Tema: {self.theme}")
-        label_size = QLabel(f"Tamaño de Ventana: {self.window_width}x{self.window_height}.")
+        label_name = InfoAlert(f"Nombre de la Aplicación: {self.app_name}")
+        label_version = WarningAlert(f"Versión: {self.version}")
+        label_theme = SuccessAlert(f"Tema: {self.theme}")
+        label_size = DangerAlert(f"Tamaño de Ventana: {self.window_width}x{self.window_height}.")
 
         primary_button = PrimaryButton("PrimaryButton")
 
@@ -31,6 +32,8 @@ class AppWindow(MainWindow):
         light_button = LightButton("LightButton")
 
         outlined_button = OutlinedButton("OutlinedButton")
+
+        label = Label("Todo salió bien")
     
         self.layout.addWidget(label_name)
         self.layout.addWidget(label_version)
@@ -45,3 +48,4 @@ class AppWindow(MainWindow):
         self.layout.addWidget(dark_button)
         self.layout.addWidget(light_button)
         self.layout.addWidget(outlined_button)
+        self.layout.addWidget(label)
