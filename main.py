@@ -1,18 +1,20 @@
 import sys
 from PySide6.QtWidgets import QApplication
 from utils.config_loader import load_app_config
-from views.main_window import MainWindow
+from views.main_window import AppWindow
 
 def main():
+    # App
     app = QApplication(sys.argv)
 
-    # Cargar configuración y tema
+    # Load settings and theme
     config = load_app_config("appconfig.toml")
-    
-    # Instanciando la clase principal de la aplicación -> MainWindow <-
-    window = MainWindow(app_config = config)
 
-    # Ejecutando el bucle principal de la app
+    # Instantiate and display the main application window
+    window = AppWindow(app_config = config)
+    window.show()
+
+    # Running the main loop
     sys.exit(app.exec())
 
 if __name__ == "__main__":

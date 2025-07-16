@@ -1,68 +1,61 @@
 # Componente QPushButton
 from PySide6.QtWidgets import QPushButton
+from typing import Literal
 
 class PushButton(QPushButton):
-    def __init__(self, text: str):
+    def __init__(self, text: str, _type: Literal["PrimaryButton", "SecondaryButton", "DangerButton", "SuccessButton", "WarningButton", "InfoButton", "LightButton", "DarkButton"]):
         super().__init__(text)
-        self.name = "PrimaryButton"
-    
-        self.instantiate() 
-    
-    def instantiate(self):
-        self.setObjectName(self.name) # Nombre Representativo del componente en el archivos 'theme/push_button.qss'
+
+        self.setObjectName(_type) # Nombre Representativo del componente en el archivo 'theme/push_button.qss'
     
 class PrimaryButton(PushButton):
     def __init__(self, text: str):
-        super().__init__(text)
         self.name = "PrimaryButton"
 
-        self.instantiate()
+        super().__init__(text, self.name)
 
 class SecondaryButton(PushButton):
     def __init__(self, text: str):
-        super().__init__(text)
         self.name = "SecondaryButton"
 
-        self.instantiate()
+        super().__init__(text, self.name)
 
 class DangerButton(PushButton):
     def __init__(self, text: str):
-        super().__init__(text)
         self.name = "DangerButton"
 
-        self.instantiate()
+        super().__init__(text, self.name)
 
 class SuccessButton(PushButton):
     def __init__(self, text: str):
-        super().__init__(text)
         self.name = "SuccessButton"
 
-        self.instantiate()
+        super().__init__(text, self.name)
 
 class WarningButton(PushButton):
     def __init__(self, text: str):
-        super().__init__(text)
         self.name = "WarningButton"
 
-        self.instantiate()
+        super().__init__(text, self.name)
 
 class InfoButton(PushButton):
     def __init__(self, text: str):
-        super().__init__(text)
         self.name = "InfoButton"
 
-        self.instantiate()
+        super().__init__(text, self.name)
 
 class LightButton(PushButton):
     def __init__(self, text: str):
-        super().__init__(text)
         self.name = "LightButton"
 
-        self.instantiate()
+        super().__init__(text, self.name)
 
 class DarkButton(PushButton):
     def __init__(self, text: str):
-        super().__init__(text)
         self.name = "DarkButton"
+        super().__init__(text, self.name)
 
-        self.instantiate()
+class OutlinedButton(PushButton):
+    def __init__(self, text: str):
+        self.name = "OutlinedButton"
+        super().__init__(text, self.name)

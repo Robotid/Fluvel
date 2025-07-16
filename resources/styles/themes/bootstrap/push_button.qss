@@ -4,13 +4,16 @@ QPushButton {
     color: white; /* Texto blanco */
     border: 1px solid; /* estilo de borde uniforme para todos los tipos de botones */
     border-color: #007bff; /* Borde del mismo color para un look sólido */
-    border-radius: 0px; /* Bordes ligeramente redondeados */
     padding: 10px 20px; /* Espaciado interno generoso */
     font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
-    font-size: 16px; /* Tamaño de fuente estándar */
-    font-weight: 500; /* Peso de fuente medio */
+    font-size: 14px; /* Tamaño de fuente estándar */
+    font-weight: 700; /* Peso de fuente medio */
     text-align: center; /* Texto centrado */
     outline: none; /* Eliminar el contorno de enfoque predeterminado */
+}
+QPushButton:pressed {
+    padding-top: 11px; /* Efecto de "hundimiento" sutil */
+    padding-bottom: 9px;
 }
 
 QPushButton:disabled {
@@ -36,8 +39,27 @@ QPushButton#PrimaryButton:pressed {
     /* Estilos al presionar el botón */
     background-color: #004085; /* Azul aún más oscuro */
     border-color: #004085; /* Borde más oscuro */
-    padding-top: 11px; /* Efecto de "hundimiento" sutil */
-    padding-bottom: 9px;
+}
+
+/* Estilo para un botón outline */
+
+QPushButton#OutlinedButton {
+    border: 1px solid #0084ff;
+    border-radius: 8px;
+    color: #0084ff;
+    background-color: #fff;
+}
+
+QPushButton#OutlinedButton:hover {
+    background-color: #c7e4ff;
+    border-color: #0056b3;
+    color: #0056b3;
+}
+
+QPushButton#OutlinedButton:pressed {
+    background-color: #c7e4ff;
+    border-color: #004085;
+    color: #004085;
 }
 
 /* Estilo para un botón secundario (ej. "Cancelar") */
@@ -95,13 +117,13 @@ QPushButton#WarningButton {
 }
 
 QPushButton#WarningButton:hover {
-    background-color: #f8c52c;
-    border-color: #f8c52c;
+    background-color: #dfb128;
+    border-color: #dfb128;
 }
 
 QPushButton#WarningButton:pressed {
-    background-color: #e0b73b;
-    border-color: #e0b73b;
+    background-color: #b4932f;
+    border-color: #b4932f;
 }
 
 /* Estilo para un botón de info */
@@ -111,8 +133,8 @@ QPushButton#InfoButton {
 }
 
 QPushButton#InfoButton:hover {
-    background-color: #2aabbe;
-    border-color: #2aabbe;
+    background-color: #1a7988;
+    border-color: #1a7988;
 }
 
 QPushButton#InfoButton:pressed {
@@ -154,4 +176,3 @@ QPushButton#DarkButton:pressed {
     background-color: #25292c;
     border-color: #25292c;
 }
-

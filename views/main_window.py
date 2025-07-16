@@ -1,79 +1,47 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget
-from utils.resource_loader import get_resource_path, load_style_sheet
-from components.Buttons.PushButtons import PrimaryButton, SecondaryButton, SuccessButton, DangerButton, DarkButton, InfoButton, WarningButton, LightButton
+from PySide6.QtWidgets import QLabel
+from components.Buttons.PushButtons import OutlinedButton, PrimaryButton, SecondaryButton, SuccessButton, DangerButton, DarkButton, InfoButton, WarningButton, LightButton
+from components.Main.Windows import MainWindow
 
-
-class MainWindow(QMainWindow):
+class AppWindow(MainWindow):
     def __init__(self, app_config: dict):
-        super().__init__()
+        super().__init__(app_config)
 
-        # Rescatar la Configuración Global de la App en 'self.config'
-        self.config = app_config
-
-        # Inicializar UI
-        self.init_ui()
-
-    def init_ui(self):
-        """Estableciendo las -> Configuraciones <- de la Interfaz de Usuario de la aplicación """
-
-        self.app_name = self.config.get("app_name", "Aplicación Desconocida")
-        self.version = self.config.get("version", "N/A")
-        self.window_width = self.config.get("window_size", {}).get("width", 640)
-        self.window_height = self.config.get("window_size", {}).get("height", 480)
-        self.theme = self.config.get("theme", "light")
-
-        self.setWindowTitle(f"{self.app_name} - {self.version}")
-        self.setGeometry(100, 100, self.window_width, self.window_height)
-
-        # Configurando el Layout
-        central_widget = QWidget()
-        self.setCentralWidget(central_widget)
-        layout = QVBoxLayout()
-        central_widget.setLayout(layout)
-
-        print(f"Configuración de la base de datos: {self.config.get('database', 'No configurada')}")
-        print(f"Nivel de log: {self.config.get('log_level', 'No definido')}")
-
-        # Display Widgets
-        self.setUpMainWindow(layout=layout)
-        self.show()
-
-    def setUpMainWindow(self, layout):
-        """ Configurar los Wigets de la aplicación """
+    def setUpMainWindow(self):
+        """ Display the `components` in the Main Window. """
+        
         label_name = QLabel(f"Nombre de la Aplicación: {self.app_name}")
         label_version = QLabel(f"Versión: {self.version}")
         label_theme = QLabel(f"Tema: {self.theme}")
         label_size = QLabel(f"Tamaño de Ventana: {self.window_width}x{self.window_height}.")
 
+        primary_button = PrimaryButton("PrimaryButton")
 
-        # Estableciendo el tema de la app con la hoja de estilos (se aplica a toda la app)
-        self.setStyleSheet(load_style_sheet("push_button.qss", self.theme))
+        secondary_button = SecondaryButton("SecondaryButton")
 
-        primary_button = PrimaryButton("Boton Primario")
+        danger_button = DangerButton("DangerButton")
 
-        secondary_button = SecondaryButton("Boton Secundario")
+        success_button = SuccessButton("SuccessButton")
 
-        danger_button = DangerButton("Boton Peligro")
+        warning_button = WarningButton("WarningButton")
 
-        success_button = SuccessButton("Boton Success")
+        info_button = InfoButton("InfoButton")
 
-        warning_button = WarningButton("Warning Button")
+        dark_button = DarkButton("DarkButton")
 
-        info_button = InfoButton("Info Button")
+        light_button = LightButton("LightButton")
 
-        dark_button = DarkButton("Dark Button")
-
-        light_button = LightButton("Light Button")
+        outlined_button = OutlinedButton("OutlinedButton")
     
-        layout.addWidget(label_name)
-        layout.addWidget(label_version)
-        layout.addWidget(label_theme)
-        layout.addWidget(label_size)
-        layout.addWidget(primary_button)
-        layout.addWidget(secondary_button)
-        layout.addWidget(danger_button)
-        layout.addWidget(success_button)
-        layout.addWidget(warning_button)
-        layout.addWidget(info_button)
-        layout.addWidget(dark_button)
-        layout.addWidget(light_button)
+        self.layout.addWidget(label_name)
+        self.layout.addWidget(label_version)
+        self.layout.addWidget(label_theme)
+        self.layout.addWidget(label_size)
+        self.layout.addWidget(primary_button)
+        self.layout.addWidget(secondary_button)
+        self.layout.addWidget(danger_button)
+        self.layout.addWidget(success_button)
+        self.layout.addWidget(warning_button)
+        self.layout.addWidget(info_button)
+        self.layout.addWidget(dark_button)
+        self.layout.addWidget(light_button)
+        self.layout.addWidget(outlined_button)

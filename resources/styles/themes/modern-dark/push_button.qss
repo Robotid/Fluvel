@@ -44,6 +44,8 @@ QPushButton:hover {
 QPushButton:pressed {
     background-color: #2A2A2A; /* Más oscuro al presionar */
     border-color: #3A3A3A;
+    padding-top: 11px; /* Efecto de "hundimiento" sutil */
+    padding-bottom: 9px;
 }
 
 QPushButton:disabled {
