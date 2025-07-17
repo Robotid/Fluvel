@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
 from utils.resource_loader import load_style_sheet
 
-class MainWindow(QMainWindow):
+class AppWindow(QMainWindow):
     def __init__(self, config: dict):
         """
         The constructor method performs the main configurations of the application's user interface window.\n
@@ -54,13 +54,14 @@ class MainWindow(QMainWindow):
         # Display Widgets
         self.setUpMainWindow()
     
-    def setUpMainWindow(self):
-        """ Display `components` in the Main Window. """
-        ...
-    
     def set_theme(self):
         label_content = load_style_sheet("Label.qss", self.theme)
         push_button_content = load_style_sheet("PushButton.qss", self.theme)
         check_button_content = load_style_sheet("CheckButton.qss", self.theme)
         full_content = f"{label_content}{push_button_content}{check_button_content}"
         self.setStyleSheet(full_content)
+
+    def setUpMainWindow(self):
+        """ Display `components` in the Main Window. """
+        ...
+    

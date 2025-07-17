@@ -1,10 +1,7 @@
 from typing import Literal
 import os
-import sys
 from pathlib import Path
-from utils.helper_functions import get_root_path
-
-APP_ROOT = get_root_path()
+from utils import APP_ROOT
 
 _RESOURCE_FOLDERS = {
         "style":"styles",
@@ -34,6 +31,11 @@ def get_resource_path(filename: str, resource_type: Literal["style", "img", "ico
     resource_full_path = os.path.join(APP_ROOT, 'resources', folder_name, filename)
     return resource_full_path
 
+
+def get_theme_path(theme: str) -> Path:
+    theme_path = Path()
+
+
 def load_style_sheet(filename: str, theme: str) -> str:
     """
     Carga el contenido de un archivo de hoja de estilos (QSS).
@@ -58,5 +60,5 @@ def load_style_sheet(filename: str, theme: str) -> str:
         return ""
         
     except Exception as e:
-        print(f"Error al leer el archivo de hoja de estilos '{filename}': {e}")
+        print(f"Error al leer el archivo de hoja de estilos '{filename}': {e}.")
         return ""

@@ -1,6 +1,10 @@
-# Project Python
+# Fluvel Framework
 
-### Python
-  - -- Version: *3.12.10*
-### PostgreSql
-  - -- Version: *17.6*
+### Tasks To Do
+ **[NOT IMPORTANT]**
+def minify_qss(qss_content: str) -> str:
+    """
+    -> **TO DO** <-\n
+    Minimizes a QSS string by removing whitespace and comments.
+    """
+    ...

@@ -1,8 +1,8 @@
 /* Estilo base para todos los QLabel que actúen como alertas */
 QLabel {
     padding: 12px 16px; /* Equivalente a px-4 py-3 en Tailwind */
-    border-radius: 5px; /* Equivalente a rounded-lg en Tailwind */
-    margin-bottom: 16px; /* Espacio entre alertas */
+    border-radius: 4px; /* Equivalente a rounded-lg en Tailwind */
+    margin: 5px; /* Espacio entre alertas */
     font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
     font-size: 14px; /* Tamaño de fuente estándar */
     font-weight: 400; /* Peso de fuente medio */

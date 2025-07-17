@@ -1,9 +1,7 @@
 import toml
 import json
 from pathlib import Path
-from utils.helper_functions import get_root_path
-
-APP_ROOT = get_root_path()
+from utils import APP_ROOT # Aquí ya hago uso de la simplificación con utils/__init__.py
 
 def get_default_config() -> dict:
     """

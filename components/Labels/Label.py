@@ -1,33 +1,32 @@
 from PySide6.QtWidgets import QLabel
 from typing import Literal
 
+LabelType = Literal["InfoAlert", "WarningAlert", "SuccessAlert", "DangerAlert"]
+
 class Label(QLabel):
-    def __init__(self, text: str, _type: Literal["InfoAlert", "WarningAlert", "SuccessAlert", "DangerAlert"]):
+    def __init__(self, text: str, _type: LabelType):
         super().__init__(text)
+        self.name = _type
 
         self.setObjectName(_type) # Nombre Representativo del componente en el archivo 'theme/push_button.qss'
 
 class InfoAlert(Label):
     def __init__(self, text: str):
-        self.name = "InfoAlert"
 
-        super().__init__(text, self.name)
+        super().__init__(text, "InfoAlert")
 
 class WarningAlert(Label):
     def __init__(self, text: str):
-        self.name = "WarningAlert"
 
-        super().__init__(text, self.name)
+        super().__init__(text, "WarningAlert")
 
 class SuccessAlert(Label):
     def __init__(self, text: str):
-        self.name = "SuccessAlert"
 
-        super().__init__(text, self.name)
+        super().__init__(text, "SuccessAlert")
 
 class DangerAlert(Label):
     def __init__(self, text: str):
-        self.name = "DangerAlert"
-
-        super().__init__(text, self.name)
+        
+        super().__init__(text, "DangerAlert")
 
