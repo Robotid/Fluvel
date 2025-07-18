@@ -1,10 +1,10 @@
 # appconfig.toml
 
 # Configuración general de la aplicación
-app_name = "Mi Aplicación PySide6 desde TOML"
+[app]
+app_name = "Fluvel"
 version = "1.0.0"
 log_level = "INFO" # Nivel de registro: DEBUG, INFO, WARNING, ERROR, CRITICAL
-
 # Configuración del tema de la interfaz de usuario
 theme = "bootstrap" # Nombre del tema a cargar desde resources/styles/themes/
 
@@ -28,4 +28,4 @@ show_welcome_message = true
 [paths]
 # Rutas relativas a la raíz del proyecto para recursos específicos
 # Aunque 'utils/paths.py' manejará la lógica, puedes definir valores aquí si es necesario
-default_icon = "app_icon.png"
+default_icon = "fluvel_icon.svg"

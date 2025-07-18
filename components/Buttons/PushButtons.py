@@ -3,7 +3,7 @@ from PySide6.QtWidgets import QPushButton
 from typing import Literal
 from PySide6.QtCore import Qt
 
-# Definir los tipos de botón para el tipado estático
+# se definen los tipos de botón para el tipado estático
 ButtonType = Literal["PrimaryButton", "SecondaryButton", "DangerButton", "SuccessButton", "WarningButton", "InfoButton", "LightButton", "DarkButton"]
 
 class PushButton(QPushButton):

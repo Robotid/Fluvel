@@ -37,10 +37,13 @@ def get_files_from_directory(dirname: str) -> list:
     return Path(dirname).iterdir() # Is just the 'iterdir()' method of the pathlib.Path Class
 
 
-def filterByExtension(dirname: Path, suffix: str) -> list:
+def filter_by_extension(dirname: Path, suffix: str) -> list:
     """
     This function *returns* a *`list`* of files filtered by extension in a given directory.
     """
+    
+    if isinstance(dirname, str):
+        dirname = Path(dirname)
 
     files: list = []
     
