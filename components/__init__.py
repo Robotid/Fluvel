@@ -1,4 +1,4 @@
-from components.Buttons.PushButtons_op2 import PushButton, OutlinedButton, PrimaryButton, SecondaryButton, SuccessButton, DangerButton, DarkButton, InfoButton, WarningButton, LightButton
+from components.Buttons.PushButtons import PushButton, OutlinedButton, PrimaryButton, SecondaryButton, SuccessButton, DangerButton, DarkButton, InfoButton, WarningButton, LightButton
 from components.Labels.Label import Label, InfoAlert, WarningAlert, SuccessAlert, DangerAlert
 
 # Simplificar la importación de componentes

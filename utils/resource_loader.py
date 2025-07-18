@@ -1,6 +1,5 @@
 from typing import Literal
 import os
-from pathlib import Path
 from utils import APP_ROOT
 
 _RESOURCE_FOLDERS = {

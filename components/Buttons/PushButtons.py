@@ -1,4 +1,3 @@
-# Componente QPushButton
 from PySide6.QtWidgets import QPushButton
 from typing import Literal
 from PySide6.QtCore import Qt
@@ -6,58 +5,56 @@ from PySide6.QtCore import Qt
 # se definen los tipos de botón para el tipado estático
 ButtonType = Literal["PrimaryButton", "SecondaryButton", "DangerButton", "SuccessButton", "WarningButton", "InfoButton", "LightButton", "DarkButton"]
 
-class PushButton(QPushButton):
-    def __init__(self, text: str, _type: ButtonType):
+class FluvelPushButton(QPushButton):
+    """
+    Clase base de **`Fluvel`** para botones estilizados. Las subclases deben definir el atributo '_button_type'.
+    """
+
+    _button_type: ButtonType
+
+    def __init__(self, text: str):
         super().__init__(text)
 
-        self.name = _type
-
-        self.setObjectName(_type) # Nombre Representativo del componente en el archivo 'theme/push_button.qss'
+        # Nombre Representativo del componente en el archivo 'theme/push_button.qss'
+        self.setObjectName(self._button_type) 
 
         # Aplicar el cursor de puntero
         self.setCursor(Qt.PointingHandCursor)
+    
+    def bind(self, event, controller):
+        pass
 
-class PrimaryButton(PushButton):
-    def __init__(self, text: str):
+class PushButton(FluvelPushButton):
+    def __init__(self, text: str, _type: ButtonType = "PushButton"):
 
-        super().__init__(text, "PrimaryButton")
+        # set the button type
+        self._button_type = _type
 
-class SecondaryButton(PushButton):
-    def __init__(self, text: str):
+        super().__init__(text)
 
-        super().__init__(text, "SecondaryButton")
+class PrimaryButton(FluvelPushButton):
+    _button_type = "PrimaryButton"
 
-class DangerButton(PushButton):
-    def __init__(self, text: str):
+class SecondaryButton(FluvelPushButton):
+    _button_type = "SecondaryButton"
 
-        super().__init__(text, "DangerButton")
+class DangerButton(FluvelPushButton):
+    _button_type = "DangerButton"
 
-class SuccessButton(PushButton):
-    def __init__(self, text: str):
+class SuccessButton(FluvelPushButton):
+    _button_type = "SuccessButton"
 
-        super().__init__(text, "SuccessButton")
+class WarningButton(FluvelPushButton):
+    _button_type = "WarningButton"
 
-class WarningButton(PushButton):
-    def __init__(self, text: str):
+class InfoButton(FluvelPushButton):
+    _button_type = "InfoButton"
 
-        super().__init__(text, "WarningButton")
+class LightButton(FluvelPushButton):
+    _button_type = "LightButton"
 
-class InfoButton(PushButton):
-    def __init__(self, text: str):
+class DarkButton(FluvelPushButton):
+    _button_type = "DarkButton"
 
-        super().__init__(text, "InfoButton")
-
-class LightButton(PushButton):
-    def __init__(self, text: str):
-
-        super().__init__(text, "LightButton")
-
-class DarkButton(PushButton):
-    def __init__(self, text: str):
-
-        super().__init__(text, "DarkButton")
-
-class OutlinedButton(PushButton):
-    def __init__(self, text: str):
-
-        super().__init__(text, "OutlinedButton")
+class OutlinedButton(FluvelPushButton):
+    _button_type = "OutlinedButton"

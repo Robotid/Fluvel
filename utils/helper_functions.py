@@ -37,9 +37,20 @@ def get_files_from_directory(dirname: str) -> list:
     return Path(dirname).iterdir() # Is just the 'iterdir()' method of the pathlib.Path Class
 
 
-def filter_by_extension(dirname: Path, suffix: str) -> list:
+def filter_by_extension(dirname: Path | str, suffix: str | tuple) -> list:
     """
-    This function *returns* a *`list`* of files filtered by extension in a given directory.
+    This function *returns* a *`list`* of files filtered by extension in a given directory.\n
+    Args:
+        **dirname (Path | str):** 
+        The abs path of the folder to be filtered.\n
+        *example: my_project/resources/styles/themes/theme/*\n
+        **suffix (str | tuple):** 
+        The suffix parameter represents the extension (or a tuple of them) of the files you want to filter.\n
+        *example with **str**: '.qss' o '.py'* -> This will only filter out individual '.qss' or '.py' files.\n
+        *example with **tuple**: ('.qss', '.py'*) -> This will filter out all '.qss' or '.py' files in the directory.\n
+    Returns:
+        **list**:
+        A list of `pathlib` objects (`WindowsPath` or `PosixPath`) containing the path of the filtered files.\n
     """
     
     if isinstance(dirname, str):
@@ -49,7 +60,7 @@ def filter_by_extension(dirname: Path, suffix: str) -> list:
     
     for _file in dirname.iterdir():
         # compares the file extension with the suffix parameter
-        if _file.suffix == suffix: 
+        if _file.suffix in suffix: 
             files.append(_file)
         else:
             pass

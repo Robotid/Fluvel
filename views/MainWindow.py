@@ -2,6 +2,7 @@
 
 from core import AppWindow
 from components import Label, InfoAlert, WarningAlert, SuccessAlert, DangerAlert
+from components import DarkButton, PushButton
 
 class MainWindow(AppWindow):
     def __init__(self):
@@ -15,10 +16,15 @@ class MainWindow(AppWindow):
         label_theme = SuccessAlert(f"Tema: {self.theme}")
         label_size = DangerAlert(f"Tamaño de Ventana: {self.window_width}x{self.window_height}.")
 
-        label = Label("Todo salió bien", "SuccessAlert")
+        label = Label("Todo salió bien", "WarningAlert")
+
+        button = PushButton("Hola! Soy un PushButton", "SecondaryButton")
 
         self.layout.addWidget(label_name)
         self.layout.addWidget(label_version)
         self.layout.addWidget(label_theme)
         self.layout.addWidget(label_size)
         self.layout.addWidget(label)
+        self.layout.addWidget(button)
+
+        

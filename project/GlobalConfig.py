@@ -1,11 +1,14 @@
-# fluvel.core.GlobalConfig
+# project.GlobalConfig
+
+from core.core_utils import load_app_config, APP_ROOT
 
 class GlobalConfig:
     """
-    **IMPORTANT** Adapt the attributes of this class and the ***`fluvel.core.App.set_config_format()`*** 
+    **IMPORTANT** Adapt the attributes of the **`GlobalConfig`** class and the ***`fluvel.core.set_config_format()`*** 
     method according to the configuration style you prefer/use in your project.\n
     Global Main Properties:\n
-        - self.config: dict -> Saves the provided application settings.\n
+        - self.APP_ROOT: str -> Contains the absolute path to the main project folder.\n
+        - self.appconfig: dict -> Saves the provided application settings.\n
         - self.app_name: str -> Saves the name of the app from appconfig['app']['app_name'].\n
         - self.version: str -> Saves the version of the app from appconfig['app']['version'].\n
         - self.window_width: str -> Saves the width of the window from appconfig['window_size']['width'].\n
@@ -35,21 +38,54 @@ class GlobalConfig:
     #         │   MainWindow()      │
     #         └─────────────────────┘
 
-    # Configuring the global properties
+    # [core utils]
+    APP_ROOT: str = APP_ROOT
+
+    # [appconfig]
     appconfig: dict
 
-    # Main info of the App
+    # [app]
     app_name: str
     version: str
     window_width: int
     window_height: int
     theme: str
 
-    # Database info
+    # [database]
     db_host: str
     db_port: int
     db_user: str
     db_password: any
 
-    # Default paths
+    # [defaults]
     default_icon: str
+
+    def set_config_format(self, filename: str):
+        """
+        **IMPORTANT** This method loads the configuration from the **`appconfig`** 
+        file TOML or JSON and defines the project's global attributes.
+        The application configuration **`appconfig`** is stored in the ***`self.config: dict`*** property of the **`GlobalConfig`** Class.\n
+        """
+
+        # Obtaining information from the TOML or JSON configuration file
+        appconfig: dict = load_app_config(filename)
+
+        # the global configuration dictionary is saved
+        GlobalConfig.appconfig: dict = appconfig
+
+        # Configuring the global properties
+        app = appconfig.get("app", {})
+        window_size = appconfig.get("window_size", {})
+
+        GlobalConfig.app_name = app.get("app_name", "UnknownApp")
+        GlobalConfig.version = app.get("version", "N/A")
+        GlobalConfig.window_width = window_size.get("width", 480)
+        GlobalConfig.window_height = window_size.get("height", 640)
+        GlobalConfig.theme = app.get("theme", "modern-dark")
+
+        # Database config
+        database = appconfig.get("database", {})
+        GlobalConfig.db_host = database.get("host", "localhost")
+        GlobalConfig.db_port = database.get("port", 5432)
+        GlobalConfig.db_user = database.get("user", "admin")
+        GlobalConfig.db_password = database.get("password", "a very powerful password")
