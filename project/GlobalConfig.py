@@ -1,11 +1,12 @@
 # project.GlobalConfig
 
-from core.core_utils import load_app_config, APP_ROOT
+from core.core_utils import load_app_config, APP_ROOT, get_default_config
 
 class GlobalConfig:
     """
-    **IMPORTANT** Adapt the attributes of the **`GlobalConfig`** class and the ***`fluvel.core.set_config_format()`*** 
+    **IMPORTANT** Adapt the attributes of the **`GlobalConfig`** class and the ***`project.GlobalConfig.set_config_format()`*** 
     method according to the configuration style you prefer/use in your project.\n
+    *To view your project's global variables, use "**`fluvel show-globals`**" in the **CLI***.\n
     Global Main Properties:\n
         - self.APP_ROOT: str -> Contains the absolute path to the main project folder.\n
         - self.appconfig: dict -> Saves the provided application settings.\n
@@ -21,7 +22,7 @@ class GlobalConfig:
         - self.db_password: any -> -> Saves the password of the DB from appconfig['database']['password']\n
     """
 
-    # Fluvel's main class hierarchy
+    # Fluvel's Global Configuration Hierarchy
     # ┌──────────────────┐   ┌───────────────────┐   ┌────────────────────┐
     # │ QMainWindow()    │   │ GlobalConfig()    │   │ QApplication()     │
     # └────────┬─────────┘   └────────┬──────────┘   └────────┬───────────┘
@@ -64,7 +65,7 @@ class GlobalConfig:
         """
         **IMPORTANT** This method loads the configuration from the **`appconfig`** 
         file TOML or JSON and defines the project's global attributes.
-        The application configuration **`appconfig`** is stored in the ***`self.config: dict`*** property of the **`GlobalConfig`** Class.\n
+        The application configuration **`appconfig`** is stored in the ***`self.appconfig: dict`*** property of the **`GlobalConfig`** Class.\n
         """
 
         # Obtaining information from the TOML or JSON configuration file
@@ -77,15 +78,16 @@ class GlobalConfig:
         app = appconfig.get("app", {})
         window_size = appconfig.get("window_size", {})
 
-        GlobalConfig.app_name = app.get("app_name", "UnknownApp")
-        GlobalConfig.version = app.get("version", "N/A")
-        GlobalConfig.window_width = window_size.get("width", 480)
-        GlobalConfig.window_height = window_size.get("height", 640)
-        GlobalConfig.theme = app.get("theme", "modern-dark")
+        GlobalConfig.app_name = app["app_name"]
+        GlobalConfig.version = app["version"]
+        GlobalConfig.window_width = window_size["width"]
+        GlobalConfig.window_height = window_size["height"]
+        GlobalConfig.theme = app["theme"]
 
         # Database config
-        database = appconfig.get("database", {})
-        GlobalConfig.db_host = database.get("host", "localhost")
-        GlobalConfig.db_port = database.get("port", 5432)
-        GlobalConfig.db_user = database.get("user", "admin")
-        GlobalConfig.db_password = database.get("password", "a very powerful password")
+        database = appconfig["database"]
+
+        GlobalConfig.db_host = database["host"]
+        GlobalConfig.db_port = database["port"]
+        GlobalConfig.db_user = database["user"]
+        GlobalConfig.db_password = database["password"]

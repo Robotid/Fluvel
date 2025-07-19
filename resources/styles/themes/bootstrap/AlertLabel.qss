@@ -1,0 +1,59 @@
+/* Info Alert */
+QFrame#InfoAlert {
+    background-color: #e8f4fd;
+    border-left: 4px solid #2196f3;
+    border-radius: 4px;
+}
+
+QLabel#InfoAlertText {
+    justify: left;
+    color: #000;
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
+    font-size: 14px; /* Tamaño de fuente estándar */
+    font-weight: 400; /* Peso de fuente medio */
+}
+
+/* Danger Alert */
+QFrame#DangerAlert {
+    background-color: #fdecea;
+    border-left: 4px solid #f44336 ;
+    border-radius: 4px;
+}
+
+QLabel#DangerAlertText {
+    justify: left;
+    color: #000;
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
+    font-size: 14px; /* Tamaño de fuente estándar */
+    font-weight: 400; /* Peso de fuente medio */
+}
+
+/* Warning Alert */
+QFrame#WarningAlert {
+    background-color: #fff4e5 ;
+    border-left: 4px solid #ff9800 ;
+    border-radius: 4px;
+}
+
+QLabel#WarningAlertText {
+    justify: left;
+    color: #000;
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
+    font-size: 14px; /* Tamaño de fuente estándar */
+    font-weight: 400; /* Peso de fuente medio */
+}
+
+/* SuccessAlert */
+QFrame#SuccessAlert {
+    background-color: #e6f4ea ;
+    border-left: 4px solid #4caf50 ;
+    border-radius: 4px;
+}
+
+QLabel#SuccessAlertText {
+    justify: left;
+    color: #000;
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
+    font-size: 14px; /* Tamaño de fuente estándar */
+    font-weight: 400; /* Peso de fuente medio */
+}

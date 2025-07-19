@@ -9,20 +9,22 @@ def get_default_config() -> dict:
     if no initial config file is provided or an `Exception` was thrown while trying to load one.
     """
     default_config = {
-    "app_name": "Unknown App",
-    "version": "N/A",
-    "window_size": {
-        "width": 640,
-        "height": 480
-    },
-    "theme": "clean-light",
-    "database": {
-        "host": "localhost",
-        "port": 5432,
-        "user": "admin",
-        "password": "secure_password"
-    },
-    "log_level": "INFO"
+        "app": {
+            "app_name": "Unknown App",
+            "version": "N/A",
+            "log_level": "INFO",
+            "theme": "clean-light",
+        },
+        "window_size": {
+            "width": 640,
+            "height": 480
+        },
+        "database": {
+            "host": "localhost",
+            "port": 5432,
+            "user": "admin",
+            "password": "secure_password"
+        },
     }
 
     return default_config

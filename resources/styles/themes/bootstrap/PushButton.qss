@@ -146,19 +146,19 @@ QPushButton#InfoButton:pressed {
 QPushButton#LightButton {
     background-color: #f8f9fa;
     color: #000;
-    border-color: #f8f9fa;
+    border-color: #b1b1b1;
 }
 
 QPushButton#LightButton:hover {
     background-color: #dee1e4;
     color: #000;
-    border-color: #dee1e4;
+    border-color: #b1b1b1;
 }
 
 QPushButton#LightButton:pressed {
     background-color: #b4b6b8;
     color: #000;
-    border-color: #b4b6b8;
+    border-color: #b1b1b1;
 }
 
 /* Estilo para un botón oscuro */

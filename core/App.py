@@ -2,8 +2,8 @@
 
 from project import GlobalConfig
 from PySide6.QtWidgets import QApplication
-from core.core_utils.theme_loader import load_style_sheet
-from core.core_utils.doc_utils import add_global_props_doc
+from core.core_utils.theme_loader import load_style_sheet, get_theme_path
+from utils.helper_functions import filter_by_extension
 
 class App(QApplication, GlobalConfig):
     def __init__(self, argv: list):
@@ -28,10 +28,14 @@ class App(QApplication, GlobalConfig):
         """
         This method *loads* the *global theme* and *component styles* to be used in the application.
         """
-        label_content = load_style_sheet("Label.qss", self.theme)
-        push_button_content = load_style_sheet("PushButton.qss", self.theme)
-        check_button_content = load_style_sheet("CheckButton.qss", self.theme)
-        full_content = f"{label_content}{push_button_content}{check_button_content}"
-        self.setStyleSheet(full_content)
+
+        qss_files: list = filter_by_extension(f"resources/styles/themes/{self.theme}", ".qss")
+
+        qss_content: str = ""
+
+        for qss_file in qss_files:
+            qss_content += load_style_sheet(qss_file)
+
+        self.setStyleSheet(qss_content)
 
     

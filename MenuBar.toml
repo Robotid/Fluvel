@@ -1,0 +1,13 @@
+[file]
+new_file = "New File"
+open = "Open"
+save = "Save"
+save_us = "Save Us"
+quit = "Quit"
+
+[file.preferences]
+export = "Export"
+export_as = "Export as"
+
+[help]
+licence = "Licence"

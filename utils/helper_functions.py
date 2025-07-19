@@ -66,3 +66,5 @@ def filter_by_extension(dirname: Path | str, suffix: str | tuple) -> list:
             pass
     
     return files
+
+# archivos_qss = filter_by_extension()

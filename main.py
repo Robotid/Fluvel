@@ -15,10 +15,8 @@ def main():
     window = MainWindow()
     window.show()
 
-    print(app.__doc__)
-
     # Runnig the main loop
     sys.exit(app.exec())
-
+    
 if __name__ == "__main__":
     main()

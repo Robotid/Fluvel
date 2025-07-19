@@ -1,0 +1,68 @@
+/* styles_minimal.qss */
+
+/* * Colores base inspirados en Bootstrap
+ * Es importante que reemplaces manualmente `var(--nombre-variable)` con los valores hexadecimales.
+ */
+/* Puedes ajustarlos a tu paleta de colores específica. */
+/* --primary: #007bff; */         /* Azul */
+/* --dark: #343a40; */           /* Gris oscuro para el menubar */
+/* --light: #f8f9fa; */          /* Gris muy claro para el resaltado del menú */
+/* --body-bg: #fff; */           /* Fondo principal */
+/* --text-color: #212529; */     /* Color de texto oscuro */
+/* --border-radius: 0.25rem; */  /* Radio de borde pequeño */
+
+/* * Estilo general de la MainWindow
+ */
+QMainWindow {
+    background-color: #fff; /* Simula el --body-bg */
+    color: #212529;         /* Simula el --text-color */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px; /* Tamaño de fuente base */
+}
+
+/*
+ * QMenuBar (para el menú principal en la parte superior)
+ */
+QMenuBar {
+    background-color: #343a40; /* Simula --dark */
+    color: #fff;
+    spacing: 5px; /* Espacio entre los elementos del menú principal */
+}
+QMenuBar::item {
+    padding: 5px 10px;
+    background: transparent;
+}
+QMenuBar::item:selected { /* Cuando el ratón está sobre el elemento */
+    background: #007bff; /* Simula --primary */
+    color: #fff;
+    border-radius: 0.25rem; /* Simula --border-radius */
+}
+QMenuBar::item:pressed { /* Cuando el elemento es clicado */
+    background: #0056b3; /* Un azul más oscuro */
+    color: #fff;
+}
+
+/*
+ * QMenu (para los menús desplegables de QMenuBar)
+ */
+QMenu {
+    background-color: #fff;
+    border: 1px solid #dee2e6; /* Simula --border-color */
+    border-radius: 0.25rem; /* Simula --border-radius */
+    padding: 5px 0; /* Espaciado superior e inferior para los ítems */
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15); /* Sombra suave */
+}
+QMenu::item {
+    padding: 5px 20px;
+    background-color: transparent;
+    color: #212529; /* Simula --text-color */
+}
+QMenu::item:selected {
+    background-color: #e4e4e4; /* Simula --light */
+    color: #212529; /* Simula --text-color */
+}
+QMenu::separator {
+    height: 1px;
+    background-color: #dee2e6; /* Simula --border-color */
+    margin: 5px 0;
+}
