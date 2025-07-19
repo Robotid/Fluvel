@@ -1,6 +1,6 @@
 # project.GlobalConfig
 
-from core.core_utils import load_app_config, APP_ROOT, get_default_config
+from core.core_utils import load_file, APP_ROOT, get_default_config
 
 class GlobalConfig:
     """
@@ -69,7 +69,7 @@ class GlobalConfig:
         """
 
         # Obtaining information from the TOML or JSON configuration file
-        appconfig: dict = load_app_config(filename)
+        appconfig: dict = load_file(filename)
 
         # the global configuration dictionary is saved
         GlobalConfig.appconfig: dict = appconfig
@@ -78,16 +78,16 @@ class GlobalConfig:
         app = appconfig.get("app", {})
         window_size = appconfig.get("window_size", {})
 
-        GlobalConfig.app_name = app["app_name"]
-        GlobalConfig.version = app["version"]
-        GlobalConfig.window_width = window_size["width"]
-        GlobalConfig.window_height = window_size["height"]
-        GlobalConfig.theme = app["theme"]
+        GlobalConfig.app_name = app.get("app_name", "-")
+        GlobalConfig.version = app.get("version", "-")
+        GlobalConfig.window_width = window_size.get("width", 640)
+        GlobalConfig.window_height = window_size.get("height", 480)
+        GlobalConfig.theme = app.get("theme", "bootstrap")
 
         # Database config
-        database = appconfig["database"]
+        database = appconfig.get("database", {})
 
-        GlobalConfig.db_host = database["host"]
-        GlobalConfig.db_port = database["port"]
-        GlobalConfig.db_user = database["user"]
-        GlobalConfig.db_password = database["password"]
+        GlobalConfig.db_host = database.get("host", "-")
+        GlobalConfig.db_port = database.get("port", "-")
+        GlobalConfig.db_user = database.get("user", "-")
+        GlobalConfig.db_password = database.get("password", "-")

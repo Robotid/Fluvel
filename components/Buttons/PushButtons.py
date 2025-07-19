@@ -3,11 +3,14 @@ from typing import Literal
 from PySide6.QtCore import Qt
 
 # se definen los tipos de botón para el tipado estático
-ButtonType = Literal["PrimaryButton", "SecondaryButton", "DangerButton", "SuccessButton", "WarningButton", "InfoButton", "LightButton", "DarkButton"]
+ButtonType = Literal["PrimaryButton", "SecondaryButton", "DangerButton", 
+                     "SuccessButton", "WarningButton", "InfoButton", 
+                     "LightButton", "DarkButton", "OutlinedButton",
+                     "LinkButton"]
 
 class FluvelPushButton(QPushButton):
     """
-    Clase base de **`Fluvel`** para botones estilizados. Las subclases deben definir el atributo '_button_type'.
+    Clase base de **`Fluvel`** para botones estilizados. Las subclases deben definir el atributo **`_button_type`**.
     """
 
     _button_type: ButtonType
@@ -58,3 +61,6 @@ class DarkButton(FluvelPushButton):
 
 class OutlinedButton(FluvelPushButton):
     _button_type = "OutlinedButton"
+
+class LinkButton(FluvelPushButton):
+    _button_type = "LinkButton"

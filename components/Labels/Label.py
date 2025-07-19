@@ -5,7 +5,7 @@ LabelType = Literal["InfoAlert", "WarningAlert", "SuccessAlert", "DangerAlert"]
 
 class FluvelLabel(QLabel):
     """
-    Clase base de **`Fluvel`** para etiquetas estilizadas. Las subclases deben definir el atributo '_label_type'.
+    Clase base de **`Fluvel`** para etiquetas estilizadas. Las subclases deben definir el atributo **`_label_type`**.
     """
 
     _label_type: LabelType

@@ -5,7 +5,7 @@ AlertTypes = Literal["InfoAlert", "DangerAlert", "WarningAlert", "SuccessAlert"]
 
 class FluvelAlertLabel(QFrame):
     """
-    Clase base de **`Fluvel`** para etiquetas de alerta estilizadas. Las subclases deben definir el atributo '_alert_type'.
+    Clase base de **`Fluvel`** para etiquetas de alerta estilizadas. Las subclases deben definir el atributo **`_alert_type`**.
     """
 
     _alert_type: AlertTypes

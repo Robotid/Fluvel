@@ -1,7 +1,8 @@
 # fluvel.core.AppWindow
 
-from PySide6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
 from project import GlobalConfig
+from PySide6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
+from core.MenuBar import MenuBar
 
 class AppWindow(QMainWindow, GlobalConfig):
     def __init__(self):
@@ -23,9 +24,15 @@ class AppWindow(QMainWindow, GlobalConfig):
         self.layout: QVBoxLayout = QVBoxLayout()
         central_widget.setLayout(self.layout)
 
+        # Configuring the Menu Bar
+        self.set_menu_bar()
+
         # Display Widgets
         self.setUpMainWindow()
 
+    def set_menu_bar(self):
+        self.menu_bar = MenuBar(parent=self, menu_file="MenuBar.toml")
+        
     def set_layout(self):
         pass
 

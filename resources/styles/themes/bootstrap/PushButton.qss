@@ -176,3 +176,23 @@ QPushButton#DarkButton:pressed {
     background-color: #25292c;
     border-color: #25292c;
 }
+
+/* Estilo para un botón de enlace */
+QPushButton#LinkButton {
+    background-color: none;
+    border: none;
+    color: rgb(110, 148, 252);
+    text-decoration: underline;
+}
+
+QPushButton#LinkButton:visited {
+    color: purple;
+}
+
+QPushButton#LinkButton:hover {
+    color: rgb(90, 129, 236);
+}
+
+QPushButton#LinkButton:pressed {
+    color: rgb(71, 103, 190);
+}

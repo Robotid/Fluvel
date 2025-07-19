@@ -29,13 +29,11 @@ def get_default_config() -> dict:
 
     return default_config
 
-def load_app_config(filename: str) -> dict:
+def load_file(file_path: Path | str) -> dict:
 
         """ 
-        **IMPORTANT** Only supports TOML or JSON config files with the ***same*** configuration style.\n
-        This function is responsible for loading the application's 
-        global configuration provided by a JSON or TOML file.\n
-        *If you have or want to create a different configuration style, update the **`set_format()`** method of the **`core.Config`** class.*
+        **IMPORTANT** Only supports TOML or JSON config files.\n
+        This function loads and returns the configuration provided by a JSON or TOML file.\n
         """
 
         config: dict # Variable que contendrá la configuración de la aplicación
@@ -44,10 +42,10 @@ def load_app_config(filename: str) -> dict:
 
         # La extensión del archivo config
         # Deberá ser TOML o JSON
-        cfg_extension = Path(filename).suffix
+        cfg_extension = Path(file_path).suffix
 
         # Path del archivo de configuración JSON
-        config_path = APP_ROOT / filename
+        config_path = APP_ROOT / file_path
 
         try:
             # Se intenta abrir el archivo 'config_path'
