@@ -1,22 +1,21 @@
 # views.MainWindow
 
 from core import AppWindow
-from components.Labels.FluvelAlertLabel import InfoAlert, WarningAlert, SuccessAlert, DangerAlert
+from components import FluvelAlert, FluvelInfoAlert, FluvelWarningAlert, FluvelSuccessAlert, FluvelDangerAlert
 from components import PushButton
 
 class MainWindow(AppWindow):
-    def __init__(self):
-        super().__init__()
 
     def setUpMainWindow(self):
         """ Display the `components` in the Main Window. """
         
         components = [
             # Label Alerts
-            InfoAlert(f"Nombre de la Aplicación: {self.app_name}"),
-            WarningAlert(f"Versión: {self.version}"),
-            SuccessAlert(f"Tema: {self.theme}"),
-            DangerAlert(f"Tamaño de Ventana: {self.window_width}x{self.window_height}."),
+            FluvelAlert("Esto es una alerta de tipo Danger", "FluvelDangerAlert"),
+            FluvelInfoAlert(f"Nombre de la Aplicación: {self.app_name}"),
+            FluvelWarningAlert(f"Versión: {self.version}"),
+            FluvelSuccessAlert(f"Tema: {self.theme}"),
+            FluvelDangerAlert(f"Tamaño de Ventana: {self.window_width}x{self.window_height}."),
             # PushButtons
             PushButton("PrimaryButton", "PrimaryButton"),
             PushButton("SecondaryButton", "SecondaryButton"),
@@ -33,5 +32,5 @@ class MainWindow(AppWindow):
         for component in components:
             self.layout.addWidget(component)
 
-    def quit_app(self):
-        print("Saliendo de la app")
+        self.menu_bar.bind("close_all", "triggered", self.close)
+        self.menu_bar.set_property("close_all", "shortcut", "Ctrl+G")

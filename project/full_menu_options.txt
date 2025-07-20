@@ -1,0 +1,280 @@
+
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+        # All menu bar options will be available as properties of the MenuBar class.                                                   #     
+        # Try to choose different names for each to avoid overrides.
+                                                                       
+        # You can (and should) integrate them into your workflow by setting their methods and properties from                          #   
+        # the menu_bar property of the main window class using the core methods self.menu_bar.bind() and self.menu_bar.set_property(). #
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+                                                                                                                                     
+There are two ways to reference menu bar options as attributes of self.menu_bar:
+file -> new_file:
+	 self.menu_bar.options['file']['new_file'] 
+	 self.menu_bar.file
+
+file -> new_window:
+	 self.menu_bar.options['file']['new_window'] 
+	 self.menu_bar.file
+
+file -> new_from_template:
+	 self.menu_bar.options['file']['new_from_template'] 
+	 self.menu_bar.file
+
+file -> open_file:
+	 self.menu_bar.options['file']['open_file'] 
+	 self.menu_bar.file
+
+file -> open_recent:
+	 self.menu_bar.options['file']['open_recent'] 
+	 self.menu_bar.file
+
+file -> close_current:
+	 self.menu_bar.options['file']['close_current'] 
+	 self.menu_bar.file
+
+file -> close_all:
+	 self.menu_bar.options['file']['close_all'] 
+	 self.menu_bar.file
+
+file -> save:
+	 self.menu_bar.options['file']['save'] 
+	 self.menu_bar.file
+
+file -> save_as:
+	 self.menu_bar.options['file']['save_as'] 
+	 self.menu_bar.file
+
+file -> save_all:
+	 self.menu_bar.options['file']['save_all'] 
+	 self.menu_bar.file
+
+file -> browse_all_versions:
+	 self.menu_bar.options['file']['browse_all_versions'] 
+	 self.menu_bar.file
+
+file -> print_dialog:
+	 self.menu_bar.options['file']['print_dialog'] 
+	 self.menu_bar.file
+
+file -> page_setup:
+	 self.menu_bar.options['file']['page_setup'] 
+	 self.menu_bar.file
+
+file -> print_preview:
+	 self.menu_bar.options['file']['print_preview'] 
+	 self.menu_bar.file
+
+file -> import:
+	 self.menu_bar.options['file']['import'] 
+	 self.menu_bar.file
+
+file -> export:
+	 self.menu_bar.options['file']['export'] 
+	 self.menu_bar.file
+
+file -> export_as:
+	 self.menu_bar.options['file']['export_as'] 
+	 self.menu_bar.file
+
+file -> share:
+	 self.menu_bar.options['file']['share'] 
+	 self.menu_bar.file
+
+file -> quit:
+	 self.menu_bar.options['file']['quit'] 
+	 self.menu_bar.file
+
+
+edit -> undo:
+	 self.menu_bar.options['edit']['undo'] 
+	 self.menu_bar.edit
+
+edit -> redo:
+	 self.menu_bar.options['edit']['redo'] 
+	 self.menu_bar.edit
+
+edit -> cut:
+	 self.menu_bar.options['edit']['cut'] 
+	 self.menu_bar.edit
+
+edit -> copy:
+	 self.menu_bar.options['edit']['copy'] 
+	 self.menu_bar.edit
+
+edit -> paste:
+	 self.menu_bar.options['edit']['paste'] 
+	 self.menu_bar.edit
+
+edit -> paste_special:
+	 self.menu_bar.options['edit']['paste_special'] 
+	 self.menu_bar.edit
+
+edit -> delete:
+	 self.menu_bar.options['edit']['delete'] 
+	 self.menu_bar.edit
+
+edit -> select_all:
+	 self.menu_bar.options['edit']['select_all'] 
+	 self.menu_bar.edit
+
+edit -> deselect:
+	 self.menu_bar.options['edit']['deselect'] 
+	 self.menu_bar.edit
+
+edit -> find:
+	 self.menu_bar.options['edit']['find'] 
+	 self.menu_bar.edit
+
+edit -> find_next:
+	 self.menu_bar.options['edit']['find_next'] 
+	 self.menu_bar.edit
+
+edit -> find_previous:
+	 self.menu_bar.options['edit']['find_previous'] 
+	 self.menu_bar.edit
+
+edit -> replace:
+	 self.menu_bar.options['edit']['replace'] 
+	 self.menu_bar.edit
+
+edit -> check_document:
+	 self.menu_bar.options['edit']['check_document'] 
+	 self.menu_bar.edit
+
+edit -> check_while_typing:
+	 self.menu_bar.options['edit']['check_while_typing'] 
+	 self.menu_bar.edit
+
+
+view -> zoom_in:
+	 self.menu_bar.options['view']['zoom_in'] 
+	 self.menu_bar.view
+
+view -> zoom_out:
+	 self.menu_bar.options['view']['zoom_out'] 
+	 self.menu_bar.view
+
+view -> actual_size:
+	 self.menu_bar.options['view']['actual_size'] 
+	 self.menu_bar.view
+
+view -> fit_to_window:
+	 self.menu_bar.options['view']['fit_to_window'] 
+	 self.menu_bar.view
+
+view -> full_screen:
+	 self.menu_bar.options['view']['full_screen'] 
+	 self.menu_bar.view
+
+view -> toolbar:
+	 self.menu_bar.options['view']['toolbar'] 
+	 self.menu_bar.view
+
+view -> sidebar:
+	 self.menu_bar.options['view']['sidebar'] 
+	 self.menu_bar.view
+
+view -> rulers:
+	 self.menu_bar.options['view']['rulers'] 
+	 self.menu_bar.view
+
+view -> grid:
+	 self.menu_bar.options['view']['grid'] 
+	 self.menu_bar.view
+
+view -> status_bar:
+	 self.menu_bar.options['view']['status_bar'] 
+	 self.menu_bar.view
+
+view -> single_pane:
+	 self.menu_bar.options['view']['single_pane'] 
+	 self.menu_bar.view
+
+view -> two_panes:
+	 self.menu_bar.options['view']['two_panes'] 
+	 self.menu_bar.view
+
+view -> three_panes:
+	 self.menu_bar.options['view']['three_panes'] 
+	 self.menu_bar.view
+
+view -> sort_by_name:
+	 self.menu_bar.options['view']['sort_by_name'] 
+	 self.menu_bar.view
+
+view -> sort_by_date_modified:
+	 self.menu_bar.options['view']['sort_by_date_modified'] 
+	 self.menu_bar.view
+
+view -> sort_by_size:
+	 self.menu_bar.options['view']['sort_by_size'] 
+	 self.menu_bar.view
+
+
+window -> minimize:
+	 self.menu_bar.options['window']['minimize'] 
+	 self.menu_bar.window
+
+window -> zoom_maximize:
+	 self.menu_bar.options['window']['zoom_maximize'] 
+	 self.menu_bar.window
+
+window -> bring_all_to_front:
+	 self.menu_bar.options['window']['bring_all_to_front'] 
+	 self.menu_bar.window
+
+window -> arrange:
+	 self.menu_bar.options['window']['arrange'] 
+	 self.menu_bar.window
+
+
+settings -> preferences:
+	 self.menu_bar.options['settings']['preferences'] 
+	 self.menu_bar.settings
+
+settings -> themes:
+	 self.menu_bar.options['settings']['themes'] 
+	 self.menu_bar.settings
+
+settings -> language:
+	 self.menu_bar.options['settings']['language'] 
+	 self.menu_bar.settings
+
+
+help -> help_docs:
+	 self.menu_bar.options['help']['help_docs'] 
+	 self.menu_bar.help
+
+help -> keyboard_shortcuts:
+	 self.menu_bar.options['help']['keyboard_shortcuts'] 
+	 self.menu_bar.help
+
+help -> tutorials:
+	 self.menu_bar.options['help']['tutorials'] 
+	 self.menu_bar.help
+
+help -> support:
+	 self.menu_bar.options['help']['support'] 
+	 self.menu_bar.help
+
+help -> licence:
+	 self.menu_bar.options['help']['licence'] 
+	 self.menu_bar.help
+
+help -> version:
+	 self.menu_bar.options['help']['version'] 
+	 self.menu_bar.help
+
+help -> web_page:
+	 self.menu_bar.options['help']['web_page'] 
+	 self.menu_bar.help
+
+help -> check_for_updates:
+	 self.menu_bar.options['help']['check_for_updates'] 
+	 self.menu_bar.help
+
+help -> about_app:
+	 self.menu_bar.options['help']['about_app'] 
+	 self.menu_bar.help
+
+

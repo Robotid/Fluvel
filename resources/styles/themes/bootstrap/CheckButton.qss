@@ -25,7 +25,6 @@ QCheckBox::indicator:checked {
 
 QCheckBox::indicator:hover {
     border-color: #86b7fe; /* Lighter blue for hover */
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* Bootstrap-like focus/hover shadow */
 }
 
 QCheckBox::indicator:checked:hover {

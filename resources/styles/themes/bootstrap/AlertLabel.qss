@@ -1,12 +1,11 @@
 /* Info Alert */
-QFrame#InfoAlert {
+QFrame#FluvelInfoAlert {
     background-color: #e8f4fd;
     border-left: 4px solid #2196f3;
     border-radius: 4px;
 }
 
-QLabel#InfoAlertText {
-    justify: left;
+QLabel#FluvelInfoAlertText {
     color: #000;
     font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
     font-size: 14px; /* Tamaño de fuente estándar */
@@ -14,14 +13,13 @@ QLabel#InfoAlertText {
 }
 
 /* Danger Alert */
-QFrame#DangerAlert {
+QFrame#FluvelDangerAlert {
     background-color: #fdecea;
     border-left: 4px solid #f44336 ;
     border-radius: 4px;
 }
 
-QLabel#DangerAlertText {
-    justify: left;
+QLabel#FluvelDangerAlertText {
     color: #000;
     font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
     font-size: 14px; /* Tamaño de fuente estándar */
@@ -29,14 +27,13 @@ QLabel#DangerAlertText {
 }
 
 /* Warning Alert */
-QFrame#WarningAlert {
+QFrame#FluvelWarningAlert {
     background-color: #fff4e5 ;
     border-left: 4px solid #ff9800 ;
     border-radius: 4px;
 }
 
-QLabel#WarningAlertText {
-    justify: left;
+QLabel#FluvelWarningAlertText {
     color: #000;
     font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
     font-size: 14px; /* Tamaño de fuente estándar */
@@ -44,14 +41,13 @@ QLabel#WarningAlertText {
 }
 
 /* SuccessAlert */
-QFrame#SuccessAlert {
+QFrame#FluvelSuccessAlert {
     background-color: #e6f4ea ;
     border-left: 4px solid #4caf50 ;
     border-radius: 4px;
 }
 
-QLabel#SuccessAlertText {
-    justify: left;
+QLabel#FluvelSuccessAlertText {
     color: #000;
     font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
     font-size: 14px; /* Tamaño de fuente estándar */

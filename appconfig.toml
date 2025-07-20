@@ -1,17 +1,23 @@
 # appconfig.toml
 
+# Activalo solo cuando la aplicación esté en modo de desarrollo.
+# Esto controla el funcionamiento de varias funciones y métodos que Fluvel
+# implementa PARA EL PROGRAMADOR para facilitar el desarrollo de la app.
+dev_mode = true # ¡IMPORTANT!
+
 # Configuración general de la aplicación
 [app]
 app_name = "Fluvel"
 version = "1.0.0"
 log_level = "INFO" # Nivel de registro: DEBUG, INFO, WARNING, ERROR, CRITICAL
+
 # Configuración del tema de la interfaz de usuario
 theme = "bootstrap" # Nombre del tema a cargar desde resources/styles/themes/
 
 # Configuración del tamaño de la ventana principal
 [window_size]
-width = 720
-height = 480
+width = 1280
+height = 720
 
 # Configuración de la base de datos (ejemplo, no se recomienda para credenciales sensibles)
 [database]

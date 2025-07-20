@@ -1,6 +1,6 @@
 # project.GlobalConfig
 
-from core.core_utils import load_file, APP_ROOT, get_default_config
+from core.core_utils import load_file, APP_ROOT
 
 class GlobalConfig:
     """
@@ -19,7 +19,7 @@ class GlobalConfig:
         - self.db_host: str -> Saves the host of the DB from appconfig['database']['host'].\n
         - self.db_port: int -> Saves the port of the DB from appconfig['database']['port'].\n
         - self.db_user: str -> Saves the user of the DB from appconfig['database']['user'].\n
-        - self.db_password: any -> -> Saves the password of the DB from appconfig['database']['password']\n
+        - self.db_password: any -> Saves the password of the DB from appconfig['database']['password']\n
     """
 
     # Fluvel's Global Configuration Hierarchy
@@ -44,6 +44,11 @@ class GlobalConfig:
 
     # [appconfig]
     appconfig: dict
+    
+    # Your customization 
+    # starts here
+    # │
+    # ▼
 
     # [app]
     app_name: str

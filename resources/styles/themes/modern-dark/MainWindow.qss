@@ -1,0 +1,117 @@
+/* QMainWindow Modern Dark Style */
+
+QMainWindow {
+    background-color: #202020; /* Fondo principal muy oscuro para la ventana */
+    color: #f0f0f0; /* Color de texto predeterminado para la ventana */
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; /* Fuente moderna y limpia */
+    font-size: 14px;
+    border: 1px solid #3a3a3a; /* Borde sutil alrededor de la ventana */
+}
+
+/* Opcional: Estilo para la QStatusBar */
+QStatusBar {
+    background-color: #2b2b2b; /* Fondo oscuro, similar al QMenuBar */
+    color: #b0b0b0; /* Color de texto ligeramente atenuado */
+    border-top: 1px solid #3a3a3a; /* Borde superior sutil */
+    padding: 3px 8px; /* Relleno */
+    font-size: 12px;
+}
+
+QStatusBar::item {
+    border: none; /* Eliminar bordes predeterminados de los ítems de la barra de estado */
+}
+
+/* Opcional: Estilo para QToolBar si se usa dentro de QMainWindow */
+QToolBar {
+    background-color: #3b3b3b; /* Fondo para la barra de herramientas */
+    border: 1px solid #4a4a4a; /* Borde para la barra de herramientas */
+    spacing: 5px; /* Espacio entre los elementos de la barra de herramientas */
+    padding: 2px; /* Relleno */
+}
+
+QToolBar::handle {
+    background-color: #5a5a5a; /* Color del "handle" para mover la barra de herramientas */
+    width: 8px; /* Ancho del handle */
+    border-radius: 2px; /* Bordes redondeados */
+}
+
+QToolBar::separator {
+    background-color: #4a4a4a; /* Color del separador en la barra de herramientas */
+    width: 1px;
+    margin: 5px; /* Margen para el separador */
+}
+
+QToolButton {
+    background-color: transparent; /* Fondo transparente por defecto */
+    border: none;
+    color: #f0f0f0;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+QToolButton:hover {
+    background-color: #4a4a4a; /* Fondo al pasar el ratón */
+}
+
+QToolButton:pressed {
+    background-color: #5a5a5a; /* Fondo al presionar */
+}
+
+QToolButton:checked {
+    background-color: #5a5a5a; /* Fondo cuando está "checked" (si aplica) */
+}
+
+/* ScrollBar general para un look consistente */
+QScrollBar:vertical {
+    border: 1px solid #4a4a4a;
+    background: #3b3b3b;
+    width: 10px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:vertical {
+    background: #5a5a5a;
+    min-height: 20px;
+    border-radius: 4px;
+}
+
+QScrollBar::add-line:vertical {
+    border: none;
+    background: none;
+}
+
+QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+QScrollBar:horizontal {
+    border: 1px solid #4a4a4a;
+    background: #3b3b3b;
+    height: 10px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #5a5a5a;
+    min-width: 20px;
+    border-radius: 4px;
+}
+
+QScrollBar::add-line:horizontal {
+    border: none;
+    background: none;
+}
+
+QScrollBar::sub-line:horizontal {
+    border: none;
+    background: none;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+}

@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QLabel, QHBoxLayout, QFrame
 from typing import Literal
 
-AlertTypes = Literal["InfoAlert", "DangerAlert", "WarningAlert", "SuccessAlert"]
+AlertTypes = Literal["FluvelInfoAlert", "FluvelDangerAlert", "FluvelWarningAlert", "FluvelSuccessAlert"]
 
 class FluvelAlertLabel(QFrame):
     """
@@ -31,7 +31,7 @@ class FluvelAlertLabel(QFrame):
         self.setLayout(layout)
         self.setFixedHeight(50)
 
-class AlertLabel(FluvelAlertLabel):
+class FluvelAlert(FluvelAlertLabel):
     def __init__(self, text: str, _type: AlertTypes):
 
         # set the alert type
@@ -39,14 +39,14 @@ class AlertLabel(FluvelAlertLabel):
 
         super().__init__(text)
 
-class InfoAlert(FluvelAlertLabel):
-    _alert_type = "InfoAlert"
+class FluvelInfoAlert(FluvelAlertLabel):
+    _alert_type = "FluvelInfoAlert"
 
-class DangerAlert(FluvelAlertLabel):
-    _alert_type = "DangerAlert"
+class FluvelDangerAlert(FluvelAlertLabel):
+    _alert_type = "FluvelDangerAlert"
 
-class WarningAlert(FluvelAlertLabel):
-    _alert_type = "WarningAlert"
+class FluvelWarningAlert(FluvelAlertLabel):
+    _alert_type = "FluvelWarningAlert"
 
-class SuccessAlert(FluvelAlertLabel):
-    _alert_type = "SuccessAlert"
+class FluvelSuccessAlert(FluvelAlertLabel):
+    _alert_type = "FluvelSuccessAlert"
