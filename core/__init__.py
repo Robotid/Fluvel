@@ -5,5 +5,6 @@ from core.AppWindow import AppWindow
 
 __all__ = [
     "App",
-    "AppWindow"
+    "AppWindow",
+    "APP_ROOT"
 ]

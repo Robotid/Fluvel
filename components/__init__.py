@@ -3,8 +3,8 @@ from components.Buttons.PushButtons import (PushButton, OutlinedButton, PrimaryB
                                             DarkButton, InfoButton, WarningButton, LightButton,
                                             LinkButton)
 
-from components.Labels.Label import (Label, InfoAlert, WarningAlert, 
-                                     SuccessAlert, DangerAlert)
+from components.Labels.Label import (Label, InfoLabel, WarningLabel, 
+                                     SuccessLabel, DangerLabel)
 
 from components.Labels.FluvelAlertLabel import (FluvelAlert, FluvelDangerAlert, FluvelInfoAlert,
                                                 FluvelSuccessAlert, FluvelWarningAlert)
@@ -26,10 +26,10 @@ __all__ = [
     "LinkButton",
     # Labels
     "Label",
-    "InfoAlert",
-    "SuccessAlert",
-    "WarningAlert",
-    "DangerAlert"
+    "InfoLabel",
+    "SuccessLabel",
+    "WarningLabel",
+    "DangerLabel",
     # Alert Labels
     "FluvelAlert",
     "FluvelInfoAlert",

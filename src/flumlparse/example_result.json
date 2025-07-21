@@ -1,0 +1,37 @@
+{
+  "File": {
+    "new_file": "New File",
+    "new_window": "New Window",
+    "sep_1": "---",
+    "Open": {
+      "open_file": "Open...",
+      "open_recent": "Open Recent...",
+      "Export as": {
+        "export_pdf": "PDF",
+        "export_png": "PNG"
+      },
+      "sep_2": "---",
+      "quit": "Quit"
+    }
+  },
+  "Edit": {
+    "undo": "Undo",
+    "redo": "Redo",
+    "sep_3": "---",
+    "open_db": "Open a Database",
+    "CRUD": {
+      "create_db_table": "Create a Table",
+      "read_db_table": "Read a Table",
+      "update_db_table": "Update a Table",
+      "delete_db_table": "Delete a Table"
+    },
+    "close_db": "Close a Database"
+  },
+  "Help": {
+    "licence": "Licence",
+    "More": {
+      "version": "1.0.0",
+      "about": "About"
+    }
+  }
+}

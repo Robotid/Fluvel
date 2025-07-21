@@ -1,0 +1,43 @@
+[File]: # -> Menu Header
+
+    # el '#' representa un comentario de linea
+    # el '[]:' representa un diccionario 
+    # y los elementos indentados después del ':' son 'clave-valor'
+    # el '@...' es un corte de línea, representado como '"sep_N" = "---"'
+    # para todo '@...'
+
+    new_file = "New File"
+    new_window = "New Window"
+
+    @SystemSection #Esto es un separador de sección"
+
+    [Open]: # -> Submenu
+        open_file = "Open..."
+        open_recent = "Open Recent..."
+
+    [Export as]: # -> Submenu
+        export_pdf = "PDF"
+        export_png = "PNG"
+
+    @QuitSection # Separador<--->
+    quit = "Quit"
+
+[Edit]: # -> Menu Header
+    undo = "Undo"
+    redo = "Redo"
+
+    @DatabaseSection
+    open_db = "Open a Database"
+    [CRUD]:
+        create_db_table = "Create a Table"
+        read_db_table = "Read a Table"
+        update_db_table = "Update a Table"
+        delete_db_table = "Delete a Table"
+
+    close_db = "Close a Database"
+
+[Help]: # -> Menu Header
+    licence = "Licence"
+    [More]:
+        version = "1.0.0"
+        about = "About"

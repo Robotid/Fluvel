@@ -1,6 +1,6 @@
 from typing import Literal
 import os
-from utils import APP_ROOT
+from core import APP_ROOT
 
 _RESOURCE_FOLDERS = {
         "style":"styles",

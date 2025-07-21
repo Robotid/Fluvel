@@ -40,7 +40,8 @@ class GlobalConfig:
     #         └─────────────────────┘
 
     # [core utils]
-    APP_ROOT: str = APP_ROOT
+    APP_ROOT = APP_ROOT
+    DEV_MODE: bool
 
     # [appconfig]
     appconfig: dict
@@ -66,7 +67,7 @@ class GlobalConfig:
     # [defaults]
     default_icon: str
 
-    def set_config_format(self, filename: str):
+    def set_config_format(self, filename: str) -> None:
         """
         **IMPORTANT** This method loads the configuration from the **`appconfig`** 
         file TOML or JSON and defines the project's global attributes.
@@ -76,12 +77,14 @@ class GlobalConfig:
         # Obtaining information from the TOML or JSON configuration file
         appconfig: dict = load_file(filename)
 
+        GlobalConfig.DEV_MODE = appconfig.get("DEV_MODE", True)
+
         # the global configuration dictionary is saved
         GlobalConfig.appconfig: dict = appconfig
 
         # Configuring the global properties
-        app = appconfig.get("app", {})
-        window_size = appconfig.get("window_size", {})
+        app: dict = appconfig.get("app", {})
+        window_size: dict = appconfig.get("window_size", {})
 
         GlobalConfig.app_name = app.get("app_name", "-")
         GlobalConfig.version = app.get("version", "-")
@@ -90,7 +93,7 @@ class GlobalConfig:
         GlobalConfig.theme = app.get("theme", "bootstrap")
 
         # Database config
-        database = appconfig.get("database", {})
+        database: dict = appconfig.get("database", {})
 
         GlobalConfig.db_host = database.get("host", "-")
         GlobalConfig.db_port = database.get("port", "-")

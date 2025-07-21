@@ -11,7 +11,7 @@ class FluvelAlertLabel(QFrame):
     _alert_type: AlertTypes
     _icon: str #para implementar después
 
-    def __init__(self, text: str):
+    def __init__(self, text: str) -> None:
         super().__init__()
 
         self.setObjectName(self._alert_type)

@@ -1,14 +1,14 @@
 from PySide6.QtWidgets import QLabel
 from typing import Literal
 
-LabelType = Literal["InfoAlert", "WarningAlert", "SuccessAlert", "DangerAlert"]
+LabelType = Literal["Label", "InfoLabel", "WarningLabel", "SuccessLabel", "DangerLabel"]
 
 class FluvelLabel(QLabel):
     """
     Clase base de **`Fluvel`** para etiquetas estilizadas. Las subclases deben definir el atributo **`_label_type`**.
     """
 
-    _label_type: LabelType
+    _label_type: LabelType = "Label"
 
     def __init__(self, text: str):
         super().__init__(text)
@@ -24,15 +24,15 @@ class Label(FluvelLabel):
 
         super().__init__(text)
 
-class InfoAlert(FluvelLabel):
-    _label_type = "InfoAlert"
+class InfoLabel(FluvelLabel):
+    _label_type = "InfoLabel"
 
-class WarningAlert(FluvelLabel):
-    _label_type = "WarningAlert"
+class WarningLabel(FluvelLabel):
+    _label_type = "WarningLabel"
 
-class SuccessAlert(FluvelLabel):
-    _label_type = "SuccessAlert"
+class SuccessLabel(FluvelLabel):
+    _label_type = "SuccessLabel"
 
-class DangerAlert(FluvelLabel):
-    _label_type = "DangerAlert"
+class DangerLabel(FluvelLabel):
+    _label_type = "DangerLabel"
 

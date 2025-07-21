@@ -1,13 +1,13 @@
 # appconfig.toml
 
 # Activalo solo cuando la aplicación esté en modo de desarrollo.
-# Esto controla el funcionamiento de varias funciones y métodos que Fluvel
+# Esto controla el despliegue de varias funciones y métodos que Fluvel
 # implementa PARA EL PROGRAMADOR para facilitar el desarrollo de la app.
-dev_mode = true # ¡IMPORTANT!
+DEV_MODE = true # ¡IMPORTANT!
 
 # Configuración general de la aplicación
 [app]
-app_name = "Fluvel"
+app_name = "Fluvel Framework"
 version = "1.0.0"
 log_level = "INFO" # Nivel de registro: DEBUG, INFO, WARNING, ERROR, CRITICAL
 

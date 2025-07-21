@@ -1,12 +1,13 @@
 import sys
 from pathlib import Path
 
-def get_root_path() -> str:
+def get_root_path() -> Path:
     """
-    This function *returns* the **`APP_ROOT: Path`** of the project.
+    This function *returns* the **`APP_ROOT: Path`** of the project.\n
+    *Handles both source code execution and packaged executables.*
     """
 
-    APP_ROOT: str
+    APP_ROOT: Path
 
     if getattr(sys, "frozen", False):
         # Si la app está empaquetada
@@ -16,7 +17,7 @@ def get_root_path() -> str:
         # Path desde este archivo. 
         # parent 1 -> .../utils/
         # parent 2 -> .../App  <root folder of the app>
-        APP_ROOT = Path(__file__).parent.parent
+        APP_ROOT = Path(__file__).parent.parent.resolve()
 
     return APP_ROOT
 
@@ -36,8 +37,7 @@ def get_files_from_directory(dirname: str) -> list:
     
     return Path(dirname).iterdir() # Is just the 'iterdir()' method of the pathlib.Path Class
 
-
-def filter_by_extension(dirname: Path | str, suffix: str | tuple) -> list:
+def filter_by_extension(dirname: Path | str, suffix: str | tuple) -> list[Path]:
     """
     This function *returns* a *`list`* of files filtered by extension in a given directory.\n
     Args:
@@ -57,14 +57,19 @@ def filter_by_extension(dirname: Path | str, suffix: str | tuple) -> list:
         dirname = Path(dirname)
 
     files: list = []
-    
-    for _file in dirname.iterdir():
-        # compares the file extension with the suffix parameter
-        if _file.suffix in suffix: 
-            files.append(_file)
-        else:
-            pass
-    
-    return files
 
-# archivos_qss = filter_by_extension()
+    try:
+        for _file in dirname.iterdir():
+            # compares the file extension with the suffix parameter
+            if _file.suffix in suffix: 
+                files.append(_file)
+
+    # Errores
+    except FileNotFoundError as e:
+        print(f"Error: Directory not found at the specified path. {e}")
+
+    except NotADirectoryError as e:
+        print(f"The specified path does not point to a directory. {e}")
+    
+    finally:
+        return files

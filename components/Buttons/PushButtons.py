@@ -15,7 +15,7 @@ class FluvelPushButton(QPushButton):
 
     _button_type: ButtonType
 
-    def __init__(self, text: str):
+    def __init__(self, text: str) -> None:
         super().__init__(text)
 
         # Nombre Representativo del componente en el archivo 'theme/push_button.qss'
@@ -28,7 +28,7 @@ class FluvelPushButton(QPushButton):
         pass
 
 class PushButton(FluvelPushButton):
-    def __init__(self, text: str, _type: ButtonType = "PushButton"):
+    def __init__(self, text: str, _type: ButtonType = "PushButton") -> None:
 
         # set the button type
         self._button_type = _type
@@ -36,31 +36,31 @@ class PushButton(FluvelPushButton):
         super().__init__(text)
 
 class PrimaryButton(FluvelPushButton):
-    _button_type = "PrimaryButton"
+    _button_type: ButtonType = "PrimaryButton"
 
 class SecondaryButton(FluvelPushButton):
-    _button_type = "SecondaryButton"
+    _button_type: ButtonType = "SecondaryButton"
 
 class DangerButton(FluvelPushButton):
-    _button_type = "DangerButton"
+    _button_type: ButtonType = "DangerButton"
 
 class SuccessButton(FluvelPushButton):
-    _button_type = "SuccessButton"
+    _button_type: ButtonType = "SuccessButton"
 
 class WarningButton(FluvelPushButton):
-    _button_type = "WarningButton"
+    _button_type: ButtonType = "WarningButton"
 
 class InfoButton(FluvelPushButton):
-    _button_type = "InfoButton"
+    _button_type: ButtonType = "InfoButton"
 
 class LightButton(FluvelPushButton):
-    _button_type = "LightButton"
+    _button_type: ButtonType = "LightButton"
 
 class DarkButton(FluvelPushButton):
-    _button_type = "DarkButton"
+    _button_type: ButtonType = "DarkButton"
 
 class OutlinedButton(FluvelPushButton):
-    _button_type = "OutlinedButton"
+    _button_type: ButtonType = "OutlinedButton"
 
 class LinkButton(FluvelPushButton):
-    _button_type = "LinkButton"
+    _button_type: ButtonType = "LinkButton"

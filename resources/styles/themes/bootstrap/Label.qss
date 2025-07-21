@@ -9,28 +9,28 @@ QLabel {
 }
 
 /* Alerta de Información (Info) */
-QLabel#InfoAlert {
+QLabel#InfoLabel {
     background-color: #E0E7FF; /* bg-blue-100 */
     border: 1px solid #93C5FD; /* border-blue-400 */
     color: #4073ff; /* text-blue-700 */
 }
 
 /* Alerta de Éxito (Success) */
-QLabel#SuccessAlert {
+QLabel#SuccessLabel {
     background-color: #DCFCE7; /* bg-green-100 */
     border: 1px solid #86EFAC; /* border-green-400 */
     color: #15803D; /* text-green-700 */
 }
 
 /* Alerta de Advertencia (Warning) */
-QLabel#WarningAlert {
+QLabel#WarningLabel {
     background-color: #FEF3C7; /* bg-yellow-100 */
     border: 1px solid #FCD34D; /* border-yellow-400 */
     color: #B45309; /* text-yellow-700 */
 }
 
 /* Alerta de Peligro (Danger) */
-QLabel#DangerAlert {
+QLabel#DangerLabel {
     background-color: #FEE2E2; /* bg-red-100 */
     border: 1px solid #FCA5A5; /* border-red-400 */
     color: #B91C1C; /* text-red-700 */

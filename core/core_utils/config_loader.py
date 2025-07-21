@@ -1,14 +1,14 @@
 import toml
 import json
 from pathlib import Path
-from utils import APP_ROOT # Aquí ya hago uso de la simplificación con utils/__init__.py
+from utils import APP_ROOT
 
 def get_default_config() -> dict:
     """
     `returns` a `dict` with a default configuration format
     if no initial config file is provided or an `Exception` was thrown while trying to load one.
     """
-    default_config = {
+    default_config: dict = {
         "app": {
             "app_name": "Unknown App",
             "version": "N/A",
@@ -75,5 +75,5 @@ def load_file(file_path: Path | str) -> dict:
 
         finally:
             if hasError:
-                config = get_default_config()
+                config: dict = get_default_config()
             return config
