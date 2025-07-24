@@ -1,6 +1,6 @@
 # project.GlobalConfig
 
-from core.core_utils import load_file, APP_ROOT
+from core.core_utils import load_app_config, APP_ROOT
 
 class GlobalConfig:
     """
@@ -75,7 +75,7 @@ class GlobalConfig:
         """
 
         # Obtaining information from the TOML or JSON configuration file
-        appconfig: dict = load_file(filename)
+        appconfig: dict = load_app_config(filename, {})
 
         GlobalConfig.DEV_MODE = appconfig.get("DEV_MODE", True)
 

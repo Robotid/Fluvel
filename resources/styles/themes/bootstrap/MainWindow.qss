@@ -16,6 +16,6 @@
 QMainWindow {
     background-color: #fff; /* Simula el --body-bg */
     color: #212529;         /* Simula el --text-color */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 14px; /* Tamaño de fuente base */
 }

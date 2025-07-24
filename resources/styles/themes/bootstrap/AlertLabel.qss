@@ -15,7 +15,7 @@ QLabel#FluvelInfoAlertText {
 /* Danger Alert */
 QFrame#FluvelDangerAlert {
     background-color: #fdecea;
-    border-left: 4px solid #f44336 ;
+    border-left: 4px solid #f44336;
     border-radius: 4px;
 }
 
@@ -28,8 +28,8 @@ QLabel#FluvelDangerAlertText {
 
 /* Warning Alert */
 QFrame#FluvelWarningAlert {
-    background-color: #fff4e5 ;
-    border-left: 4px solid #ff9800 ;
+    background-color: #fff4e5;
+    border-left: 4px solid #ff9800;
     border-radius: 4px;
 }
 
@@ -42,8 +42,8 @@ QLabel#FluvelWarningAlertText {
 
 /* SuccessAlert */
 QFrame#FluvelSuccessAlert {
-    background-color: #e6f4ea ;
-    border-left: 4px solid #4caf50 ;
+    background-color: #e6f4ea;
+    border-left: 4px solid #4caf50;
     border-radius: 4px;
 }
 

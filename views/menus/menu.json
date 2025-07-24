@@ -1,30 +1,31 @@
 {
     "File": {
+        "sep_1": "---",
         "new_file": "New File",
         "new_window": "New Window",
         "new_from_template": "New from Template",
-        "sep_1": "---",
+        "sep_2": "---",
         "open_file": "Open...",
         "open_recent": "Open Recent",
-        "sep_2": "---",
-        "close_current": "Close",
-        "close_all": "Close All",
         "sep_3": "---",
-        "Save options": {
-            "save": "Save",
-            "save_as": "Save As...",
-            "save_all": "Save All"
-        },
+        "close_vurrent": "Close",
+        "close_all": "Close All",
         "sep_4": "---",
-        "browse_all_versions": "Browse All Versions...",
+        "save": "Save",
+        "save_as": "Save As...",
+        "save_all": "Save All",
         "sep_5": "---",
+        "browse_all_versions": "Browse All Versions...",
+        "sep_6": "---",
         "print_dialog": "Print...",
         "page_setup": "Page Setup...",
         "print_preview": "Print Preview",
+        "sep_7": "---",
         "import": "Import...",
         "export": "Export...",
         "export_as": "Export As...",
         "share": "Share...",
+        "sep_8": "---",
         "quit": "Quit"
     },
     "Edit": {
@@ -37,12 +38,12 @@
         "delete": "Delete",
         "select_all": "Select All",
         "deselect": "Deselect",
-        "sep_6": "---",
+        "sep_9": "---",
         "find": "Find...",
         "find_next": "Find Next",
         "find_previous": "Find Previous",
-        "replace": "Replace...",
-        "sep_7": "---",
+        "replace": "Replace",
+        "sep_10": "---",
         "check_document": "Check Document",
         "check_while_typing": "Check Spelling While Typing"
     },
@@ -52,17 +53,25 @@
         "actual_size": "Actual Size",
         "fit_to_window": "Fit to Window",
         "full_screen": "Full Screen",
-        "sep_8": "---",
-        "toolbar": "Toolbar",
-        "sidebar": "Sidebar",
-        "rulers": "Rulers",
-        "grid": "Grid",
-        "status_bar": "Status Bar",
-        "sep_9": "---",
+        "sep_11": "---",
+        "Hide Windows": {
+            "toolbar": "Toolbar",
+            "sidebar": "SideBar",
+            "rulers": "Rulers",
+            "grid": "Grid",
+            "status_bar": "Status Bar"
+        },
+        "Change Themes": {
+            "clean_light_theme": "Clean-Light",
+            "modern_dark_theme": "Modern-Dark",
+            "modern_dark_esmerald_theme": "Modern-Dark-Esmerald",
+            "bootstrap_theme": "Bootstrap"
+        },
+        "sep_12": "---",
         "single_pane": "Single Pane",
         "two_panes": "Two Panes",
         "three_panes": "Three Panes",
-        "sep_10": "---",
+        "sep_13": "---",
         "sort_by_name": "Name",
         "sort_by_date_modified": "Date Modified",
         "sort_by_size": "Size"
@@ -79,19 +88,18 @@
         "language": "Language"
     },
     "Help": {
-        "Help": {
+        "Help options": {
             "help_docs": "Help",
             "keyboard_shortcuts": "Keyboard Shortcuts",
             "tutorials": "Tutorials",
-            "Extras": {
-                "support": "Support",
-                "licence": "Licence"
-            }
+            "sep_14": "---",
+            "support": "Support",
+            "licence": "Licence"
         },
-        "sep_11": "---",
+        "sep_15": "---",
         "version": "Version",
         "web_page": "Visit us",
         "check_for_updates": "Check for Updates",
-        "about_app": "About Fluvel"
+        "about_app": "About"
     }
 }

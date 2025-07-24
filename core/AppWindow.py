@@ -1,13 +1,24 @@
 # fluvel.core.AppWindow
-
-from project import GlobalConfig
-from PySide6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QMenuBar
-from core.MenuBar import MenuBar
 from pathlib import Path
 
+from project import GlobalConfig
+from core.MenuBar import MenuBar
+
+# PySide6 - Fluvel Importations
+from PySide6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
+from core import App
+
+# Utils
+from core.core_utils.generate_menu_options import set_dynamic_menu_keys
+from core.core_utils import get_theme_path, load_style_sheet
+from utils import filter_by_extension
+
 class AppWindow(QMainWindow, GlobalConfig):
-    def __init__(self) -> None:
+    def __init__(self, root: App) -> None:
         super().__init__()
+
+        # Saving the app instance of the QApplication/App()
+        self.root = root
 
         # Inicializar UI
         self.__init_ui()
@@ -26,14 +37,14 @@ class AppWindow(QMainWindow, GlobalConfig):
         central_widget.setLayout(self.layout)
 
         # Configuring the Top Menu Bar
-        self.__set_menu_bar()
+        self.set_menu_bar()
 
         # Display views
         self.setUpMainWindow()
 
-    def __set_menu_bar(self) -> None:
+    def set_menu_bar(self) -> None:
         """
-        **`IMPORTANT`** Este método se encarga de  
+        **`IMPORTANT`** Este método inicializa el proceso para la creación del menú dinámico
         """
         
         menu_file: Path = self.APP_ROOT / "views" / "menus" / "menu.fluml"
@@ -74,6 +85,4 @@ class AppWindow(QMainWindow, GlobalConfig):
 
     def set_layout(self) -> None:
         pass
-
-    def setUpMainWindow(self) -> None: ...
- 
+    

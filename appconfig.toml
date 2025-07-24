@@ -16,8 +16,8 @@ theme = "bootstrap" # Nombre del tema a cargar desde resources/styles/themes/
 
 # Configuración del tamaño de la ventana principal
 [window_size]
-width = 1280
-height = 720
+width = 640
+height = 480
 
 # Configuración de la base de datos (ejemplo, no se recomienda para credenciales sensibles)
 [database]

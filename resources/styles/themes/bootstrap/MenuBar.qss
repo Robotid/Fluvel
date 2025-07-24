@@ -1,45 +1,52 @@
-/*
- * QMenuBar (para el menú principal en la parte superior)
- */
+
+/* ==================== QMenu, QMenuBar ==================== */
 QMenuBar {
-    background-color: #343a40; /* Simula --dark */
-    color: #fff;
-    spacing: 5px; /* Espacio entre los elementos del menú principal */
-}
-QMenuBar::item {
-    padding: 5px 10px;
-    background: transparent;
-}
-QMenuBar::item:selected { /* Cuando el ratón está sobre el elemento */
-    background: #007bff; /* Simula --primary */
-    color: #fff;
-    border-radius: 0.25rem; /* Simula --border-radius */
-}
-QMenuBar::item:pressed { /* Cuando el elemento es clicado */
-    background: #0056b3; /* Un azul más oscuro */
-    color: #fff;
+    background-color: #e9ecef; /* Un gris claro para la barra de menú */
+    color: #212529; /* Texto oscuro */
+    padding: 4px;
 }
 
-/*
- * QMenu (para los menús desplegables de QMenuBar)
- */
-QMenu {
-    background-color: #fff;
-    border: 1px solid #dee2e6; /* Simula --border-color */
-    border-radius: 0.25rem; /* Simula --border-radius */
-    padding: 5px 0; /* Espaciado superior e inferior para los ítems */
-}
-QMenu::item {
-    padding: 5px 20px;
+QMenuBar::item {
+    padding: 5px 10px;
     background-color: transparent;
-    color: #212529; /* Simula --text-color */
 }
+
+QMenuBar::item:selected {
+    background-color: #007bff; /* Fondo azul al seleccionar */
+    color: #ffffff; /* Texto blanco */
+    border-radius: 3px;
+}
+
+QMenu {
+    background-color: #ffffff; /* Fondo blanco para los menús desplegables */
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 5px 0;
+}
+
+QMenu::item {
+    padding: 6px 20px;
+    color: #212529;
+}
+
 QMenu::item:selected {
-    background-color: #e4e4e4; /* Simula --light */
-    color: #212529; /* Simula --text-color */
+    background-color: #007bff;
+    color: #ffffff;
+    border-radius: 3px; /* Bordes redondeados para los ítems del menú */
 }
+
 QMenu::separator {
     height: 1px;
-    background-color: #dee2e6; /* Simula --border-color */
-    margin: 5px 0;
+    background: #ced4da;
+    margin: 5px 0px;
+}
+
+/* ==================== ToolTips (QToolTip) ==================== */
+QToolTip {
+    background-color: #212529; /* Fondo oscuro */
+    color: #ffffff; /* Texto blanco */
+    border: 1px solid #212529;
+    border-radius: 4px;
+    padding: 5px 8px;
+    opacity: 200; /* Completamente opaco */
 }

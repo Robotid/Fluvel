@@ -1,123 +1,133 @@
 # Main menu sections
-[File]
+[File]: # -> menu "File"
 
-  new_file = "New File"
-  new_window = "New Window"
-  new_from_template = "New from Template"
+    @InitSection
+    new_file = "New File"
+    new_window = "New Window"
+    new_from_template = "New from Template"
 
-  # Open options
-  @Open-Section
+    # Open options
+    @OpenSection
+    open_file = "Open..."
+    open_recent = "Open Recent"
 
-  open_file = "Open..."
-  open_recent = "Open Recent"
+    # Close options
+    @CloseSection
+    close_vurrent = "Close"
+    close_all = "Close All"
 
-  # Close options
-  @Close-Section
-
-  close_current = "Close"
-  close_all = "Close All"
-
-  # Save options
-  @Save-Section
-
-  [Save options]:
+    # Save options
+    @SaveSection
     save = "Save"
     save_as = "Save As..."
     save_all = "Save All"
+    
+    # revert options (for version control/autosave)
+    @RevertOptionsSection
+    browse_all_versions = "Browse All Versions..."
 
-  # Revert options (for version control/autosave)
-  @ReverOptions-Section
+    # Print options
+    @PrintSection
+    print_dialog = "Print..."
+    page_setup = "Page Setup..."
+    print_preview = "Print Preview"
 
-  browse_all_versions = "Browse All Versions..."
+    # Import/Export/Share
+    @ImportExportShare
+    import = "Import..."
+    export = "Export..."
+    export_as = "Export As..."
+    share = "Share..."
 
-  # Print options
-  @Print-Section
+    @QuitSection
+    quit = "Quit"
 
-  print_dialog = "Print..."
-  page_setup = "Page Setup..."
-  print_preview = "Print Preview"
+[Edit]: # -> menu "Edit"
 
-  # Import/Export/Share
-  import = "Import..."
-  export = "Export..."
-  export_as = "Export As..."
-  share = "Share..."
+    undo = "Undo"
+    redo = "Redo"
+    cut = "Cut"
+    copy = "Copy"
+    paste = "Paste"
+    paste_special = "Paste Special..."
+    delete = "Delete"
+    select_all = "Select All"
+    deselect = "Deselect"
 
-  # Application exit
-  quit = "Quit"
+    #Find options
+    @FindSection
+    find = "Find..."
+    find_next = "Find Next"
+    find_previous = "Find Previous"
+    replace = "Replace"
 
-[Edit]
-  undo = "Undo"
-  redo = "Redo"
-  cut = "Cut"
-  copy = "Copy"
-  paste = "Paste"
-  paste_special = "Paste Special..."
-  delete = "Delete"
-  select_all = "Select All"
-  deselect = "Deselect"
+    # Spelling and Grammar (for text-based apps)
+    @SpellingAndGrammarSection
+    check_document = "Check Document"
+    check_while_typing = "Check Spelling While Typing"
 
-  # Find options
-  @Find-Section
-  find = "Find..."
-  find_next = "Find Next"
-  find_previous = "Find Previous"
-  replace = "Replace..."
+[View]: # -> menu "View"
 
-  # Spelling and Grammar (for text-based apps)
-  @SpellingAndGrammar-Section
-  check_document = "Check Document"
-  check_while_typing = "Check Spelling While Typing"
+    zoom_in = "Zoom In"
+    zoom_out = "Zoom Out"
+    actual_size = "Actual Size"
+    fit_to_window = "Fit to Window"
+    full_screen = "Full Screen"
 
-[View]
-  zoom_in = "Zoom In"
-  zoom_out = "Zoom Out"
-  actual_size = "Actual Size"
-  fit_to_window = "Fit to Window"
-  full_screen = "Full Screen"
+    # Show/Hide toggles
+    @ShowHideSection
+    [Hide Windows]: # -> sub-menu 'Hide Windows'
+        toolbar = "Toolbar"         
+        sidebar = "SideBar"
+        rulers = "Rulers"
+        grid = "Grid"
+        status_bar = "Status Bar"
+    
+    [Change Themes]:
+        clean_light_theme = "Clean-Light"
+        modern_dark_theme = "Modern-Dark"
+        modern_dark_esmerald_theme = "Modern-Dark-Esmerald"
+        bootstrap_theme = "Bootstrap"
+        
+    # Layout options
+    @LayoutSection
+    single_pane = "Single Pane"
+    two_panes = "Two Panes"
+    three_panes = "Three Panes"
 
-  # Show/Hide toggles
-  @ShowHide-Section
-  toolbar = "Toolbar"
-  sidebar = "Sidebar"
-  rulers = "Rulers"
-  grid = "Grid"
-  status_bar = "Status Bar"
+    # Sort By options
+    @SortBySection
+    sort_by_name = "Name"
+    sort_by_date_modified = "Date Modified"
+    sort_by_size = "Size"
 
-  # Layout options
-  @Layout-Section
-  single_pane = "Single Pane"
-  two_panes = "Two Panes"
-  three_panes = "Three Panes"
+[Window]: # -> menu "Window"
 
-  # Sort By options
-  @SortBy.Section
-  sort_by_name = "Name"
-  sort_by_date_modified = "Date Modified"
-  sort_by_size = "Size"
+    minimize = "Minimize"
+    zoom_maximize = "Zoom/Maximize"
+    bring_all_to_front = "Bring All to Front"
+    arrange = "Arrange"
 
-[Window]
-  minimize = "Minimize"
-  zoom_maximize = "Zoom/Maximize"
-  bring_all_to_front = "Bring All to Front"
-  arrange = "Arrange"
+[Settings] # -> menu "Settings"
 
-[Settings]
-  preferences = "Preferences..."
-  themes = "Themes"
-  language = "Language"
+    preferences = "Preferences..."
+    themes = "Themes"
+    language = "Language"
 
-[Help]
-  [Help]:
-    help_docs = "Help"
-    keyboard_shortcuts = "Keyboard Shortcuts"
-    tutorials = "Tutorials"
-    [Extras]:
-      support = "Support"
-      licence = "Licence"  
-  # More help options
-  @More-Section
-  version = "Version"
-  web_page = "Visit us"
-  check_for_updates = "Check for Updates"
-  about_app = "About Fluvel"
+[Help] # -> menu "Help"
+
+    [Help options]: # -> Drop-down sub-menu "Help options"
+        help_docs = "Help"
+        keyboard_shortcuts = "Keyboard Shortcuts"
+        tutorials = "Tutorials"
+    
+        @MoreHelp 
+        support = "Support"
+        licence = "Licence"
+
+    # More help options
+    @MoreSection
+    version = "Version"
+    web_page = "Visit us"
+    check_for_updates = "Check for Updates"
+    about_app = "About"

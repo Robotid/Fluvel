@@ -2,7 +2,7 @@ QPushButton {
     /* Estilos base del botón */
     background-color: #007bff; /* Color primario azul (similar a Bootstrap) */
     color: white; /* Texto blanco */
-    border: 1px solid; /* estilo de borde uniforme para todos los tipos de botones */
+    border: 3px solid; /* estilo de borde uniforme para todos los tipos de botones */
     border-color: #007bff; /* Borde del mismo color para un look sólido */
     padding: 10px 20px; /* Espaciado interno generoso */
     font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente limpia y moderna */
@@ -183,10 +183,6 @@ QPushButton#LinkButton {
     border: none;
     color: rgb(110, 148, 252);
     text-decoration: underline;
-}
-
-QPushButton#LinkButton:visited {
-    color: purple;
 }
 
 QPushButton#LinkButton:hover {

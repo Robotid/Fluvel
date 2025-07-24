@@ -13,6 +13,7 @@ QCheckBox::indicator {
 
 QCheckBox::indicator:unchecked {
     /* No specific icon for unchecked state, just the border */
+    border: 1px solid #ced4d1;
 }
 
 QCheckBox::indicator:checked {

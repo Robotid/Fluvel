@@ -1,0 +1,78 @@
+/* --- QToolBar: Estilo Base Tipo Bootstrap --- */
+QToolBar {
+    background-color: #343a40; /* Fondo oscuro, como un navbar de Bootstrap */
+    border: 1px solid #495057; /* Borde sutil para definir el área */
+    padding: 6px; /* Relleno alrededor de los elementos de la barra */
+    spacing: 8px; /* Espacio entre los elementos (botones, separadores) */
+    min-height: 40px; /* Asegura una altura mínima para la barra */
+}
+
+/* Manejador (handle) para barras de herramientas movibles/flotantes */
+QToolBar::handle {
+    background-color: #6c757d; /* Color del asa - un gris medio, siempre visible */
+    border: 1px solid #7c858d; /* Añade un borde sutil para definirlo mejor */
+    border-radius: 3px; /* Bordes ligeramente redondeados */
+    margin: 4px; /* Un pequeño margen para separarlo del borde de la barra */
+
+    /* Importante para la visibilidad en diferentes estados/orientaciones */
+    /* Asegura un tamaño mínimo si es vertical u horizontal */
+    width: 8px; /* Ancho para el handle vertical */
+    height: 8px; /* Altura para el handle horizontal */
+
+    /* Puedes añadir un gradiente o un icono si quieres un diseño más elaborado */
+    /*
+    image: url(:/icons/grip.png); // Un pequeño icono de "grip"
+    image-position: center;
+    */
+}
+
+/* Opcional: Estilo al pasar el ratón sobre el handle */
+QToolBar::handle:hover {
+    background-color: #889299; /* Un poco más claro al pasar el ratón */
+    border: 1px solid #99a2a9;
+}
+
+/* Separador visual entre grupos de acciones */
+QToolBar::separator {
+    background-color: #495057; /* Línea separadora oscura */
+    width: 1px; /* Espesor del separador */
+    margin: 5px 8px; /* Margen vertical y horizontal */
+}
+
+/* --- QToolButton (Representa QAction en la QToolBar) --- */
+/* (Resto de los estilos de QToolButton como ya los tienes) */
+QToolButton {
+    background-color: transparent;
+    border: none;
+    color: #f8f9fa;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    outline: none;
+    min-width: 30px;
+    min-height: 28px;
+}
+QToolButton:hover { background-color: #495057; }
+QToolButton:pressed { background-color: #5a6268; }
+QToolButton:disabled {
+    color: #adb5bd;
+    background-color: transparent;
+    opacity: 0.6;
+    pointer-events: none;
+}
+QToolButton:checked {
+    background-color: #007bff;
+    color: #ffffff;
+    border: 1px solid #0056b3;
+}
+QToolButton:checked:hover { background-color: #0069d9; }
+QToolButton[popupMode="InstantPopup"] {
+    padding-right: 25px;
+    image: url(:/icons/arrow_down.png);
+    image-position: right center;
+}
+QToolButton::menu-indicator {
+    image: url(no-such-image.png);
+    width: 0px;
+}

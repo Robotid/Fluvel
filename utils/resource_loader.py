@@ -1,6 +1,5 @@
 from typing import Literal
 import os
-from core import APP_ROOT
 
 _RESOURCE_FOLDERS = {
         "style":"styles",
@@ -11,9 +10,9 @@ _RESOURCE_FOLDERS = {
         "font":"fonts"
 }
 
-def get_resource_path(filename: str, resource_type: Literal["style", "img", "ico", "data", "template", "font"]) -> str:
+def get_resource_path(APP_ROOT, filename: str, resource_type: Literal["style", "img", "ico", "data", "template", "font"]) -> str:
     """
-    Construye la ruta absoluta a un recurso específico.
+    Construye la ruta absoluta a un recurso específico. Ejemplo: *'APP_ROOT/resources/icons/...'*.
 
     Args:
         resource_type (Literal): El tipo de recurso (ej. "style", "img").
@@ -27,5 +26,5 @@ def get_resource_path(filename: str, resource_type: Literal["style", "img", "ico
 
     # Construye la ruta completa: APP_ROOT/resources/tipo_de_recurso/filename
     folder_name = _RESOURCE_FOLDERS[resource_type]
-    resource_full_path = os.path.join(APP_ROOT, 'resources', folder_name, filename)
-    return resource_full_path
+    resource_full_path = APP_ROOT / 'resources' / folder_name / filename
+    return str(resource_full_path)

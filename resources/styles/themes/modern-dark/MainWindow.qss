@@ -115,3 +115,123 @@ QScrollBar::sub-line:horizontal {
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: none;
 }
+
+/* QCheckBox Modern Dark Style */
+
+QCheckBox {
+    color: #f0f0f0; /* Color del texto del QCheckBox */
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    padding: 2px; /* Pequeño relleno alrededor de todo el QCheckBox */
+    spacing: 5px; /* Espacio entre el indicador y el texto */
+}
+
+QCheckBox::indicator {
+    width: 16px; /* Ancho del cuadrado del indicador */
+    height: 16px; /* Alto del cuadrado del indicador */
+    border: 1px solid #5a5a5a; /* Borde del cuadrado */
+    background-color: #3b3b3b; /* Fondo del cuadrado sin marcar */
+    border-radius: 3px; /* Bordes ligeramente redondeados del cuadrado */
+}
+
+/* Estado normal (sin marcar) */
+QCheckBox::indicator:unchecked {
+    background-color: #3b3b3b;
+    border: 1px solid #5a5a5a;
+}
+
+/* Estado al pasar el ratón (sin marcar) */
+QCheckBox::indicator:unchecked:hover {
+    background-color: #4a4a4a; /* Fondo más oscuro al pasar el ratón */
+    border: 1px solid #6a6a6a; /* Borde más claro */
+}
+
+/* Estado presionado (sin marcar) */
+QCheckBox::indicator:unchecked:pressed {
+    background-color: #5a5a5a;
+    border: 1px solid #7a7a7a;
+}
+
+/* Estado deshabilitado (sin marcar) */
+QCheckBox::indicator:unchecked:disabled {
+    background-color: #2a2a2a; /* Fondo muy oscuro */
+    border: 1px solid #4a4a4a;
+    image: none; /* Asegura que no haya imagen si hay una por defecto */
+}
+
+/* Estado marcado */
+QCheckBox::indicator:checked {
+    background-color: #5cb85c; /* Verde brillante para marcado */
+    border: 1px solid #4cae4c; /* Borde verde más oscuro */
+    image: url(:/icons/check_white.png); /* Icono de marca de verificación (ver nota) */
+    /* Alternativa si no usas recursos QRC y el icono está en la misma carpeta que el QSS: */
+    /* image: url(check_white.png); */
+}
+
+/* Estado al pasar el ratón (marcado) */
+QCheckBox::indicator:checked:hover {
+    background-color: #6edc6e; /* Verde más claro al pasar el ratón */
+    border: 1px solid #5cb85c;
+}
+
+/* Estado presionado (marcado) */
+QCheckBox::indicator:checked:pressed {
+    background-color: #4CAF50; /* Un verde intermedio */
+    border: 1px solid #449d44;
+}
+
+/* Estado deshabilitado (marcado) */
+QCheckBox::indicator:checked:disabled {
+    background-color: #4a6a4a; /* Verde oscuro atenuado */
+    border: 1px solid #5a7a5a;
+    image: url(:/icons/check_grey.png); /* Icono de marca de verificación gris */
+    /* Alternativa si no usas recursos QRC y el icono está en la misma carpeta que el QSS: */
+    /* image: url(check_grey.png); */
+}
+
+/* Estilo del texto del QCheckBox cuando está deshabilitado */
+QCheckBox:disabled {
+    color: #888888; /* Texto atenuado para QCheckBox deshabilitado */
+}
+
+
+/* QToolBar Modern Dark Style (Repetido del QMainWindow para contexto) */
+QToolBar {
+    background-color: #3b3b3b; /* Fondo para la barra de herramientas */
+    border: 1px solid #4a4a4a; /* Borde para la barra de herramientas */
+    spacing: 5px; /* Espacio entre los elementos de la barra de herramientas */
+    padding: 2px; /* Relleno */
+}
+
+QToolBar::handle {
+    background-color: #5a5a5a; /* Color del "handle" para mover la barra de herramientas */
+    width: 8px; /* Ancho del handle */
+    border-radius: 2px; /* Bordes redondeados */
+}
+
+QToolBar::separator {
+    background-color: #4a4a4a; /* Color del separador en la barra de herramientas */
+    width: 1px;
+    margin: 5px; /* Margen para el separador */
+}
+
+/* Estilo para los QToolButton (los botones que representan QAction en la toolbar) */
+QToolButton {
+    background-color: transparent; /* Fondo transparente por defecto */
+    border: none;
+    color: #f0f0f0;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+QToolButton:hover {
+    background-color: #4a4a4a; /* Fondo al pasar el ratón */
+}
+
+QToolButton:pressed {
+    background-color: #5a5a5a; /* Fondo al presionar */
+}
+
+QToolButton:checked {
+    background-color: #5a5a5a; /* Fondo cuando está "checked" (si aplica) */
+}

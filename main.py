@@ -12,7 +12,7 @@ def main():
     app.load("appconfig.toml")
 
     # Instantiate and display the main application window
-    window = MainWindow()
+    window = MainWindow(root=app)
     window.show()
 
     # Runnig the main loop

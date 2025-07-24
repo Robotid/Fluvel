@@ -3,7 +3,7 @@ from pathlib import Path
 
 def get_root_path() -> Path:
     """
-    This function *returns* the **`APP_ROOT: Path`** of the project.\n
+     **`ROOT FUNCTION`** This function *returns* the **`APP_ROOT: Path`** of the project.\n
     *Handles both source code execution and packaged executables.*
     """
 
@@ -17,7 +17,7 @@ def get_root_path() -> Path:
         # Path desde este archivo. 
         # parent 1 -> .../utils/
         # parent 2 -> .../App  <root folder of the app>
-        APP_ROOT = Path(__file__).parent.parent.resolve()
+        APP_ROOT = Path(__file__).parent.parent
 
     return APP_ROOT
 
@@ -25,10 +25,10 @@ def get_root_path() -> Path:
 def minify_qss(qss_content: str) -> str:
     """
     -> **TO DO** <-\n
-    Minimiza una cadena QSS eliminando espacios en blanco y comentarios.
+    Minimizes a QSS string by removing whitespace and comments.\n
+    perhaps useful when running the *`fluvel build`* command
     """
     ...
-
 
 def get_files_from_directory(dirname: str) -> list:
     """
@@ -64,10 +64,9 @@ def filter_by_extension(dirname: Path | str, suffix: str | tuple) -> list[Path]:
             if _file.suffix in suffix: 
                 files.append(_file)
 
-    # Errores
     except FileNotFoundError as e:
         print(f"Error: Directory not found at the specified path. {e}")
-
+    
     except NotADirectoryError as e:
         print(f"The specified path does not point to a directory. {e}")
     

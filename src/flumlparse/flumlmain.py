@@ -3,23 +3,27 @@ import json
 import re
 
 def read_file(file_path: Path | str) -> list[str]:
-    """Lee un archivo y devuelve una lista de sus líneas."""
+    """
+    Lee un archivo y devuelve una lista de sus líneas.
+    """
+
     if isinstance(file_path, str):
         file_path = Path(file_path)
 
     try:
+
         with open(file_path, "r", encoding="utf-8") as f:
-            if file_path.stem == ".json":
-                return json.load(f)
             return f.readlines()
+        
     except Exception as e:
         print(f"Error: Ha ocurrido un error al leer el archivo: {e}")
         return []
 
 def parse_FLUML(file_path: Path | str) -> dict:
     """
-    Analiza un archivo .fluml y lo convierte en un diccionario de Python.
+    Analiza un archivo .fluml, lo formatea a JSON y lo convierte en un diccionario de Python.
     """
+
     lines = read_file(file_path)
     if not lines:
         return {}
@@ -42,8 +46,8 @@ def parse_FLUML(file_path: Path | str) -> dict:
         line = line.lstrip()
 
         # 3. Volver a la jerarquía correcta basándose en la indentación
-        # Si la indentación actual es menor o igual a la del último diccionario en la pila,
-        # significa que hemos subido de nivel.
+        # Si la indentación actual es menor o igual a la del último diccionario en la pila entonces
+        # subimos de nivel.
         while indent <= stack[-1][0]:
             stack.pop()
 
@@ -51,7 +55,7 @@ def parse_FLUML(file_path: Path | str) -> dict:
         current_dict = stack[-1][1]
 
         # 4. Procesar la línea según su tipo
-        # Separador (@)
+        # Separador de sección (@)
         if line.startswith("@"):
             key = f"sep_{sep_counter}"
             current_dict[key] = "---"
@@ -68,7 +72,7 @@ def parse_FLUML(file_path: Path | str) -> dict:
             stack.append((indent, new_dict))
             continue
         
-        # Par clave-valor (key = "value")
+        # Par entidad clave-valor (key = "value")
         kv_match = re.match(r'([^=\s]+)\s*=\s*"([^"]+)"', line)
         if kv_match:
             key, value = kv_match.groups()
@@ -80,15 +84,22 @@ def parse_FLUML(file_path: Path | str) -> dict:
 
     return root
 
-def convert_FLUML_to_JSON(input_file: str, output_file: str):
-    """Convierte un archivo .fluml a .json."""
+def convert_FLUML_to_JSON(input_file: Path | str, output_file: Path | str):
+    """
+    Convierte un archivo `.fluml` a `.json.`
+    """
+
     try:
 
         parsed_data = parse_FLUML(input_file)
+
         with open(output_file, "w", encoding="utf-8") as f:
             json.dump(parsed_data, f, indent=4, ensure_ascii=False)
 
+    # Si en el proceso de conversión se detectó una sintaxis errónea
     except ValueError as e:
         print(f"Error durante la conversión: {e}")
+
+    # Cualquier otra excepción
     except Exception as e:
         print(f"Ha ocurrido un error inesperado: {e}")
