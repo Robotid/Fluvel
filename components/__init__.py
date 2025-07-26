@@ -6,7 +6,7 @@ from components.Buttons.PushButtons import (PushButton, OutlinedButton, PrimaryB
 from components.Labels.Label import (Label, InfoLabel, WarningLabel, 
                                      SuccessLabel, DangerLabel)
 
-from components.Labels.FluvelAlertLabel import (FluvelAlert, FluvelDangerAlert, FluvelInfoAlert,
+from components.Labels.FluvelAlertLabel import (FluvelDangerAlert, FluvelInfoAlert,
                                                 FluvelSuccessAlert, FluvelWarningAlert)
 
 # from fluvel.components import <component_name> 
@@ -31,7 +31,6 @@ __all__ = [
     "WarningLabel",
     "DangerLabel",
     # Alert Labels
-    "FluvelAlert",
     "FluvelInfoAlert",
     "FluvelSuccessAlert",
     "FluvelWarningAlert",

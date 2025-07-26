@@ -12,7 +12,7 @@ QPushButton {
     outline: none; /* Eliminar el contorno de enfoque predeterminado */
 }
 QPushButton:pressed {
-    padding-top: 11px; /* Efecto de "hundimiento" sutil */
+    padding-top: 10px; /* Efecto de "hundimiento" sutil */
     padding-bottom: 9px;
 }
 
@@ -128,25 +128,25 @@ QPushButton#WarningButton:pressed {
 
 /* Estilo para un botón de info */
 QPushButton#InfoButton {
-    background-color: #00a2ba;
-    border-color: #00a2ba;
+    background-color: #2196f3;
+    border-color: #2196f3;
 }
 
 QPushButton#InfoButton:hover {
-    background-color: #1a7988;
-    border-color: #1a7988;
+    background-color: #2183d3;
+    border-color: #212183d396f3;
 }
 
 QPushButton#InfoButton:pressed {
-    background-color: #1b7f8f;
-    border-color: #1b7f8f;
+    background-color: #1d82d4;
+    border-color: #1d82d4;
 }
 
 /* Estilo para un botón claro */
 QPushButton#LightButton {
     background-color: #f8f9fa;
     color: #000;
-    border-color: #b1b1b1;
+    border-color: #f8f9fa;
 }
 
 QPushButton#LightButton:hover {

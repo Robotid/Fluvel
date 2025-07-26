@@ -55,7 +55,7 @@ class App(QApplication, GlobalConfig):
         # Cargando el tema a la app
         self.setStyleSheet(qss_content)
     
-    def change_theme(self, new_theme: AppThemes):
+    def change_theme(self, new_theme: AppThemes) -> None:
         """
         This method changes the entire `appearance` of the application dynamically at runtime or development time.
         """

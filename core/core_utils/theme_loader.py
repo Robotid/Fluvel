@@ -23,9 +23,9 @@ def load_style_sheet(file_path: str | Path) -> str:
         
     except FileNotFoundError:
         print(f"Error: No se encontró el archivo {file_path.name} en la ruta {file_path}.")
-        return ""
         
     except Exception as e:
         print(f"Error al leer el archivo de hoja de estilos '{file_path.name}': {e}.")
-        return ""
     
+    # En caso de excepción
+    return ""

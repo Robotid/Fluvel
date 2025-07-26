@@ -122,8 +122,10 @@ class MenuBar:
         # the QMenuBar Widget of the main window
         self.__menu_bar: QMenuBar = self.app_window.menuBar()
 
+        self._EMBEDDED_MENU_DATA_JSON = None
+
         # IMPORTANT MAIN PROCESS
-        
+
         # Step 0
         # The folder where the FLUML and JSON files will be stored
         menus_folder: Path = menu_file.parent
@@ -269,7 +271,7 @@ class MenuBar:
                     action = QAction(value, self.app_window)
                     parent_menu.addAction(action)
                     # self.main_window.actions[key] = action # Guardar la acción usando su clave TOML
-                    # FluvelOption.options = action # Maybe
+                    # FluvelOption.options = action # Quizás se lo pueda implementar
                     setattr(self, key, action) # convirtiendo cada QAction en una instancia de MenuBar
                     self.all_menu_options.append(key) # Guardando sus referencias para usarlas en MenuOptions y MainWindow
             

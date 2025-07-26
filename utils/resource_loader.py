@@ -10,9 +10,11 @@ _RESOURCE_FOLDERS = {
         "font":"fonts"
 }
 
-def get_resource_path(APP_ROOT, filename: str, resource_type: Literal["style", "img", "ico", "data", "template", "font"]) -> str:
+ResourceTypes = Literal["style", "img", "ico", "data", "template", "font"]
+
+def get_resource_path(APP_ROOT, filename: str, resource_type: ResourceTypes) -> str:
     """
-    Construye la ruta absoluta a un recurso específico. Ejemplo: *'APP_ROOT/resources/icons/...'*.
+    Construye la ruta absoluta a un recurso específico. Ejemplo: *'APP_ROOT/resources/icons/...'*
 
     Args:
         resource_type (Literal): El tipo de recurso (ej. "style", "img").

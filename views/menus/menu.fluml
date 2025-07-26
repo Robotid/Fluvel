@@ -82,12 +82,6 @@
         rulers = "Rulers"
         grid = "Grid"
         status_bar = "Status Bar"
-    
-    [Change Themes]:
-        clean_light_theme = "Clean-Light"
-        modern_dark_theme = "Modern-Dark"
-        modern_dark_esmerald_theme = "Modern-Dark-Esmerald"
-        bootstrap_theme = "Bootstrap"
         
     # Layout options
     @LayoutSection
@@ -111,7 +105,13 @@
 [Settings] # -> menu "Settings"
 
     preferences = "Preferences..."
-    themes = "Themes"
+
+    [Themes]:
+        clean_light_theme = "Clean-Light"
+        modern_dark_theme = "Modern-Dark"
+        modern_dark_esmerald_theme = "Modern-Dark-Esmerald"
+        bootstrap_theme = "Bootstrap"
+        
     language = "Language"
 
 [Help] # -> menu "Help"

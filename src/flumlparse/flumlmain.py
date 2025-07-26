@@ -4,7 +4,7 @@ import re
 
 def read_file(file_path: Path | str) -> list[str]:
     """
-    Lee un archivo y devuelve una lista de sus líneas.
+    Lee un archivo y devuelve una lista de sus líneas con readlines().
     """
 
     if isinstance(file_path, str):
@@ -37,10 +37,10 @@ def parse_FLUML(file_path: Path | str) -> dict:
     for line_num, each_line in enumerate(lines, 1):
         # 1. Limpiar la línea: eliminar comentarios y espacios en blanco
         line = each_line.split('#', 1)[0].rstrip()
-        
+
         if not line:
             continue
-
+        
         # 2. Calcular la indentación de la línea actual
         indent = len(line) - len(line.lstrip())
         line = line.lstrip()
@@ -84,7 +84,7 @@ def parse_FLUML(file_path: Path | str) -> dict:
 
     return root
 
-def convert_FLUML_to_JSON(input_file: Path | str, output_file: Path | str):
+def convert_FLUML_to_JSON(input_file: Path | str, output_file: Path | str) -> None:
     """
     Convierte un archivo `.fluml` a `.json.`
     """

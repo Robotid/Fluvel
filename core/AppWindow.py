@@ -21,12 +21,13 @@ class AppWindow(QMainWindow, GlobalConfig):
         self.root = root
 
         # Inicializar UI
-        self.__init_ui()
+        self._init_ui()
 
-    def __init_ui(self) -> None:
+    def _init_ui(self) -> None:
         """
         This method performs the main configurations of the application's user interface window.
         """
+
         self.setWindowTitle(f"{self.app_name} - {self.version}")
         self.setGeometry(100, 100, self.window_width, self.window_height)
 
@@ -86,3 +87,4 @@ class AppWindow(QMainWindow, GlobalConfig):
     def set_layout(self) -> None:
         pass
     
+    def config(self, **kwargs) -> None: ...

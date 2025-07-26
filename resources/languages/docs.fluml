@@ -1,0 +1,18 @@
+# Sintactic Rules
+# [] -> dict -> contains the id of the StyledText
+# """ """ -> multiline formated text -> contains the value of the StyledText
+
+# Style Rules
+# * -> italic -> <span style='font-style: italic;'>
+# ** -> bold -> <span style='font-weight: bold;'>
+# -- -> line-throug -> <span style='text-decoration: line-throug;'>
+# __ -> underline -> <span style='text-decoration: underline;'>
+# {value:link} -> link -> <a href='link'> value </a>
+# <> -> code -> <span style='font-family: consolas;'>
+
+[btn-accept]:
+    """
+    **Hi!**, this *is* an **<demostration>**. Check our {Youtube | https://www.youtube.com} channel. 
+    """
+
+class StyledText[str]

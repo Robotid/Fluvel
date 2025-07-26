@@ -2,23 +2,22 @@
 
 from core import App
 from core import AppWindow
-from components import FluvelInfoAlert, FluvelWarningAlert, FluvelSuccessAlert, FluvelDangerAlert, FluvelAlert
+from components import FluvelInfoAlert, FluvelWarningAlert, FluvelSuccessAlert, FluvelDangerAlert
 from components import Label, InfoLabel, WarningLabel, DangerLabel, SuccessLabel
 from components import PushButton
-from PySide6.QtWidgets import QMessageBox, QToolBar
+from PySide6.QtWidgets import QMessageBox, QToolBar, QLabel, QTextEdit
 from utils import get_resource_path
-from PySide6.QtGui import QIcon, Qt, QKeySequence
-from PySide6.QtCore import QSize
+from PySide6.QtGui import QIcon, Qt, QKeySequence, QPixmap, QFont, QFontInfo, QDesktopServices
+from PySide6.QtCore import QSize, QUrl
 
 import qtawesome as qta
-
 
 def expect_zero_division_error(controller):
     def wrapper(*args, **kwargs):    
         try:
             return controller(*args, **kwargs)
         except Exception as e:
-            print(f"Ha ocurrido un error en {controller.__name__}:")
+            print(f"Ha ocurrido un error en {controller.__name__}: {e}")
             message = QMessageBox()
             message.setMinimumSize(700, 700)
             message.setWindowTitle(f"Critical error")
@@ -37,51 +36,69 @@ class MainWindow(AppWindow):
 
     def setUpMainWindow(self):
         """ Display the `components` in the Main Window. """
-
         button = PushButton("LinkButton", "LinkButton")
+        
+        lbl = FluvelInfoAlert(f"Nombre de la Aplicación: {self.app_name}")
+
+        lbl.closed.connect(lambda wd: wd.deleteLater())
 
         components = [
             # Label Alerts De fluvel
-            FluvelInfoAlert(f"Nombre de la Aplicación: {self.app_name}"),
+            lbl,
             FluvelWarningAlert(f"Versión: {self.version}"),
             FluvelSuccessAlert(f"Tema: {self.theme}"),
             FluvelDangerAlert(f"Tamaño de Ventana: {self.window_width}x{self.window_height}."),
             # Nativas tipo bootstrap
-            # InfoLabel("Texto informativo"),
-            # DangerLabel("Esta función está deprecated"),
-            # WarningLabel("Advertencia"),
-            # SuccessLabel("Éxito!😀"),
-            # PushButtons
-            PushButton("PrimaryButton", "PrimaryButton"),
-            PushButton("SecondaryButton", "SecondaryButton"),
-            PushButton("InfoButton", "InfoButton"),
-            PushButton("SuccessButton", "SuccessButton"),
-            PushButton("WarningButton", "WarningButton"),
-            PushButton("DangerButton", "DangerButton"),
-            PushButton("DarkButton", "DarkButton"),
-            PushButton("LightButton", "LightButton"),
-            PushButton("OutlinedButton", "OutlinedButton"),
-            button
-            
+            InfoLabel("Texto informativo"),
+            DangerLabel("Texto de alerta"),
+            WarningLabel("Advertencia"),
+            SuccessLabel("Éxito!😀"),
+            # PushButton("PrimaryButton", "PrimaryButton"),
+            # PushButton("SecondaryButton", "SecondaryButton"),
+            # PushButton("InfoButton", "InfoButton"),
+            # PushButton("SuccessButton", "SuccessButton"),
+            # PushButton("WarningButton", "WarningButton"),
+            # PushButton("DangerButton", "DangerButton"),
+            # PushButton("DarkButton", "DarkButton")
         ]    
         
         for component in components:
             self.layout.addWidget(component)
         
-        icon_camera_ban = qta.icon(
-            "fa6s.camera",
-            color = "blue",
-            color_active = "orange"
-        )
-
-        btn_stacked = PushButton("Cámara Prohibida", "OutlinedButton")
-        btn_stacked.setIcon(icon_camera_ban)
-
-        self.layout.addWidget(btn_stacked)
-        
-        self.menu_bar.add_shortcut("quit", "Ctrl+K", self.close)
+        # self.menu_bar.add_shortcut("quit", "Ctrl+K", self.dividir)
 
         self.menu_bar.bind("clean_light_theme", "triggered", lambda: self.root.change_theme("clean-light"))
         self.menu_bar.bind("modern_dark_theme", "triggered", lambda: self.root.change_theme("modern-dark"))
         self.menu_bar.bind("modern_dark_esmerald_theme", "triggered", lambda: self.root.change_theme("modern-dark-esmerald"))
         self.menu_bar.bind("bootstrap_theme", "triggered", lambda: self.root.change_theme("bootstrap"))
+
+        self.menu_bar.add_shortcut("undo", "Ctrl+P", self.close)
+        self.menu_bar.add_shortcut("new_file", "Ctrl+Alt+N", lambda: print("Ventana para la creación de un nuevo archivo"))
+
+        self.menu_bar.add_shortcut("quit", "Ctrl+S", self.dividir)
+
+        label = SuccessLabel("")
+
+        html_content = (
+            "esto es un "
+            "<span style='font-style: italic; font-weight: bold;'>PÁRRAFO itálico</span>. Check our "
+            "<a href='https://www.youtube.com/watch?v=jeuQ9WRnSjM&t=2179s&ab_channel=NAFTA' style='font-family: consolas; font-weight: bold; color: blue;'>Youtube</a>"
+            " channel."
+        )
+
+        label.setText(html_content)
+        label.setTextFormat(Qt.TextFormat.RichText)
+        label.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse)
+        label.linkActivated.connect(self.open_link)
+
+        self.layout.addWidget(label)
+
+    @expect_zero_division_error
+    def dividir(self):
+        return 4 / 0
+
+    def open_link(self, link_str):
+        print(f"Enlace clicado: {link_str}")    
+
+        QDesktopServices.openUrl(QUrl(link_str))
+

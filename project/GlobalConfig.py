@@ -22,29 +22,12 @@ class GlobalConfig:
         - self.db_password: any -> Saves the password of the DB from appconfig['database']['password']\n
     """
 
-    # Fluvel's Global Configuration Hierarchy
-    # ┌──────────────────┐   ┌───────────────────┐   ┌────────────────────┐
-    # │ QMainWindow()    │   │ GlobalConfig()    │   │ QApplication()     │
-    # └────────┬─────────┘   └────────┬──────────┘   └────────┬───────────┘
-    #          │                      │                       │
-    #          │                      │                       │
-    #          └────────┬─────────────┴──────────────┬────────┘
-    #                   │                            │
-    #        ┌──────────▼────────────┐    ┌──────────▼─────────┐
-    #        │    AppWindow()        │    │      App()         │
-    #        └──────────┬────────────┘    └────────────────────┘
-    #                   │
-    #                   ▼
-    #         ┌─────────────────────┐
-    #         │   MainWindow()      │
-    #         └─────────────────────┘
-
     # [core utils]
     APP_ROOT = APP_ROOT
     DEV_MODE: bool
 
     # [appconfig]
-    appconfig: dict
+    CONFIG: dict
     
     # Your customization 
     # starts here
@@ -80,7 +63,7 @@ class GlobalConfig:
         GlobalConfig.DEV_MODE = appconfig.get("DEV_MODE", True)
 
         # the global configuration dictionary is saved
-        GlobalConfig.appconfig: dict = appconfig
+        GlobalConfig.CONFIG = appconfig
 
         # Configuring the global properties
         app: dict = appconfig.get("app", {})
