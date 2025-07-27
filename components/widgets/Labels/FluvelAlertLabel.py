@@ -1,0 +1,72 @@
+from typing import Literal
+
+# PySide6 - Fluvel
+from components.gui.StyledText import StyledText
+from components import Label, PushButton
+from PySide6.QtWidgets import QHBoxLayout, QFrame, QSizePolicy
+from PySide6.QtGui import QIcon
+
+# Utils
+from utils import APP_ROOT
+
+
+AlertTypes = Literal["Infocard", "WarningCard", "SuccessCard", "DangerCard"]
+
+IconsPath = APP_ROOT / "resources" / "icons" / "bootstrap-icons"
+
+class FluvelCard(QFrame):
+    """
+    Clase base de **`Fluvel`** para etiquetas de aviso estilizadas. Las subclases deben definir el atributo **`_card_type`**.
+    """
+
+    _card_type: AlertTypes
+    _icon: str
+    _close_icon_path: str = str(IconsPath / "close.png")
+
+    def __init__(self, text: str = "") -> None:
+        super().__init__()
+        self.setObjectName(self._card_type)
+        self.setProperty("type", "frame-container")
+
+        self.html_content = "<span style='text-decoration: underline overline line-through;'>Palabra</span>"
+
+        # Body layout Container
+        self.hbox = QHBoxLayout(self)
+
+        self.icon_label = Label()
+        self.icon = QIcon(self._icon).pixmap(36, 36)
+        self.icon_label.setPixmap(self.icon)
+        self.icon_label.setFixedWidth(65)
+        self.icon_label.setProperty("type", "description")
+
+        self.description_label = Label(self.html_content)
+        self.description_label.setProperty("type", "description")
+        self.description_label.setWordWrap(True)
+        # self.description_label.setSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.MinimumExpanding)
+        
+        self.close_btn = PushButton()
+        self.close_btn.setFixedSize(22, 12)
+        self.close_btn.setProperty("type", "description")
+
+        self.hbox.addWidget(self.icon_label)
+        self.hbox.addWidget(self.description_label)
+        self.hbox.addWidget(self.close_btn)
+
+        self.hbox.setContentsMargins(0, 0, 0, 0)
+        self.setContentsMargins(0, 0, 0, 0)
+
+class InfoCard(FluvelCard):
+    _icon = str(IconsPath / "info.png")
+    _card_type = "InfoCard"
+
+class DangerCard(FluvelCard):
+    _icon = str(IconsPath / "danger.png")
+    _card_type = "DangerCard"
+
+class WarningCard(FluvelCard):
+    _icon = str(IconsPath / "warning.png")
+    _card_type = "WarningCard"
+
+class SuccessCard(FluvelCard):
+    _icon = str(IconsPath / "success.png")
+    _card_type = "SuccessCard"

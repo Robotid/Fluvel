@@ -6,7 +6,7 @@ def get_theme_path(theme: str) -> Path:
     """
     Esta función retorna la ruta absoluta de un tema qss determinado.
     """
-    theme_path: Path = APP_ROOT / "resources" / "styles" / "themes"/ theme 
+    theme_path: Path = APP_ROOT / "project" / "static"/ "themes" / theme 
 
     return theme_path
 

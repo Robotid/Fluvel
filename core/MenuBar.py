@@ -7,7 +7,7 @@ from PySide6.QtGui import QAction
 from PySide6.QtWidgets import QMenuBar, QMainWindow
 
 # FLUML Parse
-from src.flumlparse.flumlmain import convert_FLUML_to_JSON
+from src import convert_FLUML_to_JSON
 
 # Utils
 from core.core_utils import load_file

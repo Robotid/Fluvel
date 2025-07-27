@@ -63,7 +63,7 @@ def parse_FLUML(file_path: Path | str) -> dict:
             continue
 
         # Sección ([Section])
-        section_match = re.match(r'\[([^\]]+)\]', line)
+        section_match = re.match(r'\[([^\]]+)\]\:', line)
         if section_match:
             section_name = section_match.group(1).strip()
             new_dict = {}

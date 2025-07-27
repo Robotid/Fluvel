@@ -1,0 +1,25 @@
+class StyledText[str]
+# Sintactic Rules
+# # -> inline comments
+# []: -> dict -> contains the id of the StyledText
+# Reglas de sangría para definir los hijos de []: 
+
+# Style Rules
+# * -> italic -> <span style='font-style: italic;'>
+# ** -> bold -> <span style='font-weight: bold;'>
+# *** -> bold and italic -> <span style='font-weight: bold; font-style: italic;'>
+# -- -> line-throug -> <span style='text-decoration: line-throug;'>
+# __ -> underline -> <span style='text-decoration: underline;'>
+# {value:link} -> link -> <a href='link'> value </a>
+# <sub></sub> -> <span style='vertical-align: sub'>
+# <sup></sup> -> <span style='vertical-align: sup'>
+
+Demostration 
+[info-card-1]:
+    **Hi!**, this is *an* __demostration__. Check our {Youtube | https://www.youtube.com} channel.
+
+[info-card-2]:
+    *Run it*! If you press the button, you'll see it highlighted as *checked*. Press it again to release it. Look for the *check state* in the console.
+
+[warning-card-1]:
+    we **need** to keep a reference to the button on __self__ so we can access it in our slot.

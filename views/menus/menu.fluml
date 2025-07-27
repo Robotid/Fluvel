@@ -102,7 +102,7 @@
     bring_all_to_front = "Bring All to Front"
     arrange = "Arrange"
 
-[Settings] # -> menu "Settings"
+[Settings]: # -> menu "Settings"
 
     preferences = "Preferences..."
 
@@ -114,7 +114,7 @@
         
     language = "Language"
 
-[Help] # -> menu "Help"
+[Help]: # -> menu "Help"
 
     [Help options]: # -> Drop-down sub-menu "Help options"
         help_docs = "Help"

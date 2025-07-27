@@ -2,7 +2,7 @@
 
 from core import App
 from core import AppWindow
-from components import FluvelInfoAlert, FluvelWarningAlert, FluvelSuccessAlert, FluvelDangerAlert
+from components import InfoCard, WarningCard, SuccessCard, DangerCard
 from components import Label, InfoLabel, WarningLabel, DangerLabel, SuccessLabel
 from components import PushButton
 from PySide6.QtWidgets import QMessageBox, QToolBar, QLabel, QTextEdit
@@ -36,30 +36,14 @@ class MainWindow(AppWindow):
 
     def setUpMainWindow(self):
         """ Display the `components` in the Main Window. """
-        button = PushButton("LinkButton", "LinkButton")
-        
-        lbl = FluvelInfoAlert(f"Nombre de la Aplicación: {self.app_name}")
-
-        lbl.closed.connect(lambda wd: wd.deleteLater())
 
         components = [
             # Label Alerts De fluvel
-            lbl,
-            FluvelWarningAlert(f"Versión: {self.version}"),
-            FluvelSuccessAlert(f"Tema: {self.theme}"),
-            FluvelDangerAlert(f"Tamaño de Ventana: {self.window_width}x{self.window_height}."),
+            InfoCard(),
+            WarningCard(),
+            DangerCard(),
+            SuccessCard(),
             # Nativas tipo bootstrap
-            InfoLabel("Texto informativo"),
-            DangerLabel("Texto de alerta"),
-            WarningLabel("Advertencia"),
-            SuccessLabel("Éxito!😀"),
-            # PushButton("PrimaryButton", "PrimaryButton"),
-            # PushButton("SecondaryButton", "SecondaryButton"),
-            # PushButton("InfoButton", "InfoButton"),
-            # PushButton("SuccessButton", "SuccessButton"),
-            # PushButton("WarningButton", "WarningButton"),
-            # PushButton("DangerButton", "DangerButton"),
-            # PushButton("DarkButton", "DarkButton")
         ]    
         
         for component in components:

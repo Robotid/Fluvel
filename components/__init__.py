@@ -1,13 +1,17 @@
-from components.Buttons.PushButtons import (PushButton, OutlinedButton, PrimaryButton,
+"""
+This module contains all Fluvel Compontents
+"""
+
+from components.widgets.Buttons.PushButtons import (PushButton, OutlinedButton, PrimaryButton,
                                             SecondaryButton, SuccessButton, DangerButton, 
                                             DarkButton, InfoButton, WarningButton, LightButton,
                                             LinkButton)
 
-from components.Labels.Label import (Label, InfoLabel, WarningLabel, 
+from components.widgets.Labels.Label import (Label, InfoLabel, WarningLabel, 
                                      SuccessLabel, DangerLabel)
 
-from components.Labels.FluvelAlertLabel import (FluvelDangerAlert, FluvelInfoAlert,
-                                                FluvelSuccessAlert, FluvelWarningAlert)
+from components.widgets.Labels.FluvelAlertLabel import (DangerCard, InfoCard,
+                                                SuccessCard, WarningCard)
 
 # from fluvel.components import <component_name> 
 
@@ -30,9 +34,9 @@ __all__ = [
     "SuccessLabel",
     "WarningLabel",
     "DangerLabel",
-    # Alert Labels
-    "FluvelInfoAlert",
-    "FluvelSuccessAlert",
-    "FluvelWarningAlert",
-    "FluvelDangerAlert"
+    # Notice Cards
+    "InfoCard",
+    "SuccessCard",
+    "WarningCard",
+    "DangerCard"
 ]
