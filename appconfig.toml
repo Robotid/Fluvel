@@ -3,7 +3,7 @@
 # Activalo solo cuando la aplicación esté en modo de desarrollo.
 # Esto controla el despliegue de varias funciones y métodos que Fluvel
 # implementa PARA EL PROGRAMADOR para facilitar el desarrollo de la app.
-DEV_MODE = true # ¡IMPORTANT!
+DEV_MODE = false # ¡IMPORTANT!
 
 # Configuración general de la aplicación
 [app]
@@ -12,7 +12,10 @@ version = "1.0.0"
 log_level = "INFO" # Nivel de registro: DEBUG, INFO, WARNING, ERROR, CRITICAL
 
 # Configuración del tema de la interfaz de usuario
-theme = "bootstrap" # Nombre del tema a cargar desde resources/styles/themes/
+theme = "my-custom-theme"
+
+# Configuración del idioma de la interfaz de usuario
+lang = "es"
 
 # Configuración del tamaño de la ventana principal
 [window_size]

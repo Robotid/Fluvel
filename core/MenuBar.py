@@ -1,4 +1,5 @@
 # fluvel.core.MenuBar
+# Py
 from typing import Literal
 from pathlib import Path
 
@@ -111,6 +112,7 @@ StandardActionShortcut = Literal[
 ]
 
 class MenuBar:
+
     def __init__(self, parent: QMainWindow, menu_file: Path):
         
         # an instance of the AppWindow Class
@@ -122,7 +124,7 @@ class MenuBar:
         # the QMenuBar Widget of the main window
         self.__menu_bar: QMenuBar = self.app_window.menuBar()
 
-        self._EMBEDDED_MENU_DATA_JSON = None
+        self._MENU_DATA_JSON = None
 
         # IMPORTANT MAIN PROCESS
 
@@ -146,103 +148,6 @@ class MenuBar:
         # Step 4
         # Generate the literal that contains all menu options
         set_dynamic_menu_keys(self.all_menu_options)
-
-    def _decode_menu_config(self) -> None:
-        """
-        **`UNUSED`** 1st Semi-failed and obsolete attempt
-        """
-
-        all_menu_options: list = []
-
-        self.options = {}
-
-        option_dict = {}
-
-        for top_menu, medium_menu in self.menu_info.items():
-
-            set_top_option = self.__menu.addMenu(top_menu)
-
-            sub_option = {}
-
-            for sub_menu, value in medium_menu.items():
-
-                if isinstance(value, dict):
-
-                    set_top_option.addSeparator() # Añadiendo separador
-
-                    for sub, val in value.items():
-
-                        set_sub_option = set_top_option.addAction(val)
-
-                        sub_option.update({sub: set_sub_option})
-
-                        all_menu_options.append(sub)
-
-                        setattr(self, sub, set_sub_option)
-
-                else:
-
-                    set_sub_option = set_top_option.addAction(value)
-
-                    sub_option.update({sub_menu: set_sub_option})
-
-                    all_menu_options.append(sub_menu)
-
-                    setattr(self, sub_menu, set_sub_option)
-
-                option_dict.update({top_menu.lower(): sub_option})
-
-            self.options.update(option_dict)
-
-            # Generando el Literal con todas las opciones de Menú
-            set_dynamic_menu_keys(all_menu_options)
-
-    def _parse_menu_config(self) -> None:
-        """
-        **`UNUSED`** 2nd Semi-failed and obsolete attempt
-        """
-        
-        self.all_menu_options: list = []
-
-        self.options: dict = {}
-
-        lista_desplegable: list = []
-
-        def add_menu_option(parent_name, menu_header, option_name, value):
-            action_object = menu_header.addAction(value)
-            setattr(self, option_name, action_object)
-
-            self.all_menu_options.append(option_name)
-            self.options.update({parent_name: {option_name: value}})
-        
-        def add_desplegable_menu(lista_acciones):
-            ...
-
-        for header_parent, submenus in self.menu_info.items():
-            # header_parent es el padre
-            menu_header = self.__menu.addMenu(header_parent)
-
-            for submenu_var, submenu_value in submenus.items():
-
-                isDict: bool = isinstance(submenu_value, dict)
-
-                if isDict:
-                    # Adding Separator
-                    menu_header.addSeparator()
-                                                                
-                    for after_separated_var, after_separated_value in submenu_value.items():
-                        match after_separated_var:
-                            case "Advanced":
-
-                                for desplegable_var, desplegable_value in after_separated_value.items():
-                                    ...
-                                    # AGRHH!!!!
-
-                            case _:
-                                add_menu_option(header_parent, menu_header, after_separated_var, after_separated_value)
-
-                else:
-                    add_menu_option(header_parent, menu_header, submenu_var, submenu_value)
     
     def _create_menus(self, structure) -> None:
         """
@@ -270,15 +175,13 @@ class MenuBar:
                 else:
                     action = QAction(value, self.app_window)
                     parent_menu.addAction(action)
-                    # self.main_window.actions[key] = action # Guardar la acción usando su clave TOML
-                    # FluvelOption.options = action # Quizás se lo pueda implementar
-                    setattr(self, key, action) # convirtiendo cada QAction en una instancia de MenuBar
-                    self.all_menu_options.append(key) # Guardando sus referencias para usarlas en MenuOptions y MainWindow
+                    # Convirtiendo cada QAction en una instancia de MenuBar
+                    setattr(self, key, action) 
+                    # Guardando sus referencias para usarlas en MenuOptions y MainWindow
+                    self.all_menu_options.append(key) 
             
             elif isinstance(value, dict):
                 # Caso 2: Es un submenú, llamar recursivamente
-                # El título del submenú es la propia clave, formateada.
-                # submenu_title = key.replace('_', ' ').capitalize() -> ya no es necesario
                 submenu = parent_menu.addMenu(key)
                 self._structure_menu(submenu, value)
 

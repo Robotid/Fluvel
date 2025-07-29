@@ -1,12 +1,12 @@
 /* Info Alert */
 
-*[type="frame-container"] {
+*[type="card-container"] {
     border-radius: 5px;
-    padding-top: 4px;
+    padding-top: 3px;
     border-bottom: 4px solid;
 }
 
-*[type="description"] {
+*[type="card-description"] {
     color: #fff;
     background: none;
     border: none;
@@ -18,12 +18,12 @@
     padding-bottom: 0px;
 }
 
-QPushButton[type="description"] {
+QPushButton[type="card-description"] {
     background-color: #ffffff;
     margin-right: 10px;
 }
 
-QPushButton[type="description"]:hover {
+QPushButton[type="card-description"]:hover {
     background: #fff;
 }
 

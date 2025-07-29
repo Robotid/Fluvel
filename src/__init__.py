@@ -1,7 +1,7 @@
 from src.fluvel_menu_parser.flumlmain import convert_FLUML_to_JSON
-from src.fluvel_content_parser.styled_text_parser import style_FLUML_CONTENT
+from src.fluvel_content_parser.styled_text_parser import convert_FLUML_to_HTML
 
 __all__ = [
     "convert_FLUML_to_JSON",
-    "style_FLUML_CONTENT"
+    "convert_FLUML_to_HTML"
 ]

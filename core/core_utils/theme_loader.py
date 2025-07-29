@@ -1,12 +1,11 @@
-import os
 from pathlib import Path
-from utils import APP_ROOT
+from utils.paths import THEMES_DIR
 
 def get_theme_path(theme: str) -> Path:
     """
     Esta función retorna la ruta absoluta de un tema qss determinado.
     """
-    theme_path: Path = APP_ROOT / "project" / "static"/ "themes" / theme 
+    theme_path: Path = THEMES_DIR / theme
 
     return theme_path
 

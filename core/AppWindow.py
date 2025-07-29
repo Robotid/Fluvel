@@ -1,17 +1,17 @@
 # fluvel.core.AppWindow
+# Py
 from pathlib import Path
 
+# Fluvel
 from project import GlobalConfig
+from core import App
 from core.MenuBar import MenuBar
 
-# PySide6 - Fluvel Importations
+# PySide6 
 from PySide6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
-from core import App
 
 # Utils
-from core.core_utils.generate_menu_options import set_dynamic_menu_keys
-from core.core_utils import get_theme_path, load_style_sheet
-from utils import filter_by_extension
+from utils.paths import MENUS_DIR
 
 class AppWindow(QMainWindow, GlobalConfig):
     def __init__(self, root: App) -> None:
@@ -48,16 +48,16 @@ class AppWindow(QMainWindow, GlobalConfig):
         **`IMPORTANT`** Este método inicializa el proceso para la creación del menú dinámico
         """
         
-        menu_file: Path = self.APP_ROOT / "views" / "menus" / "menu.fluml"
+        menu_file: Path = MENUS_DIR / "menu.fluml"
 
         # This is not an instance of QMenuBar
         self.menu_bar = MenuBar(parent = self, menu_file = menu_file)
 
         # Creating the full_menu_options.txt file
         if self.DEV_MODE:
-            self.get_menu_bar_options()
+            self.set_menu_bar_options()
     
-    def get_menu_bar_options(self) -> None:
+    def set_menu_bar_options(self) -> None:
         """     
         This method generates the file `log_menu_options.txt` in the `project` folder.\n
         *The `full_menu_options.txt` file contains all the options in the MainWindow's menu bar and how to refer to them.*
@@ -83,6 +83,8 @@ class AppWindow(QMainWindow, GlobalConfig):
                 print(f"The file with the menu options was generated successfully. Check '{file_path}'.")
         except Exception as e:
             print(f"An error has occurred: {e}")
+
+    def setUpMainWindow(self) -> None: ...
 
     def set_layout(self) -> None:
         pass

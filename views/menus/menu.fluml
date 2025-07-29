@@ -107,10 +107,9 @@
     preferences = "Preferences..."
 
     [Themes]:
-        clean_light_theme = "Clean-Light"
         modern_dark_theme = "Modern-Dark"
-        modern_dark_esmerald_theme = "Modern-Dark-Esmerald"
         bootstrap_theme = "Bootstrap"
+        custom_theme = "My Custom"
         
     language = "Language"
 

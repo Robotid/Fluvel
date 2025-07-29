@@ -1,5 +1,4 @@
 from typing import Literal
-import os
 
 _RESOURCE_FOLDERS = {
         "style":"styles",

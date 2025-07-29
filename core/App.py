@@ -4,11 +4,13 @@ from typing import Literal
 
 # PySide6 - Fluvel
 from project import GlobalConfig
+from models import GlobalContent
 from PySide6.QtWidgets import QApplication
 
 # Utils
 from core.core_utils.theme_loader import load_style_sheet, get_theme_path
 from utils.helper_functions import filter_by_extension
+from utils.paths import THEMES_DIR, CONTENT_DIR
 
 AppThemes = Literal["bootstrap", "clean-light", "modern-dark", "modern-dark-esmerald"]
 
@@ -28,6 +30,17 @@ class App(QApplication, GlobalConfig):
         # Se aplican los atributos globales del proyecto
         self.set_config_format(filename)
 
+        # Se cargan los contenidos estáticos de la app
+        self.set_static_content()
+
+    def set_static_content(self):
+        """
+        Este método gestiona la carga de contenido estático de la aplicación.
+        """
+
+        # Cargando el contenido de texto estático de las vistas
+        self.set_text_blocks()
+
         # Aplicando los temas y estilos a los componentes
         self.set_theme()
 
@@ -40,7 +53,7 @@ class App(QApplication, GlobalConfig):
         self.setStyle("Fusion")
 
         # Directorio donde se encuentran los archivos qss de los componentes
-        theme_path = get_theme_path(self.theme)
+        theme_path = THEMES_DIR / self.theme
 
         # Lista con los archivos .qss
         qss_files: list = filter_by_extension(theme_path, ".qss")
@@ -62,3 +75,21 @@ class App(QApplication, GlobalConfig):
         self.theme = new_theme
 
         self.set_theme()
+    
+    def set_text_blocks(self) -> None:
+        """
+        This method *loads* all static .fluml text files according to the application language
+        """
+
+        content_folder = CONTENT_DIR / self.lang
+
+        GlobalContent.initialize(content_folder)
+    
+    def change_language(self, new_language: str) -> None:
+        
+        self.lang = new_language
+
+        self.set_text_blocks()
+    
+    def update_ui(self) -> None:
+        ...

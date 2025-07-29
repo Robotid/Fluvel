@@ -21,7 +21,6 @@ def get_root_path() -> Path:
 
     return APP_ROOT
 
-
 def minify_qss(qss_content: str) -> str:
     """
     -> **TO DO** <-\n

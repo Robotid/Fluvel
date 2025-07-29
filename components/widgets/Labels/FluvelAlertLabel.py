@@ -21,14 +21,12 @@ class FluvelCard(QFrame):
 
     _card_type: AlertTypes
     _icon: str
-    _close_icon_path: str = str(IconsPath / "close.png")
 
-    def __init__(self, text: str = "") -> None:
+    def __init__(self, text: str | StyledText = None) -> None:
         super().__init__()
+        
         self.setObjectName(self._card_type)
-        self.setProperty("type", "frame-container")
-
-        self.html_content = "<span style='text-decoration: underline overline line-through;'>Palabra</span>"
+        self.setProperty("type", "card-container")
 
         # Body layout Container
         self.hbox = QHBoxLayout(self)
@@ -37,16 +35,16 @@ class FluvelCard(QFrame):
         self.icon = QIcon(self._icon).pixmap(36, 36)
         self.icon_label.setPixmap(self.icon)
         self.icon_label.setFixedWidth(65)
-        self.icon_label.setProperty("type", "description")
+        self.icon_label.setProperty("type", "card-description")
 
-        self.description_label = Label(self.html_content)
-        self.description_label.setProperty("type", "description")
+        self.description_label = Label(text)
+        self.description_label.setProperty("type", "card-description")
         self.description_label.setWordWrap(True)
         # self.description_label.setSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.MinimumExpanding)
         
         self.close_btn = PushButton()
         self.close_btn.setFixedSize(22, 12)
-        self.close_btn.setProperty("type", "description")
+        self.close_btn.setProperty("type", "card-description")
 
         self.hbox.addWidget(self.icon_label)
         self.hbox.addWidget(self.description_label)

@@ -1,6 +1,5 @@
 import re
 from collections import defaultdict
-from pathlib import Path
 
 class StyledTextParser:
     def __init__(self, text: str):
@@ -14,37 +13,35 @@ class StyledTextParser:
 
     def _parse_FLUML(self):
         current_id = None
-        for line in self.text.splitlines():
-            stripped = line.strip()
-            if not stripped or stripped.startswith("#"):
+        for raw_line in self.text.splitlines():
+            clean_line = raw_line.strip()
+            if not clean_line or clean_line.startswith("#"):
                 continue 
 
-            match = re.match(r"\[(.+?)\]:", stripped)
-            if match:
-                current_id = match.group(1).strip()
+            _match = re.match(r"\[(.+?)\]:", clean_line)
+            if _match:
+                current_id = _match.group(1).strip()
                 continue
 
-            if current_id and line.startswith(" "):
-                self.blocks[current_id].append(line.strip())
+            if current_id and raw_line.startswith(" "):
+                self.blocks[current_id].append(raw_line.strip())
 
     def _apply_styles(self, text):
         """
-        Este método encuentra y traduce los patrones a la sintaxis HTML correspondiente.\n
-        En caso de coincidir más de un patrón, se anidan las etiquetas `<span>`.
+        Este método encuentra y traduce los patrones escritos en FLUML a la sintaxis HTML correspondiente.\n
+        *En caso de coincidir más de un patrón, se anidan las etiquetas `<span>`.*
         """
-
-        # Patrones Single
         
-        # LINK {content | href}
+        # LINK -> {content | href}
         text = re.sub(r"\{(.*?)\s*\|\s*(.*?)\}", r"<a href='\2';'>\1</a>", text)
 
-        # UNDERLINE __content__
+        # UNDERLINE -> __content__
         text = re.sub(r"__([^_]+)__", r"<span style='text-decoration: underline;'>\1</span>", text)
 
         # LINE-THROUG -> --content--
         text = re.sub(r"--([^-]+)--", r"<span style='text-decoration: line-through;'>\1</span>", text)
 
-        # BOLD AND ITALIC
+        # BOLD AND ITALIC -> ***content***
         text = re.sub(r"\*\*\*([^\*]+)\*\*\*", r"<span style='font-weight: bold; font-style: italic;'>\1</span>", text)
 
         # BOLD -> **content**
@@ -53,19 +50,18 @@ class StyledTextParser:
         # ITALIC -> *content*
         text = re.sub(r"\*([^\*]+)\*", r"<span style='font-style: italic;'>\1</span>", text)
 
-        # VERTICAL ALIGN SUPER -> <<content>>
+        # VERTICAL ALIGN SUPER -> <sup>content</sup>
         text = re.sub(r"<sup>(.*?)</sup>", r"<span style='vertical-align: sub;'>\1</span>", text)
 
-        # VERTICAL ALIGN SUB -> <<<content>>>
+        # VERTICAL ALIGN SUB -> <sub>content</sub>
         text = re.sub(r"<sub>(.*?)</sub>", r"<span style='vertical-align: super;'>\1</span>", text)
-
-        # if __name__ == "__main__":
-        #     print(f"text: {text}")
 
         return text
 
     def render_html(self):
-
+        """
+        Este método mapea 
+        """
         result: dict = {}
 
         for block_id, lines in self.blocks.items():
@@ -78,18 +74,8 @@ class StyledTextParser:
 
         return result
 
-input_text = """
-[solicitud_no1]:
-    ***Hi!***, this *is* an demostration our <sup>hola</sup> {Youtube | https://www.youtube.com} channel.
-    Genial --hola--.
+def convert_FLUML_to_HTML(fluml_content: str) -> dict:
 
-[solicitud_no2]:
-    __n__o soy yo.
-"""
+    parser = StyledTextParser(fluml_content)
 
-def style_FLUML_CONTENT(content: dict) -> dict:
-
-    parser = StyledTextParser(content)
-
-    content_dict: dict = parser.render_html()
-
+    return parser.render_html()

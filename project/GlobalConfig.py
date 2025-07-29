@@ -14,7 +14,8 @@ class GlobalConfig:
         - self.version: str -> Saves the version of the app from appconfig['app']['version'].\n
         - self.window_width: str -> Saves the width of the window from appconfig['window_size']['width'].\n
         - self.window_height: str -> Saves the height of the window from appconfig['window_size']['height'].\n
-        - self.theme: str -> Global theme of the app from appconfig['app']['theme'].\n
+        - self.theme: str -> Global ui theme of the app from appconfig['app']['theme'].\n
+        - self.lang: str -> Global ui language of the app from appconfig['app']['lang'].\n
     Global Database Properties:\n
         - self.db_host: str -> Saves the host of the DB from appconfig['database']['host'].\n
         - self.db_port: int -> Saves the port of the DB from appconfig['database']['port'].\n
@@ -40,6 +41,7 @@ class GlobalConfig:
     window_width: int
     window_height: int
     theme: str
+    lang: str
 
     # [database]
     db_host: str
@@ -74,6 +76,7 @@ class GlobalConfig:
         GlobalConfig.window_width = window_size.get("width", 640)
         GlobalConfig.window_height = window_size.get("height", 480)
         GlobalConfig.theme = app.get("theme", "bootstrap")
+        GlobalConfig.lang = app.get("lang", "es")
 
         # Database config
         database: dict = appconfig.get("database", {})

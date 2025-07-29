@@ -42,6 +42,7 @@ def load_file(file_path: Path | str) -> (dict | None):
 
         # Path del archivo de configuración JSON
         config_path = APP_ROOT / file_path
+        
         try:
             # Se intenta abrir el archivo 'config_path'
             with open(config_path, "r", encoding="utf-8") as f:

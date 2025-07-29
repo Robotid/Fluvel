@@ -1,0 +1,25 @@
+# class StyledText()
+
+# # -> inline comments
+# [id]: -> dict -> represent the id para acceder al contenido declarado debajo de él mediante la clase StyledText(_id = id)
+# Reglas de indentación para definir los hijos de []: 
+
+# Style Rules
+
+# * -> italic -> <span style='font-style: italic;'>
+# ** -> bold -> <span style='font-weight: bold;'>
+# *** -> bold and italic -> <span style='font-weight: bold; font-style: italic;'>
+# -- -> line-throug -> <span style='text-decoration: line-throug;'>
+# __ -> underline -> <span style='text-decoration: underline;'>
+# {value:link} -> link -> <a href='link'> value </a>
+# <sub></sub> -> <span style='vertical-align: sub'>
+# <sup></sup> -> <span style='vertical-align: sup'>
+# $1, $2, $n -> placeholders to replace with Dynamic Text (QString's)
+ 
+ --- EXAMPLE ---
+
+ # welcome card in the main window
+[info-card-1]:
+    **Hi!**, this is *an* __demostration__. Check our {Youtube | https://www.youtube.com} channel.
+
+RichText Representation -> <span style='font-weight: bold;'>Hi!</span>, this is <span style='font-style: italic;'>an</span> <span style='text-decoration: underline;'>demostration</span>. Check our <a href='https://www.youtube.com'>Youtube<a/> channel.
