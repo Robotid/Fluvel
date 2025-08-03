@@ -8,7 +8,7 @@ def main():
     # App
     app = App(sys.argv)
 
-    # Load global settings and theme of the app
+    # Load global settings of the app
     app.load("appconfig.toml")
 
     # Instantiate and display the main application window

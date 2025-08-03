@@ -10,8 +10,10 @@ from components.widgets.Buttons.PushButtons import (PushButton, OutlinedButton, 
 from components.widgets.Labels.Label import (Label, InfoLabel, WarningLabel, 
                                      SuccessLabel, DangerLabel)
 
-from components.widgets.Labels.FluvelAlertLabel import (DangerCard, InfoCard,
+from components.widgets.Labels.FluvelCard import (DangerCard, InfoCard,
                                                 SuccessCard, WarningCard)
+
+from components.widgets.LineEdit.LineEdit import LineEdit
 
 # from fluvel.components import <component_name> 
 
@@ -38,5 +40,7 @@ __all__ = [
     "InfoCard",
     "SuccessCard",
     "WarningCard",
-    "DangerCard"
+    "DangerCard",
+    # Line Edit
+    "LineEdit"
 ]

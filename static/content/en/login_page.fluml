@@ -1,0 +1,23 @@
+[title-sign-in]:
+    Sign In
+
+[form-user-field]:
+    User:
+
+[form-user-field-back]:
+    User
+
+[form-pass-field]:
+    Password:
+
+[form-pass-field-back]:
+    Password
+
+[lbl-forgotten-password]:
+    {Forgot your password? | https://support.google.com/a/answer/33310?hl=es&co=DASHER._Family%3DDomain-verified}
+
+[btn-register]:
+    Register
+
+[btn-sign-in]:
+    Sign In

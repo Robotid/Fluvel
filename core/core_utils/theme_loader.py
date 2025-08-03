@@ -26,5 +26,5 @@ def load_style_sheet(file_path: str | Path) -> str:
     except Exception as e:
         print(f"Error al leer el archivo de hoja de estilos '{file_path.name}': {e}.")
     
-    # En caso de excepción
+    # En caso de alguna excepción
     return ""

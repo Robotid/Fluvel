@@ -32,10 +32,8 @@ class AppWindow(QMainWindow, GlobalConfig):
         self.setGeometry(100, 100, self.window_width, self.window_height)
 
         # Configuring the layout
-        central_widget = QWidget()
-        self.setCentralWidget(central_widget)
-        self.layout: QVBoxLayout = QVBoxLayout()
-        central_widget.setLayout(self.layout)
+        
+        self.set_layout()
 
         # Configuring the Top Menu Bar
         self.set_menu_bar()
@@ -84,9 +82,16 @@ class AppWindow(QMainWindow, GlobalConfig):
         except Exception as e:
             print(f"An error has occurred: {e}")
 
-    def setUpMainWindow(self) -> None: ...
-
     def set_layout(self) -> None:
-        pass
+        """
+        Configuraciones iniciales del layout de la ventana principal.\n
+        Por defecto se provee un QWidget() central para implementar los diseños.
+        """
+
+        self.central_widget = QWidget()
+
+        self.setCentralWidget(self.central_widget)
     
     def config(self, **kwargs) -> None: ...
+
+    def setUpMainWindow(self) -> None: ...

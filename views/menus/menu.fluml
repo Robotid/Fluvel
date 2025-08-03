@@ -109,7 +109,7 @@
     [Themes]:
         modern_dark_theme = "Modern-Dark"
         bootstrap_theme = "Bootstrap"
-        custom_theme = "My Custom"
+        clean_light_theme = "Clean Light"
         
     language = "Language"
 

@@ -31,11 +31,11 @@ class FluvelCard(QFrame):
         # Body layout Container
         self.hbox = QHBoxLayout(self)
 
-        self.icon_label = Label()
-        self.icon = QIcon(self._icon).pixmap(36, 36)
-        self.icon_label.setPixmap(self.icon)
-        self.icon_label.setFixedWidth(65)
-        self.icon_label.setProperty("type", "card-description")
+        # self.icon_label = Label()
+        # self.icon = QIcon(self._icon).pixmap(36, 36)
+        # self.icon_label.setPixmap(self.icon)
+        # self.icon_label.setFixedWidth(65)
+        # self.icon_label.setProperty("type", "card-description")
 
         self.description_label = Label(text)
         self.description_label.setProperty("type", "card-description")
@@ -46,7 +46,7 @@ class FluvelCard(QFrame):
         self.close_btn.setFixedSize(22, 12)
         self.close_btn.setProperty("type", "card-description")
 
-        self.hbox.addWidget(self.icon_label)
+        # self.hbox.addWidget(self.icon_label)
         self.hbox.addWidget(self.description_label)
         self.hbox.addWidget(self.close_btn)
 

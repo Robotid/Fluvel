@@ -1,0 +1,23 @@
+[title-sign-in]:
+    Iniciar Sesión
+
+[form-user-field]:
+    Usuario:
+
+[form-user-field-back]:
+    Usuario
+
+[form-pass-field]:
+    Contraseña:
+
+[form-pass-field-back]:
+    Contraseña
+
+[lbl-forgotten-password]:
+    {¿Olvidaste la contraseña? | https://support.google.com/a/answer/33310?hl=es&co=DASHER._Family%3DDomain-verified}
+
+[btn-register]:
+    Registrarse
+
+[btn-sign-in]:
+    Iniciar Sesión

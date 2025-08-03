@@ -1,12 +1,5 @@
 from models import GlobalContent
-
-class ContentNotFoundError(Exception):
-    """
-    Excepción que se lanza cuando se intenta acceder a un contenido
-    de la clase GlobalContent con un id erróneo o inexistente.
-    """
-    def __init__(self, *args):
-        super().__init__(*args)
+from core.exceptions import ContentNotFoundError
 
 def get_content_by_id(content_id: str) -> str:
     """
@@ -18,4 +11,4 @@ def get_content_by_id(content_id: str) -> str:
 
         return GlobalContent.content_map[content_id]
 
-    raise ContentNotFoundError(f"No se encontró contenido relacionado al id: '{content_id}'.")
+    raise ContentNotFoundError(f"No content related to the id '{content_id}' has been found, is misspelled or does not exist.")

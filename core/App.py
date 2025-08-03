@@ -2,13 +2,16 @@
 
 from typing import Literal
 
-# PySide6 - Fluvel
+# Fluvel
 from project import GlobalConfig
 from models import GlobalContent
+
+# PySide6
 from PySide6.QtWidgets import QApplication
+from PySide6.QtCore import Slot
 
 # Utils
-from core.core_utils.theme_loader import load_style_sheet, get_theme_path
+from core.core_utils.theme_loader import load_style_sheet
 from utils.helper_functions import filter_by_extension
 from utils.paths import THEMES_DIR, CONTENT_DIR
 
@@ -35,7 +38,8 @@ class App(QApplication, GlobalConfig):
 
     def set_static_content(self):
         """
-        Este método gestiona la carga de contenido estático de la aplicación.
+        Este método gestiona la carga de contenido estático de la aplicación.\n
+        El orden de implementación no debería ser un problema.
         """
 
         # Cargando el contenido de texto estático de las vistas
@@ -71,6 +75,8 @@ class App(QApplication, GlobalConfig):
     def change_theme(self, new_theme: AppThemes) -> None:
         """
         This method changes the entire `appearance` of the application dynamically at runtime or development time.
+        Args:
+            new_theme (str): the name of the theme that will be displayed.
         """
         self.theme = new_theme
 
@@ -78,7 +84,7 @@ class App(QApplication, GlobalConfig):
     
     def set_text_blocks(self) -> None:
         """
-        This method *loads* all static .fluml text files according to the application language
+        This method *loads* all static `.fluml` text files according to the application language.
         """
 
         content_folder = CONTENT_DIR / self.lang

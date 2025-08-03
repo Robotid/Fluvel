@@ -21,7 +21,7 @@ def read_file(file_path: Path | str) -> list[str]:
 
 def parse_FLUML(file_path: Path | str) -> dict:
     """
-    Analiza un archivo .fluml, lo formatea a JSON y lo convierte en un diccionario de Python.
+    Analiza un archivo `.fluml`, lo formatea a JSON y lo convierte en un diccionario de Python.
     """
 
     lines = read_file(file_path)

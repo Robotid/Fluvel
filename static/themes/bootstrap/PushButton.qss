@@ -1,3 +1,5 @@
+
+
 QPushButton {
     /* Estilos base del botón */
     background-color: #007bff; /* Color primario azul (similar a Bootstrap) */

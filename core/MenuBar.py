@@ -188,8 +188,8 @@ class MenuBar:
     def bind(self, menu_option: MenuOptions, action: ActionTypes, controller: any) -> None:
         """
         Args:
-            menu_option (Literal): Option of the Menu Bar
-            action (Literal): Type of action method
+            menu_option (str): Option of the Menu Bar
+            action (str): Type of action method
             controller (any): Some controller that responds to the action
         """
 
@@ -198,8 +198,8 @@ class MenuBar:
     def set_property(self, menu_option: MenuOptions, property_to_change: ActionProperties, new_value: any) -> None:
         """
         Args:
-            menu_option (Literal): Option of the Menu Bar.
-            property_to_change (Literal): Property that will be changed.
+            menu_option (str): Option of the Menu Bar.
+            property_to_change (str): Property that will be changed.
             new_value (any): The new value of the property.
         """
         
@@ -210,7 +210,7 @@ class MenuBar:
     def add_shortcut(self, menu_option: MenuOptions, new_shortcut: StandardActionShortcut, controller: any) -> None:
         """
         Args:
-            menu_option (Literal): Option of the Menu Bar.
+            menu_option (str): Option of the Menu Bar.
             new_shortcut (str): The new shortcut that will be assigned.
             controller (any): Some controller that responds to the action.
         """
