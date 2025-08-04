@@ -3,13 +3,11 @@
 from core import AppWindow
 from components import InfoCard, WarningCard, SuccessCard, DangerCard, LineEdit
 from components import Label, InfoLabel, WarningLabel, DangerLabel, SuccessLabel
-from components import PushButton, DarkButton
-from PySide6.QtWidgets import QListView, QTreeView, QToolBar, QLabel, QTextEdit, QLineEdit, QLCDNumber, QProgressBar, QCalendarWidget, QComboBox, QSlider, QTextBrowser
-from utils import get_resource_path
-from PySide6.QtGui import QIcon, Qt, QStandardItem, QStandardItemModel
-from PySide6.QtCore import QSize, QUrl
+from components import Button
+from PySide6.QtGui import Qt
 from components.gui import StyledText
 from core import ViewBuilder
+from components import FormLayout
 
 class MainWindow(AppWindow):
 
@@ -19,9 +17,8 @@ class MainWindow(AppWindow):
         view = ViewBuilder()
 
         with view.Horizontal(self.central_widget) as h:
-
             # Configuraciones 
-            h.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+            h.setAlignment(Qt.AlignmentFlag.AlignCenter)
             h.setContentsMargins(50, 50, 50, 50)
 
         with view.Vertical(h) as v:
@@ -31,29 +28,25 @@ class MainWindow(AppWindow):
             # Haciendo las configuraciones de diseño
             v.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-            label_title = QLabel(StyledText("title-sign-in").text)
+            label_title = Label(text=StyledText("title-sign-in"))
             label_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
             label_title.setProperty("class", "h1 bold")
 
-            v.addWidget(label_title)
+            v.add_label(widget=label_title)
             
             v.addSpacing(50)
 
             with view.Form(v) as form:
-                # Configurando el diseño del formulario
-                form.addRow(Label(StyledText("form-user-field")), QLineEdit(placeholderText=StyledText("form-user-field-back").text))
-                form.addRow(Label(StyledText("form-pass-field")), QLineEdit(placeholderText=StyledText("form-pass-field-back").text, echoMode=QLineEdit.EchoMode.Password))
 
-            with view.Horizontal(v) as bottom_reg:
-                bottom_reg.addWidget(DarkButton(StyledText("btn-register").text))
-                bottom_reg.addWidget(PushButton(StyledText("btn-sign-in").text))
-            lbl_new_account = Label(StyledText("lbl-forgotten-password"))
-            lbl_new_account.setProperty("class", "h5 is-secondary")
+                user_input = form.add_row(label="form-user-field")[1]
+                pass_label, pass_input = form.add_row(label="form-password-field")
+                          
+            with view.Horizontal(v) as bottom:
+                btn_register = bottom.add_button(text=StyledText("btn-register").text, style="dark")
+                btn_sign_in = bottom.add_button(text=StyledText("btn-sign-in").text)
+
+            lbl_new_account = v.add_label(text=StyledText("lbl-forgotten-password"))
             lbl_new_account.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            v.addWidget(lbl_new_account)
-
-        # Implementar el uso de @property para encapsular la lógica de validación de estados
-        # Implementar algo que permita conectar/enlazar cualquier widget con cualquier propiedad de otro
 
         bind = self.menu_bar.bind
         theme = self.root.change_theme
@@ -61,3 +54,5 @@ class MainWindow(AppWindow):
         bind("bootstrap_theme", "triggered", lambda: theme("bootstrap"))
         bind("modern_dark_theme", "triggered", lambda: theme("modern-dark"))
         bind("clean_light_theme", "triggered", lambda: theme("clean-light"))
+
+        self.menu_bar.add_shortcut("quit", "Close", self.close)

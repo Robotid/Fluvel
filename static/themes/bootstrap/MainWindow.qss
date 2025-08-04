@@ -16,6 +16,9 @@
 QMainWindow {
     background-color: #fff; /* Simula el --body-bg */
     color: #212529;         /* Simula el --text-color */
-    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif;
     font-size: 14px; /* Tamaño de fuente base */
 }
+/* QWidget#central-wd {
+    background-color: #7136e0;
+} */

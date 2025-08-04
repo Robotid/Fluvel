@@ -3,6 +3,7 @@ class StyledText[str]
 # # -> inline comments
 # []: -> dict -> contains the id of the StyledText
 # Reglas de sangría para definir los hijos de []: 
+# $0, $1, ..., $n -> Placeholders
 
 # Style Rules
 # * -> italic -> <span style='font-style: italic;'>
@@ -15,10 +16,4 @@ class StyledText[str]
 # <sup></sup> -> <span style='vertical-align: sup'>
  
 [info-card-1]:
-    **Hi!**, this $0 is *an* __demostration__. hola Check our *{Youtube | https://www.youtube.com}* channel.
-
-[info-card-2]:
-    ***Run it***! If you $0 press the button, --you'll see it highlighted-- as <sup>checked</sup>. Press it again to release it. Look for the *check state* in the console.
-
-[warning-card-2]:
-    we **need** to keep a reference to the button on __self__ so we can access it in our slot.
+    **Hi!**, this $0 is *an* __demostration__. Check our *{Youtube | https://www.youtube.com}* channel.

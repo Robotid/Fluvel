@@ -4,13 +4,13 @@
 [form-user-field]:
     User:
 
-[form-user-field-back]:
+[form-user-field-behind]:
     User
 
-[form-pass-field]:
+[form-password-field]:
     Password:
 
-[form-pass-field-back]:
+[form-password-field-behind]:
     Password
 
 [lbl-forgotten-password]:

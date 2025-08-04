@@ -1,63 +1,55 @@
-# Componente QPushButton
 from PySide6.QtWidgets import QPushButton
 from typing import Literal
 from PySide6.QtCore import Qt
 
 # se definen los tipos de botón para el tipado estático
-ButtonType = Literal["PrimaryButton", "SecondaryButton", "DangerButton", "SuccessButton", "WarningButton", "InfoButton", "LightButton", "DarkButton"]
+ButtonType = Literal["primary", "secondary", "danger", 
+                     "success", "warning", "info", "light", 
+                     "dark"]
 
 class PushButton(QPushButton):
-    def __init__(self, text: str, _type: ButtonType):
+    """
+    Clase base de **`Fluvel`** para **`QPushButton`**.
+    """
+
+    style: ButtonType = "primary"
+
+    def __init__(self, text: str, style: ButtonType | None = None) -> None:
+
+        if style:
+            self.style = style
+
         super().__init__(text)
 
-        self.name = _type
-
-        self.setObjectName(_type) # Nombre Representativo del componente en el archivo 'theme/push_button.qss'
+        # Nombre Representativo del componente en el archivo 'theme/PushButtons.qss'
+        self.setProperty("class", self.style)
 
         # Aplicar el cursor de puntero
         self.setCursor(Qt.PointingHandCursor)
+        
+    def bind(self, event, controller):
+        pass
 
 class PrimaryButton(PushButton):
-    def __init__(self, text: str):
-
-        super().__init__(text, "PrimaryButton")
+    style: ButtonType = "primary"
 
 class SecondaryButton(PushButton):
-    def __init__(self, text: str):
-
-        super().__init__(text, "SecondaryButton")
+    style: ButtonType = "secondary"
 
 class DangerButton(PushButton):
-    def __init__(self, text: str):
-
-        super().__init__(text, "DangerButton")
+    style: ButtonType = "danger"
 
 class SuccessButton(PushButton):
-    def __init__(self, text: str):
-
-        super().__init__(text, "SuccessButton")
+    style: ButtonType = "success"
 
 class WarningButton(PushButton):
-    def __init__(self, text: str):
-
-        super().__init__(text, "WarningButton")
+    style: ButtonType = "warning"
 
 class InfoButton(PushButton):
-    def __init__(self, text: str):
-
-        super().__init__(text, "InfoButton")
+    style: ButtonType = "info"
 
 class LightButton(PushButton):
-    def __init__(self, text: str):
-
-        super().__init__(text, "LightButton")
+    style: ButtonType = "light"
 
 class DarkButton(PushButton):
-    def __init__(self, text: str):
-
-        super().__init__(text, "DarkButton")
-
-class OutlinedButton(PushButton):
-    def __init__(self, text: str):
-
-        super().__init__(text, "OutlinedButton")
+    style: ButtonType = "dark"

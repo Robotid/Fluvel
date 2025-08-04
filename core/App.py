@@ -87,13 +87,13 @@ class App(QApplication, GlobalConfig):
         This method *loads* all static `.fluml` text files according to the application language.
         """
 
-        content_folder = CONTENT_DIR / self.lang
+        content_folder = CONTENT_DIR / self.language
 
         GlobalContent.initialize(content_folder)
     
     def change_language(self, new_language: str) -> None:
         
-        self.lang = new_language
+        self.language = new_language
 
         self.set_text_blocks()
     

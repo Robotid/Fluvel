@@ -15,7 +15,10 @@ class StyledText:
     
     @property
     def text(self) -> str:
-
+        """
+        Returns:
+            (str): El texto formateado a RichText obtenido de `GlobalContent.content_map`.
+        """
         try:
             
             # Load the RichText content from GlobalContent

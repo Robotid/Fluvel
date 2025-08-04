@@ -1,16 +1,22 @@
-import sys
+# Fluvel
+from components.layouts import FormLayout, HBoxLayout, VBoxLayout
 
 # PySide6
 from PySide6.QtWidgets import QWidget, QLayout
+from typing import TypeVar, Generic
 
 # Layouts
-from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout, QGridLayout, QStackedLayout, QFormLayout
+from PySide6.QtWidgets import QGridLayout, QStackedLayout
 
-class LayoutBuilder:
+# Definir una variable de tipo para los layouts
+T = TypeVar('T', bound=QLayout)
+
+class LayoutBuilder(Generic[T]):
+    
     def __init__(self, parent: QLayout | QWidget | None, type_layout):
 
-        # an instance of QHBoxLayout, QVBoxLayout, QGridLayout or QStackedLayout
-        self.layout = type_layout
+        # an instance of HBoxLayout, QVBoxLayout, QGridLayout or QStackedLayout
+        self.layout: T = type_layout()
 
         # Si el layout no tiene padre, se le asigna un contenedor vacío
         if not parent:
@@ -32,7 +38,7 @@ class LayoutBuilder:
             else:
                 raise TypeError("The parent must be a QLayout or a QWidget.")
 
-    def __enter__(self):
+    def __enter__(self) -> T:
         return self.layout
     
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -44,14 +50,14 @@ class ViewBuilder:
     Los nombres de los métodos ignoran la guía de estilo oficial `PEP 8` para mejorar
     la legibilidad y entendimiento a la hora de codificar.
     """
-    def Vertical(self, parent: QLayout | QWidget | None = None) -> QVBoxLayout:
-        return LayoutBuilder(parent, QVBoxLayout()) 
+    def Vertical(self, parent: QLayout | QWidget | None = None) -> LayoutBuilder[VBoxLayout]:
+        return LayoutBuilder(parent, VBoxLayout) 
 
-    def Horizontal(self, parent: QLayout | QWidget | None = None) -> QHBoxLayout:
-        return LayoutBuilder(parent, QHBoxLayout())
+    def Horizontal(self, parent: QLayout | QWidget | None = None) -> LayoutBuilder[HBoxLayout]:
+        return LayoutBuilder(parent, HBoxLayout)
 
-    def Form(self, parent: QLayout | QWidget | None = None) -> QFormLayout:
-        return LayoutBuilder(parent, QFormLayout())
+    def Form(self, parent: QLayout | QWidget | None = None) -> LayoutBuilder[FormLayout]:
+        return LayoutBuilder(parent, FormLayout)
 
     def Grid(self, parent: QLayout | QWidget | None = None):
         # Igual que las demás

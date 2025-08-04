@@ -41,7 +41,7 @@ class GlobalConfig:
     window_width: int
     window_height: int
     theme: str
-    lang: str
+    language: str
 
     # [database]
     db_host: str
@@ -76,7 +76,7 @@ class GlobalConfig:
         GlobalConfig.window_width = window_size.get("width", 640)
         GlobalConfig.window_height = window_size.get("height", 480)
         GlobalConfig.theme = app.get("theme", "bootstrap")
-        GlobalConfig.lang = app.get("lang", "es")
+        GlobalConfig.language = app.get("language", "en")
 
         # Database config
         database: dict = appconfig.get("database", {})

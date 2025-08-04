@@ -32,7 +32,6 @@ class AppWindow(QMainWindow, GlobalConfig):
         self.setGeometry(100, 100, self.window_width, self.window_height)
 
         # Configuring the layout
-        
         self.set_layout()
 
         # Configuring the Top Menu Bar
@@ -45,8 +44,8 @@ class AppWindow(QMainWindow, GlobalConfig):
         """
         **`IMPORTANT`** Este método inicializa el proceso para la creación del menú dinámico
         """
-        
-        menu_file: Path = MENUS_DIR / "menu.fluml"
+
+        menu_file: Path = MENUS_DIR / self.language / "menus" / "menu.fluml"
 
         # This is not an instance of QMenuBar
         self.menu_bar = MenuBar(parent = self, menu_file = menu_file)

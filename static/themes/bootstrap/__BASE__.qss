@@ -8,116 +8,11 @@
     /* Fuente base */
     font-family: "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
     font-size: 14px;
-    color: #343a40; /* Color de texto oscuro, similar al texto principal de Bootstrap */
+    color: #343a40; 
     
     /* Colores de fondo */
-    background-color: #f8f9fa; /* Color de fondo muy claro, similar al body de Bootstrap */
-}
-
-/* ==================== QMainWindow y QWidget (contenedores) ==================== */
-QMainWindow, QWidget {
-    background-color: #ffffff; /* Fondo blanco para las ventanas principales y widgets */
-    border: none; /* Sin bordes por defecto */
-}
-
-/* ==================== QPushButton ==================== */
-QPushButton {
-    /* Estilos base del botón */
-    background-color: #007bff; /* Azul primario de Bootstrap */
-    color: #ffffff; /* Texto blanco */
-    border: 1px solid #007bff; /* Borde del mismo color */
-    border-radius: 5px; /* Bordes ligeramente redondeados */
-    padding: 8px 16px; /* Espaciado interno */
-    outline: none; /* Eliminar el contorno de enfoque por defecto */
-}
-
-QPushButton:hover {
-    background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
-    border-color: #004085;
-}
-
-QPushButton:pressed {
-    background-color: #004085; /* Azul aún más oscuro al presionar */
-    border-color: #002752;
-}
-
-QPushButton:disabled {
-    background-color: #e9ecef; /* Gris claro para botones deshabilitados */
-    color: #6c757d; /* Texto gris más oscuro */
-    border-color: #ced4da;
-}
-
-/* Estilos para variantes de botones (usando qproperty-class en Python) */
-QPushButton[class="secondary"] {
-    background-color: #6c757d;
-    border-color: #6c757d;
-}
-QPushButton[class="secondary"]:hover {
-    background-color: #5a6268;
-    border-color: #545b62;
-}
-QPushButton[class="success"] {
-    background-color: #28a745;
-    border-color: #28a745;
-}
-QPushButton[class="success"]:hover {
-    background-color: #218838;
-    border-color: #1e7e34;
-}
-QPushButton[class="danger"] {
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-QPushButton[class="danger"]:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-}
-QPushButton[class="warning"] {
-    background-color: #ffc107;
-    border-color: #ffc107;
-    color: #212529; /* Texto oscuro para contraste */
-}
-QPushButton[class="warning"]:hover {
-    background-color: #e0a800;
-    border-color: #d39e00;
-}
-QPushButton[class="info"] {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-}
-QPushButton[class="info"]:hover {
-    background-color: #138496;
-    border-color: #117a8b;
-}
-QPushButton[class="light"] {
     background-color: #f8f9fa;
-    border-color: #f8f9fa;
-    color: #212529;
 }
-QPushButton[class="light"]:hover {
-    background-color: #e2e6ea;
-    border-color: #dae0e5;
-}
-QPushButton[class="dark"] {
-    background-color: #343a40;
-    border-color: #343a40;
-    color: #ffffff;
-}
-QPushButton[class="dark"]:hover {
-    background-color: #23272b;
-    border-color: #1d2124;
-}
-QPushButton[class="link"] {
-    background-color: transparent;
-    border: none;
-    color: #007bff;
-    text-decoration: underline;
-    padding: 0;
-}
-QPushButton[class="link"]:hover {
-    color: #0056b3;
-}
-
 
 /* ==================== QLineEdit, QTextEdit, QPlainTextEdit ==================== */
 QLineEdit, QTextEdit, QPlainTextEdit {

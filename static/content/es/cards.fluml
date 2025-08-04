@@ -1,8 +1,2 @@
 [py-gui]:
-    **{$0 | https://www.pythonguis.com/tutorials/pyside6-signals-slots-events/}** by Martin Fitzpatrick.
-
-[user-field]:
-    Usuario
-    
-[pass-field]
-    Contraseña
+    **{Señales y receptores (Signals y Slots) | https://www.pythonguis.com/tutorials/pyside6-signals-slots-events/}** by Martin Fitzpatrick.

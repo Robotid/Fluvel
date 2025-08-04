@@ -7,4 +7,4 @@ CONTENT_DIR: Path = APP_ROOT / "static" / "content"
 
 THEMES_DIR: Path = APP_ROOT / "static" / "themes"
 
-MENUS_DIR: Path = APP_ROOT / "views" / "menus"
+MENUS_DIR: Path = APP_ROOT / "static" / "content"

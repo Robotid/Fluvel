@@ -1,0 +1,132 @@
+# Secciones del menú principal
+[Archivo]: # -> menú "Archivo"
+
+    @InitSection
+    new_file = "Nuevo Archivo"
+    new_window = "Nueva Ventana"
+    new_from_template = "Nuevo desde Plantilla"
+
+    # Opciones de Apertura
+    @OpenSection
+    open_file = "Abrir..."
+    open_recent = "Abrir Recientes"
+
+    # Opciones de Cierre
+    @CloseSection
+    close_vurrent = "Cerrar"
+    close_all = "Cerrar Todo"
+
+    # Opciones de Guardado
+    @SaveSection
+    save = "Guardar"
+    save_as = "Guardar Como..."
+    save_all = "Guardar Todo"
+    
+    # Opciones de revertir (para control de versiones/autoguardado)
+    @RevertOptionsSection
+    browse_all_versions = "Examinar Todas las Versiones..."
+
+    # Opciones de Impresión
+    @PrintSection
+    print_dialog = "Imprimir..."
+    page_setup = "Configurar Página..."
+    print_preview = "Vista Previa de Impresión"
+
+    # Importar/Exportar/Compartir
+    @ImportExportShare
+    import = "Importar..."
+    export = "Exportar..."
+    export_as = "Exportar Como..."
+    share = "Compartir..."
+
+    @QuitSection
+    quit = "Salir"
+
+[Editar]: # -> menú "Editar"
+
+    undo = "Deshacer"
+    redo = "Rehacer"
+    cut = "Cortar"
+    copy = "Copiar"
+    paste = "Pegar"
+    paste_special = "Pegado Especial..."
+    delete = "Eliminar"
+    select_all = "Seleccionar Todo"
+    deselect = "Deseleccionar"
+
+    # Opciones de Búsqueda
+    @FindSection
+    find = "Buscar..."
+    find_next = "Buscar Siguiente"
+    find_previous = "Buscar Anterior"
+    replace = "Reemplazar"
+
+    # Ortografía y Gramática (para aplicaciones de texto)
+    @SpellingAndGrammarSection
+    check_document = "Revisar Documento"
+    check_while_typing = "Revisar Ortografía Mientras Escribe"
+
+[Vista]: # -> menú "Ver"
+
+    zoom_in = "Acercar"
+    zoom_out = "Alejar"
+    actual_size = "Tamaño Real"
+    fit_to_window = "Ajustar a la Ventana"
+    full_screen = "Pantalla Completa"
+
+    # Alternar Mostrar/Ocultar
+    @ShowHideSection
+    [Ocultar Ventanas]: # -> sub-menú 'Ocultar Ventanas'
+        toolbar = "Barra de Herramientas"         
+        sidebar = "Barra Lateral"
+        rulers = "Reglas"
+        grid = "Cuadrícula"
+        status_bar = "Barra de Estado"
+        
+    # Opciones de Diseño
+    @LayoutSection
+    single_pane = "Panel Único"
+    two_panes = "Dos Paneles"
+    three_panes = "Tres Paneles"
+
+    # Opciones de Ordenar Por
+    @SortBySection
+    sort_by_name = "Nombre"
+    sort_by_date_modified = "Fecha de Modificación"
+    sort_by_size = "Tamaño"
+
+[Ventana]: # -> menú "Ventana"
+
+    minimize = "Minimizar"
+    zoom_maximize = "Zoom/Maximizar"
+    bring_all_to_front = "Traer Todo al Frente"
+    arrange = "Organizar"
+
+[Ajustes]: # -> menú "Configuración"
+
+    preferences = "Preferencias..."
+
+    [Temas]: # -> Temas
+        modern_dark_theme = "Moderno-Oscuro"
+        bootstrap_theme = "Bootstrap"
+        clean_light_theme = "Claro Limpio"
+        
+    language = "Idioma"
+
+[Ayuda]: # -> menú "Ayuda"
+
+    [Opciones de Ayuda]: # -> Submenú desplegable "Opciones de Ayuda"
+        help_docs = "Ayuda"
+        keyboard_shortcuts = "Atajos de Teclado"
+        tutorials = "Tutoriales"
+    
+        @MoreHelp 
+        support = "Soporte"
+        licence = "Licencia"
+
+    # Más opciones de ayuda
+    @MoreSection
+    version = "Versión"
+    web_page = "Visítanos"
+    check_for_updates = "Buscar Actualizaciones"
+    about_app = "Acerca de la App"

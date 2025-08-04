@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, TypedDict
 
 # Fluvel
 from components.gui import StyledText
@@ -11,15 +11,18 @@ from PySide6.QtGui import QDesktopServices
 
 LabelType = Literal["Label", "InfoLabel", "WarningLabel", "SuccessLabel", "DangerLabel"]
 
+class LabelKwargs(TypedDict, total=False):
+    id_: StyledText | None
+    text: str | None
+
 class Label(QLabel):
     """
-    Clase base de **`Fluvel`** para etiquetas estilizadas. Las subclases deben definir el atributo **`_label_type`**
-    .
+    Clase base de **`Fluvel`** para **`QLabel`**.
     """
 
     _label_type: LabelType = "Label"
 
-    def __init__(self, text: str | StyledText = None):
+    def __init__(self, id_: str | None = None, text: str | StyledText = None):
         super().__init__()
 
         # Set the Text

@@ -60,7 +60,7 @@ def filter_by_extension(dirname: Path | str, suffix: str | tuple) -> list[Path]:
     try:
         for _file in dirname.iterdir():
             # compares the file extension with the suffix parameter
-            if _file.suffix in suffix: 
+            if _file.suffix in suffix and not _file.is_dir(): 
                 files.append(_file)
 
     except FileNotFoundError as e:
