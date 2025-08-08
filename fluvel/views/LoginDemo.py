@@ -10,10 +10,6 @@ class LoginPage(ViewBuilder):
         main.adjust(alignment=main.CENTER, margins=(50, 50, 50, 50))
 
         main.add_label(content_id="title-sign-in", style="h1 bold", alignment=main.CENTER)
-        main.add_label(text="Info Label", style="info")
-        main.add_label(text="Warning Label", style="warning")
-        main.add_label(text="Success Label", style="success")
-        main.add_label(text="Danger Label", style="danger")
         
         main.addSpacing(50)
 

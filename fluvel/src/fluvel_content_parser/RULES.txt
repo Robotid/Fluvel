@@ -1,9 +1,9 @@
-class StyledText[str]
-# Sintactic Rules
+
+# Syntactic rules for declaring static text content application
+ 
 # # -> inline comments
-# []: -> dict -> contains the id of the StyledText
-# Reglas de sangría para definir los hijos de []: 
-# $0, $1, ..., $n -> Placeholders
+# []: -> dict -> contains the content_id of the StyledText
+# Indentation rules to define nesting (only 1 level is allowed):
 
 # Style Rules
 # * -> italic -> <span style='font-style: italic;'>
@@ -14,6 +14,7 @@ class StyledText[str]
 # {value:link} -> link -> <a href='link'> value </a>
 # <sub></sub> -> <span style='vertical-align: sub'>
 # <sup></sup> -> <span style='vertical-align: sup'>
+# $0, $1, ..., $n -> Placeholders that will be dynamically replaced by text in the application.
  
-[info-card-1]:
-    **Hi!**, this $0 is *an* __demostration__. Check our *{Youtube | https://www.youtube.com}* channel.
+[welcome-message]:
+    **Hi!** $0, this is *an* __demostration__. Check our *{Youtube | https://www.youtube.com}* channel.

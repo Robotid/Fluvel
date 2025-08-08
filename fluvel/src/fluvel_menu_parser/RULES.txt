@@ -1,0 +1,7 @@
+
+# Syntactic rules for creating the application's main menu
+
+# el '#' representa un comentario de linea
+# el '[]:' representa un diccionario 
+# los elementos indentados después del '[]:' son argumentos 'clave-valor'
+# el '@any' es un separador de sección que visualmente representa una linea separadora en el menú de opciones

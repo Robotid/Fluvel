@@ -1,11 +1,5 @@
 [File]: # -> Menu Header
 
-    # el '#' representa un comentario de linea
-    # el '[]:' representa un diccionario 
-    # y los elementos indentados después del ':' son 'clave-valor'
-    # el '@...' es un corte de línea, representado como '"sep_N" = "---"'
-    # para todo '@...'
-
     new_file = "New File"
     new_window = "New Window"
 
