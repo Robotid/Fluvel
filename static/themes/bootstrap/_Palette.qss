@@ -1,0 +1,3 @@
+*[class="bg-primary"] {
+    background-color: #3a7bde;
+}

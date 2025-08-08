@@ -194,6 +194,7 @@ class MenuBar:
         """
 
         getattr(getattr(self, menu_option), action).connect(controller)
+        # self.menu_bar.quit.triggered.connect(self.close)
 
     def set_property(self, menu_option: MenuOptions, property_to_change: ActionProperties, new_value: any) -> None:
         """
@@ -205,7 +206,7 @@ class MenuBar:
         
         property_method = f"set{property_to_change}"
 
-        getattr(getattr(self, menu_option), f"{property_method}")(new_value)
+        getattr(getattr(self, menu_option), property_method)(new_value)
     
     def add_shortcut(self, menu_option: MenuOptions, new_shortcut: StandardActionShortcut, controller: any) -> None:
         """

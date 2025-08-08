@@ -1,10 +1,9 @@
 
 
 QPushButton {
-    /* Estilos base del botón */
-    background-color: #007bff; 
+    /* Estilos base del Label */
+    background-color: #007bff;
     color: #fff;
-    font-family: "Segoe UI", "Helvetica Neue", sans-serif; 
     font-size: 14px;
     font-weight: 700; 
     text-align: center; 
@@ -16,6 +15,8 @@ QPushButton {
 
 QPushButton:pressed {
     padding-bottom: 6px;
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
 
 QPushButton:disabled {
@@ -24,6 +25,7 @@ QPushButton:disabled {
     color: #6c757d;
     border: 1px solid #ced4da; 
 }
+
 
 /* Estilo para un primary Button */
 

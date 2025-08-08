@@ -23,18 +23,37 @@
 
 /* -------- Font Weights -------- */
 
+*[class~="w-100"] {
+    font-weight: 100;
+}
+
 *[class~="w-200"] {
     font-weight: 200;
+}
+
+*[class~="w-300"] {
+    font-weight: 300;
 }
 
 *[class~="w-400"] {
     font-weight: 400;
 }
 
+*[class~="w-500"] {
+    font-weight: 500;
+}
+
 *[class~="w-600"] {
     font-weight: 600;
 }
+*[class~="w-700"] {
+    font-weight: 600;
+}
 
-*[class~="bold "]{
+*[class~="bold"]{
     font-weight: bold;
+}
+
+*[class~="italic"]{
+    font-style: italic;
 }

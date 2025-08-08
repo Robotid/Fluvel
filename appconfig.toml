@@ -27,8 +27,7 @@ password = "secure_password" # ¡Considera usar variables de entorno para esto e
 
 # Otras configuraciones que podrías añadir
 [features]
-enable_dark_mode_toggle = true
-show_welcome_message = true
+enable_hot_reloading = true
 
 [paths]
 # Rutas relativas a la raíz del proyecto para recursos específicos

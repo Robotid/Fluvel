@@ -8,14 +8,13 @@ from models import GlobalContent
 
 # PySide6
 from PySide6.QtWidgets import QApplication
-from PySide6.QtCore import Slot
 
 # Utils
 from core.core_utils.theme_loader import load_style_sheet
 from utils.helper_functions import filter_by_extension
 from utils.paths import THEMES_DIR, CONTENT_DIR
 
-AppThemes = Literal["bootstrap", "clean-light", "modern-dark", "modern-dark-esmerald"]
+AppThemes = Literal["bootstrap", "modern-dark", "clean-light"]
 
 class App(QApplication, GlobalConfig):
     def __init__(self, argv: list) -> None:
@@ -43,7 +42,7 @@ class App(QApplication, GlobalConfig):
         """
 
         # Cargando el contenido de texto estático de las vistas
-        self.set_text_blocks()
+        self.set_static_text_blocks()
 
         # Aplicando los temas y estilos a los componentes
         self.set_theme()
@@ -82,7 +81,7 @@ class App(QApplication, GlobalConfig):
 
         self.set_theme()
     
-    def set_text_blocks(self) -> None:
+    def set_static_text_blocks(self) -> None:
         """
         This method *loads* all static `.fluml` text files according to the application language.
         """
@@ -95,7 +94,4 @@ class App(QApplication, GlobalConfig):
         
         self.language = new_language
 
-        self.set_text_blocks()
-    
-    def update_ui(self) -> None:
-        ...
+        self.set_static_text_blocks()

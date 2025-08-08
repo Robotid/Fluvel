@@ -1,2 +1,5 @@
 [py-gui]:
     **{Señales y receptores (Signals y Slots) | https://www.pythonguis.com/tutorials/pyside6-signals-slots-events/}** by Martin Fitzpatrick.
+
+[saludo-bienvenida]:
+    ¡Hola **$0!**, Estamos encantados de que estés de vacaciones en *$1* en este $2 con nosotros. No te olvides de visitar nuestra {Página Web | $3}

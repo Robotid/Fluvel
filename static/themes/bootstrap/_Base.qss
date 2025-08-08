@@ -102,26 +102,6 @@ QRadioButton::indicator:disabled {
     border-color: #ced4da;
 }
 
-/* ==================== QLabel (Títulos y texto) ==================== */
-QLabel {
-    color: #343a40; /* Color de texto estándar */
-}
-
-/* Puedes usar propiedades dinámicas para emular encabezados H1-H6 si es necesario */
-QLabel[class="h1"] {
-    font-size: 32px;
-    font-weight: bold;
-    color: #212529; /* Color más oscuro para encabezados */
-    margin-bottom: 0.5rem;
-}
-QLabel[class="h2"] {
-    font-size: 28px;
-    font-weight: bold;
-    color: #212529;
-    margin-bottom: 0.5rem;
-}
-/* ... y así sucesivamente para h3, h4, etc. */
-
 /* ==================== QSlider ==================== */
 QSlider::groove:horizontal {
     border: 1px solid #ced4da;

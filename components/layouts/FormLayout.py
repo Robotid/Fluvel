@@ -1,12 +1,12 @@
 # Fluvel
-from components import Label
-from components.gui import StyledText
-from models import GlobalContent
+from components.widgets import Label
+from components.widgets import LineEdit
+from core.FluvelLayout import FluvelLayout
 
 # PySide6
 from PySide6.QtWidgets import QFormLayout, QLineEdit
 
-class FormLayout(QFormLayout):
+class FormLayout(QFormLayout, FluvelLayout):
     def __init__(self):
         super().__init__()
 
@@ -23,15 +23,10 @@ class FormLayout(QFormLayout):
             field = f"{label}-behind"
         
         # el Widget Label
-        label_field = Label(text=StyledText(label))
+        label_field = Label(content_id=label) 
 
         # el Widget QLineEdit
-        input_field = QLineEdit(placeholderText=StyledText(field).text)
-
-        # El campo es para una contraseña
-        if "password" in field:
-
-            input_field.setEchoMode(QLineEdit.EchoMode.Password)
+        input_field = LineEdit(placeholder_id=field)
 
         # Añadiendo la Fila
         self.addRow(label_field, input_field)

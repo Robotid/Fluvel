@@ -4,8 +4,11 @@ from components.layouts.HBoxLayout import HBoxLayout
 
 from components.layouts.FormLayout import FormLayout
 
+from components.layouts.GridLayout import GridLayout
+
 __all__ = [
-    "VBoxLayout"
+    "VBoxLayout",
     "HBoxLayout",
     "FormLayout",
+    "GridLayout"
 ]

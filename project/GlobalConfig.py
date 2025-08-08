@@ -26,6 +26,9 @@ class GlobalConfig:
     # [core utils]
     APP_ROOT = APP_ROOT
     DEV_MODE: bool
+    theme: str
+    language: str
+    enable_hot_reloading: bool
 
     # [appconfig]
     CONFIG: dict
@@ -40,8 +43,6 @@ class GlobalConfig:
     version: str
     window_width: int
     window_height: int
-    theme: str
-    language: str
 
     # [database]
     db_host: str
@@ -67,18 +68,23 @@ class GlobalConfig:
         # the global configuration dictionary is saved
         GlobalConfig.CONFIG = appconfig
 
-        # Configuring the global properties
+        # [Getting the specific configurations]
         app: dict = appconfig.get("app", {})
         window_size: dict = appconfig.get("window_size", {})
+        features: dict = appconfig.get("features", {})
 
+        # [App]
         GlobalConfig.app_name = app.get("app_name", "-")
         GlobalConfig.version = app.get("version", "-")
         GlobalConfig.window_width = window_size.get("width", 640)
         GlobalConfig.window_height = window_size.get("height", 480)
+
+        # [Core Utils]
         GlobalConfig.theme = app.get("theme", "bootstrap")
         GlobalConfig.language = app.get("language", "en")
+        GlobalConfig.enable_hot_reloading = features.get("enable_hot_reloading", False)
 
-        # Database config
+        # [Database]
         database: dict = appconfig.get("database", {})
 
         GlobalConfig.db_host = database.get("host", "-")

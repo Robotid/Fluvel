@@ -2,9 +2,8 @@ from typing import Literal
 
 # PySide6 - Fluvel
 from components.gui.StyledText import StyledText
-from components import Label, Button
+from components.widgets import Label, Button
 from PySide6.QtWidgets import QHBoxLayout, QFrame, QSizePolicy
-from PySide6.QtGui import QIcon
 
 # Utils
 from utils import APP_ROOT
@@ -27,6 +26,7 @@ class FluvelCard(QFrame):
         
         self.setObjectName(self._card_type)
         self.setProperty("type", "card-container")
+        self.setContentsMargins(5, 5, 5, 5)
 
         # Body layout Container
         self.hbox = QHBoxLayout(self)
@@ -40,9 +40,9 @@ class FluvelCard(QFrame):
         self.description_label = Label(text)
         self.description_label.setProperty("type", "card-description")
         self.description_label.setWordWrap(True)
-        # self.description_label.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        self.description_label.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         
-        self.close_btn = Button("")
+        self.close_btn = Button(text="")
         self.close_btn.setFixedSize(22, 12)
         self.close_btn.setProperty("type", "card-description")
 
