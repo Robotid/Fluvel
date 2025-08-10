@@ -83,7 +83,10 @@
             "bootstrap_theme": "Bootstrap",
             "clean_light_theme": "Claro Limpio"
         },
-        "language": "Idioma"
+        "Idiomas": {
+            "es_language": "Español",
+            "en_language": "Inglés"
+        }
     },
     "Ayuda": {
         "Opciones de Ayuda": {

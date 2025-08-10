@@ -110,8 +110,10 @@
         modern_dark_theme = "Modern-Dark"
         bootstrap_theme = "Bootstrap"
         clean_light_theme = "Clean Light"
-        
-    language = "Language"
+
+    [Languages]:
+        es_language = "Spanish"
+        en_language = "English"
 
 [Help]: # -> menu "Help"
 

@@ -1,0 +1,28 @@
+[project]
+name = "fluvel"
+version = "0.1.0"
+description = "A Python framework for building modern and declarative UIs with PySide6."
+authors = [
+    {name = "robotid7@outlook.es"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "pyside6 (>=6.9.1,<7.0.0)",
+    "toml (>=0.10.2,<0.11.0)"
+]
+
+[tool.poetry]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+black = "^25.1.0"
+click = "^8.2.1"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+fluvel = "fluvel.cli.cli:main"

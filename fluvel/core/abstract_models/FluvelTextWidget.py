@@ -1,4 +1,3 @@
-
 # Fluvel
 from components.gui import StyledText
 
@@ -6,7 +5,8 @@ from components.gui import StyledText
 from PySide6.QtWidgets import QLabel
 from PySide6.QtCore import Qt
 
-class TextWidget:
+
+class FluvelTextWidget:
     """
     Clase que se encarga de obtener el contenido estático usando
     el método get_static_text y la clase StyledText.
@@ -15,7 +15,13 @@ class TextWidget:
     """
 
     def get_static_text(self, **kwargs) -> dict[str, any]:
-        
+        """
+        if isinstance(kwargs["content_id"], tuple):
+            _id, *placeholders = kwargs["content_id"]
+
+            text = StyledText(_id, *placeholders)
+        """
+
         if "content_id" in kwargs:
 
             text = StyledText(kwargs["content_id"]).text
@@ -31,7 +37,7 @@ class TextWidget:
             kwargs["text"] = text
 
             kwargs.pop("content_id")
-            
+
         if "placeholder_id" in kwargs:
 
             placeholder_text = StyledText(kwargs["placeholder_id"]).text

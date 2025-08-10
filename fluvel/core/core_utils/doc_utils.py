@@ -1,5 +1,6 @@
 from project import GlobalConfig
 
+
 # NOT USED
 def add_global_props_doc(cls):
     # un decorador de clase para añadir la documentación global de la aplicación
@@ -10,5 +11,6 @@ def add_global_props_doc(cls):
     else:
         cls.__doc__ = global_doc_content
     return cls
+
 
 global_props: str = GlobalConfig.__doc__

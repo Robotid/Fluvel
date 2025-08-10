@@ -2,9 +2,10 @@
 
 from core.core_utils import load_app_config, APP_ROOT
 
+
 class GlobalConfig:
     """
-    **IMPORTANT** Adapt the attributes of the **`GlobalConfig`** class and the ***`project.GlobalConfig.set_config_format()`*** 
+    **IMPORTANT** Adapt the attributes of the **`GlobalConfig`** class and the ***`project.GlobalConfig.set_config_format()`***
     method according to the configuration style you prefer/use in your project.\n
     *To view your project's global variables, use "**`fluvel show-globals`**" in the **CLI***.\n
     Global Main Properties:\n
@@ -32,8 +33,8 @@ class GlobalConfig:
 
     # [appconfig]
     CONFIG: dict
-    
-    # Your customization 
+
+    # Your customization
     # starts here
     # │
     # ▼
@@ -55,7 +56,7 @@ class GlobalConfig:
 
     def set_config_format(self, filename: str) -> None:
         """
-        **IMPORTANT** This method loads the configuration from the **`appconfig`** 
+        **IMPORTANT** This method loads the configuration from the **`appconfig`**
         file TOML or JSON and defines the project's global attributes.
         The application configuration **`appconfig`** is stored in the ***`self.appconfig: dict`*** property of the **`GlobalConfig`** Class.\n
         """

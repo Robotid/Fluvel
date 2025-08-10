@@ -1,9 +1,9 @@
 from typing import Literal, TypedDict, Unpack
 
 # Fluvel
-from components.gui import StyledText
-from core.FluvelWidget import FluvelWidget
-from core.core_models.FluvelTextWidget import TextWidget
+from core.abstract_models.FluvelWidget import FluvelWidget
+from core.abstract_models.FluvelTextWidget import FluvelTextWidget
+
 
 # PySide 6
 from PySide6.QtWidgets import QLabel
@@ -14,8 +14,9 @@ from core.core_utils import configure_process
 
 LabelStyles = Literal["normal", "info", "success", "warning", "danger"]
 
+
 class LabelKwargs(TypedDict, total=False):
-    content_id: StyledText | None
+    content_id: str | tuple | None
     text: str | None
     alignment: Qt.AlignmentFlag | None
     style: LabelStyles | None
@@ -31,15 +32,13 @@ class LabelKwargs(TypedDict, total=False):
     # selected_text
     # buddy
 
-class Label(QLabel, FluvelWidget, TextWidget):
+
+class Label(QLabel, FluvelWidget, FluvelTextWidget):
     """
     Clase base de **`Fluvel`** para **`QLabel`**.
     """
 
-    _MAPPING_METHODS = {
-        "text": "setText",
-        "alignment": "setAlignment"
-    }
+    _MAPPING_METHODS = {"text": "setText", "alignment": "setAlignment"}
 
     def __init__(self, **kwargs: Unpack[LabelKwargs]):
         super().__init__()

@@ -1,5 +1,3 @@
-
-
 def configure_process(obj: object, mapping: dict, **kwargs: any) -> None:
     """
     Esta función es un proceso núcleo de Fluvel, permitiendo un enfoque genérico
@@ -21,7 +19,7 @@ def configure_process(obj: object, mapping: dict, **kwargs: any) -> None:
                     method(*value)
                 else:
                     method(value)
-                    
+
         except KeyError as e:
             # Ignore keys that do not represent a PySide6 method.
             continue

@@ -2,6 +2,4 @@
 
 from project.GlobalConfig import GlobalConfig
 
-__all__ = [
-    "GlobalConfig"
-]
+__all__ = ["GlobalConfig"]

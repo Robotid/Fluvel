@@ -15,13 +15,17 @@
 }
 
 /* ==================== QLineEdit, QTextEdit, QPlainTextEdit ==================== */
-QLineEdit, QTextEdit, QPlainTextEdit {
+QLineEdit, QPlainTextEdit {
     background-color: #ffffff; /* Fondo blanco puro para los campos de entrada */
     border: 1px solid #ced4da; /* Borde gris claro */
     border-radius: 4px;
     padding: 6px 12px;
     selection-background-color: #cce5ff; /* Azul muy claro para la selección */
     selection-color: #343a40; /* Texto gris oscuro en la selección para mejor contraste */
+}
+
+QTextEdit {
+    padding: 6px 12px;
 }
 
 QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {

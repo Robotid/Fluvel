@@ -2,7 +2,7 @@ from typing import Unpack, overload, TypedDict, TypeVar
 
 # Flvuel Core
 from core.core_utils import configure_process
-from core.FluvelWidget import FluvelWidget
+from core.abstract_models.FluvelWidget import FluvelWidget
 
 # Fluvel Widgets
 from components.widgets.Label import Label, LabelKwargs
@@ -12,17 +12,21 @@ from components.widgets.Button import Button, ButtonKwargs
 from PySide6.QtWidgets import QWidget, QLayout
 from PySide6.QtCore import Qt
 
+
 class LayoutKwargs(TypedDict, total=False):
     """
     Argumentos de palabra clave para la configuración de la distribución del layout.
     """
+
     alignment: Qt.AlignmentFlag | None
     spacing: int | None
     margins: tuple[int, int, int, int] | None
     size_constraint: QLayout.SizeConstraint | None
 
-TWidget = TypeVar("TWidget", bound=QWidget)    
-    
+
+TWidget = TypeVar("TWidget", bound=QWidget)
+
+
 class FluvelLayout(FluvelWidget):
     """
     Clase propia de `Fluvel` que proporciona los métodos para la adición de QWidgets en QLayouts.
@@ -40,7 +44,7 @@ class FluvelLayout(FluvelWidget):
         "alignment": "setAlignment",
         "spacing": "setSpacing",
         "margins": "setContentsMargins",
-        "size_constraint": "setSizeConstraint"
+        "size_constraint": "setSizeConstraint",
     }
 
     def adjust(self, **kwargs: Unpack[LayoutKwargs]) -> None:
@@ -79,7 +83,7 @@ class FluvelLayout(FluvelWidget):
                 - `self.MINIMUM`
                 - `self.MAXIMUM`
                 - `self.WITHOUT`
-                - `self.MIN_AND_MAX`   
+                - `self.MIN_AND_MAX`
         """
         configure_process(self, self._MAPPING_METHODS, **kwargs)
 
@@ -91,10 +95,10 @@ class FluvelLayout(FluvelWidget):
         exist: bool = False
 
         # If the supplied argument is already a widget
-        if len(args)>0:
+        if len(args) > 0:
             widget = args[0]
             exist = True
- 
+
         else:
             # Create the widget
             widget = _type(**kwargs)
@@ -108,7 +112,6 @@ class FluvelLayout(FluvelWidget):
         # Return
         return None if exist else widget
 
-
     @overload
     def add_label(self, **kwargs: Unpack[LabelKwargs]) -> Label: ...
 
@@ -117,10 +120,9 @@ class FluvelLayout(FluvelWidget):
 
     def add_label(self, *args, **kwargs) -> Label | None:
 
-        # create the label if it doesn't exist or just add it to the layout, 
+        # create the label if it doesn't exist or just add it to the layout,
         # then return the Label instance or None if the widget is already provided
         return self._process_kwargs(Label, *args, **kwargs)
-
 
     @overload
     def add_button(self, **kwargs: Unpack[ButtonKwargs]) -> Button: ...
@@ -129,11 +131,9 @@ class FluvelLayout(FluvelWidget):
     def add_button(self, arg__1: Button) -> None: ...
 
     def add_button(self, *args, **kwargs) -> Button | None:
-        
+
         # create the button if it doesn't exist or just add it to the layout,
         # then return the Button instance or None if it's already a widget
         return self._process_kwargs(Button, *args, **kwargs)
 
-
-    def add_input_field(self, **kwargs):
-        ...
+    def add_input_field(self, **kwargs): ...

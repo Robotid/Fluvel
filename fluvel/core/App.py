@@ -16,6 +16,7 @@ from utils.paths import THEMES_DIR, CONTENT_DIR
 
 AppThemes = Literal["bootstrap", "modern-dark", "clean-light"]
 
+
 class App(QApplication, GlobalConfig):
     def __init__(self, argv: list) -> None:
         super().__init__(argv)
@@ -70,7 +71,7 @@ class App(QApplication, GlobalConfig):
 
         # Cargando el tema a la app
         self.setStyleSheet(qss_content)
-    
+
     def change_theme(self, new_theme: AppThemes) -> None:
         """
         This method changes the entire `appearance` of the application dynamically at runtime or development time.
@@ -80,7 +81,7 @@ class App(QApplication, GlobalConfig):
         self.theme = new_theme
 
         self.set_theme()
-    
+
     def set_static_text_blocks(self) -> None:
         """
         This method *loads* all static `.fluml` text files according to the application language.
@@ -89,9 +90,9 @@ class App(QApplication, GlobalConfig):
         content_folder = CONTENT_DIR / self.language
 
         GlobalContent.initialize(content_folder)
-    
+
     def change_language(self, new_language: str) -> None:
-        
+
         self.language = new_language
 
         self.set_static_text_blocks()

@@ -1,11 +1,11 @@
-
 # PySide6
 from PySide6.QtCore import Qt
 
 # Separar por propiedades de diseño y propiedades de estilo
 
+
 class FluvelWidget:
-    
+
     # Alingment Flags
     TOP = Qt.AlignmentFlag.AlignTop
     BOTTOM = Qt.AlignmentFlag.AlignBottom
@@ -37,5 +37,5 @@ class FluvelWidget:
 
             self.setProperty("class", kwargs["style"])
             kwargs.pop("style")
-        
+
         return kwargs

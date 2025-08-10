@@ -2,6 +2,7 @@ from pathlib import Path
 import json
 import re
 
+
 def read_file(file_path: Path | str) -> list[str]:
     """
     Lee un archivo y devuelve una lista de sus líneas con readlines().
@@ -14,10 +15,11 @@ def read_file(file_path: Path | str) -> list[str]:
 
         with open(file_path, "r", encoding="utf-8") as f:
             return f.readlines()
-        
+
     except Exception as e:
         print(f"Error: Ha ocurrido un error al leer el archivo: {e}")
         return []
+
 
 def parse_FLUML(file_path: Path | str) -> dict:
     """
@@ -31,16 +33,16 @@ def parse_FLUML(file_path: Path | str) -> dict:
     root = {}
     # La pila (stack) almacenará tuplas de (indentación, diccionario)
     # Empezamos con -1 como indentación base para el diccionario raíz.
-    stack = [(-1, root)] 
+    stack = [(-1, root)]
     sep_counter = 1
 
     for line_num, each_line in enumerate(lines, 1):
         # 1. Limpiar la línea: eliminar comentarios y espacios en blanco
-        line = each_line.split('#', 1)[0].rstrip()
+        line = each_line.split("#", 1)[0].rstrip()
 
         if not line:
             continue
-        
+
         # 2. Calcular la indentación de la línea actual
         indent = len(line) - len(line.lstrip())
         line = line.lstrip()
@@ -63,7 +65,7 @@ def parse_FLUML(file_path: Path | str) -> dict:
             continue
 
         # Sección ([Section])
-        section_match = re.match(r'\[([^\]]+)\]\:', line)
+        section_match = re.match(r"\[([^\]]+)\]\:", line)
         if section_match:
             section_name = section_match.group(1).strip()
             new_dict = {}
@@ -71,7 +73,7 @@ def parse_FLUML(file_path: Path | str) -> dict:
             # Añadir la nueva sección y su indentación a la pila
             stack.append((indent, new_dict))
             continue
-        
+
         # Par entidad clave-valor (key = "value")
         kv_match = re.match(r'([^=\s]+)\s*=\s*"([^"]+)"', line)
         if kv_match:
@@ -80,9 +82,12 @@ def parse_FLUML(file_path: Path | str) -> dict:
             continue
 
         # Si no coincide con ningún patrón, es un error de sintaxis
-        raise ValueError(f"Error de sintaxis en la línea {line_num}: '{each_line.strip()}'")
+        raise ValueError(
+            f"Error de sintaxis en la línea {line_num}: '{each_line.strip()}'"
+        )
 
     return root
+
 
 def convert_FLUML_to_JSON(input_file: Path | str, output_file: Path | str) -> None:
     """

@@ -1,15 +1,18 @@
 # views.MainWindow
 
 from core import AppWindow
+from functools import partial
+
 from views.LoginDemo import LoginPage
+from fluvel.views.Demo import Demo
+
 
 class MainWindow(AppWindow):
 
     def setUpMainWindow(self):
-        """ Display the `components` in the Main Window. """
-        
-        # View Example
-        LoginPage(self.central_widget)
+        """Display the `components` in the Main Window."""
+
+        self.demo_view = Demo(self.central_widget)
 
         # configure menu options
         self.config_menu()
@@ -19,12 +22,21 @@ class MainWindow(AppWindow):
         # Menu Config Example
         bind = self.menu_bar.bind
         add_shortcut = self.menu_bar.add_shortcut
-        theme = self.root.change_theme
+        change_theme = self.root.change_theme
 
         # Add a shortcut
         add_shortcut("quit", "Ctrl+Q", self.close)
 
-        # configure theme switching
-        bind("bootstrap_theme", "triggered", lambda: theme("bootstrap"))
-        bind("modern_dark_theme", "triggered", lambda: theme("modern-dark"))
-        bind("clean_light_theme", "triggered", lambda: theme("clean-light"))
+        themes: tuple[tuple[str, str]] = (
+            ("bootstrap", "bootstrap_theme"),
+            ("modern-dark", "modern_dark_theme"),
+            ("clean-light", "clean_light_theme"),
+        )
+
+        for theme in themes:
+
+            name, option = theme
+
+            controller = partial(change_theme, name)
+
+            bind(option, "triggered", controller)

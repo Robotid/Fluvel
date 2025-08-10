@@ -1,193 +1,267 @@
-/* Archivo push_button.qss para PySide6 */
 
-/* --- Colores de la Paleta 'Modern-Dark' --- */
-/*
-  Background: #1E1E1E
-  Foreground: #D4D4D4
-  Highlight/Selection: #3A3A3A
-  Border/Separator: #444444
-
-  Comments: #6A9955
-  Strings: #CE9178
-  Numbers/Constants: #B5CEA8
-  Keywords: #569CD6
-  Variables/Identifiers: #9CDCFE
-  Operators: #D4D4D4
-  Object Properties: #C8C8C8
-  Brackets/Braces: #F7C770
-
-  Errors: #F44747
-  Warnings: #FFD700
-
-  Buttons/Interactive: #007ACC
-  Focus/Hover: #005C99
-  Active/Selected UI Element: #2A6799
-*/
-
-/* --- Estilo Base para QPushButton --- */
 QPushButton {
-    background-color: #3A3A3A; /* Un gris intermedio para el estado base */
-    color: #D4D4D4; /* Texto principal */
-    border: 1px solid #444444; /* Borde sutil */
-    padding: 8px 16px; /* Relleno interno */
-    border-radius: 4px; /* Bordes ligeramente redondeados */
-    font-family: "Segoe UI", "Helvetica Neue", sans-serif; /* Fuente moderna */
+    /* Estilos base del Label */
+    background-color: #3366FF;
+    color: #fff;
     font-size: 14px;
-    outline: none; /* Elimina el contorno de foco predeterminado */
-}
-
-QPushButton:hover {
-    background-color: #444444; /* Un poco más claro al pasar el ratón */
-    border-color: #555555;
+    font-weight: 700; 
+    text-align: center; 
+    border: 1px solid #3366FF;
+    border-radius: 5px;
+    padding: 8px 16px; 
+    outline: none;
 }
 
 QPushButton:pressed {
-    background-color: #2A2A2A; /* Más oscuro al presionar */
-    border-color: #3A3A3A;
-    padding-top: 11px; /* Efecto de "hundimiento" sutil */
-    padding-bottom: 9px;
+    padding-bottom: 6px;
+    background-color: #1F3D99;
+    border-color: #1F3D99;
 }
 
 QPushButton:disabled {
-    background-color: #282828;
-    color: #888888;
-    border-color: #333333;
+    /* Estilos para el botón deshabilitado */
+    background-color: #e9ecef; 
+    color: #6c757d;
+    border: 1px solid #ced4da; 
 }
 
-/* --- Estilos por ID de Botón --- */
+/* Estilo para un primary Button */
 
-/* #PrimaryButton */
-#PrimaryButton {
-    background-color: #007ACC; /* Azul clásico de VS Code */
-    border: 1px solid #007ACC;
-    color: #FFFFFF; /* Texto blanco para mayor contraste */
+QPushButton[class~="primary"] {
+    background-color: #3366FF;
+    border-color: #3366FF;
 }
+QPushButton[class~="primary"]:hover {
+    background-color: #2952CC;
+    border-color: #2952CC;
+}
+QPushButton[class~="primary"]:pressed {
+    background-color: #1F3D99;
+    border-color: #1F3D99;
+}
+QPushButton[class~="primary-outlined"] {
+    color: #3366FF;
+    background-color: transparent;
+    border-color: #3366FF;
+}
+QPushButton[class~="primary-outlined"]:hover {
+    color: #2952CC;
+    background-color: transparent;
+    border-color: #2952CC;
+}
+QPushButton[class~="primary-outlined"]:pressed {
+    color: #1F3D99;
+    background-color: transparent;
+    border-color: #1F3D99;
+}
+    
+/* Estilo para un secondary Button */
 
-#PrimaryButton:hover {
-    background-color: #005C99; /* Azul más oscuro al pasar el ratón */
-    border-color: #005C99;
+QPushButton[class~="secondary"] {
+    background-color: #4F5B66;
+    border-color: #4F5B66;
 }
+QPushButton[class~="secondary"]:hover {
+    background-color: #627280;
+    border-color: #627280;
+}
+QPushButton[class~="secondary"]:pressed {
+    background-color: #758999;
+    border-color: #758999;
+}
+QPushButton[class~="secondary-outlined"] {
+    color: #4F5B66;
+    background-color: transparent;
+    border-color: #4F5B66;
+}
+QPushButton[class~="secondary-outlined"]:hover {
+    color: #627280;
+    background-color: transparent;
+    border-color: #627280;
+}
+QPushButton[class~="secondary-outlined"]:pressed {
+    color: #758999;
+    background-color: transparent;
+    border-color: #758999;
+}
+    
+/* Estilo para un info Button */
 
-#PrimaryButton:pressed {
-    background-color: #004A80; /* Aún más oscuro al presionar */
-    border-color: #004A80;
+QPushButton[class~="info"] {
+    background-color: #00C1D4;
+    border-color: #00C1D4;
 }
+QPushButton[class~="info"]:hover {
+    background-color: #00A9BB;
+    border-color: #00A9BB;
+}
+QPushButton[class~="info"]:pressed {
+    background-color: #0091A2;
+    border-color: #0091A2;
+}
+QPushButton[class~="info-outlined"] {
+    color: #00C1D4;
+    background-color: transparent;
+    border-color: #00C1D4;
+}
+QPushButton[class~="info-outlined"]:hover {
+    color: #00A9BB;
+    background-color: transparent;
+    border-color: #00A9BB;
+}
+QPushButton[class~="info-outlined"]:pressed {
+    color: #0091A2;
+    background-color: transparent;
+    border-color: #0091A2;
+}
+    
+/* Estilo para un success Button */
 
-/* #SecondaryButton */
-#SecondaryButton {
-    background-color: #3A3A3A;
-    border: 1px solid #569CD6; /* Borde azul de palabra clave */
-    color: #9CDCFE; /* Color de texto de variable */
+QPushButton[class~="success"] {
+    background-color: #17D497;
+    border-color: #17D497;
 }
+QPushButton[class~="success"]:hover {
+    background-color: #13B882;
+    border-color: #13B882;
+}
+QPushButton[class~="success"]:pressed {
+    background-color: #0F9C6D;
+    border-color: #0F9C6D;
+}
+QPushButton[class~="success-outlined"] {
+    color: #17D497;
+    background-color: transparent;
+    border-color: #17D497;
+}
+QPushButton[class~="success-outlined"]:hover {
+    color: #13B882;
+    background-color: transparent;
+    border-color: #13B882;
+}
+QPushButton[class~="success-outlined"]:pressed {
+    color: #0F9C6D;
+    background-color: transparent;
+    border-color: #0F9C6D;
+}
+    
+/* Estilo para un warning Button */
 
-#SecondaryButton:hover {
-    background-color: #4A4A4A;
-    border-color: #6DAFE2;
+QPushButton[class~="warning"] {
+    background-color: #FF8C00;
+    border-color: #FF8C00;
 }
+QPushButton[class~="warning"]:hover {
+    background-color: #E67E00;
+    border-color: #E67E00;
+}
+QPushButton[class~="warning"]:pressed {
+    background-color: #CC7000;
+    border-color: #CC7000;
+}
+QPushButton[class~="warning-outlined"] {
+    color: #FF8C00;
+    background-color: transparent;
+    border-color: #FF8C00;
+}
+QPushButton[class~="warning-outlined"]:hover {
+    color: #E67E00;
+    background-color: transparent;
+    border-color: #E67E00;
+}
+QPushButton[class~="warning-outlined"]:pressed {
+    color: #CC7000;
+    background-color: transparent;
+    border-color: #CC7000;
+}
+    
+/* Estilo para un danger Button */
 
-#SecondaryButton:pressed {
-    background-color: #2A2A2A;
-    border-color: #4088C5;
+QPushButton[class~="danger"] {
+    background-color: #F93154;
+    border-color: #F93154;
 }
+QPushButton[class~="danger"]:hover {
+    background-color: #DE2C4B;
+    border-color: #DE2C4B;
+}
+QPushButton[class~="danger"]:pressed {
+    background-color: #C32742;
+    border-color: #C32742;
+}
+QPushButton[class~="danger-outlined"] {
+    color: #F93154;
+    background-color: transparent;
+    border-color: #F93154;
+}
+QPushButton[class~="danger-outlined"]:hover {
+    color: #DE2C4B;
+    background-color: transparent;
+    border-color: #DE2C4B;
+}
+QPushButton[class~="danger-outlined"]:pressed {
+    color: #C32742;
+    background-color: transparent;
+    border-color: #C32742;
+}
+    
+/* Estilo para un dark Button */
 
-/* #DangerButton */
-#DangerButton {
-    background-color: #F44747; /* Rojo de error */
-    border: 1px solid #F44747;
-    color: #FFFFFF;
+QPushButton[class~="dark"] {
+    background-color: #2C343A;
+    border-color: #2C343A;
 }
+QPushButton[class~="dark"]:hover {
+    background-color: #3E4A53;
+    border-color: #3E4A53;
+}
+QPushButton[class~="dark"]:pressed {
+    background-color: #50606C;
+    border-color: #50606C;
+}
+QPushButton[class~="dark-outlined"] {
+    color: #2C343A;
+    background-color: transparent;
+    border-color: #2C343A;
+}
+QPushButton[class~="dark-outlined"]:hover {
+    color: #3E4A53;
+    background-color: transparent;
+    border-color: #3E4A53;
+}
+QPushButton[class~="dark-outlined"]:pressed {
+    color: #50606C;
+    background-color: transparent;
+    border-color: #50606C;
+}
+    
+/* Estilo para un light Button */
 
-#DangerButton:hover {
-    background-color: #D63838;
-    border-color: #D63838;
+QPushButton[class~="light"] {
+    background-color: #EAEAEA;
+    border-color: #EAEAEA;
 }
-
-#DangerButton:pressed {
-    background-color: #BF2A2A;
-    border-color: #BF2A2A;
+QPushButton[class~="light"]:hover {
+    background-color: #DCDCDC;
+    border-color: #DCDCDC;
 }
-
-/* #SuccessButton */
-#SuccessButton {
-    background-color: #6A9955; /* Verde de comentario */
-    border: 1px solid #6A9955;
-    color: #FFFFFF;
+QPushButton[class~="light"]:pressed {
+    background-color: #BEBEBE;
+    border-color: #BEBEBE;
 }
-
-#SuccessButton:hover {
-    background-color: #5C8849;
-    border-color: #5C8849;
+QPushButton[class~="light-outlined"] {
+    color: #EAEAEA;
+    background-color: transparent;
+    border-color: #EAEAEA;
 }
-
-#SuccessButton:pressed {
-    background-color: #4D773D;
-    border-color: #4D773D;
+QPushButton[class~="light-outlined"]:hover {
+    color: #DCDCDC;
+    background-color: transparent;
+    border-color: #DCDCDC;
 }
-
-/* #WarningButton */
-#WarningButton {
-    background-color: #FFD700; /* Amarillo de advertencia */
-    border: 1px solid #FFD700;
-    color: #1E1E1E; /* Texto oscuro para contraste en fondo claro */
+QPushButton[class~="light-outlined"]:pressed {
+    color: #BEBEBE;
+    background-color: transparent;
+    border-color: #BEBEBE;
 }
-
-#WarningButton:hover {
-    background-color: #E6C200;
-    border-color: #E6C200;
-}
-
-#WarningButton:pressed {
-    background-color: #CCAD00;
-    border-color: #CCAD00;
-}
-
-/* #InfoButton */
-#InfoButton {
-    background-color: #B5CEA8; /* Verde claro de número/constante */
-    border: 1px solid #B5CEA8;
-    color: #1E1E1E;
-}
-
-#InfoButton:hover {
-    background-color: #A3BD97;
-    border-color: #A3BD97;
-}
-
-#InfoButton:pressed {
-    background-color: #91A885;
-    border-color: #91A885;
-}
-
-/* #DarkButton */
-#DarkButton {
-    background-color: #1E1E1E; /* Color de fondo principal */
-    border: 1px solid #444444;
-    color: #D4D4D4;
-}
-
-#DarkButton:hover {
-    background-color: #2A2A2A;
-    border-color: #555555;
-}
-
-#DarkButton:pressed {
-    background-color: #0E0E0E;
-    border-color: #333333;
-}
-
-/* #LightButton */
-#LightButton {
-    background-color: #D4D4D4; /* Color de texto principal */
-    border: 1px solid #C8C8C8;
-    color: #1E1E1E; /* Texto oscuro */
-}
-
-#LightButton:hover {
-    background-color: #C2C2C2;
-    border-color: #B8B8B8;
-}
-
-#LightButton:pressed {
-    background-color: #B0B0B0;
-    border-color: #A0A0A0;
-}
+    

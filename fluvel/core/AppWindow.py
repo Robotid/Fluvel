@@ -1,18 +1,18 @@
 # fluvel.core.AppWindow
 
 from pathlib import Path
-from abc import abstractmethod
 
 # Fluvel
 from project import GlobalConfig
 from core import App
 from core.MenuBar import MenuBar
 
-# PySide6 
-from PySide6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
+# PySide6
+from PySide6.QtWidgets import QMainWindow, QWidget
 
 # Utils
 from utils.paths import CONTENT_DIR
+
 
 class AppWindow(QMainWindow, GlobalConfig):
     def __init__(self, root: App) -> None:
@@ -49,14 +49,14 @@ class AppWindow(QMainWindow, GlobalConfig):
         menu_file: Path = CONTENT_DIR / self.language / "menus" / "menu.fluml"
 
         # This is not an instance of QMenuBar
-        self.menu_bar = MenuBar(parent = self, menu_file = menu_file)
+        self.menu_bar = MenuBar(parent=self, menu_file=menu_file)
 
         # Creating the full_menu_options.txt file
         if self.DEV_MODE:
             self.set_menu_bar_options()
-    
+
     def set_menu_bar_options(self) -> None:
-        """     
+        """
         This method generates the file `log_menu_options.txt` in the `project` folder.\n
         *The `full_menu_options.txt` file contains all the options in the MainWindow's menu bar and how to refer to them.*
         """
@@ -78,7 +78,9 @@ class AppWindow(QMainWindow, GlobalConfig):
                 full_options += "\n"
             with open(f"{file_path}", "w") as f:
                 f.writelines(full_options)
-                print(f"The file with the menu options was generated successfully. Check '{file_path}'.")
+                print(
+                    f"The file with the menu options was generated successfully. Check '{file_path}'."
+                )
         except Exception as e:
             print(f"An error has occurred: {e}")
 
@@ -93,7 +95,7 @@ class AppWindow(QMainWindow, GlobalConfig):
         self.central_widget.setObjectName("central-widget")
 
         self.setCentralWidget(self.central_widget)
-    
+
     def config(self, **kwargs) -> None: ...
 
     def setUpMainWindow(self) -> None: ...

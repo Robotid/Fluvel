@@ -10,8 +10,13 @@ from components.widgets.Label import Label
 from components.widgets.LineEdit import LineEdit
 
 # Fluvel Custom Components
-from components.widgets.FluvelCustom.FluvelCard import (DangerCard, InfoCard,
-                                                SuccessCard, WarningCard)
+from components.widgets.FluvelCustom.FluvelCard import (
+    DangerCard,
+    InfoCard,
+    SuccessCard,
+    WarningCard,
+)
+
 __all__ = [
     # Push Button
     "Button",
@@ -23,5 +28,5 @@ __all__ = [
     "WarningCard",
     "DangerCard",
     # Line Edit
-    "LineEdit"
+    "LineEdit",
 ]

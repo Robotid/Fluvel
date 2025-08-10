@@ -4,11 +4,12 @@ from pathlib import Path
 from core.core_utils.content_loader import load_fluml
 from src import convert_FLUML_to_HTML
 
+
 class GlobalContent:
     """
     Una clase que almacena como atributos de clase
     estructuras de datos que contienen los recursos estáticos
-    del proyecto y sirve como modelo para el acceso a través de controladores.  
+    del proyecto y sirve como modelo para el acceso a través de controladores.
     """
 
     content_map: dict = {}
@@ -32,8 +33,6 @@ class GlobalContent:
         # Parsear el archivo
         html_content: dict = convert_FLUML_to_HTML(fluml_content)
 
-        # Mapeamos los key-word arguments        
+        # Mapeamos los key-word arguments
         for _id, text in html_content.items():
             GlobalContent.content_map[_id] = text
-
-
