@@ -1,17 +1,17 @@
 """
 Este módulo contiene la lógica fundamental de Fluvel para la creación
 de Layouts.
-classes: 
-    - LayoutBuilder: es la clase usada como context managet
+classes:
+    - LayoutBuilder: es la clase usada como context manager
     - ViewBuilder: es el disparador de LayoutBuilder a través de sus
-    métodos.
+    métodos y sirve como clase abstracta para la creación de Vistas.
 """
 
 from typing import TypeVar, Generic
 from abc import ABC, abstractmethod, ABCMeta
 
 # Fluvel
-from components.layouts import FormLayout, HBoxLayout, VBoxLayout, GridLayout
+from fluvel.components.layouts import FormLayout, HBoxLayout, VBoxLayout, GridLayout
 
 # PySide6
 from PySide6.QtWidgets import QWidget, QLayout
@@ -19,6 +19,7 @@ from PySide6.QtCore import QObject
 
 # Definir una variable de tipo para los layouts
 TLayout = TypeVar("TLayout", bound=QLayout)
+
 
 class LayoutBuilder(Generic[TLayout]):
 
@@ -45,13 +46,14 @@ class LayoutBuilder(Generic[TLayout]):
         return False
 
 
-
 class VBMeta(type(QObject), ABCMeta):
     """
     Metaclase Unificada que resuelve los conflictos
     entre las clases base QObject y ABCMeta al combinarlas.
     """
+
     pass
+
 
 class ViewBuilder(QObject, ABC, metaclass=VBMeta):
     """

@@ -1,5 +1,5 @@
 # .project.__init__:py
 
-from project.GlobalConfig import GlobalConfig
+from .GlobalConfig import GlobalConfig
 
 __all__ = ["GlobalConfig"]

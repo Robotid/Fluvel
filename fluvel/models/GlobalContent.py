@@ -1,8 +1,8 @@
 # core.GlobalContent.py
-from utils import filter_by_extension
+from fluvel.utils import filter_by_extension
 from pathlib import Path
-from core.core_utils.content_loader import load_fluml
-from src import convert_FLUML_to_HTML
+from fluvel.core.core_utils.content_loader import load_fluml
+from fluvel.src import convert_FLUML_to_HTML
 
 
 class GlobalContent:

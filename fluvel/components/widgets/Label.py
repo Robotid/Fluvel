@@ -1,8 +1,8 @@
 from typing import Literal, TypedDict, Unpack
 
 # Fluvel
-from core.abstract_models.FluvelWidget import FluvelWidget
-from core.abstract_models.FluvelTextWidget import FluvelTextWidget
+from fluvel.core.abstract_models.FluvelWidget import FluvelWidget
+from fluvel.core.abstract_models.FluvelTextWidget import FluvelTextWidget
 
 
 # PySide 6
@@ -10,7 +10,7 @@ from PySide6.QtWidgets import QLabel
 from PySide6.QtCore import Qt
 
 # Fluvel core utils
-from core.core_utils import configure_process
+from fluvel.core.core_utils import configure_process
 
 LabelStyles = Literal["normal", "info", "success", "warning", "danger"]
 
@@ -26,7 +26,6 @@ class LabelKwargs(TypedDict, total=False):
     # indent
     # margin
     # scaled_contents
-    # open_external_links
     # text_interaction_flags
     # has_selected_text
     # selected_text

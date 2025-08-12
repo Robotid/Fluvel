@@ -1,7 +1,7 @@
 # Fluvel
-from components.widgets import Label
-from components.widgets import LineEdit
-from core.abstract_models.FluvelLayout import FluvelLayout
+from fluvel.components.widgets import Label
+from fluvel.components.widgets import LineEdit
+from fluvel.core.abstract_models.FluvelLayout import FluvelLayout
 
 # PySide6
 from PySide6.QtWidgets import QFormLayout

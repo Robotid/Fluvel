@@ -1,10 +1,9 @@
 # views.MainWindow
 
-from core import AppWindow
+from fluvel.core import AppWindow
 from functools import partial
 
-from views.LoginDemo import LoginPage
-from fluvel.views.Demo import Demo
+from .LoginDemo import LoginPage
 
 
 class MainWindow(AppWindow):
@@ -12,7 +11,7 @@ class MainWindow(AppWindow):
     def setUpMainWindow(self):
         """Display the `components` in the Main Window."""
 
-        self.demo_view = Demo(self.central_widget)
+        self.demo_view = LoginPage(self.central_widget)
 
         # configure menu options
         self.config_menu()
@@ -40,3 +39,14 @@ class MainWindow(AppWindow):
             controller = partial(change_theme, name)
 
             bind(option, "triggered", controller)
+
+        # Manejando el cambio de idioma
+
+        bind("en_language", "triggered", lambda: self.change_language("en"))
+        bind("es_language", "triggered", lambda: self.change_language("es"))
+
+    def change_language(self, language) -> None:
+
+        self.root.change_language(language)
+
+        self._init_ui()

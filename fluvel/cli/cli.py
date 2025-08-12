@@ -1,6 +1,8 @@
 import click
-from fluvel.cli.commands.run import run
-from fluvel.cli.commands.check import check
+from .commands.run import run
+from .commands.check import check
+from .commands.demo import demo
+
 
 @click.group()
 def main() -> None:
@@ -9,9 +11,12 @@ def main() -> None:
     """
     pass
 
+
 # Agregar comandos
 main.add_command(run)
 main.add_command(check)
+main.add_command(demo)
+
 
 if __name__ == "__main__":
     main()

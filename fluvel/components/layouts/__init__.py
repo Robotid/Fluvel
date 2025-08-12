@@ -1,9 +1,6 @@
-from components.layouts.VBoxLayout import VBoxLayout
-
-from components.layouts.HBoxLayout import HBoxLayout
-
-from components.layouts.FormLayout import FormLayout
-
-from components.layouts.GridLayout import GridLayout
+from .VBoxLayout import VBoxLayout
+from .HBoxLayout import HBoxLayout
+from .FormLayout import FormLayout
+from .GridLayout import GridLayout
 
 __all__ = ["VBoxLayout", "HBoxLayout", "FormLayout", "GridLayout"]

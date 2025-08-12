@@ -1,7 +1,7 @@
-from controllers import get_content_by_id
+from fluvel.controllers import get_content_by_id
 import re
 
-from core.exceptions import ContentNotFoundError
+from fluvel.core.exceptions import ContentNotFoundError
 
 
 class StyledText:

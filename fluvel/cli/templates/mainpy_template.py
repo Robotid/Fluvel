@@ -1,7 +1,7 @@
 # main.py
 
 import sys
-from core import App
+from fluvel.core import App
 from views import MainWindow
 
 

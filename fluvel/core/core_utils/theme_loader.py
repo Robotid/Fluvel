@@ -1,5 +1,5 @@
 from pathlib import Path
-from utils.paths import THEMES_DIR
+from fluvel.utils.paths import THEMES_DIR
 
 
 def get_theme_path(theme: str) -> Path:

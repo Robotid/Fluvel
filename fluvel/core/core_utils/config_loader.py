@@ -1,7 +1,7 @@
 import toml
 import json
 from pathlib import Path
-from utils import APP_ROOT
+from fluvel.utils import APP_ROOT
 
 
 def get_default_config() -> dict:
@@ -69,14 +69,16 @@ def load_file(file_path: Path | str) -> dict | None:
     return None
 
 
-def load_app_config(app_config: Path | str, default_config: dict = {}) -> dict:
+def load_app_config(app_config: Path | str | dict, default_config: dict = {}) -> dict:
     """
     Esta función carga y devuelve la configuración de la aplicación.
     """
 
-    config = load_file(app_config)
+    if isinstance(app_config, dict):
+        return app_config
 
-    if config is None:
-        return default_config
+    if isinstance(app_config, (str, Path)):
 
-    return config
+        config = load_file(app_config)
+
+        return default_config if config is None else config

@@ -26,3 +26,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 fluvel = "fluvel.cli.cli:main"
+
+[[tool.poetry.packages]]
+include = "fluvel"

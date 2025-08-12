@@ -1,12 +1,12 @@
 from typing import Unpack, overload, TypedDict, TypeVar
 
 # Flvuel Core
-from core.core_utils import configure_process
-from core.abstract_models.FluvelWidget import FluvelWidget
+from fluvel.core.core_utils import configure_process
+from fluvel.core.abstract_models.FluvelWidget import FluvelWidget
 
 # Fluvel Widgets
-from components.widgets.Label import Label, LabelKwargs
-from components.widgets.Button import Button, ButtonKwargs
+from fluvel.components.widgets.Label import Label, LabelKwargs
+from fluvel.components.widgets.Button import Button, ButtonKwargs
 
 # PySide6
 from PySide6.QtWidgets import QWidget, QLayout

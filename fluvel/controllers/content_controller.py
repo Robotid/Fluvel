@@ -1,5 +1,5 @@
-from models import GlobalContent
-from core.exceptions import ContentNotFoundError
+from fluvel.models import GlobalContent
+from fluvel.core.exceptions import ContentNotFoundError
 
 
 def get_content_by_id(content_id: str) -> str:

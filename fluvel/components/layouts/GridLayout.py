@@ -1,5 +1,5 @@
 # Fluvel
-from core.abstract_models.FluvelLayout import FluvelLayout
+from fluvel.core.abstract_models.FluvelLayout import FluvelLayout
 
 # PySide6
 from PySide6.QtWidgets import QGridLayout, QWidget, QLayout
@@ -28,7 +28,7 @@ class ColumnIndex:
         Args:
             arg__1 (QWidget | QLayout): El `Widget` o `Layout` que ocupará la celda.
             row_span (int): El número de celdas hacia abajo que abarcará el objeto. 1 por defecto.
-            column_span (int): El número de columnas a la derecha que abarcará el objeto. 1 por defecto.
+            column_span (int): El número de celdas a la derecha que abarcará el objeto. 1 por defecto.
         """
 
         # Si existe un elemento en la celda actual

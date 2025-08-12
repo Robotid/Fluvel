@@ -1,4 +1,4 @@
-from utils import APP_ROOT
+from fluvel.utils import APP_ROOT
 
 _DEFAULT_MENU_OPTIONS = """
 # This module updates dynamically depending on your project's menu options.

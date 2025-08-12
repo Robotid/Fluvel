@@ -3,15 +3,15 @@
 from pathlib import Path
 
 # Fluvel
-from project import GlobalConfig
-from core import App
-from core.MenuBar import MenuBar
+from fluvel.project import GlobalConfig
+from fluvel.core import App
+from fluvel.core.MenuBar import MenuBar
 
 # PySide6
 from PySide6.QtWidgets import QMainWindow, QWidget
 
 # Utils
-from utils.paths import CONTENT_DIR
+from fluvel.utils.paths import CONTENT_DIR
 
 
 class AppWindow(QMainWindow, GlobalConfig):
@@ -33,15 +33,15 @@ class AppWindow(QMainWindow, GlobalConfig):
         self.setGeometry(100, 100, self.window_width, self.window_height)
 
         # Configuring the layout
-        self.set_layout()
+        self._set_central_widget()
 
         # Configuring the Top Menu Bar
-        self.set_menu_bar()
+        self._set_menu_bar()
 
         # Display views
         self.setUpMainWindow()
 
-    def set_menu_bar(self) -> None:
+    def _set_menu_bar(self) -> None:
         """
         **`IMPORTANT`** Este método inicializa el proceso para la creación del menú dinámico
         """
@@ -84,7 +84,7 @@ class AppWindow(QMainWindow, GlobalConfig):
         except Exception as e:
             print(f"An error has occurred: {e}")
 
-    def set_layout(self) -> None:
+    def _set_central_widget(self) -> None:
         """
         Configuraciones iniciales del layout de la ventana principal.\n
         Por defecto se provee un QWidget() central para implementar los diseños.

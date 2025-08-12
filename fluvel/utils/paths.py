@@ -1,4 +1,4 @@
-from utils import APP_ROOT
+from fluvel.utils import APP_ROOT
 from pathlib import Path
 
 # Common project routes

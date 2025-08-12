@@ -10,7 +10,7 @@ DEV_MODE = false # ¡IMPORTANT!
 app_name = "Fluvel Framework"
 version = "1.0.0"
 log_level = "INFO" # Nivel de registro: DEBUG, INFO, WARNING, ERROR, CRITICAL
-theme = "modern-dark"
+theme = "bootstrap"
 language = "en"
 
 # Configuración del tamaño de la ventana principal

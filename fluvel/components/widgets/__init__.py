@@ -3,14 +3,14 @@ This module import all Fluvel Widgets Compontents
 """
 
 # Main Widgets
-from components.widgets.Button import Button
+from fluvel.components.widgets.Button import Button
 
-from components.widgets.Label import Label
+from fluvel.components.widgets.Label import Label
 
-from components.widgets.LineEdit import LineEdit
+from fluvel.components.widgets.LineEdit import LineEdit
 
 # Fluvel Custom Components
-from components.widgets.FluvelCustom.FluvelCard import (
+from fluvel.components.widgets.FluvelCustom.FluvelCard import (
     DangerCard,
     InfoCard,
     SuccessCard,

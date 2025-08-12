@@ -1,21 +1,21 @@
 from typing import TypedDict, Unpack
 
 # Fluvel
-from core.abstract_models.FluvelWidget import FluvelWidget
-from core.abstract_models.FluvelTextWidget import FluvelTextWidget
+from fluvel.core.abstract_models.FluvelWidget import FluvelWidget
+from fluvel.core.abstract_models.FluvelTextWidget import FluvelTextWidget
 
 
 # PySide6
 from PySide6.QtWidgets import QLineEdit
 
 # Fluvel core utils
-from core.core_utils import configure_process
+from fluvel.core.core_utils import configure_process
 
 
 class LineEditKwargs(TypedDict, total=False):
     content_id: str | tuple | None
     text: str | None
-    placeholder_id: str | None
+    placeholder_id: str | tuple | None
 
 
 class LineEdit(QLineEdit, FluvelWidget, FluvelTextWidget):

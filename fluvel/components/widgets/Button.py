@@ -1,8 +1,8 @@
 from typing import Literal, TypedDict, Unpack
 
 # Fluvel
-from core.abstract_models.FluvelWidget import FluvelWidget
-from core.abstract_models.FluvelTextWidget import FluvelTextWidget
+from fluvel.core.abstract_models.FluvelWidget import FluvelWidget
+from fluvel.core.abstract_models.FluvelTextWidget import FluvelTextWidget
 
 # PySide6
 from PySide6.QtWidgets import QPushButton, QSizePolicy
@@ -10,7 +10,7 @@ from PySide6.QtCore import Qt, QUrl
 from PySide6.QtGui import QDesktopServices
 
 # Fluvel core utils
-from core.core_utils import configure_process
+from fluvel.core.core_utils import configure_process
 
 ButtonStyles = Literal[
     "primary",
@@ -33,7 +33,7 @@ ButtonStyles = Literal[
 
 
 class ButtonKwargs(TypedDict, total=False):
-    content_id: str | None
+    content_id: str | tuple | None
     text: str | None
     style: ButtonStyles | None
 
@@ -54,7 +54,7 @@ class Button(QPushButton, FluvelWidget, FluvelTextWidget):
         # Aplicar el cursor de puntero
         self.setCursor(Qt.PointingHandCursor)
 
-        self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        # self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
 
         self.configure(**kwargs)
 

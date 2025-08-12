@@ -2,5 +2,5 @@
 This module import all Fluvel Compontents
 """
 
-from components.widgets import *
-from components.layouts import *
+from fluvel.components.widgets import *
+from fluvel.components.layouts import *

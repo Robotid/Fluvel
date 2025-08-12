@@ -8,12 +8,12 @@ from PySide6.QtGui import QAction
 from PySide6.QtWidgets import QMenuBar, QMainWindow
 
 # FLUML Parse
-from src import convert_FLUML_to_JSON
+from fluvel.src import convert_FLUML_to_JSON
 
 # Utils
-from core.core_utils import load_file
-from project.MenuOptions import MenuOptions
-from core.core_utils.generate_menu_options import set_dynamic_menu_keys
+from fluvel.core.core_utils import load_file
+from fluvel.project.MenuOptions import MenuOptions
+from fluvel.core.core_utils.generate_menu_options import set_dynamic_menu_keys
 
 ActionTypes = Literal["triggered", "toggled", "changed", "hovered"]
 

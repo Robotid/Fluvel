@@ -1,5 +1,5 @@
-from utils.helper_functions import filter_by_extension, get_root_path
-from utils.resource_loader import get_resource_path
+from .helper_functions import filter_by_extension, get_root_path
+from .resource_loader import get_resource_path
 
 APP_ROOT = get_root_path()
 

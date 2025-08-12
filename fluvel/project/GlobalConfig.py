@@ -1,6 +1,6 @@
 # project.GlobalConfig
 
-from core.core_utils import load_app_config, APP_ROOT
+from fluvel.core.core_utils import load_app_config, APP_ROOT
 
 
 class GlobalConfig:
@@ -54,7 +54,7 @@ class GlobalConfig:
     # [defaults]
     default_icon: str
 
-    def set_config_format(self, filename: str) -> None:
+    def set_config_format(self, filename: str | dict) -> None:
         """
         **IMPORTANT** This method loads the configuration from the **`appconfig`**
         file TOML or JSON and defines the project's global attributes.
@@ -64,7 +64,7 @@ class GlobalConfig:
         # Obtaining information from the TOML or JSON configuration file
         appconfig: dict = load_app_config(filename, {})
 
-        GlobalConfig.DEV_MODE = appconfig.get("DEV_MODE", True)
+        GlobalConfig.DEV_MODE = appconfig.get("DEV_MODE", False)
 
         # the global configuration dictionary is saved
         GlobalConfig.CONFIG = appconfig

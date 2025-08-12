@@ -3,16 +3,16 @@
 from typing import Literal
 
 # Fluvel
-from project import GlobalConfig
-from models import GlobalContent
+from ..project import GlobalConfig
+from fluvel.models import GlobalContent
 
 # PySide6
 from PySide6.QtWidgets import QApplication
 
 # Utils
-from core.core_utils.theme_loader import load_style_sheet
-from utils.helper_functions import filter_by_extension
-from utils.paths import THEMES_DIR, CONTENT_DIR
+from .core_utils.theme_loader import load_style_sheet
+from fluvel.utils.helper_functions import filter_by_extension
+from fluvel.utils.paths import THEMES_DIR, CONTENT_DIR
 
 AppThemes = Literal["bootstrap", "modern-dark", "clean-light"]
 
@@ -78,8 +78,10 @@ class App(QApplication, GlobalConfig):
         Args:
             new_theme (str): the name of the theme that will be displayed.
         """
+        # Change theme
         self.theme = new_theme
 
+        # Update app
         self.set_theme()
 
     def set_static_text_blocks(self) -> None:
@@ -95,4 +97,8 @@ class App(QApplication, GlobalConfig):
 
         self.language = new_language
 
+        self.CONFIG["app"]["language"] = new_language
+
         self.set_static_text_blocks()
+
+        self.set_config_format(self.CONFIG)

@@ -67,12 +67,12 @@ class StyledTextParser:
 
         # VERTICAL ALIGN SUPER -> <sup>content</sup>
         text = re.sub(
-            r"<sup>(.*?)</sup>", r"<span style='vertical-align: sub;'>\1</span>", text
+            r"<sup>(.*?)</sup>", r"<span style='vertical-align: super;'>\1</span>", text
         )
 
         # VERTICAL ALIGN SUB -> <sub>content</sub>
         text = re.sub(
-            r"<sub>(.*?)</sub>", r"<span style='vertical-align: super;'>\1</span>", text
+            r"<sub>(.*?)</sub>", r"<span style='vertical-align: sub;'>\1</span>", text
         )
 
         return text

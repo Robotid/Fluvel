@@ -1,5 +1,5 @@
-from core import ViewBuilder
-from components.layouts import VBoxLayout
+from fluvel.core import ViewBuilder
+from fluvel.components.layouts import VBoxLayout
 
 
 class LoginPage(ViewBuilder):
@@ -7,26 +7,22 @@ class LoginPage(ViewBuilder):
     def view(self):
 
         # The main structure
-        main = VBoxLayout(self.parent)
+        body = VBoxLayout(self.parent)
+        body.adjust(alignment=body.CENTER, margins=(50, 50, 50, 50))
 
-        main.adjust(alignment=main.CENTER, margins=(50, 50, 50, 50))
-
-        main.add_label(
-            content_id="title-sign-in", style="h1 bold", alignment=main.CENTER
+        body.add_label(
+            content_id="title-sign-in", style="h1 bold", alignment=body.CENTER
         )
 
-        main.addSpacing(50)
+        body.addSpacing(50)
 
-        with self.Form(main) as form:
+        with self.Form(body) as form:
             form.adjust(spacing=20)
             user_label, user_input = form.add_row(label="form-user-field")
             pass_label, pass_input = form.add_row(label="form-password-field")
 
-        with self.Horizontal(main) as bottom_side:
-            btn_register = bottom_side.add_button(
-                content_id="btn-register", style="dark-outlined w-100"
-            )
-            btn_sign_in = bottom_side.add_button(content_id="btn-sign-in")
+        with self.Horizontal(body) as footer:
+            btn_register = footer.add_button(content_id="btn-register", style="light")
+            btn_sign_in = footer.add_button(content_id="btn-sign-in")
 
-        lbl_new_account = main.add_label(content_id="lbl-forgotten-password")
-        lbl_new_account.setAlignment(bottom_side.CENTER)
+        body.add_label(content_id="lbl-forgotten-password", alignment=footer.CENTER)

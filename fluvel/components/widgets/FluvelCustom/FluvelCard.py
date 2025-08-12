@@ -1,12 +1,12 @@
 from typing import Literal
 
 # PySide6 - Fluvel
-from components.gui.StyledText import StyledText
-from components.widgets import Label, Button
+from fluvel.components.gui.StyledText import StyledText
+from fluvel.components.widgets import Label, Button
 from PySide6.QtWidgets import QHBoxLayout, QFrame, QSizePolicy
 
 # Utils
-from utils import APP_ROOT
+from fluvel.utils import APP_ROOT
 
 
 AlertTypes = Literal["Infocard", "WarningCard", "SuccessCard", "DangerCard"]
@@ -38,7 +38,7 @@ class FluvelCard(QFrame):
         # self.icon_label.setFixedWidth(65)
         # self.icon_label.setProperty("type", "card-description")
 
-        self.description_label = Label(text)
+        self.description_label = Label(text=text)
         self.description_label.setProperty("type", "card-description")
         self.description_label.setWordWrap(True)
         self.description_label.setSizePolicy(

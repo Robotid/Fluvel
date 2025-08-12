@@ -1,3 +1,3 @@
-from core.exceptions.exceptions import ContentNotFoundError
+from .exceptions import ContentNotFoundError
 
 __all__ = ["ContentNotFoundError"]
