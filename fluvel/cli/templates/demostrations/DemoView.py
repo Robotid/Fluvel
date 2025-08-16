@@ -1,12 +1,5 @@
 from fluvel.core import ViewBuilder
-from fluvel.components import Button, VBoxLayout
-
-
-def add_buttons(buttons: tuple | list, layout: any) -> None:
-    for button in buttons:
-        text, style = button
-        layout.add_button(text=text, style=style)
-
+from fluvel.components import FButton, VBoxLayout
 
 class Demo(ViewBuilder):
 
@@ -14,13 +7,13 @@ class Demo(ViewBuilder):
 
         main = VBoxLayout(self.parent)
         main.adjust(
-            margins=(50, 50, 50, 50),
-            alignment=main.CENTER,
+            margins=(20, 20, 20, 20),
+            alignment=main.TOP_LEFT,
         )
 
         # BUTTONS
 
-        main.add_label(text="Buttons", style="h1 bold", alignment=main.CENTER)
+        main.Label(text="Buttons", style="h1 bold", alignment=main.LEFT)
 
         with self.Grid(main) as grid:
 
@@ -42,16 +35,16 @@ class Demo(ViewBuilder):
 
                 column = grid.Column(i)
 
-                column.add(Button(text=normal, style=button))
-                column.add(Button(text=outlined, style=f"{button}-outlined"))
+                column.add(FButton(text=normal, style=button))
+                column.add(FButton(text=outlined, style=f"{button}-outlined"))
 
         # LABELS
 
-        main.add_label(text="Labels", style="h1 bold", alignment=main.CENTER)
+        main.Label(text="Labels",  style="h1 bold",  alignment=main.LEFT)
 
         with self.Horizontal(main) as h1:
 
-            h1.add_label(text="Info", style="info")
-            h1.add_label(text="Success", style="success")
-            h1.add_label(text="Warning", style="warning")
-            h1.add_label(text="Danger", style="danger")
+            h1.Label(text="Info", style="info")
+            h1.Label(text="Success", style="success")
+            h1.Label(text="Warning", style="warning")
+            h1.Label(text="Danger", style="danger")

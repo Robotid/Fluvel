@@ -2,25 +2,41 @@
 import sys
 
 from fluvel.core import App
-from .MainWindow import MainWindow
+from .DemoWindow import DemoWindow
+from fluvel.cli.paths import PROJECT_ROOT
+import importlib
 
 
 def demo_app(theme: str | None):
 
+    module_path = "project.GlobalConfig"
+
+    gc_module = importlib.import_module(module_path)
+
     # default config to load
-    config = "appconfig.toml"
+    appconfig = PROJECT_ROOT / "appconfig.toml"
 
     if theme is not None:
-        config = {"app": {"theme": theme}}
+        appconfig = {
+            "app": {
+                "theme": theme
+            },
+            "window_size": {
+                "width": 1280,
+                "height": 720
+            }
+        }
 
     # App
     app = App(sys.argv)
+
+    config = gc_module.GlobalConfig(appconfig)
 
     # Load global settings of the app
     app.load(config)
 
     # Instantiate and display the demo application window
-    window = MainWindow(root=app)
+    window = DemoWindow(root=app)
     window.show()
 
     # Running the main demo loop

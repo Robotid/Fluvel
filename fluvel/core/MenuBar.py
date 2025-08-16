@@ -12,7 +12,7 @@ from fluvel.src import convert_FLUML_to_JSON
 
 # Utils
 from fluvel.core.core_utils import load_file
-from fluvel.project.MenuOptions import MenuOptions
+from fluvel._user.MenuOptions import MenuOptions
 from fluvel.core.core_utils.generate_menu_options import set_dynamic_menu_keys
 
 ActionTypes = Literal["triggered", "toggled", "changed", "hovered"]
@@ -192,9 +192,7 @@ class MenuBar:
                 submenu = parent_menu.addMenu(key)
                 self._structure_menu(submenu, value)
 
-    def bind(
-        self, menu_option: MenuOptions, action: ActionTypes, controller: any
-    ) -> None:
+    def bind(self, menu_option: MenuOptions, action: ActionTypes, controller: any) -> None:
         """
         Args:
             menu_option (str): Option of the Menu Bar
@@ -204,12 +202,7 @@ class MenuBar:
 
         getattr(getattr(self, menu_option), action).connect(controller)
 
-    def set_property(
-        self,
-        menu_option: MenuOptions,
-        property_to_change: ActionProperties,
-        new_value: any,
-    ) -> None:
+    def set_property(self, menu_option: MenuOptions, property_to_change: ActionProperties, new_value: any) -> None:
         """
         Args:
             menu_option (str): Option of the Menu Bar.
@@ -221,12 +214,7 @@ class MenuBar:
 
         getattr(getattr(self, menu_option), property_method)(new_value)
 
-    def add_shortcut(
-        self,
-        menu_option: MenuOptions,
-        new_shortcut: StandardActionShortcut,
-        controller: any,
-    ) -> None:
+    def add_shortcut(self,menu_option: MenuOptions, new_shortcut: StandardActionShortcut, controller: any) -> None:
         """
         Args:
             menu_option (str): Option of the Menu Bar.

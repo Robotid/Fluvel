@@ -3,7 +3,6 @@
 from typing import Literal
 
 # Fluvel
-from ..project import GlobalConfig
 from fluvel.models import GlobalContent
 
 # PySide6
@@ -17,11 +16,16 @@ from fluvel.utils.paths import THEMES_DIR, CONTENT_DIR
 AppThemes = Literal["bootstrap", "modern-dark", "clean-light"]
 
 
-class App(QApplication, GlobalConfig):
+class App(QApplication):
+
     def __init__(self, argv: list) -> None:
         super().__init__(argv)
 
-    def load(self, filename: str) -> None:
+        # Variable de tipo GlobalConfig que
+        # almacenará la configuración global de la app
+        self.config = None
+
+    def load(self, config_instance: any) -> None:
         """
         **IMPORTANT** Only supports TOML or JSON config files with the ***same*** configuration format.\n
         This method is responsible for loading the application's
@@ -30,8 +34,7 @@ class App(QApplication, GlobalConfig):
         update the **`properties`** and the **`set_config_format()`** method of the **`project.GlobalConfig`** class.*
         """
 
-        # Se aplican los atributos globales del proyecto
-        self.set_config_format(filename)
+        self.config = config_instance
 
         # Se cargan los contenidos estáticos de la app
         self.set_static_content()
@@ -57,7 +60,7 @@ class App(QApplication, GlobalConfig):
         self.setStyle("Fusion")
 
         # Directorio donde se encuentran los archivos qss de los componentes
-        theme_path = THEMES_DIR / self.theme
+        theme_path = THEMES_DIR / self.config.theme
 
         # Lista con los archivos .qss
         qss_files: list = filter_by_extension(theme_path, ".qss")
@@ -79,7 +82,7 @@ class App(QApplication, GlobalConfig):
             new_theme (str): the name of the theme that will be displayed.
         """
         # Change theme
-        self.theme = new_theme
+        self.config.theme = new_theme
 
         # Update app
         self.set_theme()
@@ -89,16 +92,16 @@ class App(QApplication, GlobalConfig):
         This method *loads* all static `.fluml` text files according to the application language.
         """
 
-        content_folder = CONTENT_DIR / self.language
+        content_folder = CONTENT_DIR / self.config.language
 
         GlobalContent.initialize(content_folder)
 
     def change_language(self, new_language: str) -> None:
 
-        self.language = new_language
+        self.config.language = new_language
 
-        self.CONFIG["app"]["language"] = new_language
+        self.config.CONFIG["app"]["language"] = new_language
 
         self.set_static_text_blocks()
 
-        self.set_config_format(self.CONFIG)
+        self.config.set_config_format(self.config.CONFIG)

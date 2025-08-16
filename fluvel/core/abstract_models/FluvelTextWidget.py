@@ -1,15 +1,13 @@
 # Fluvel
-from fluvel.components.gui import StyledText
+from fluvel.components.gui import StyledText, StringVar
 
 # PySide6
-from PySide6.QtWidgets import QLabel, QLineEdit
-from PySide6.QtCore import Qt
-
+from PySide6.QtWidgets import QLineEdit
 
 class FluvelTextWidget:
     """
     Clase que se encarga de obtener el contenido estático usando
-    el método get_static_text y la clase StyledText.
+    el método get_static_text y la clase StyledText o StringVar.
     Una vez obtenidos los bloques de contenido estático,
     modifica y retorna los respectivos kwargs.
     """
@@ -18,66 +16,58 @@ class FluvelTextWidget:
         """ """
 
         if "content_id" in kwargs:
+            
+            content_id = kwargs["content_id"]
 
-            kwargs = self._is_text_content(**kwargs)
-
+            kwargs = self.get_string_var(content_id, "content_id", "setText", **kwargs)
+           
+            
         if "placeholder_id" in kwargs:
 
-            kwargs = self._is_placeholder_content(**kwargs)
+            place_id = kwargs["placeholder_id"]
+
+            kwargs = self.get_string_var(place_id, "placeholder_id", "setPlaceholderText", **kwargs)
+
+            if "password" in place_id and isinstance(self, QLineEdit):
+
+                # Changing the echo mode to password
+                self.setEchoMode(self.EchoMode.Password)
+            
+
+        if "textvariable" in kwargs:
+
+            kwargs = self._is_text_variable(**kwargs)
+
 
         return kwargs
 
-    def _is_text_content(self, **kwargs) -> dict[str, any]:
+    
+    def _is_text_variable(self, **kwargs) -> dict[str, any]:
 
-        content_id = kwargs["content_id"]
+        string_var: StringVar = kwargs["textvariable"]
 
-        # El Texto contiene marcadores de posición
-        if isinstance(content_id, tuple):
+        string_var.valueChanged.connect(self.setText)
 
-            kwargs["text"] = self._process_markers(content_id)
+        kwargs["text"] = string_var.value
 
-        if isinstance(content_id, str):
-
-            kwargs["text"] = self._process_content(content_id)
-
-        # Habilitar la apertura de enlaces si es un Label
-        if isinstance(self, QLabel):
-
-            self.setTextFormat(Qt.TextFormat.RichText)
-
-            self.setOpenExternalLinks(True)
-
-        kwargs.pop("content_id")
+        kwargs.pop("textvariable")
 
         return kwargs
 
-    def _is_placeholder_content(self, **kwargs) -> dict[str, any]:
+    def get_string_var(self, _id: str, flag: str, method: any, **kwargs) -> None:
+        
+        if isinstance(_id, tuple):
 
-        place_id = kwargs["placeholder_id"]
+            content_id, *markers = _id
 
-        # El Texto contiene marcadores de posición
-        if isinstance(place_id, tuple):
+            string_var: StringVar = StyledText(content_id, *markers).var
 
-            kwargs["placeholder_id"] = self._process_markers(place_id)
+        else:
 
-        if isinstance(place_id, str):
+            string_var: StringVar = StyledText(_id).var
 
-            # Setting the value in kwargs
-            kwargs["placeholder_id"] = self._process_content(place_id)
+        string_var.valueChanged.connect(getattr(self, method))
 
-        # El campo es para una contraseña
-        if "password" in place_id and isinstance(self, QLineEdit):
-            # Changing the echo mode to password
-            self.setEchoMode(self.EchoMode.Password)
+        kwargs[flag] = string_var.value
 
         return kwargs
-
-    def _process_markers(self, content: tuple) -> str:
-
-        _id, *placeholders = content
-
-        return StyledText(_id, *placeholders).text
-
-    def _process_content(self, content: str) -> str:
-
-        return StyledText(content).text

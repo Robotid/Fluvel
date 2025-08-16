@@ -3,7 +3,7 @@
 from fluvel.core import AppWindow
 from functools import partial
 
-from .LoginDemo import LoginPage
+from views.LoginDemo import LoginPage
 
 
 class MainWindow(AppWindow):
@@ -31,7 +31,7 @@ class MainWindow(AppWindow):
             ("modern-dark", "modern_dark_theme"),
             ("clean-light", "clean_light_theme"),
         )
-
+    
         for theme in themes:
 
             name, option = theme
@@ -41,7 +41,6 @@ class MainWindow(AppWindow):
             bind(option, "triggered", controller)
 
         # Manejando el cambio de idioma
-
         bind("en_language", "triggered", lambda: self.change_language("en"))
         bind("es_language", "triggered", lambda: self.change_language("es"))
 
@@ -49,4 +48,18 @@ class MainWindow(AppWindow):
 
         self.root.change_language(language)
 
-        self._init_ui()
+        # self._init_core_ui()
+    
+    def init_ui(self):
+        # Screen size
+
+        screen_geometry = self.root.primaryScreen().availableGeometry()
+        screen_width = screen_geometry.width()
+        screen_height = screen_geometry.height()
+        x = (screen_width - self.root.config.window_width) // 2
+        y = (screen_height - self.root.config.window_height) // 2
+
+        self.configure(
+            title=f"{self.root.config.app_name} - {self.root.config.version}",
+            geometry=(x, y, self.root.config.window_width, self.root.config.window_height)
+        )

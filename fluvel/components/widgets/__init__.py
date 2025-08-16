@@ -3,9 +3,9 @@ This module import all Fluvel Widgets Compontents
 """
 
 # Main Widgets
-from fluvel.components.widgets.Button import Button
+from fluvel.components.widgets.FButton import FButton, FLinkButton
 
-from fluvel.components.widgets.Label import Label
+from fluvel.components.widgets.FLabel import FLabel
 
 from fluvel.components.widgets.LineEdit import LineEdit
 
@@ -19,9 +19,10 @@ from fluvel.components.widgets.FluvelCustom.FluvelCard import (
 
 __all__ = [
     # Push Button
-    "Button",
+    "FButton",
+    "FLinkButton",
     # Label
-    "Label",
+    "FLabel",
     # Notice Cards
     "InfoCard",
     "SuccessCard",

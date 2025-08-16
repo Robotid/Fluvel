@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+import os
 
 
 def get_root_path() -> Path:
@@ -8,39 +9,15 @@ def get_root_path() -> Path:
     *Handles both source code execution and packaged executables.*
     """
 
-    APP_ROOT: Path
-
     if getattr(sys, "frozen", False):
         # Si la app está empaquetada
-        APP_ROOT = Path(sys.executable).parent
+        return Path(sys.executable).parent
     else:
-        # Si se ejecuta desde el código fuente
-        # Path desde este archivo.
-        # parent 1 -> .../utils/
-        # parent 2 -> .../App  <root folder of the app>
-        APP_ROOT = Path(__file__).parent.parent
-
-    return APP_ROOT
-
-
-def minify_qss(qss_content: str) -> str:
-    """
-    -> **TO DO** <-\n
-    Minimizes a QSS string by removing whitespace and comments.\n
-    perhaps useful when running the *`fluvel build`* command
-    """
-    ...
-
-
-def get_files_from_directory(dirname: str) -> list:
-    """
-    This function *returns* a *`list`* of ***all files*** in a specified directory except the *`__init__.py`* file.\n
-    """
-
-    return Path(
-        dirname
-    ).iterdir()  # Is just the 'iterdir()' method of the pathlib.Path Class
-
+        # Obtener el directorio de trabajo del usuario
+        # Si se ejecuta desde el código fuente, retorna la carpeta del script principal
+        # esta forma, en lugar de <return Path(os.getcwd())> hace que se pueda 
+        # ejecutar el main.py desde cualquier subdirectorio relativo al directorio principal
+        return Path(os.getcwd())
 
 def filter_by_extension(dirname: Path | str, suffix: str | tuple) -> list[Path]:
     """

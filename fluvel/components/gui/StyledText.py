@@ -1,7 +1,8 @@
-from fluvel.controllers import get_content_by_id
+from fluvel.controllers.content_controller import get_content_by_id
+from fluvel.core.exceptions import ContentNotFoundError
+from fluvel.components.gui import StringVar
 import re
 
-from fluvel.core.exceptions import ContentNotFoundError
 
 
 class StyledText:
@@ -9,29 +10,31 @@ class StyledText:
         """
         Args:
             content_id (str): The string identifier that represents the content block in `.fluml` files
-            *placeholders (str): The text that will replace the placeholder in the content block.
+            *placeholders (str): The var that will replace the placeholder in the content block.
         """
         self._id: str = content_id
         self.placeholders: tuple = placeholders
 
     @property
-    def text(self) -> str:
+    def var(self) -> str:
         """
         Returns:
-            (str): El texto formateado a RichText obtenido de `GlobalContent.content_map`.
+            (StringVar): una variable `StringVar` relacionada al ID en `GlobalContent.content_map`.\n
+            *El Property Method de esta variable contiene el RichText obtenido de los archivos `.fluml`*
         """
         try:
 
             # Load the RichText content from GlobalContent
-            content: str = get_content_by_id(content_id=self._id)
+            content: StringVar = get_content_by_id(content_id=self._id)
 
             # Check for placeholders in the text
-            _match = re.findall(r"\$(\d+)", content)
+            _match = re.findall(r"\$(\d+)", content.value)
 
             if _match:
 
                 for marker in _match:
-                    content = content.replace(
+
+                    content.value = content.value.replace(
                         f"${marker}", self.placeholders[int(marker)]
                     )
 

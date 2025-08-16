@@ -5,8 +5,8 @@ from fluvel.core.core_utils import configure_process
 from fluvel.core.abstract_models.FluvelWidget import FluvelWidget
 
 # Fluvel Widgets
-from fluvel.components.widgets.Label import Label, LabelKwargs
-from fluvel.components.widgets.Button import Button, ButtonKwargs
+from fluvel.components.widgets.FLabel import FLabel, FLabelKwargs
+from fluvel.components.widgets.FButton import FButton, FButtonKwargs
 
 # PySide6
 from PySide6.QtWidgets import QWidget, QLayout
@@ -113,27 +113,27 @@ class FluvelLayout(FluvelWidget):
         return None if exist else widget
 
     @overload
-    def add_label(self, **kwargs: Unpack[LabelKwargs]) -> Label: ...
-
+    def Label(self, **kwargs: Unpack[FLabelKwargs]) -> FLabel: ...
+        
     @overload
-    def add_label(self, arg__1: Label) -> None: ...
+    def Label(self, arg__1: FLabel) -> None: ...
 
-    def add_label(self, *args, **kwargs) -> Label | None:
+    def Label(self, *args, **kwargs) -> FLabel | None:
 
         # create the label if it doesn't exist or just add it to the layout,
-        # then return the Label instance or None if the widget is already provided
-        return self._process_kwargs(Label, *args, **kwargs)
+        # then return the FLabel instance or None if the widget is already provided
+        return self._process_kwargs(FLabel, *args, **kwargs)
 
     @overload
-    def add_button(self, **kwargs: Unpack[ButtonKwargs]) -> Button: ...
+    def Button(self, **kwargs: Unpack[FButtonKwargs]) -> FButton: ...
 
     @overload
-    def add_button(self, arg__1: Button) -> None: ...
+    def Button(self, arg__1: FButton) -> None: ...
 
-    def add_button(self, *args, **kwargs) -> Button | None:
+    def Button(self, *args, **kwargs) -> FButton | None:
 
         # create the button if it doesn't exist or just add it to the layout,
-        # then return the Button instance or None if it's already a widget
-        return self._process_kwargs(Button, *args, **kwargs)
+        # then return the FButton instance or None if it's already a widget
+        return self._process_kwargs(FButton, *args, **kwargs)
 
     def add_input_field(self, **kwargs): ...

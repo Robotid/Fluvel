@@ -23,6 +23,9 @@ class GlobalConfig:
         - self.db_user: str -> Saves the user of the DB from appconfig['database']['user'].\n
         - self.db_password: any -> Saves the password of the DB from appconfig['database']['password']\n
     """
+    def __init__(self, filename: str):
+        
+        self.set_config_format(filename)
 
     # [core utils]
     APP_ROOT = APP_ROOT

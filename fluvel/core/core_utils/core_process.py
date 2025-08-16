@@ -20,6 +20,18 @@ def configure_process(obj: object, mapping: dict, **kwargs: any) -> None:
                 else:
                     method(value)
 
-        except KeyError as e:
+        # Un TypeError en la llamada de esta función indica
+        # que el método del objeto está siendo llamado de forma errónea
+        # o con argumentos incorrectos, por lo que en esta situación, 
+        # por como está planteado el algoritmo y los MAPPING_METHODS, se infiere que es una 
+        # señal de PySide6 y se intenta conectarla usando el método obj.signal.connect().
+        # e.g. button.clicked.connect(slot=value)
+        except TypeError:
+                
+                signal = getattr(obj, method_name)
+
+                signal.connect(value)
+
+        except KeyError:
             # Ignore keys that do not represent a PySide6 method.
             continue
