@@ -1,0 +1,23 @@
+[title-sign-in]:
+    Se connecter
+
+[form-user-field]:
+    Utilisateur:
+
+[form-user-field-behind]:
+    Utilisateur
+
+[form-password-field]:
+    Mot de passe :
+
+[form-password-field-behind]:
+    Mot de passe
+
+[lbl-forgotten-password]:
+    {Mot de passe oublié ? | https://support.google.com/a/answer/33310?hl=es&co=DASHER._Family%3DDomain-verified}
+
+[btn-register]:
+    S'inscrire
+
+[btn-sign-in]:
+    Se connecter

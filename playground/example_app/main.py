@@ -2,19 +2,15 @@
 
 import sys
 from fluvel.core import App
-from playground.test.views import MainWindow
-from project import GlobalConfig
+from views.MainWindow import MainWindow
 
 
 def main():
     # App
     app = App(sys.argv)
 
-    # An instance of the app's global configuration is created
-    config = GlobalConfig("appconfig.toml")
-
     # Load global settings of the app
-    app.load(config)
+    app.load("appconfig.toml")
 
     # Instantiate and display the main application window
     window = MainWindow(root=app)

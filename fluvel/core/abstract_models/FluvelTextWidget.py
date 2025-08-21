@@ -4,6 +4,7 @@ from fluvel.components.gui import StyledText, StringVar
 # PySide6
 from PySide6.QtWidgets import QLineEdit
 
+
 class FluvelTextWidget:
     """
     Clase que se encarga de obtener el contenido estático usando
@@ -13,36 +14,51 @@ class FluvelTextWidget:
     """
 
     def get_static_text(self, **kwargs) -> dict[str, any]:
-        """ """
+        """
+        Procesa y retorna los argumentos de los widgets para manejar el contenido estático y dinámico.
 
-        if "content_id" in kwargs:
-            
-            content_id = kwargs["content_id"]
+        Args:
+            **kwargs: Argumentos del constructor del widget.
 
-            kwargs = self.get_string_var(content_id, "content_id", "setText", **kwargs)
-           
-            
-        if "placeholder_id" in kwargs:
+        Returns:
+            dict[str, any]: Un diccionario con los argumentos procesados.
+        """
 
-            place_id = kwargs["placeholder_id"]
+        if "text" in kwargs:
 
-            kwargs = self.get_string_var(place_id, "placeholder_id", "setPlaceholderText", **kwargs)
+            content_id = kwargs["text"]
+
+            kwargs = self.get_string_var(content_id, "text", "setText", **kwargs)
+
+        if "placeholder_text" in kwargs:
+
+            place_id = kwargs["placeholder_text"]
+
+            kwargs = self.get_string_var(
+                place_id, "placeholder_text", "setPlaceholderText", **kwargs
+            )
 
             if "password" in place_id and isinstance(self, QLineEdit):
 
                 # Changing the echo mode to password
                 self.setEchoMode(self.EchoMode.Password)
-            
 
         if "textvariable" in kwargs:
 
             kwargs = self._is_text_variable(**kwargs)
 
-
         return kwargs
 
-    
     def _is_text_variable(self, **kwargs) -> dict[str, any]:
+        """
+        Conecta un StringVar a un widget.
+
+        Args:
+            **kwargs: Argumentos del constructor del widget.
+
+        Returns:
+            dict[str, any]: Argumentos actualizados sin la clave 'textvariable'.
+        """
 
         string_var: StringVar = kwargs["textvariable"]
 
@@ -55,19 +71,26 @@ class FluvelTextWidget:
         return kwargs
 
     def get_string_var(self, _id: str, flag: str, method: any, **kwargs) -> None:
-        
-        if isinstance(_id, tuple):
+        """
+        Obtiene un StringVar para un ID de contenido y lo conecta a un método del widget.
+
+        Args:
+            _id (str | list): El ID de contenido o una lista que contiene el ID y marcadores de posición.
+            flag (str): La clave del argumento ('text' o 'placeholder_text').
+            method (any): El método del widget al que se conectará (e.g., setText).
+            **kwargs: Argumentos del constructor del widget.
+        """
+
+        if isinstance(_id, list):
 
             content_id, *markers = _id
 
             string_var: StringVar = StyledText(content_id, *markers).var
 
-        else:
+            string_var.valueChanged.connect(getattr(self, method))
 
-            string_var: StringVar = StyledText(_id).var
+            kwargs[flag] = string_var.value
 
-        string_var.valueChanged.connect(getattr(self, method))
-
-        kwargs[flag] = string_var.value
+        # Si es un texto simple (una instancia de str), no ocurre nada
 
         return kwargs

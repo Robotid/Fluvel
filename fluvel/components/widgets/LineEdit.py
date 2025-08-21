@@ -13,9 +13,8 @@ from fluvel.core.core_utils import configure_process
 
 
 class LineEditKwargs(TypedDict, total=False):
-    content_id: str | tuple | None
     text: str | None
-    placeholder_id: str | tuple | None
+    placeholder_text: str | None
 
 
 class LineEdit(QLineEdit, FluvelWidget, FluvelTextWidget):
@@ -23,7 +22,7 @@ class LineEdit(QLineEdit, FluvelWidget, FluvelTextWidget):
     Clase base de **`Fluvel`** para **`QLineEdit`**.
     """
 
-    _MAPPING_METHODS = {"text": "setText", "placeholder_id": "setPlaceholderText"}
+    _MAPPING_METHODS = {"text": "setText", "placeholder_text": "setPlaceholderText"}
 
     def __init__(self, **kwargs: Unpack[LineEditKwargs]):
         super().__init__()

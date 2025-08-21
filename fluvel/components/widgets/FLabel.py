@@ -5,7 +5,7 @@ from fluvel.core.abstract_models.FluvelWidget import FluvelWidget
 from fluvel.core.abstract_models.FluvelTextWidget import FluvelTextWidget
 from fluvel.components.gui import StringVar
 
-# PySide 6
+# PySide6
 from PySide6.QtWidgets import QLabel
 from PySide6.QtCore import Qt
 
@@ -17,8 +17,7 @@ LabelStyles = Literal["normal", "info", "success", "warning", "danger"]
 
 
 class FLabelKwargs(TypedDict, total=False):
-    content_id: str | tuple | None
-    text: str | None
+    text: str | list | None
     textvariable: StringVar | None
     alignment: Qt.AlignmentFlag | None
     style: LabelStyles | None
@@ -39,11 +38,7 @@ class FLabel(QLabel, FluvelWidget, FluvelTextWidget):
     Clase base de **`Fluvel`** para **`QLabel`**.
     """
 
-    _MAPPING_METHODS = {
-        "text": "setText",
-        "content_id": "setText",
-        "alignment": "setAlignment"
-    }
+    _MAPPING_METHODS = {"text": "setText", "alignment": "setAlignment"}
 
     def __init__(self, **kwargs: Unpack[FLabelKwargs]):
         super().__init__()
@@ -64,6 +59,9 @@ class FLabel(QLabel, FluvelWidget, FluvelTextWidget):
 
     def _set_defaults(self) -> None:
 
+        # Por defecto acepta la apertura de
+        # enlaces externos
         self.setOpenExternalLinks(True)
 
+        # Por defecto su formato de texto es RichText
         self.setTextFormat(Qt.TextFormat.RichText)

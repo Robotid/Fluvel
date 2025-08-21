@@ -1,10 +1,10 @@
-RELOADER_TEMPLATE = """\"\"\"
+"""
 Modulo de Fluvel que habilita el Hot-Reload
 en la aplicación PySide6.
 por defecto analiza los siguientes directorios:
     - ./views/...
     - ./static/...
-\"\"\"
+"""
 
 import sys
 from fluvel.core import App
@@ -24,4 +24,3 @@ def main() -> None:
     reloader = HReloader(root=app, project_path=PROJECT_ROOT)
 
     sys.exit(app.exec())
-"""

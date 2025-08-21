@@ -1,0 +1,23 @@
+[title-sign-in]:
+    Войти
+
+[form-user-field]:
+    Пользователь:
+
+[form-user-field-behind]:
+    Пользователь
+
+[form-password-field]:
+    Пароль:
+
+[form-password-field-behind]:
+    Пароль
+
+[lbl-forgotten-password]:
+    {Забыли пароль? | https://support.google.com/a/answer/33310?hl=es&co=DASHER._Family%3DDomain-verified}
+
+[btn-register]:
+    Зарегистрироваться
+
+[btn-sign-in]:
+    Войти

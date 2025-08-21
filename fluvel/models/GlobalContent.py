@@ -5,6 +5,7 @@ from fluvel.core.core_utils.content_loader import load_fluml
 from fluvel.src import convert_FLUML_to_HTML
 from fluvel.components.gui import StringVar
 
+
 class GlobalContent:
     """
     Una clase que almacena como atributos de clase
@@ -13,13 +14,17 @@ class GlobalContent:
     """
 
     content_map: dict[str, StringVar] = {}
-    
+
     @staticmethod
     def initialize(content_path: Path | str) -> None:
         """
-        Este método carga y mapea a `id -> StringVar` los 
+        Este método carga y mapea a `ID: str -> CONTENT: StringVar` los
         archivos `.fluml` de la aplicación o actualiza los existentes
         con nuevos valores.
+
+        Args:
+            content_path (Path | str): La ruta al directorio con los archivos .fluml.
+
         """
 
         files = filter_by_extension(content_path, ".fluml")
@@ -37,16 +42,23 @@ class GlobalContent:
             for _id, text in html_content.items():
 
                 GlobalContent.content_map[_id] = StringVar(text)
-    
+
         else:
 
             GlobalContent._update_content(html_content)
 
     @staticmethod
     def _update_content(html_content: dict) -> None:
-        
+        """
+        Actualiza el valor de los StringVars existentes con nuevos contenidos.
+
+        Args:
+            html_content (dict): Un diccionario con los nuevos IDs y valores.
+        """ 
+
         for _id, text in html_content.items():
-            # Se actualizan los StringVar y estos
-            # a su vez emiten las señales para
-            # modificar el texto de los Widgets
-            GlobalContent.content_map[_id].value = text
+
+            # Actualizamos el texto base del StringVar
+            # Lo que desencaden una serie de eventos dentro
+            # de la clase StringVar para actualizar el contenido
+            GlobalContent.content_map[_id].base_text = text

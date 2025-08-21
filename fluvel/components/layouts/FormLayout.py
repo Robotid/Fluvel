@@ -11,7 +11,9 @@ class FormLayout(QFormLayout, FluvelLayout):
     def __init__(self):
         super().__init__()
 
-    def add_row(self, label: str, field: str | None = None) -> tuple[FLabel, LineEdit]:
+    def add_row(
+        self, label: str | list, field: str | list = None
+    ) -> tuple[FLabel, LineEdit]:
         """
         This method adds a row to the form.
         Args:
@@ -24,10 +26,10 @@ class FormLayout(QFormLayout, FluvelLayout):
             field = f"{label}-behind"
 
         # el Widget Label
-        label_field = FLabel(content_id=label)
+        label_field = FLabel(text=[label])
 
         # el Widget LineEdit
-        input_field = LineEdit(placeholder_id=field)
+        input_field = LineEdit(placeholder_text=[field])
 
         # Añadiendo la Fila
         self.addRow(label_field, input_field)

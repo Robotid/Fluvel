@@ -1,7 +1,15 @@
 def configure_process(obj: object, mapping: dict, **kwargs: any) -> None:
     """
-    Esta función es un proceso núcleo de Fluvel, permitiendo un enfoque genérico
-    ligado a los procesos de configuración de propiedades y métodos de los objetos de PySide6.
+    Configure properties, methods, and signals of a PySide6 object in a generic way.
+
+    This function is a central component of Fluvel that allows dynamic configuration
+    of widgets, decoupling the names of the arguments from their
+    corresponding methods in PySide6.
+
+    Args:
+        obj (object): The PySide6 object instance to be configured (e.g. QWidget, QPushButton).
+        mapping (dict): A dictionary that maps argument names to method or signal names.
+        **kwargs (any): Configuration arguments that will be processed.
     """
     for key, value in kwargs.items():
         try:
@@ -20,17 +28,16 @@ def configure_process(obj: object, mapping: dict, **kwargs: any) -> None:
                 else:
                     method(value)
 
-        # Un TypeError en la llamada de esta función indica
-        # que el método del objeto está siendo llamado de forma errónea
-        # o con argumentos incorrectos, por lo que en esta situación, 
-        # por como está planteado el algoritmo y los MAPPING_METHODS, se infiere que es una 
-        # señal de PySide6 y se intenta conectarla usando el método obj.signal.connect().
+        # A TypeError in the call to this function indicates
+        # that the object method is being called incorrectly
+        # or with incorrect arguments, so in this situation,
+        # given the way the algorithm and MAPPING_METHODS are set up, it is inferred that it is a
+        # PySide6 signal and an attempt is made to connect it using the obj.signal.connect() method.
         # e.g. button.clicked.connect(slot=value)
         except TypeError:
-                
-                signal = getattr(obj, method_name)
 
-                signal.connect(value)
+            # obj.signal = method | line 23
+            method.connect(value)
 
         except KeyError:
             # Ignore keys that do not represent a PySide6 method.

@@ -4,14 +4,21 @@ from fluvel.core.exceptions import ContentNotFoundError
 def get_content_by_id(content_id: str) -> str:
     """
     Este controlador se comunica con el modelo `GlobalContent`
-    para obtener y retornar el contenido específico relacionado con un id.
+    para obtener y retornar el contenido específico relacionado con un ID.
+
+    Args:
+        content_id (str): El identificador del bloque de contenido.
+
+    Returns:
+        str: El contenido del bloque.
+
+    Raises:
+        ContentNotFoundError: Si no se encuentra un contenido para el ID dado.
     """
     from fluvel.models.GlobalContent import GlobalContent
-    
 
     if content_id in GlobalContent.content_map:
-        
-        # La instancia de
+
         return GlobalContent.content_map[content_id]
 
     raise ContentNotFoundError(

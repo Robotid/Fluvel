@@ -1,6 +1,4 @@
-# fluvel.core.App
-
-from typing import Literal
+import importlib
 
 # Fluvel
 from fluvel.models import GlobalContent
@@ -13,8 +11,6 @@ from .core_utils.theme_loader import load_style_sheet
 from fluvel.utils.helper_functions import filter_by_extension
 from fluvel.utils.paths import THEMES_DIR, CONTENT_DIR
 
-AppThemes = Literal["bootstrap", "modern-dark", "clean-light"]
-
 
 class App(QApplication):
 
@@ -25,7 +21,7 @@ class App(QApplication):
         # almacenará la configuración global de la app
         self.config = None
 
-    def load(self, config_instance: any) -> None:
+    def load(self, filename: str) -> None:
         """
         **IMPORTANT** Only supports TOML or JSON config files with the ***same*** configuration format.\n
         This method is responsible for loading the application's
@@ -34,7 +30,9 @@ class App(QApplication):
         update the **`properties`** and the **`set_config_format()`** method of the **`project.GlobalConfig`** class.*
         """
 
-        self.config = config_instance
+        self.config = importlib.import_module("project.GlobalConfig").GlobalConfig(
+            filename
+        )
 
         # Se cargan los contenidos estáticos de la app
         self.set_static_content()
@@ -75,7 +73,7 @@ class App(QApplication):
         # Cargando el tema a la app
         self.setStyleSheet(qss_content)
 
-    def change_theme(self, new_theme: AppThemes) -> None:
+    def change_theme(self, new_theme: str) -> None:
         """
         This method changes the entire `appearance` of the application dynamically at runtime or development time.
         Args:

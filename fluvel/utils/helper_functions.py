@@ -15,9 +15,10 @@ def get_root_path() -> Path:
     else:
         # Obtener el directorio de trabajo del usuario
         # Si se ejecuta desde el código fuente, retorna la carpeta del script principal
-        # esta forma, en lugar de <return Path(os.getcwd())> hace que se pueda 
+        # esta forma, en lugar de <return Path(os.getcwd())> hace que se pueda
         # ejecutar el main.py desde cualquier subdirectorio relativo al directorio principal
         return Path(os.getcwd())
+
 
 def filter_by_extension(dirname: Path | str, suffix: str | tuple) -> list[Path]:
     """
@@ -35,16 +36,20 @@ def filter_by_extension(dirname: Path | str, suffix: str | tuple) -> list[Path]:
         A list of `pathlib` objects (`WindowsPath` or `PosixPath`) containing the path of the filtered files.\n
     """
 
+    # If the directory is passed as str
+    # it is converted to a Path object
     if isinstance(dirname, str):
         dirname = Path(dirname)
 
-    files: list = []
-
     try:
-        for _file in dirname.iterdir():
-            # compares the file extension with the suffix parameter
-            if _file.suffix in suffix and not _file.is_dir():
-                files.append(_file)
+
+        # Using list comprehension to iterate over
+        # the directory and get the list of files
+        files = [
+            file
+            for file in dirname.iterdir()
+            if file.suffix in suffix and not file.is_dir()
+        ]
 
     except FileNotFoundError as e:
         print(f"Error: Directory not found at the specified path. {e}")

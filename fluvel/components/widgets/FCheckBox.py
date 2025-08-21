@@ -13,17 +13,13 @@ from fluvel.core.core_utils.core_process import configure_process
 
 
 class FCheckBoxKwargs(TypedDict, total=False):
-    text: str | None
-    content_id: str | None 
+    text: str | list | None
     textvariable: StringVar | None
 
 
 class FCheckBox(QCheckBox, FluvelTextWidget, FluvelWidget):
 
-
-    _MAPPING_METHODS = {
-        "text": "setText"
-    }
+    _MAPPING_METHODS = {"text": "setText"}
 
     def __init__(self, **kwargs: Unpack[FCheckBoxKwargs]):
         super().__init__()

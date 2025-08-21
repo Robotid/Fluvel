@@ -1,6 +1,5 @@
 import click
-import shutil
-from fluvel.cli.paths import CLI_TEMPLATES, MAINPY_ROOT
+from fluvel.cli.paths import MAINPY_ROOT, MAINPY_TEMPLATE
 
 
 @click.command()
@@ -18,14 +17,13 @@ def check_mainpy() -> None:
     copy the template to the project path
     """
 
-    template_file = CLI_TEMPLATES / "mainpy_template.py"
-
-    exist = MAINPY_ROOT.exists()
-
     try:
 
-        if not exist:
-            shutil.copy(template_file, MAINPY_ROOT)
+        if not MAINPY_ROOT.exists():
+
+            with open(MAINPY_ROOT, "w", encoding="utf-8") as f:
+                f.write(MAINPY_TEMPLATE)
+
             click.echo("'main.py' -----> was successfully restored.")
 
         else:

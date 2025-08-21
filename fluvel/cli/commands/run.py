@@ -1,16 +1,12 @@
-import click
-import subprocess
-import sys
-import importlib
-import shutil
+import click, subprocess, sys, importlib
 
 # Fluvel
 from fluvel.cli.paths import MAINPY_ROOT, PROJECT_ROOT, RELOADER_TEMPLATE
 
+
 @click.command()
 @click.option("--debug", "-d", is_flag=True, help="Enable hot-reloading")
-@click.option("--timer", "-t", type=int, default=2, help="Sets the refresh interval for the main window")
-def run(debug: bool, timer: int) -> None:
+def run(debug: bool) -> None:
     """
     Start the Fluvel application by running 'main.py'.
     """
@@ -19,8 +15,7 @@ def run(debug: bool, timer: int) -> None:
     if debug:
 
         click.echo("hot-reloading enabled")
-        start_monitoring(timer)
-
+        start_monitoring()
 
     else:
 
@@ -34,28 +29,35 @@ def run(debug: bool, timer: int) -> None:
 
         # The command to run main.py
         command = [sys.executable, str(MAINPY_ROOT)]
-    
+
         # Try to run main.py
         try:
-        
+
             click.echo("initializing...")
             subprocess.run(command, check=True)
-    
+
         except subprocess.CalledProcessError as e:
             click.echo(f"An error has occurred: {e}")
             click.echo("---")
             click.echo("Details of the error from main.py:")
             click.echo(e.stderr)
 
-def start_monitoring(timer: int) -> None:
+
+def start_monitoring() -> None:
+    """
+    Comienza la creación de una nueva ventana
+    PySide6 a partir del módulo `reloader.py` y
+    `fluvel/cli/reloader/reloader_manager`
+    """
 
     reloader_file = PROJECT_ROOT / "reloader.py"
 
     if not reloader_file.exists():
-        
-        shutil.copy(RELOADER_TEMPLATE, reloader_file)
+
+        with open(reloader_file, "w", encoding="utf-8") as f:
+            f.write(RELOADER_TEMPLATE)
 
     reloader_module = importlib.import_module("reloader")
 
-    # Se llama a la función main del modulo 
-    reloader_module.main(timer)
+    # Se llama a la función main del modulo
+    reloader_module.main()

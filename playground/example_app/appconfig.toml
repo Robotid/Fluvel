@@ -11,12 +11,12 @@ app_name = "Fluvel Framework"
 version = "1.0.0"
 log_level = "INFO" # Nivel de registro: DEBUG, INFO, WARNING, ERROR, CRITICAL
 theme = "bootstrap"
-language = "en"
+language = "es"
 
 # Configuración del tamaño de la ventana principal
 [window_size]
-width = 1280
-height = 720
+width = 680
+height = 420
 
 # Configuración de la base de datos (ejemplo, no se recomienda para credenciales sensibles)
 [database]

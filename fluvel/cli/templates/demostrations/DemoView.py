@@ -1,6 +1,7 @@
 from fluvel.core import ViewBuilder
 from fluvel.components import FButton, VBoxLayout
 
+
 class Demo(ViewBuilder):
 
     def view(self):
@@ -40,7 +41,7 @@ class Demo(ViewBuilder):
 
         # LABELS
 
-        main.Label(text="Labels",  style="h1 bold",  alignment=main.LEFT)
+        main.Label(text="Labels", style="h1 bold", alignment=main.LEFT)
 
         with self.Horizontal(main) as h1:
 

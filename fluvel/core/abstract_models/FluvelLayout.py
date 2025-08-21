@@ -7,6 +7,7 @@ from fluvel.core.abstract_models.FluvelWidget import FluvelWidget
 # Fluvel Widgets
 from fluvel.components.widgets.FLabel import FLabel, FLabelKwargs
 from fluvel.components.widgets.FButton import FButton, FButtonKwargs
+from fluvel.components.widgets.LineEdit import LineEdit, LineEditKwargs
 
 # PySide6
 from PySide6.QtWidgets import QWidget, QLayout
@@ -92,12 +93,12 @@ class FluvelLayout(FluvelWidget):
         This method determines whether or not to create a Widget, depending on the supplied arguments.\n
         It then establishes parentage relationships and adds it to the Layout.
         """
-        exist: bool = False
+        exists: bool = False
 
         # If the supplied argument is already a widget
         if len(args) > 0:
             widget = args[0]
-            exist = True
+            exists = True
 
         else:
             # Create the widget
@@ -110,11 +111,11 @@ class FluvelLayout(FluvelWidget):
         self.addWidget(widget)
 
         # Return
-        return None if exist else widget
+        return None if exists else widget
 
     @overload
     def Label(self, **kwargs: Unpack[FLabelKwargs]) -> FLabel: ...
-        
+
     @overload
     def Label(self, arg__1: FLabel) -> None: ...
 
@@ -136,4 +137,14 @@ class FluvelLayout(FluvelWidget):
         # then return the FButton instance or None if it's already a widget
         return self._process_kwargs(FButton, *args, **kwargs)
 
-    def add_input_field(self, **kwargs): ...
+    @overload
+    def addLineEdit(self, **kwargs: Unpack[LineEditKwargs]) -> LineEdit: ...
+
+    @overload
+    def addLineEdit(self, arg__1: LineEdit) -> None: ...
+
+    def addLineEdit(self, *args, **kwargs) -> LineEdit | None:
+
+        # create the button if it doesn't exist or just add it to the layout,
+        # then return the FButton instance or None if it's already a widget
+        return self._process_kwargs(LineEdit, *args, **kwargs)

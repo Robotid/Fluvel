@@ -18,13 +18,8 @@ def demo_app(theme: str | None):
 
     if theme is not None:
         appconfig = {
-            "app": {
-                "theme": theme
-            },
-            "window_size": {
-                "width": 1280,
-                "height": 720
-            }
+            "app": {"theme": theme},
+            "window_size": {"width": 1280, "height": 720},
         }
 
     # App

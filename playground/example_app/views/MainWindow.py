@@ -11,6 +11,7 @@ class MainWindow(AppWindow):
     def setUpMainWindow(self):
         """Display the `components` in the Main Window."""
 
+        # self.demo_view = Demo(self.central_widget)
         self.demo_view = LoginPage(self.central_widget)
 
         # configure menu options
@@ -31,7 +32,7 @@ class MainWindow(AppWindow):
             ("modern-dark", "modern_dark_theme"),
             ("clean-light", "clean_light_theme"),
         )
-    
+
         for theme in themes:
 
             name, option = theme
@@ -49,7 +50,7 @@ class MainWindow(AppWindow):
         self.root.change_language(language)
 
         # self._init_core_ui()
-    
+
     def init_ui(self):
         # Screen size
 
@@ -61,5 +62,10 @@ class MainWindow(AppWindow):
 
         self.configure(
             title=f"{self.root.config.app_name} - {self.root.config.version}",
-            geometry=(x, y, self.root.config.window_width, self.root.config.window_height)
+            geometry=(
+                x,
+                y,
+                self.root.config.window_width,
+                self.root.config.window_height,
+            ),
         )

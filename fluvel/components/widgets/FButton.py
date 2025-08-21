@@ -34,14 +34,13 @@ ButtonStyles = Literal[
 
 
 class FButtonKwargs(TypedDict, total=False):
-    content_id: str | tuple | None
-    text: str | None
+    text: str | list | None
     textvariable: StringVar | None
     style: ButtonStyles | None
     checkable: bool | None
 
     # Signals
-    on_click: any 
+    on_click: any
     on_pressed: any
     on_released: any
     on_toggled: any
@@ -54,13 +53,12 @@ class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
 
     _MAPPING_METHODS = {
         "text": "setText",
-        "content_id": "setText",
         "checkable": "setCheckable",
         # Signals
         "on_click": "clicked",
         "on_pressed": "pressed",
         "on_released": "released",
-        "on_toggled": "toggled"
+        "on_toggled": "toggled",
     }
 
     def __init__(self, **kwargs: Unpack[FButtonKwargs]):
@@ -84,10 +82,10 @@ class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
 
 
 class FLinkButton(FButton):
-    def __init__(self, link: str, **kwargs: Unpack[FButtonKwargs]):
+    def __init__(self, url: str, **kwargs: Unpack[FButtonKwargs]):
         super().__init__(**kwargs)
-        self.link = link
+        self.url = url
         self.clicked.connect(self.open_link)
 
     def open_link(self):
-        QDesktopServices.openUrl(QUrl(self.link))
+        QDesktopServices.openUrl(QUrl(self.url))

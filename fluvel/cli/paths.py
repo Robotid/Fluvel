@@ -3,8 +3,7 @@ En este módulo se gestionan los paths usados en la CLI
 """
 
 from pathlib import Path
-import os
-import sys
+import os, sys
 
 # El directorio de trabajo del usuario
 PROJECT_ROOT = Path(os.getcwd())
@@ -14,7 +13,8 @@ sys.path.append(str(PROJECT_ROOT))
 
 MAINPY_ROOT = PROJECT_ROOT / "main.py"
 
+
+# TEMPLATES
 CLI_TEMPLATES = Path(__file__).parent / "templates"
-
-RELOADER_TEMPLATE = CLI_TEMPLATES / "reloader_template.py"
-
+from fluvel.cli.templates.mainpy_template import MAINPY_TEMPLATE
+from fluvel.cli.templates.reloader_template import RELOADER_TEMPLATE
