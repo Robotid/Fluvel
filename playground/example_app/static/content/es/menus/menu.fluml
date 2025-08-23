@@ -13,7 +13,7 @@
 
     # Opciones de Cierre
     @CloseSection
-    close_vurrent = "Cerrar"
+    close_current = "Cerrar"
     close_all = "Cerrar Todo"
 
     # Opciones de Guardado

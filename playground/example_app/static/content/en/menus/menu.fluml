@@ -13,7 +13,7 @@
 
     # Close options
     @CloseSection
-    close_vurrent = "Close"
+    close_current = "Close"
     close_all = "Close All"
 
     # Save options

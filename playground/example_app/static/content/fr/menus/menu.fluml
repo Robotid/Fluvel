@@ -1,0 +1,134 @@
+# Secciones del menú principal
+[Fichier]: # -> menú "Archivo"
+
+    @InitSection
+    new_file = "Nouveau fichier"
+    new_window = "Nouvelle fenêtre"
+    new_from_template = "Nouveau à partir d'un modèle"
+
+    # Opciones de Apertura
+    @OpenSection
+    open_file = "Ouvrir..."
+    open_recent = "Ouvrir les éléments récents"
+
+    # Opciones de Cierre
+    @CloseSection
+    close_current = "Fermer"
+    close_all = "Tout fermer"
+
+    # Opciones de Guardado
+    @SaveSection
+    save = "Enregistrer"
+    save_as = "Enregistrer sous..."
+    save_all = "Tout enregistrer"
+    
+    # Opciones de revertir (para control de versiones/autoguardado)
+    @RevertOptionsSection
+    browse_all_versions = "Parcourir toutes les versions..."
+
+    # Opciones de Impresión
+    @PrintSection
+    print_dialog = "Imprimer..."
+    page_setup = "Mise en page..."
+    print_preview = "Aperçu avant impression"
+
+    # Importar/Exportar/Compartir
+    @ImportExportShare
+    import = "Importer..."
+    export = "Exporter..."
+    export_as = "Exporter sous..."
+    share = "Partager..."
+
+    @QuitSection
+    quit = "Quitter"
+
+[Édition]: # -> menú "Editar"
+
+    undo = "Annuler"
+    redo = "Rétablir"
+    cut = "Couper"
+    copy = "Copier"
+    paste = "Coller"
+    paste_special = "Collage spécial..."
+    delete = "Supprimer"
+    select_all = "Tout sélectionner"
+    deselect = "Désélectionner"
+
+    # Opciones de Búsqueda
+    @FindSection
+    find = "Rechercher..."
+    find_next = "Rechercher le suivant"
+    find_previous = "Rechercher le précédent"
+    replace = "Remplacer"
+
+    # Ortografía y Gramática (para aplicaciones de texto)
+    @SpellingAndGrammarSection
+    check_document = "Vérifier le document"
+    check_while_typing = "Vérifier l'orthographe pendant la frappe"
+
+[Affichage]: # -> menú "Ver"
+
+    zoom_in = "Zoom avant"
+    zoom_out = "Zoom arrière"
+    actual_size = "Taille réelle"
+    fit_to_window = "Ajuster à la fenêtre"
+    full_screen = "Plein écran"
+
+    # Alternar Mostrar/Ocultar
+    @ShowHideSection
+    [Afficher]: # -> sub-menú 'Ocultar Ventanas'
+        toolbar = "Barre d'outils"        
+        sidebar = "Barre latérale"
+        rulers = "Règles"
+        grid = "Grille"
+        status_bar = "Barre d'état"
+        
+    # Opciones de Diseño
+    @LayoutSection
+    single_pane = "Volet unique"
+    two_panes = "Deux volets"
+    three_panes = "Trois volets"
+
+    # Opciones de Ordenar Por
+    @SortBySection
+    sort_by_name = "Nom"
+    sort_by_date_modified = "Date de modification"
+    sort_by_size = "Taille"
+
+[Fenêtre]: # -> menú "Ventana"
+
+    minimize = "Réduire"
+    zoom_maximize = "Zoom/Agrandir"
+    bring_all_to_front = "Tout ramener au premier plan"
+    arrange = "Organiser"
+
+[Paramètres]: # -> menú "Configuración"
+
+    preferences = "Préférences..."
+
+    [Thèmes]: # -> Temas
+        modern_dark_theme = "Moderne-Sombre"
+        bootstrap_theme = "Bootstrap"
+        clean_light_theme = "Clair-Net"
+        
+    [Langues]:
+        es_language = "Espagnol"
+        en_language = "Anglais"
+
+[Aide]: # -> menú "Ayuda"
+
+    [Options d'aide]: # -> Submenú desplegable "Opciones de Ayuda"
+        help_docs = "Aide"
+        keyboard_shortcuts = "Raccourcis clavier"
+        tutorials = "Tutoriels"
+    
+        @MoreHelp 
+        support = "Support"
+        licence = "Licence"
+
+    # Más opciones de ayuda
+    @MoreSection
+    version = "Version"
+    web_page = "Visitez notre site"
+    check_for_updates = "Rechercher les mises à jour"
+    about_app = "À propos de l'application"

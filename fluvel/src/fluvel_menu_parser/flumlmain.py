@@ -89,17 +89,14 @@ def parse_FLUML(file_path: Path | str) -> dict:
     return root
 
 
-def convert_FLUML_to_JSON(input_file: Path | str, output_file: Path | str) -> None:
+def convert_FLUML_to_JSON(input_file: Path) -> dict:
     """
     Convierte un archivo `.fluml` a `.json.`
     """
 
     try:
 
-        parsed_data = parse_FLUML(input_file)
-
-        with open(output_file, "w", encoding="utf-8") as f:
-            json.dump(parsed_data, f, indent=4, ensure_ascii=False)
+        return parse_FLUML(input_file)
 
     # Si en el proceso de conversión se detectó una sintaxis errónea
     except ValueError as e:

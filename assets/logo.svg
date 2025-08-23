@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.092314636"
-     inkscape:cx="2502.3118"
-     inkscape:cy="937.01285"
+     inkscape:zoom="0.26110522"
+     inkscape:cx="4117.1142"
+     inkscape:cy="1411.3084"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -108,7 +108,7 @@
      id="layer1"><g
        id="g15"
        style="display:inline;stroke:url(#linearGradient13);stroke-width:1.2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-       transform="rotate(180,1136.2469,245.87659)"
+       transform="matrix(-1.1890285,0,0,-1.1890285,2519.5363,560.74379)"
        inkscape:label="Logo-Color"><path
          style="fill:none;stroke:url(#linearGradient1);stroke-width:1.2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
          d="m 1110.3908,351.78689 -45.7417,45.76676 c -9.1593,11.89316 -5.341,22.95654 4.1055,30.36694 9.8874,6.49502 19.1248,4.71904 27.7123,-5.32813 l 100.1276,-100.40598 c 31.6551,-32.97861 55.3908,-110.26675 -35.8882,-188.93193 -1.0506,-0.90546 -68.5364,-66.000759 -77.8152,-76.744515 -4.6965,-5.438002 -45.0401,49.725115 -0.3243,83.583365 24.0993,18.24769 21.0426,42.83278 12.34,53.80848 -0.6406,0.80788 -22.7188,22.02746 -26.5527,29.36118 -10.0243,19.17505 -1.763,30.15576 0.7612,35.24551 0.1188,0.23962 -16.9146,15.97054 -1.444,29.81405 9.9672,8.91887 23.3348,-1.5823 42.2505,-22.27018 14.0137,-15.32658 36.2506,-33.38008 42.6011,-57.38279 9.0129,-34.06552 0.7776,-76.27053 -43.9957,-126.13845"
@@ -169,7 +169,7 @@
        id="g12"
        inkscape:label="Texto"
        style="stroke:#ffffff;stroke-width:0.9;stroke-dasharray:none;stroke-opacity:0.763158"
-       transform="translate(97.665418,73.469988)"><text
+       transform="matrix(1.1890285,0,0,1.1890285,-66.396507,63.393273)"><text
          xml:space="preserve"
          style="font-size:130.09px;font-family:'Noto Sans JP';-inkscape-font-specification:'Noto Sans JP';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#2c2c2c;fill-opacity:1;stroke:#ffffff;stroke-width:0.9;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:0.763158"
          x="855.36279"

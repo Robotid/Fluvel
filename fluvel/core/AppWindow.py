@@ -76,8 +76,11 @@ class AppWindow(QMainWindow):
             CONTENT_DIR / self.root.config.language / "menus" / "menu.fluml"
         )
 
-        # This is not an instance of QMenuBar
+        # This is an instance of QMenuBar
         self.menu_bar = MenuBar(parent=self, menu_file=menu_file)
+
+        # Adding the Menu Bar to the Window
+        self.setMenuBar(self.menu_bar)
 
     def update_ui(self):
         """

@@ -15,7 +15,7 @@ class LoginPage(ViewBuilder):
         body.Label(
             text=["title-sign-in"], style="h1 bold", alignment=body.CENTER_BOTTOM
         )
-
+        
         body.addSpacing(50)
 
         with self.Form(body) as form:

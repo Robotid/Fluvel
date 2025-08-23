@@ -13,7 +13,7 @@ También cuenta con DSLs (Domain Specific Languages) propios creados para centra
 ### Cómo crear menús a través de archivos `.fluml`
 Pequeña demostración construyendo los típicos menús de las aplicaciones usando el lenguaje `fluml`. 
 <br>
-```toml
+```
 [File]:
 
     new_text_file = "New Text File"
