@@ -7,7 +7,7 @@ from fluvel.components.widgets.FButton import FButton, FLinkButton
 
 from fluvel.components.widgets.FLabel import FLabel
 
-from fluvel.components.widgets.LineEdit import LineEdit
+from fluvel.components.widgets.FLineEdit import FLineEdit
 
 # Fluvel Custom Components
 from fluvel.components.widgets.FluvelCustom.FluvelCard import (
@@ -29,5 +29,5 @@ __all__ = [
     "WarningCard",
     "DangerCard",
     # Line Edit
-    "LineEdit",
+    "FLineEdit",
 ]

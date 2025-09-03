@@ -1,35 +1,23 @@
-# appconfig.toml
+[fluvel]
+DEV_MODE = true
 
-# Activalo solo cuando la aplicación esté en modo de desarrollo.
-# Esto controla el despliegue de varias funciones y métodos que Fluvel
-# implementa PARA EL PROGRAMADOR para facilitar el desarrollo de la app.
-DEV_MODE = false # ¡IMPORTANT!
-
-# Configuración general de la aplicación
 [app]
-app_name = "Fluvel Framework"
-version = "1.0.0"
-log_level = "INFO" # Nivel de registro: DEBUG, INFO, WARNING, ERROR, CRITICAL
-theme = "bootstrap"
+name = "Fluvel Framework"
+version = "0.1.0"
+author = "Robotid"
+homepage = "https://www.fluvel.com"
+licence = "MIT"
+copyright = "© 2025 Robotid"
+
+[ui]
+theme = "custom"
 language = "es"
 
-# Configuración del tamaño de la ventana principal
-[window_size]
-width = 680
-height = 420
-
-# Configuración de la base de datos (ejemplo, no se recomienda para credenciales sensibles)
-[database]
-host = "localhost"
-port = 5432
-user = "admin"
-password = "secure_password" # ¡Considera usar variables de entorno para esto en producción!
-
-# Otras configuraciones que podrías añadir
-[features]
-enable_hot_reloading = true
-
-[paths]
-# Rutas relativas a la raíz del proyecto para recursos específicos
-# Aunque 'utils/paths.py' manejará la lógica, puedes definir valores aquí si es necesario
-default_icon = "fluvel_icon.svg"
+[window]
+width = 720  
+height = 500
+min_width = 800
+min_height = 600
+resizable = true
+title_bar_hidden = false
+icon = "static/icons/app_icon.png"

@@ -1,3 +1,3 @@
-from .exceptions import ContentNotFoundError
+from .exceptions import ContentNotFoundError, ContentLoadingError
 
-__all__ = ["ContentNotFoundError"]
+__all__ = ["ContentNotFoundError", "ContentLoadingError"]

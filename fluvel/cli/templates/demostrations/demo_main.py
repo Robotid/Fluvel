@@ -3,16 +3,14 @@ import sys
 
 from fluvel.core import App
 from .DemoWindow import DemoWindow
-from fluvel.cli.paths import PROJECT_ROOT
 
 
 def demo_app(theme: str | None):
 
     config = "appconfig.toml"
 
-
     if theme is not None:
-       config = {
+        config = {
             "app": {"theme": theme},
             "window_size": {"width": 1280, "height": 720},
         }

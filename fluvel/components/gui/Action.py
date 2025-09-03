@@ -4,6 +4,7 @@ from typing import TypedDict, Unpack
 from fluvel.components.gui.StringVar import StringVar
 
 # PySide6
+from PySide6.QtWidgets import QWidget
 from PySide6.QtGui import QAction
 
 
@@ -13,11 +14,9 @@ class ActionKwargs(TypedDict, total=False):
 
 class Action(QAction):
 
-    _MAPPING_METHODS = {
-        "text": "setText"
-    }
+    _MAPPING_METHODS = {"text": "setText"}
 
-    def __init__(self, parent, **kwargs: Unpack[ActionKwargs]) -> None:
+    def __init__(self, parent: QWidget, **kwargs: Unpack[ActionKwargs]) -> None:
         super().__init__(parent)
 
         self.configure(**kwargs)

@@ -6,3 +6,11 @@ class ContentNotFoundError(Exception):
 
     def __init__(self, *args):
         super().__init__(*args)
+
+class ContentLoadingError(Exception):
+    """
+    Excepción que se lanza cuando se intenta
+    cargar los archivos .json a través del ContentHandler
+    """
+    def __init__(self, *args):
+        super().__init__(*args)

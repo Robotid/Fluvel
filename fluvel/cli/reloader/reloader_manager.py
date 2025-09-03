@@ -58,7 +58,7 @@ class HReloader(QObject):
         """
         Instancia la ventana principal por primera vez y la muestra.
         """
-        main_window_module = importlib.import_module("views.MainWindow")
+        main_window_module = importlib.import_module("window")
 
         self.main_window_instance = main_window_module.MainWindow(root=self.app_root)
         self.main_window_instance.show()
@@ -71,11 +71,19 @@ class HReloader(QObject):
         """
         try:
             views_path = self.project_path / "views"
+            static_path = self.project_path / "static"
+
             self.observer.schedule(self.event_handler, str(views_path), recursive=True)
+            self.observer.schedule(self.event_handler, str(static_path), recursive=True)
+
             self.observer.start()
-            print(f"Monitoreando cambios en: {views_path}")
+            print(f"Monitoring changes in: {views_path}")
+            print(f"Monitoring changes in: {static_path}")
+
         except FileNotFoundError:
-            print("Error: El directorio 'views/' no existe. No se puede monitorear.")
+            print(
+                'Error: The "views/" or "static/" directory does not exist. Cannot monitor.'
+            )
 
         self.app_root.aboutToQuit.connect(self.stop_file_monitoring)
 
@@ -86,13 +94,13 @@ class HReloader(QObject):
         if self.observer.is_alive():
             self.observer.stop()
             self.observer.join()
-            print("Monitoreo de archivos detenido.")
+            print("File monitoring stopped.")
 
     def on_file_changed(self) -> None:
         """
         Slot que se llama cuando cambia un archivo.
         """
-        print("Cambio detectado. Recargando la aplicación...")
+        print("Change detected. Reloading the application...")
         self.reload_and_update()
 
     def reload_and_update(self) -> None:
@@ -106,6 +114,13 @@ class HReloader(QObject):
                 try:
                     importlib.reload(sys.modules[module])
                 except Exception as e:
-                    print(f"Error recargando módulo {module}: {e}")
+                    print(f"Error reloading module {module}: {e}")
 
+        # Recargamos los qss
+        self.main_window_instance.root._set_theme()
+
+        # Recargamos el contenido de texto estático
+        self.main_window_instance.root._set_content()
+
+        # Actualizamos la UI
         self.main_window_instance.update_ui()

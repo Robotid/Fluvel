@@ -6,9 +6,11 @@ from fluvel.components.gui.StringVar import StringVar
 # PySide6
 from PySide6.QtWidgets import QMenu
 
+
 class MenuKwargs(TypedDict, total=False):
 
     title: str | StringVar | None
+
 
 class Menu(QMenu):
 

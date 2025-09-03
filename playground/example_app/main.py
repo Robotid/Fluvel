@@ -2,7 +2,7 @@
 
 import sys
 from fluvel.core import App
-from views.MainWindow import MainWindow
+from window import MainWindow
 
 
 def main():

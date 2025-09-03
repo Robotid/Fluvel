@@ -1,142 +1,146 @@
-# core.GlobalContent.py
-from pathlib import Path
-
 # Fluvel
-from fluvel.utils import filter_by_extension
-from fluvel.core.core_utils.content_loader import load_fluml
-from fluvel.src import convert_FLUML_to_HTML, convert_FLUML_to_JSON
 from fluvel.components.gui import StringVar
 
 
 class GlobalContent:
     """
-    Una clase que almacena como atributos de clase
-    estructuras de datos que contienen los recursos estáticos
-    del proyecto y sirve como modelo para el acceso a través de controladores.
+    Gestor del contenido de texto dinámico de la aplicación obtenidos de arhivos
+    `FLUML` o `JSON`
+
+    Almacena todo el contenido de la UI (texto general y menús) en diccionarios
+    estáticos (atributos de clase). Cada pieza de contenido se envuelve en un
+    objeto `StringVar` para permitir la reactividad en toda la aplicación.
+
+    Esta clase utiliza únicamente métodos estáticos, ya que no necesita ser
+    instanciada.
     """
 
     content_map: dict[str, StringVar] = {}
     menu_content: dict[str, StringVar] = {}
 
-    menu_counter: int = 0
-
-
-    @staticmethod
-    def initialize(content_path: Path | str) -> None:
+    @classmethod
+    def initialize(cls, menu_content: dict, static_content: dict) -> None:
         """
-        Este método carga y mapea a `ID: str -> CONTENT: StringVar` los
-        archivos `.fluml` de la aplicación o actualiza los existentes
-        con nuevos valores.
+        Inicializa o actualiza el estado del contenido global de la aplicación.
 
         Args:
-            content_path (Path | str): La ruta al directorio con los archivos .fluml.
+            menu_content (dict): Diccionario con los datos 'crudos' del menú.
+            static_content (dict): Diccionario con los datos 'crudos' del contenido estático.
         """
         # Se carga el contenido de la barra de menú de la aplicación
-        GlobalContent._initialize_menu_bar(content_path)
+        cls._load_menu(menu_content)
 
-        # Se inicia la carga del contenido estático de la aplicación    
-        GlobalContent._initialize_content(content_path)
-        
+        # Se inicia la carga del contenido estático de la aplicación
+        cls._load_static(static_content)
 
-    @staticmethod
-    def _initialize_content(content_path: Path | str):
+    @classmethod
+    def _load_static(cls, static_content: dict) -> None:
+        """
+        Carga el contenido estático en el mapa de estado `content_map`.
+        """
 
-        files = filter_by_extension(content_path, ".fluml")
+        cls._load_structure(static_content, "content_map")
 
-        fluml_content: str = ""
+    @classmethod
+    def _load_menu(cls, menu_content: dict) -> None:
+        """
+        Transforma y carga el contenido del menú en `menu_content`.
+        """
 
-        for file in files:
-            fluml_content += "{}\n".format(load_fluml(file))
+        # se 'aplana' el diccionario con la estructura del menú
+        menu_map: dict = cls._map_menu(menu_content)
 
-        html_content: dict = convert_FLUML_to_HTML(fluml_content)
+        # se carga o actualiza el contenido de 'GlobalContent.menu_content'
+        cls._load_structure(menu_map, "menu_content")
 
-        # Si el content_map no existe (al momento de la inicialización de la app)
-        if not GlobalContent.content_map:
+    @classmethod
+    def _load_structure(cls, structure: dict, map_name: str) -> None:
+        """
+        Puebla o actualiza un mapa de estado (`content_map` o `menu_content`).
 
-            for _id, text in html_content.items():
+        Distingue entre la carga inicial (creando nuevos StringVars) y las
+        cargas posteriores (actualizando los existentes).
 
-                GlobalContent.content_map[_id] = StringVar(text)
+        Args:
+            structure (dict): El diccionario de datos a cargar.
+            map_name (str): El nombre del atributo de clase a modificar.
+        """
+        map_to_modify: dict = getattr(cls, map_name)
 
-        # Si el content_map sí existe, entonces se actualizan los StringVars del 
+        if not map_to_modify:
+
+            for _id, text in structure.items():
+
+                map_to_modify[_id] = StringVar(text)
+
         else:
 
-            GlobalContent._update_content(html_content, "content_map")
+            cls._update_content(structure, map_name)
 
-
-    @staticmethod
-    def _initialize_menu_bar(content_path: Path | str) -> None:
-        
-        # La localización del archivo fluml
-        menu_file = content_path / "menus" / "menu.fluml"
-
-        # El diccionario JSON ya parseado
-        parsed_structure = convert_FLUML_to_JSON(menu_file)
-
-        # Se genera el map de los menu map
-        menu_map: dict = GlobalContent._map_menu(parsed_structure)
-
-        # Si el menu_content no existe (al momento de la inicialización de la app)
-        if not GlobalContent.menu_content:
-
-            for _id, text in menu_map.items():
-
-                GlobalContent.menu_content[_id] = StringVar(text)
-
-        # Si el menu_content sí existe, entonces se actualizan los StringVars del menu_content
-        else:
-
-            GlobalContent._update_content(menu_map, "menu_content")
-
-            
-           
     @staticmethod
     def _map_menu(items: dict) -> dict:
         """
-        Construye de forma recursiva un mapa de los menús y actions.
+        Transforma una estructura de menú anidada en un mapa plano (diccionario).
+
+        Esta función recorre recursivamente el diccionario del menú para asignar
+        IDs únicos a los submenús (QMenu) (ej. 'menu_0', 'menu_1') y mantener los IDs
+        originales para las acciones (QAction).
+
+        Args:
+            items (dict): El diccionario anidado que representa la estructura del menú.
+
+        Returns:
+            dict: Un diccionario plano donde cada clave es un ID único y cada valor
+                  es el texto a mostrar.
         """
 
         menu_map: dict = {}
 
-        def create_menu_map(items: dict, counter: int = 0) -> None:
+        def create_menu_map(items: dict, counter: int) -> int:
+            """
+            Función anidada recursiva para gestionar el estado del contador.
+            """
+
             for key, value in items.items():
 
                 if isinstance(value, str):
-                    # Caso 1: Es una acción o un separador
-                    if value == "---":
-                        continue
-                    else:
+
+                    # Es una acción de menú o un separador.
+                    if value != "---":
                         menu_map[key] = value
 
                 elif isinstance(value, dict):
-                    
-                    menu_key = f"menu_{GlobalContent.menu_counter}"
 
+                    # Es un submenú, por lo que se genera una clave única.
+                    menu_key = f"menu_{counter}"
+
+                    # El valor es el título del submenú
                     menu_map[menu_key] = key
 
-                    GlobalContent.menu_counter += 1
+                    counter += 1
 
-                    create_menu_map(value, counter)
-        
+                    # Llamada recursiva, pasando el contador actualizado.
+                    counter = create_menu_map(value, counter)
+
+            return counter
+
         # Se comienza a crear el menu map
-        create_menu_map(items)
+        create_menu_map(items, 0)
 
-        # Se reinicia el contador Global
-        GlobalContent.menu_counter = 0
-    
         return menu_map
 
-
-    @staticmethod
-    def _update_content(updated_content: dict, map_name: str) -> None:
+    @classmethod
+    def _update_content(cls, updated_content: dict, map_name: str) -> None:
         """
-        Actualiza el valor de los StringVars existentes con nuevos contenidos.
+        Actualiza la UI con un nuevo contenido `updated_content` al modificar
+        el atributo `base_text` de un `StringVar`.
 
         Args:
-            updated_content (dict): Un diccionario con los nuevos IDs y valores.
+            updated_content (dict): Un diccionario con los nuevos IDs y valores de texto..
             map_name (str): El nombre del diccionario en GlobalContent a actualizar.
-        """ 
+        """
 
-        map_to_update = getattr(GlobalContent, map_name)
+        map_to_update = getattr(cls, map_name)
 
         for _id, text in updated_content.items():
 

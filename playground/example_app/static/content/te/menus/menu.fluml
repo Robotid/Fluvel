@@ -1,0 +1,134 @@
+# ప్రధాన మెనూ విభాగాలు
+[ఫైల్]: # -> "ఫైల్" మెనూ
+
+    @InitSection
+    new_file = "కొత్త ఫైల్"
+    new_window = "కొత్త విండో"
+    new_from_template = "టెంప్లేట్ నుండి కొత్తది"
+
+    # తెరవడానికి ఎంపికలు
+    @OpenSection
+    open_file = "తెరవండి..."
+    open_recent = "ఇటీవలివి తెరవండి"
+
+    # మూసివేయడానికి ఎంపికలు
+    @CloseSection
+    close_current = "మూసివేయండి"
+    close_all = "అన్నీ మూసివేయండి"
+
+    # సేవ్ చేయడానికి ఎంపికలు
+    @SaveSection
+    save = "సేవ్ చేయండి"
+    save_as = "ఇలా సేవ్ చేయండి..."
+    save_all = "అన్నీ సేవ్ చేయండి"
+    
+    # వెనక్కి తీసుకునే ఎంపికలు (సంస్కరణ నియంత్రణ/ఆటోసేవ్ కోసం)
+    @RevertOptionsSection
+    browse_all_versions = "అన్ని సంస్కరణలను బ్రౌజ్ చేయండి..."
+
+    # ముద్రణ ఎంపికలు
+    @PrintSection
+    print_dialog = "ముద్రించండి..."
+    page_setup = "పేజీ సెటప్..."
+    print_preview = "ముద్రణ ప్రివ్యూ"
+
+    # దిగుమతి/ఎగుమతి/భాగస్వామ్యం
+    @ImportExportShare
+    import = "దిగుమతి..."
+    export = "ఎగుమతి..."
+    export_as = "ఇలా ఎగుమతి చేయండి..."
+    share = "భాగస్వామ్యం..."
+
+    @QuitSection
+    quit = "నిష్క్రమించండి"
+
+[సవరించు]: # -> "సవరించు" మెనూ
+
+    undo = "చర్యరద్దు"
+    redo = "పునఃచేయి"
+    cut = "కత్తిరించు"
+    copy = "కాపీ"
+    paste = "అతికించు"
+    paste_special = "ప్రత్యేకంగా అతికించు..."
+    delete = "తొలగించు"
+    select_all = "అన్నీ ఎంచుకోండి"
+    deselect = "ఎంపికను తీసివేయండి"
+
+    # కనుగొనడానికి ఎంపికలు
+    @FindSection
+    find = "కనుగొనండి..."
+    find_next = "తదుపరి కనుగొనండి"
+    find_previous = "మునుపటి కనుగొనండి"
+    replace = "భర్తీ చేయండి"
+
+    # స్పెల్లింగ్ మరియు వ్యాకరణం (టెక్స్ట్ అప్లికేషన్‌ల కోసం)
+    @SpellingAndGrammarSection
+    check_document = "పత్రాన్ని తనిఖీ చేయండి"
+    check_while_typing = "టైప్ చేస్తున్నప్పుడు స్పెల్లింగ్ తనిఖీ చేయండి"
+
+[వీక్షణ]: # -> "వీక్షణ" మెనూ
+
+    zoom_in = "జూమ్ ఇన్"
+    zoom_out = "జూమ్ అవుట్"
+    actual_size = "వాస్తవ పరిమాణం"
+    fit_to_window = "విండోకు సరిపోయేలా చేయండి"
+    full_screen = "పూర్తి స్క్రీన్"
+
+    # చూపించు/దాచు టోగుల్ చేయండి
+    @ShowHideSection
+    [విండోలను దాచు]: # -> 'విండోలను దాచు' ఉప-మెనూ
+        toolbar = "టూల్‌బార్"        
+        sidebar = "సైడ్‌బార్"
+        rulers = "రూలర్లు"
+        grid = "గ్రిడ్"
+        status_bar = "స్థితి బార్"
+        
+    # లేఅవుట్ ఎంపికలు
+    @LayoutSection
+    single_pane = "ఒకే పేన్"
+    two_panes = "రెండు పేన్‌లు"
+    three_panes = "మూడు పేన్‌లు"
+
+    # దీని ప్రకారం క్రమబద్ధీకరించు ఎంపికలు
+    @SortBySection
+    sort_by_name = "పేరు"
+    sort_by_date_modified = "సవరించిన తేదీ"
+    sort_by_size = "పరిమాణం"
+
+[విండో]: # -> "విండో" మెనూ
+
+    minimize = "కనిష్టీకరించు"
+    zoom_maximize = "జూమ్/గరిష్టీకరించు"
+    bring_all_to_front = "అన్నింటినీ ముందుకు తీసుకురండి"
+    arrange = "ఏర్పాటు చేయండి"
+
+[సెట్టింగ్‌లు]: # -> "సెట్టింగ్‌లు" మెనూ
+
+    preferences = "ప్రాధాన్యతలు..."
+
+    [థీమ్‌లు]: # -> థీమ్‌లు
+        modern_dark_theme = "ఆధునిక-చీకటి"
+        bootstrap_theme = "బూట్‌స్ట్రాప్"
+        clean_light_theme = "శుభ్రమైన కాంతి"
+        
+    [భాషలు]:
+        es_language = "స్పానిష్"
+        en_language = "ఇంగ్లీష్"
+
+[సహాయం]: # -> "సహాయం" మెనూ
+
+    [సహాయ ఎంపికలు]: # -> "సహాయ ఎంపికలు" డ్రాప్‌డౌన్ ఉపమెనూ
+        help_docs = "సహాయం"
+        keyboard_shortcuts = "కీబోర్డ్ సత్వరమార్గాలు"
+        tutorials = "ట్యుటోరియల్స్"
+    
+        @MoreHelp 
+        support = "మద్దతు"
+        licence = "లైసెన్స్"
+
+    # మరిన్ని సహాయ ఎంపికలు
+    @MoreSection
+    version = "సంస్కరణ"
+    web_page = "మమ్మల్ని సందర్శించండి"
+    check_for_updates = "నవీకరణల కోసం తనిఖీ చేయండి"
+    about_app = "యాప్ గురించి"

@@ -1,18 +1,20 @@
-# fluvel.core.AppWindow
-
-from pathlib import Path
 from typing import TypedDict, Unpack, Literal
 
 # Fluvel
 from fluvel.core import App
 from fluvel.core.MenuBar import MenuBar
+from fluvel.models import GlobalContent
+from fluvel._user.Config import AppConfig
+
+# Fluvel Controllers
+from fluvel.controllers.ContentHandler import ContentHandler
+from fluvel.controllers.main_controller import init_content
+
+# Core Process
 from fluvel.core.core_utils.core_process import configure_process
 
 # PySide6
 from PySide6.QtWidgets import QMainWindow, QWidget
-
-# Utils
-from fluvel.utils.paths import CONTENT_DIR
 
 InitialDisplay = Literal["FullScreen", "Maximized", "Minimized", "Normal"]
 
@@ -72,12 +74,10 @@ class AppWindow(QMainWindow):
         **`IMPORTANT`** Este método inicializa el proceso para la creación del menú dinámico.
         """
 
-        menu_file: Path = (
-            CONTENT_DIR / self.root.config.language / "menus" / "menu.fluml"
-        )
+        menu: dict = ContentHandler.MENU_CONTENT
 
         # This is an instance of QMenuBar
-        self.menu_bar = MenuBar(parent=self, menu_file=menu_file)
+        self.menu_bar = MenuBar(self, menu)
 
         # Adding the Menu Bar to the Window
         self.setMenuBar(self.menu_bar)
@@ -94,6 +94,18 @@ class AppWindow(QMainWindow):
         # Crea uno nuevo
         self._set_central_widget()
 
+        # Reiniciar contenido
+        GlobalContent.menu_content = {}
+        GlobalContent.content_map = {}
+
+        ContentHandler.current_lang = None
+        init_content(AppConfig.ui.language)
+
+        # Reiniciar menú
+        self.menu_bar.deleteLater()
+        self._set_menu_bar()
+
+        # Reiniciar vistas
         self.setUpMainWindow()
 
     def _set_central_widget(self) -> None:

@@ -96,9 +96,6 @@ class StringVar(QObject):
     def replace_markers(self) -> None:
         """
         Reemplaza los marcadores de posición ($0, $1, etc.) en el texto con los valores dados.
-
-        Args:
-            placeholders (tuple): Una tupla de cadenas o StringVars para los marcadores.
         """
 
         # El nuevo valor del StringVar

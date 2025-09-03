@@ -7,7 +7,7 @@ QPushButton {
     font-weight: 700; 
     text-align: center; 
     border: 1px solid #007bff;
-    border-radius: 1px;
+    border-radius: 5px;
     padding: 8px 16px; 
     outline: none;
 }
@@ -214,7 +214,7 @@ QPushButton[class~="danger-outlined"]:pressed {
 /* Estilo para un dark Button */
 
 QPushButton[class~="dark"] {
-    background-color: #232629;
+    background-color: #272923;
     border-color: #232629;
 }
 QPushButton[class~="dark"]:hover {

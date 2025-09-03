@@ -28,11 +28,11 @@ class LayoutBuilder(Generic[TLayout]):
         # an instance of HBoxLayout, QVBoxLayout, QGridLayout or QStackedLayout
         self.layout: TLayout = type_layout()
 
-        # Si el padre es un Layout
+        # the parent is a layout
         if isinstance(parent, QLayout):
             parent.addLayout(self.layout)
 
-        # Si el padre es un Widget
+        # the parent is a widget
         elif isinstance(parent, QWidget):
             parent.setLayout(self.layout)
 
@@ -62,22 +62,31 @@ class ViewBuilder(QObject, ABC, metaclass=VBMeta):
     la legibilidad y entendimiento a la hora de codificar.
     """
 
+    _parent: QWidget
+
     def __init__(self, parent: QWidget | QLayout) -> None:
         super().__init__()
 
-        if isinstance(parent, QLayout):
-
-            blank_container = QWidget(parent.parentWidget())
-
-            parent.addWidget(blank_container)
-
-            self.parent = blank_container
-
-        else:
-
-            self.parent = parent
+        self.parent = parent
 
         self.view()
+
+    @property
+    def parent(self) -> QWidget:
+        return self._parent
+
+    @parent.setter
+    def parent(self, parent: QWidget | QLayout) -> None:
+
+        if isinstance(parent, QWidget):
+            self._parent = parent
+
+        # El padre es un Layout, por lo que se crea
+        # un contenedor en blanco QWidget
+        elif isinstance(parent, QLayout):
+            blank_container = QWidget()
+            parent.addWidget(blank_container)
+            self._parent = blank_container
 
     def Vertical(self, parent: QLayout | QWidget) -> LayoutBuilder[VBoxLayout]:
         return LayoutBuilder(parent, VBoxLayout)
@@ -94,4 +103,5 @@ class ViewBuilder(QObject, ABC, metaclass=VBMeta):
     def Stacked(self, parent: QLayout | QWidget): ...
 
     @abstractmethod
-    def view(self) -> None: ...
+    def view(self) -> None:
+        pass

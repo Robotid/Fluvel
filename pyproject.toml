@@ -1,6 +1,6 @@
 [project]
 name = "fluvel"
-version = "0.1.0"
+version = "0.1.0a1"
 description = "A Python framework for building modern and declarative UIs with PySide6."
 authors = [
     {name = "robotid7@outlook.es"}
@@ -17,11 +17,16 @@ dependencies = [
 
 [tool.poetry]
 
-
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
 black = "^25.1.0"
 click = "^8.2.1"
+
+
+[[tool.poetry.source]]
+name = "pypi-test"
+url = "https://test.pypi.org/simple/"
+priority = "supplemental"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

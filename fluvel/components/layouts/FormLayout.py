@@ -1,6 +1,6 @@
 # Fluvel
 from fluvel.components.widgets import FLabel
-from fluvel.components.widgets import LineEdit
+from fluvel.components.widgets import FLineEdit
 from fluvel.core.abstract_models.FluvelLayout import FluvelLayout
 
 # PySide6
@@ -13,7 +13,7 @@ class FormLayout(QFormLayout, FluvelLayout):
 
     def add_row(
         self, label: str | list, field: str | list = None
-    ) -> tuple[FLabel, LineEdit]:
+    ) -> tuple[FLabel, FLineEdit]:
         """
         This method adds a row to the form.
         Args:
@@ -29,7 +29,7 @@ class FormLayout(QFormLayout, FluvelLayout):
         label_field = FLabel(text=[label])
 
         # el Widget LineEdit
-        input_field = LineEdit(placeholder_text=[field])
+        input_field = FLineEdit(placeholder_text=[field])
 
         # Añadiendo la Fila
         self.addRow(label_field, input_field)

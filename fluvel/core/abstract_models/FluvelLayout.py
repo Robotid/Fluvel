@@ -7,7 +7,8 @@ from fluvel.core.abstract_models.FluvelWidget import FluvelWidget
 # Fluvel Widgets
 from fluvel.components.widgets.FLabel import FLabel, FLabelKwargs
 from fluvel.components.widgets.FButton import FButton, FButtonKwargs
-from fluvel.components.widgets.LineEdit import LineEdit, LineEditKwargs
+from fluvel.components.widgets.FLineEdit import FLineEdit, FLineEditKwargs
+from fluvel.components.widgets.FCheckBox import FCheckBox, FCheckBoxKwargs
 
 # PySide6
 from PySide6.QtWidgets import QWidget, QLayout
@@ -96,7 +97,7 @@ class FluvelLayout(FluvelWidget):
         exists: bool = False
 
         # If the supplied argument is already a widget
-        if len(args) > 0:
+        if args:
             widget = args[0]
             exists = True
 
@@ -138,13 +139,25 @@ class FluvelLayout(FluvelWidget):
         return self._process_kwargs(FButton, *args, **kwargs)
 
     @overload
-    def addLineEdit(self, **kwargs: Unpack[LineEditKwargs]) -> LineEdit: ...
+    def LineEdit(self, **kwargs: Unpack[FLineEditKwargs]) -> FLineEdit: ...
 
     @overload
-    def addLineEdit(self, arg__1: LineEdit) -> None: ...
+    def LineEdit(self, arg__1: FLineEdit) -> None: ...
 
-    def addLineEdit(self, *args, **kwargs) -> LineEdit | None:
+    def LineEdit(self, *args, **kwargs) -> FLineEdit | None:
 
-        # create the button if it doesn't exist or just add it to the layout,
-        # then return the FButton instance or None if it's already a widget
-        return self._process_kwargs(LineEdit, *args, **kwargs)
+        # create the line edit if it doesn't exist or just add it to the layout,
+        # then return the FLineEdit instance or None if it's already a widget
+        return self._process_kwargs(FLineEdit, *args, **kwargs)
+    
+    @overload
+    def CheckBox(self, **kwargs: Unpack[FCheckBoxKwargs]) -> FCheckBox: ...
+    
+    @overload
+    def CheckBox(self, arg__1: FCheckBox) -> None: ...
+    
+    def CheckBox(self, *args, **kwargs) -> FCheckBox | None:
+        
+        # create the CheckBox if it doesn't exist or just add it to the layout,
+        # then return the FCheckBox instance or None if it's already a widget
+        return self._process_kwargs(FCheckBox, *args, **kwargs)

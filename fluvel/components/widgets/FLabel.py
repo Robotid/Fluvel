@@ -7,7 +7,7 @@ from fluvel.components.gui import StringVar
 
 # PySide6
 from PySide6.QtWidgets import QLabel
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTimer
 
 # Fluvel core utils
 from fluvel.core.core_utils import configure_process
@@ -17,20 +17,10 @@ LabelStyles = Literal["normal", "info", "success", "warning", "danger"]
 
 
 class FLabelKwargs(TypedDict, total=False):
-    text: str | list | None
-    textvariable: StringVar | None
-    alignment: Qt.AlignmentFlag | None
-    style: LabelStyles | None
-    # pixmap
-    # movie
-    # wordWrap
-    # indent
-    # margin
-    # scaled_contents
-    # text_interaction_flags
-    # has_selected_text
-    # selected_text
-    # buddy
+    text: str | list
+    textvariable: StringVar
+    alignment: Qt.AlignmentFlag
+    style: LabelStyles
 
 
 class FLabel(QLabel, FluvelWidget, FluvelTextWidget):

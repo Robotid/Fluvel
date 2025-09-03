@@ -1,0 +1,134 @@
+# أقسام القائمة الرئيسية
+[ملف]: # -> قائمة "ملف"
+
+    @InitSection
+    new_file = "ملف جديد"
+    new_window = "نافذة جديدة"
+    new_from_template = "جديد من قالب"
+
+    # خيارات الفتح
+    @OpenSection
+    open_file = "فتح..."
+    open_recent = "فتح الأخيرة"
+
+    # خيارات الإغلاق
+    @CloseSection
+    close_current = "إغلاق"
+    close_all = "إغلاق الكل"
+
+    # خيارات الحفظ
+    @SaveSection
+    save = "حفظ"
+    save_as = "حفظ باسم..."
+    save_all = "حفظ الكل"
+    
+    # خيارات التراجع (للتحكم في الإصدار/الحفظ التلقائي)
+    @RevertOptionsSection
+    browse_all_versions = "تصفح جميع الإصدارات..."
+
+    # خيارات الطباعة
+    @PrintSection
+    print_dialog = "طباعة..."
+    page_setup = "إعداد الصفحة..."
+    print_preview = "معاينة الطباعة"
+
+    # استيراد/تصدير/مشاركة
+    @ImportExportShare
+    import = "استيراد..."
+    export = "تصدير..."
+    export_as = "تصدير باسم..."
+    share = "مشاركة..."
+
+    @QuitSection
+    quit = "خروج"
+
+[تحرير]: # -> قائمة "تحرير"
+
+    undo = "تراجع"
+    redo = "إعادة"
+    cut = "قص"
+    copy = "نسخ"
+    paste = "لصق"
+    paste_special = "لصق خاص..."
+    delete = "حذف"
+    select_all = "تحديد الكل"
+    deselect = "إلغاء التحديد"
+
+    # خيارات البحث
+    @FindSection
+    find = "بحث..."
+    find_next = "بحث عن التالي"
+    find_previous = "بحث عن السابق"
+    replace = "استبدال"
+
+    # التدقيق الإملائي والنحوي (للتطبيقات النصية)
+    @SpellingAndGrammarSection
+    check_document = "فحص المستند"
+    check_while_typing = "التدقيق الإملائي أثناء الكتابة"
+
+[عرض]: # -> قائمة "عرض"
+
+    zoom_in = "تكبير"
+    zoom_out = "تصغير"
+    actual_size = "الحجم الفعلي"
+    fit_to_window = "ملائمة للنافذة"
+    full_screen = "ملء الشاشة"
+
+    # تبديل إظهار/إخفاء
+    @ShowHideSection
+    [إخفاء النوافذ]: # -> قائمة فرعية 'إخفاء النوافذ'
+        toolbar = "شريط الأدوات"        
+        sidebar = "الشريط الجانبي"
+        rulers = "المساطر"
+        grid = "الشبكة"
+        status_bar = "شريط الحالة"
+        
+    # خيارات التخطيط
+    @LayoutSection
+    single_pane = "جزء واحد"
+    two_panes = "جزأين"
+    three_panes = "ثلاثة أجزاء"
+
+    # خيارات الفرز حسب
+    @SortBySection
+    sort_by_name = "الاسم"
+    sort_by_date_modified = "تاريخ التعديل"
+    sort_by_size = "الحجم"
+
+[نافذة]: # -> قائمة "نافذة"
+
+    minimize = "تصغير"
+    zoom_maximize = "تكبير/تصغير"
+    bring_all_to_front = "إحضار الكل إلى الأمام"
+    arrange = "ترتيب"
+
+[إعدادات]: # -> قائمة "إعدادات"
+
+    preferences = "تفضيلات..."
+
+    [سمات]: # -> سمات
+        modern_dark_theme = "حديث-داكن"
+        bootstrap_theme = "بوتستراب"
+        clean_light_theme = "فاتح نظيف"
+        
+    [لغات]:
+        es_language = "الإسبانية"
+        en_language = "الإنجليزية"
+
+[مساعدة]: # -> قائمة "مساعدة"
+
+    [خيارات المساعدة]: # -> قائمة فرعية منسدلة "خيارات المساعدة"
+        help_docs = "مساعدة"
+        keyboard_shortcuts = "اختصارات لوحة المفاتيح"
+        tutorials = "دروس"
+    
+        @MoreHelp 
+        support = "الدعم"
+        licence = "الترخيص"
+
+    # المزيد من خيارات المساعدة
+    @MoreSection
+    version = "الإصدار"
+    web_page = "زورونا"
+    check_for_updates = "التحقق من وجود تحديثات"
+    about_app = "حول التطبيق"

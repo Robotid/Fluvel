@@ -1,9 +1,10 @@
-from fluvel.utils import APP_ROOT
+from fluvel._user import USER_FOLDER
 
 _DEFAULT_MENU_OPTIONS = """
-# This module updates dynamically depending on your project's menu options.
+# This module is dynamically updated according to the project menu options.
 
 from typing import Literal
+
 MenuOptions = Literal["nothing yet"]
 """
 
@@ -13,7 +14,7 @@ def set_dynamic_menu_keys(menu_options: list, moduleExists: bool = True) -> None
     Esta función genera dinámicamente en el módulo `project/MenuOptions.py` el `MenuOptions: Literal`
     """
 
-    menu_file = APP_ROOT / "project" / "MenuOptions.py"
+    menu_file = USER_FOLDER / "MenuOptions.py"
 
     if moduleExists:
 

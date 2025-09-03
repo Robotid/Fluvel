@@ -1,19 +1,14 @@
 # fluvel.core.MenuBar
-import json
 from typing import Literal
-from pathlib import Path
 
 # Fluvel
 from fluvel.components.gui.Action import Action
 from fluvel.components.widgets.Menu import Menu
 from fluvel.models.GlobalContent import GlobalContent
+from fluvel._user import AppConfig
 
-# PySide6 Importations
-from PySide6.QtGui import QAction
+# PySide6
 from PySide6.QtWidgets import QMenuBar, QMainWindow
-
-# FLUML Parse
-from fluvel.src import convert_FLUML_to_JSON
 
 # Utils
 from fluvel._user.MenuOptions import MenuOptions
@@ -127,7 +122,7 @@ StandardActionShortcut = Literal[
 
 class MenuBar(QMenuBar):
 
-    def __init__(self, parent: QMainWindow, menu_file: Path):
+    def __init__(self, parent: QMainWindow, menu: dict):
         super().__init__(parent)
 
         # The names of all menu options will be added to this list.
@@ -135,27 +130,22 @@ class MenuBar(QMenuBar):
 
         # IMPORTANT MAIN PROCESS
 
-        self.menu_counter: int = 0
-
-        # Step 1
-        # Start the conversion process to JSON and provide an output file path
-        parsed_structure = convert_FLUML_to_JSON(menu_file)
-
         # Step 2
         # Decoding and assembling the menu structure
-        self._create_menus(parsed_structure)
+        self._create_menus(menu)
 
         # Step 3
         # Generate the literal that contains all menu options
-        set_dynamic_menu_keys(self.all_menu_options)
+        if AppConfig.fluvel.DEV_MODE:
+            set_dynamic_menu_keys(self.all_menu_options)
 
     def _create_menus(self, structure) -> None:
         """
         Inicializa la creación de los menús de nivel superior.\n
         """
-        self._structure_menu(self, structure)
+        self._structure_menu(self, structure, 0)
 
-    def _structure_menu(self, parent_menu: QMenuBar, items: dict) -> None:
+    def _structure_menu(self, parent_menu: QMenuBar, items: dict, counter: int) -> int:
         """
         Función recursiva que forma un menú (o barra de menú) con acciones y submenús.
 
@@ -163,6 +153,7 @@ class MenuBar(QMenuBar):
             parent_menu: El QMenu o QMenuBar al que se añadirán los elementos.
             items: Un diccionario con la configuración de los elementos del menú.
         """
+
         for key, value in items.items():
 
             if isinstance(value, str):
@@ -170,7 +161,7 @@ class MenuBar(QMenuBar):
                 if value == "---":
                     parent_menu.addSeparator()
                 else:
-                    
+
                     # El StringVar obtenido de GlobalContent
                     action_text = GlobalContent.menu_content[key]
 
@@ -189,11 +180,11 @@ class MenuBar(QMenuBar):
             elif isinstance(value, dict):
 
                 # El ID del Menú o Submenú en Globalcontent
-                submenu_name = f"menu_{self.menu_counter}"
+                submenu_name = f"menu_{counter}"
 
                 # El StringVar obtenido de GlobalContent
                 menu_text = GlobalContent.menu_content[submenu_name]
-                
+
                 # El QMenu conectado al StringVar
                 submenu = Menu(self, title=menu_text)
 
@@ -201,16 +192,14 @@ class MenuBar(QMenuBar):
                 parent_menu.addMenu(submenu)
 
                 # Aumentamos en 1 el contador
-                self.menu_counter += 1
+                counter += 1
 
-                self._structure_menu(submenu, value)
+                counter = self._structure_menu(submenu, value, counter)
+
+        return counter
 
     def bind(
-        self, 
-        menu_option: 
-        MenuOptions, 
-        action: ActionTypes, 
-        controller: any
+        self, menu_option: MenuOptions, action: ActionTypes, controller: callable
     ) -> None:
         """
         Args:
@@ -242,7 +231,7 @@ class MenuBar(QMenuBar):
         self,
         menu_option: MenuOptions,
         new_shortcut: StandardActionShortcut,
-        controller: any,
+        controller: callable,
     ) -> None:
         """
         Args:

@@ -13,8 +13,8 @@ from fluvel.core.core_utils.core_process import configure_process
 
 
 class FCheckBoxKwargs(TypedDict, total=False):
-    text: str | list | None
-    textvariable: StringVar | None
+    text: str | list
+    textvariable: StringVar
 
 
 class FCheckBox(QCheckBox, FluvelTextWidget, FluvelWidget):

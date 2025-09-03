@@ -1,0 +1,134 @@
+# Seções do Menu Principal
+[Arquivo]: # -> menu "Arquivo"
+
+    @InitSection
+    new_file = "Novo Arquivo"
+    new_window = "Nova Janela"
+    new_from_template = "Novo a partir de Modelo"
+
+    # Opções de Abertura
+    @OpenSection
+    open_file = "Abrir..."
+    open_recent = "Abrir Recentes"
+
+    # Opções de Fechamento
+    @CloseSection
+    close_current = "Fechar"
+    close_all = "Fechar Tudo"
+
+    # Opções de Salvamento
+    @SaveSection
+    save = "Salvar"
+    save_as = "Salvar Como..."
+    save_all = "Salvar Tudo"
+    
+    # Opções de reverter (para controle de versão/salvamento automático)
+    @RevertOptionsSection
+    browse_all_versions = "Navegar por Todas as Versões..."
+
+    # Opções de Impressão
+    @PrintSection
+    print_dialog = "Imprimir..."
+    page_setup = "Configurar Página..."
+    print_preview = "Visualizar Impressão"
+
+    # Importar/Exportar/Compartilhar
+    @ImportExportShare
+    import = "Importar..."
+    export = "Exportar..."
+    export_as = "Exportar Como..."
+    share = "Compartilhar..."
+
+    @QuitSection
+    quit = "Sair"
+
+[Editar]: # -> menu "Editar"
+
+    undo = "Desfazer"
+    redo = "Refazer"
+    cut = "Recortar"
+    copy = "Copiar"
+    paste = "Colar"
+    paste_special = "Colar Especial..."
+    delete = "Excluir"
+    select_all = "Selecionar Tudo"
+    deselect = "Desselecionar"
+
+    # Opções de Busca
+    @FindSection
+    find = "Localizar..."
+    find_next = "Localizar Próximo"
+    find_previous = "Localizar Anterior"
+    replace = "Substituir"
+
+    # Ortografia e Gramática (para aplicativos de texto)
+    @SpellingAndGrammarSection
+    check_document = "Verificar Documento"
+    check_while_typing = "Verificar Ortografia ao Digitar"
+
+[Exibir]: # -> menu "Exibir"
+
+    zoom_in = "Aproximar"
+    zoom_out = "Afastar"
+    actual_size = "Tamanho Real"
+    fit_to_window = "Ajustar à Janela"
+    full_screen = "Tela Cheia"
+
+    # Alternar Mostrar/Ocultar
+    @ShowHideSection
+    [Ocultar Janelas]: # -> submenu 'Ocultar Janelas'
+        toolbar = "Barra de Ferramentas"        
+        sidebar = "Barra Lateral"
+        rulers = "Réguas"
+        grid = "Grade"
+        status_bar = "Barra de Status"
+        
+    # Opções de Layout
+    @LayoutSection
+    single_pane = "Painel Único"
+    two_panes = "Dois Painéis"
+    three_panes = "Três Painéis"
+
+    # Opções de Ordenar Por
+    @SortBySection
+    sort_by_name = "Nome"
+    sort_by_date_modified = "Data de Modificação"
+    sort_by_size = "Tamanho"
+
+[Janela]: # -> menu "Janela"
+
+    minimize = "Minimizar"
+    zoom_maximize = "Zoom/Maximizar"
+    bring_all_to_front = "Trazer Tudo para a Frente"
+    arrange = "Organizar"
+
+[Configurações]: # -> menu "Configurações"
+
+    preferences = "Preferências..."
+
+    [Temas]: # -> Temas
+        modern_dark_theme = "Moderno-Escuro"
+        bootstrap_theme = "Bootstrap"
+        clean_light_theme = "Claro Limpo"
+        
+    [Idiomas]:
+        es_language = "Espanhol"
+        en_language = "Inglês"
+
+[Ajuda]: # -> menu "Ajuda"
+
+    [Opções de Ajuda]: # -> submenu suspenso "Opções de Ajuda"
+        help_docs = "Ajuda"
+        keyboard_shortcuts = "Atalhos de Teclado"
+        tutorials = "Tutoriais"
+    
+        @MoreHelp 
+        support = "Suporte"
+        licence = "Licença"
+
+    # Mais opções de ajuda
+    @MoreSection
+    version = "Versão"
+    web_page = "Visite-nos"
+    check_for_updates = "Verificar Atualizações"
+    about_app = "Sobre o App"

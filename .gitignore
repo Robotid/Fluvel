@@ -15,3 +15,5 @@ __pycache__/
 # Archivos de datos temporales o generados
 *.env
 .env.local
+
+fluvel/customizer

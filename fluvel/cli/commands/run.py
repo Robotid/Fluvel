@@ -1,8 +1,7 @@
-import click, subprocess, sys, importlib
+import click, subprocess, sys, importlib, os
 
 # Fluvel
 from fluvel.cli.paths import MAINPY_ROOT, PROJECT_ROOT, RELOADER_TEMPLATE
-
 
 @click.command()
 @click.option("--debug", "-d", is_flag=True, help="Enable hot-reloading")
@@ -14,7 +13,7 @@ def run(debug: bool) -> None:
     # Si se inicializa en modo debug/hot-reloading
     if debug:
 
-        click.echo("hot-reloading enabled")
+        click.echo("Hot Reloading Enabled")
         start_monitoring()
 
     else:
@@ -32,7 +31,6 @@ def run(debug: bool) -> None:
 
         # Try to run main.py
         try:
-
             click.echo("initializing...")
             subprocess.run(command, check=True)
 
@@ -41,7 +39,6 @@ def run(debug: bool) -> None:
             click.echo("---")
             click.echo("Details of the error from main.py:")
             click.echo(e.stderr)
-
 
 def start_monitoring() -> None:
     """
@@ -58,6 +55,9 @@ def start_monitoring() -> None:
             f.write(RELOADER_TEMPLATE)
 
     reloader_module = importlib.import_module("reloader")
+
+    # Al finalizar, se borra el archivo reloader.py
+    os.remove(reloader_file)
 
     # Se llama a la función main del modulo
     reloader_module.main()

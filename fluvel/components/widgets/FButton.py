@@ -34,16 +34,16 @@ ButtonStyles = Literal[
 
 
 class FButtonKwargs(TypedDict, total=False):
-    text: str | list | None
-    textvariable: StringVar | None
-    style: ButtonStyles | None
-    checkable: bool | None
+    text: str | list
+    textvariable: StringVar
+    style: ButtonStyles
+    checkable: bool
 
     # Signals
-    on_click: any
-    on_pressed: any
-    on_released: any
-    on_toggled: any
+    on_click: callable
+    on_pressed: callable
+    on_released: callable
+    on_toggled: callable
 
 
 class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
@@ -51,7 +51,7 @@ class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
     Clase base de **`Fluvel`** para **`QPushButton`**.
     """
 
-    _MAPPING_METHODS = {
+    _MAPPING_METHODS: dict = {
         "text": "setText",
         "checkable": "setCheckable",
         # Signals

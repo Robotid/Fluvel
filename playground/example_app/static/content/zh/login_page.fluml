@@ -1,0 +1,23 @@
+[title-sign-in]:
+    登录
+
+[form-user-field]:
+    用户:
+
+[form-user-field-behind]:
+    用户
+
+[form-password-field]:
+    密码:
+
+[form-password-field-behind]:
+    密码
+
+[lbl-forgotten-password]:
+    {忘记密码？ | https://support.google.com/a/answer/33310?hl=es&co=DASHER._Family%3DDomain-verified}
+
+[btn-register]:
+    注册
+
+[btn-sign-in]:
+    登录

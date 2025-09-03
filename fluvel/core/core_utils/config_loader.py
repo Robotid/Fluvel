@@ -1,32 +1,6 @@
-import toml
-import json
+import toml, json
 from pathlib import Path
 from fluvel.utils import APP_ROOT
-
-
-def get_default_config() -> dict:
-    """
-    **[`UNUSED]`** `returns` a `dict` with a default configuration format
-    if no initial config file is provided or an `Exception` was thrown while trying to load one.
-    """
-    default_config: dict = {
-        "app": {
-            "app_name": "Unknown App",
-            "version": "N/A",
-            "log_level": "INFO",
-            "theme": "clean-light",
-        },
-        "window_size": {"width": 640, "height": 480},
-        "database": {
-            "host": "localhost",
-            "port": 5432,
-            "user": "admin",
-            "password": "secure_password",
-        },
-    }
-
-    return default_config
-
 
 def load_file(file_path: Path | str) -> dict | None:
     """
@@ -59,7 +33,7 @@ def load_file(file_path: Path | str) -> dict | None:
 
     # Si hay un fallo al decodificar el JSON
     except (json.JSONDecodeError, toml.TomlDecodeError) as e:
-        print(f"Error: El archivo '{config_path}' no es un JSON válido.")
+        print(f"Error: El archivo '{config_path}' no es un JSON/TOML válido.")
 
     # Cualquier otro tipo de fallo
     except Exception as e:
@@ -67,18 +41,3 @@ def load_file(file_path: Path | str) -> dict | None:
 
     # En caso de excepción, retornar none
     return None
-
-
-def load_app_config(app_config: Path | str | dict, default_config: dict = {}) -> dict:
-    """
-    Esta función carga y devuelve la configuración de la aplicación.
-    """
-
-    if isinstance(app_config, dict):
-        return app_config
-
-    if isinstance(app_config, (str, Path)):
-
-        config = load_file(app_config)
-
-        return default_config if config is None else config

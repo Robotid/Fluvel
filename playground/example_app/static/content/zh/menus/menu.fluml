@@ -1,0 +1,134 @@
+# 主菜单部分
+[文件]: # -> "文件" 菜单
+
+    @InitSection
+    new_file = "新建文件"
+    new_window = "新建窗口"
+    new_from_template = "从模板新建"
+
+    # 打开选项
+    @OpenSection
+    open_file = "打开..."
+    open_recent = "打开最近文件"
+
+    # 关闭选项
+    @CloseSection
+    close_current = "关闭"
+    close_all = "全部关闭"
+
+    # 保存选项
+    @SaveSection
+    save = "保存"
+    save_as = "另存为..."
+    save_all = "全部保存"
+    
+    # 恢复选项 (用于版本控制/自动保存)
+    @RevertOptionsSection
+    browse_all_versions = "浏览所有版本..."
+
+    # 打印选项
+    @PrintSection
+    print_dialog = "打印..."
+    page_setup = "页面设置..."
+    print_preview = "打印预览"
+
+    # 导入/导出/共享
+    @ImportExportShare
+    import = "导入..."
+    export = "导出..."
+    export_as = "导出为..."
+    share = "共享..."
+
+    @QuitSection
+    quit = "退出"
+
+[编辑]: # -> "编辑" 菜单
+
+    undo = "撤销"
+    redo = "重做"
+    cut = "剪切"
+    copy = "复制"
+    paste = "粘贴"
+    paste_special = "选择性粘贴..."
+    delete = "删除"
+    select_all = "全选"
+    deselect = "取消选择"
+
+    # 查找选项
+    @FindSection
+    find = "查找..."
+    find_next = "查找下一个"
+    find_previous = "查找上一个"
+    replace = "替换"
+
+    # 拼写和语法 (用于文本应用)
+    @SpellingAndGrammarSection
+    check_document = "检查文档"
+    check_while_typing = "键入时检查拼写"
+
+[视图]: # -> "视图" 菜单
+
+    zoom_in = "放大"
+    zoom_out = "缩小"
+    actual_size = "实际大小"
+    fit_to_window = "适应窗口"
+    full_screen = "全屏"
+
+    # 切换显示/隐藏
+    @ShowHideSection
+    [隐藏窗口]: # -> '隐藏窗口' 子菜单
+        toolbar = "工具栏"        
+        sidebar = "侧边栏"
+        rulers = "标尺"
+        grid = "网格"
+        status_bar = "状态栏"
+        
+    # 布局选项
+    @LayoutSection
+    single_pane = "单窗格"
+    two_panes = "双窗格"
+    three_panes = "三窗格"
+
+    # 排序方式选项
+    @SortBySection
+    sort_by_name = "名称"
+    sort_by_date_modified = "修改日期"
+    sort_by_size = "大小"
+
+[窗口]: # -> "窗口" 菜单
+
+    minimize = "最小化"
+    zoom_maximize = "缩放/最大化"
+    bring_all_to_front = "全部置于顶层"
+    arrange = "排列"
+
+[设置]: # -> "设置" 菜单
+
+    preferences = "偏好设置..."
+
+    [主题]: # -> 主题
+        modern_dark_theme = "现代深色"
+        bootstrap_theme = "Bootstrap"
+        clean_light_theme = "简洁浅色"
+        
+    [语言]:
+        es_language = "西班牙语"
+        en_language = "英语"
+
+[帮助]: # -> "帮助" 菜单
+
+    [帮助选项]: # -> "帮助选项" 下拉子菜单
+        help_docs = "帮助"
+        keyboard_shortcuts = "键盘快捷键"
+        tutorials = "教程"
+    
+        @MoreHelp 
+        support = "支持"
+        licence = "许可证"
+
+    # 更多帮助选项
+    @MoreSection
+    version = "版本"
+    web_page = "访问我们"
+    check_for_updates = "检查更新"
+    about_app = "关于应用"

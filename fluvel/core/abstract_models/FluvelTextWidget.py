@@ -38,11 +38,6 @@ class FluvelTextWidget:
                 place_id, "placeholder_text", "setPlaceholderText", **kwargs
             )
 
-            if "password" in place_id and isinstance(self, QLineEdit):
-
-                # Changing the echo mode to password
-                self.setEchoMode(self.EchoMode.Password)
-
         if "textvariable" in kwargs:
 
             kwargs = self._is_text_variable(**kwargs)
