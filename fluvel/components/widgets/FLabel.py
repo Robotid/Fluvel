@@ -10,7 +10,7 @@ from PySide6.QtWidgets import QLabel
 from PySide6.QtCore import Qt, QTimer
 
 # Fluvel core utils
-from fluvel.core.core_utils import configure_process
+from fluvel.core.tools import configure_process
 
 
 LabelStyles = Literal["normal", "info", "success", "warning", "danger"]

@@ -16,5 +16,3 @@ MAINPY_ROOT = PROJECT_ROOT / "main.py"
 
 # TEMPLATES
 CLI_TEMPLATES = Path(__file__).parent / "templates"
-from fluvel.cli.templates.mainpy_template import MAINPY_TEMPLATE
-from fluvel.cli.templates.reloader_template import RELOADER_TEMPLATE

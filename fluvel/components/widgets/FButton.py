@@ -6,12 +6,12 @@ from fluvel.core.abstract_models.FluvelTextWidget import FluvelTextWidget
 from fluvel.components.gui import StringVar
 
 # PySide6
-from PySide6.QtWidgets import QPushButton, QSizePolicy
+from PySide6.QtWidgets import QPushButton
 from PySide6.QtCore import Qt, QUrl
 from PySide6.QtGui import QDesktopServices
 
 # Fluvel core utils
-from fluvel.core.core_utils import configure_process
+from fluvel.core.tools import configure_process
 
 ButtonStyles = Literal[
     "primary",
@@ -69,8 +69,6 @@ class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
 
         # Aplicar el cursor de puntero
         self.setCursor(Qt.PointingHandCursor)
-
-        self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
 
         self.configure(**kwargs)
 

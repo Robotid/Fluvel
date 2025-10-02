@@ -9,7 +9,7 @@ from fluvel.components.gui import StringVar
 from PySide6.QtWidgets import QCheckBox
 
 # Core-Utils
-from fluvel.core.core_utils.core_process import configure_process
+from fluvel.core.tools.core_process import configure_process
 
 
 class FCheckBoxKwargs(TypedDict, total=False):

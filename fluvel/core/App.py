@@ -1,22 +1,34 @@
-# Fluvel
+import sys, importlib
 
+# Fluvel
 from fluvel.controllers.main_controller import init_content
-from fluvel._user.Config import AppConfig
+from fluvel._user.GlobalConfig import AppConfig
+from fluvel.core.Router import Router
+from fluvel.controllers.ContentHandler import ContentHandler
 
 # PySide6
 from PySide6.QtWidgets import QApplication
 
-# Utils
-from .core_utils.theme_loader import load_style_sheet
-from fluvel.utils.paths import THEMES_DIR
+# Exception Handler
+from fluvel.core.exceptions.expect_handler import expect
 
+class FluvelApp:
 
-class App(QApplication):
+    def __init__(self, window_module_path: str | None = None, config_file: str = "appconfig.toml") -> None:
+        
+        # The instance of QApplication
+        self._app = QApplication()
+        
+        # Start initial config
+        self._load(config_file)
 
-    def __init__(self, argv: list) -> None:
-        super().__init__(argv)
+        # The instance of AppWindow(QMainWindow)
+        self.main_window = self._create_main_window(window_module_path)
 
-    def load(self, filename: str) -> None:
+        # Start router config
+        Router.init(self.main_window)
+
+    def _load(self, filename: str) -> None:
         """
         **IMPORTANT** Only supports TOML or JSON config files with the ***same*** configuration format.\n
         This method is responsible for loading the application's
@@ -24,13 +36,51 @@ class App(QApplication):
         *If you have or want to create a different configuration style (format),
         update the **`properties`** and the **`set_config_format()`** method of the **`project.AppConfig`** class.*
         """
-
         AppConfig.init_config(filename)
 
         # Se cargan los contenidos estáticos de la ui
         self.set_static_content()
 
-    def set_static_content(self):
+    def _create_main_window(self, window_module_path: str | None):
+        
+        # The default is "window" if no alternative module defining AppWindow is provided.
+        window_module_path = "window" if not window_module_path else window_module_path
+        
+        # Loading module
+        window_module = importlib.import_module(window_module_path)
+
+        # Return an instance of MainWindow(AppWindow)
+        return window_module.MainWindow(self)
+
+    def run(self) -> None:
+        """
+        Starts the application's event loop.
+        """
+
+        # Display window
+        self.main_window.show()
+
+        # Init mainloop
+        sys.exit(self._app.exec())
+
+    @expect.ErrorImportingModule(stop=True)
+    def register(self, initial: str, views: list[str]) -> None:
+        """
+        Registra las vistas de la aplicación.
+        
+        :param initial: Nombre de la ruta de la vista inicial.
+        :type initial: str
+        :param views: Nombres de los módulos de las vistas.
+        :type views: list[str]
+        """
+        # Importing view modules
+        for view_name in views:
+            importlib.import_module(view_name)
+
+        # Show initial view
+        Router.show(initial)
+                
+    def set_static_content(self) -> None:
         """
         Este método gestiona la carga de contenido estático de la aplicación.\n
         El orden de implementación no debería ser un problema.
@@ -48,23 +98,12 @@ class App(QApplication):
         """
 
         # Esto provee una apariencia consistente en todas las plataformas antes de aplicar los estilos QSS
-        self.setStyle("Fusion")
+        self._app.setStyle("Fusion")
 
-        # Directorio donde se encuentran los archivos qss de los componentes
-        theme_path = THEMES_DIR / AppConfig.ui.theme
-
-        # Lista con los archivos .qss
-        qss_files: list = theme_path.rglob("*.qss")
-
-        # Contenido que se cargará a la ui
-        qss_content: str = ""
-
-        # Iterando y concatenando el contenido QSS de los archivos
-        for qss_file in qss_files:
-            qss_content += load_style_sheet(qss_file)
+        qss_content: str = ContentHandler.process_theme()
 
         # Cargando el tema a la ui
-        self.setStyleSheet(qss_content)
+        self._app.setStyleSheet(qss_content)
 
     def change_theme(self, new_theme: str) -> None:
         """

@@ -17,13 +17,23 @@ def get_root_path() -> Path:
         # --dev
         return Path(os.getcwd())
 
+
+
 APP_ROOT = get_root_path()
 
-# Common project routes
-CONTENT_DIR: Path = APP_ROOT / "static" / "content"
 
-THEMES_DIR: Path = APP_ROOT / "static" / "themes"
+# Common project routes
+
+STATIC_DIR = APP_ROOT / "static"
+
+CONTENT_DIR: Path = STATIC_DIR / "content"
+
+THEMES_DIR: Path = STATIC_DIR / "themes"
+
+VIEWS_DIR: Path = APP_ROOT / "views"
 
 # Paths on Prod
 
 PROD_CONTENT_DIR: Path = APP_ROOT / "build_resources"
+
+PROD_THEMES_DIR: Path = PROD_CONTENT_DIR / "_themes"

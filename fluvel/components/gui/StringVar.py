@@ -99,7 +99,7 @@ class StringVar(QObject):
         """
 
         # El nuevo valor del StringVar
-        new_value: str = self._base_text
+        new_value: str = self.base_text
 
         # Iteramos y reemplazamos los marcadores con texto
         for i, marker in self._MAPPING_MARKERS.items():

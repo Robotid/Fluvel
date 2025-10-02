@@ -1,24 +1,18 @@
-# main.py
+from fluvel import FluvelApp
 
-import sys
-from fluvel.core import App
-from window import MainWindow
+# App
+app = FluvelApp()
 
-
-def main():
-    # App
-    app = App(sys.argv)
-
-    # Load global settings of the app
-    app.load("appconfig.toml")
-
-    # Instantiate and display the main application window
-    window = MainWindow(root=app)
-    window.show()
-
-    # Runnig the main loop
-    sys.exit(app.exec())
+app.register(
+    initial="login", 
+    views=[
+        "views.login", 
+        "views.home", 
+        "views.hello_world",
+        "views.hot_reload_example"
+    ]
+)
 
 
 if __name__ == "__main__":
-    main()
+    app.run()

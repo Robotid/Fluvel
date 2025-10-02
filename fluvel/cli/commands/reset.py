@@ -1,7 +1,7 @@
 import click
 
 # Defaults
-from fluvel.core.core_utils.generate_menu_options import (
+from fluvel.core.tools.generate_menu_options import (
     _DEFAULT_MENU_OPTIONS,
     USER_FOLDER,
 )

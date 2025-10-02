@@ -2,13 +2,14 @@
 This module import all Fluvel Widgets Compontents
 """
 
-# Main Widgets
+# Input Widgets
 from fluvel.components.widgets.FButton import FButton, FLinkButton
-
-from fluvel.components.widgets.FLabel import FLabel
-
 from fluvel.components.widgets.FLineEdit import FLineEdit
+from fluvel.components.widgets.FCheckBox import FCheckBox
+from fluvel.components.widgets.FRadioButton import FRadioButton
 
+# Display Widgets
+from fluvel.components.widgets.FLabel import FLabel
 # Fluvel Custom Components
 from fluvel.components.widgets.FluvelCustom.FluvelCard import (
     DangerCard,
@@ -18,16 +19,16 @@ from fluvel.components.widgets.FluvelCustom.FluvelCard import (
 )
 
 __all__ = [
-    # Push Button
+    # Input Widgets
     "FButton",
     "FLinkButton",
-    # Label
+    "FLineEdit",
+    "FCheckBox",
+    "FRadioButton",
+    # Display Widgets
     "FLabel",
-    # Notice Cards
     "InfoCard",
     "SuccessCard",
     "WarningCard",
     "DangerCard",
-    # Line Edit
-    "FLineEdit",
 ]

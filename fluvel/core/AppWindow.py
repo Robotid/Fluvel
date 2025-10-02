@@ -1,59 +1,114 @@
-from typing import TypedDict, Unpack, Literal
+from typing import TypedDict, Unpack
 
 # Fluvel
-from fluvel.core import App
 from fluvel.core.MenuBar import MenuBar
-from fluvel.models import GlobalContent
-from fluvel._user.Config import AppConfig
+from fluvel._user.GlobalConfig import AppConfig
 
 # Fluvel Controllers
 from fluvel.controllers.ContentHandler import ContentHandler
-from fluvel.controllers.main_controller import init_content
+from fluvel.controllers.reload_ui import reload_ui
 
 # Core Process
-from fluvel.core.core_utils.core_process import configure_process
+from fluvel.core.tools.core_process import configure_process
 
 # PySide6
-from PySide6.QtWidgets import QMainWindow, QWidget
+from PySide6.QtWidgets import QMainWindow, QStackedWidget
+from PySide6.QtCore import Qt
 
-InitialDisplay = Literal["FullScreen", "Maximized", "Minimized", "Normal"]
-
+# Utils
+from fluvel.utils.tip_helpers import WindowFlags, WidgetAttributes, WindowStates
 
 class AppWindowKwargs(TypedDict, total=False):
 
-    title: str | None
-    geometry: tuple | None
-    initial_display: InitialDisplay
-
+    title: str
+    geometry: tuple | list
+    size: tuple[int, int] | list
+    fixed_size: tuple | list
+    min_size: tuple | list
+    max_size: tuple | list
+    min_width: int
+    min_height: int
+    max_width: int
+    max_height: int
+    opacity: float
+    show_mode: WindowStates
+    flags: list[WindowFlags]
+    attributes: list[WidgetAttributes]
 
 class AppWindow(QMainWindow):
 
-    _MAPPING_METHODS = {"title": "setWindowTitle", "geometry": "setGeometry"}
+    _FLAGS = {
+        "frameless": "FramelessWindowHint",
+        "always-on-top": "WindowStaysOnTopHint",
+        "always-on-bottom": "WindowStaysOnBottomHint",
+        "title": "WindowTitleHint",
+        "sys-menu": "WindowSystemMenuHint",
+        "maximize-button": "WindowMaximizeButtonHint",
+        "minimize-button": "WindowMinimizeButtonHint",
+        "close-button": "WindowCloseButtonHint",
+        "click-through": "WindowTransparentForInput",
+    }
 
-    def __init__(self, root: App) -> None:
+    _ATTRIBUTES = {
+        "enable-hover": "WA_Hover",
+        "opaque-paint-event": "WA_OpaquePaintEvent",
+        "no-system-background": "WA_NoSystemBackground",
+        "delete-on-close": "WA_DeleteOnClose",
+        "styled-background": "WA_StyledBackground",
+        "translucent-background": "WA_TranslucentBackground"
+    }
+
+    _MAPPING_METHODS = {
+        "title": "setWindowTitle", 
+        "geometry": "setGeometry",
+        "size": "resize",
+        "min_width": "setMinimumWidth",
+        "min_height": "setMinimumHeight",
+        "max_width": "setMaximumWidth",
+        "max_height": "setMaximumHeight",
+        "fixed_size": "setFixedSize",
+        "min_size": "setMinimumSize",
+        "max_size": "setMaximumSize",
+        "opacity": "setWindowOpacity",
+        "flags": "setWindowFlags",
+        "show_mode": "setWindowState",
+    }
+
+    def __init__(self, root) -> None:
         super().__init__()
 
-        # Saving the app instance of the QApplication/App()
+        # Saving the app instance of the FluvelApp
         self.root = root
 
-        # Se diseña el estado inicial de la UI
-        self.init_ui()
+        # Se configura con las especificaciones del archivo .toml
+        self.configure(**vars(AppConfig.window))
 
         # Se inicializa y muestra UI
         self._init_core_ui()
 
-    # abstract method donde se diseña el estado inicial
-    # de la UI a través del método -self.configure-
-    def init_ui(self) -> None:
-        pass
-
-    # Abstract method
-    def setUpMainWindow(self) -> None:
-        pass
-
     def configure(self, **kwargs: Unpack[AppWindowKwargs]) -> None:
 
+        if "flags" in kwargs:
+            previous_flag = Qt.WindowType.Window
+            for flag in kwargs["flags"]:
+                previous_flag = previous_flag | getattr(Qt.WindowType, self._FLAGS[flag])
+            kwargs["flags"] = previous_flag
+
+        if "show_mode" in kwargs:
+            mode = getattr(Qt.WindowState, f"Window{kwargs["show_mode"]}")
+            kwargs["show_mode"] = mode
+
+        if "window_attributes" in kwargs:
+            for attr in kwargs["window_attributes"]:
+                attribute = getattr(Qt.WidgetAttribute, self._ATTRIBUTES[attr])
+                self.setAttribute(attribute, True)
+            kwargs.pop("window_attributes")
+            
         configure_process(self, self._MAPPING_METHODS, **kwargs)
+
+    # abstract method where the initial state is defined
+    # of the UI via the -self.configure- method
+    def init_ui(self) -> None: pass
 
     def _init_core_ui(self) -> None:
         """
@@ -66,55 +121,36 @@ class AppWindow(QMainWindow):
         # Configuring the Top Menu Bar
         self._set_menu_bar()
 
-        # Display views
-        self.setUpMainWindow()
+        # Set initial configurations
+        self.init_ui()
 
     def _set_menu_bar(self) -> None:
         """
-        **`IMPORTANT`** Este método inicializa el proceso para la creación del menú dinámico.
+        Este método inicializa el proceso para la creación del menú dinámico.
         """
+        
+        if menu := ContentHandler.MENU_CONTENT.get("main-menu", {}):
+            
+            # This is an instance of QMenuBar
+            self.menu_bar = MenuBar(self, menu)
 
-        menu: dict = ContentHandler.MENU_CONTENT
+            # Adding the Menu Bar to the Window
+            self.setMenuBar(self.menu_bar)
 
-        # This is an instance of QMenuBar
-        self.menu_bar = MenuBar(self, menu)
-
-        # Adding the Menu Bar to the Window
-        self.setMenuBar(self.menu_bar)
-
-    def update_ui(self):
+    def update_ui(self, router):
         """
         Método llamado por el hreloader para actualizar la interfaz.
         """
-        print("Actualizando la interfaz de usuario...")
 
-        # Borra el widget central y los layouts
-        self.central_widget.deleteLater()
-
-        # Crea uno nuevo
-        self._set_central_widget()
-
-        # Reiniciar contenido
-        GlobalContent.menu_content = {}
-        GlobalContent.content_map = {}
-
-        ContentHandler.current_lang = None
-        init_content(AppConfig.ui.language)
-
-        # Reiniciar menú
-        self.menu_bar.deleteLater()
-        self._set_menu_bar()
-
-        # Reiniciar vistas
-        self.setUpMainWindow()
-
+        reload_ui(self, router)
+        
     def _set_central_widget(self) -> None:
         """
         Configuraciones iniciales del layout de la ventana principal.\n
         Por defecto se provee un QWidget() central para implementar los diseños.
         """
 
-        self.central_widget = QWidget(self)
+        self.central_widget = QStackedWidget()
 
         self.central_widget.setObjectName("central-widget")
 

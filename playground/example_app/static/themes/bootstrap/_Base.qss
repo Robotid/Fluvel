@@ -14,7 +14,6 @@
     background-color: #f8f9fa;
 }
 
-
 /* ==================== QLineEdit, QTextEdit, QPlainTextEdit ==================== */
 QLineEdit, QTextEdit, QPlainTextEdit {
     background-color: #ffffff;

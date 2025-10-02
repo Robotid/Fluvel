@@ -1,5 +1,5 @@
 from pathlib import Path
-from fluvel._user.Config import AppConfig
+from fluvel._user.GlobalConfig import AppConfig
 
 # This folder
 USER_FOLDER = Path(__file__).parent

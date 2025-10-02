@@ -1,5 +1,5 @@
 # Fluvel
-from fluvel.components.gui import StringVar
+from fluvel.components.gui.StringVar import StringVar
 
 
 class GlobalContent:
@@ -23,9 +23,10 @@ class GlobalContent:
         """
         Inicializa o actualiza el estado del contenido global de la aplicación.
 
-        Args:
-            menu_content (dict): Diccionario con los datos 'crudos' del menú.
-            static_content (dict): Diccionario con los datos 'crudos' del contenido estático.
+        :param menu_content: El diccionario con la estructura de cada menú de la aplicación.
+        :type menu_content: dict
+        :param static_content: El diccionario con los datos del contenido de texto general.
+        :type static_content: dict
         """
         # Se carga el contenido de la barra de menú de la aplicación
         cls._load_menu(menu_content)
@@ -37,6 +38,9 @@ class GlobalContent:
     def _load_static(cls, static_content: dict) -> None:
         """
         Carga el contenido estático en el mapa de estado `content_map`.
+
+        :param static_content: El diccionario con los datos del contenido de texto general.
+        :type static_content: dict
         """
 
         cls._load_structure(static_content, "content_map")
@@ -45,6 +49,9 @@ class GlobalContent:
     def _load_menu(cls, menu_content: dict) -> None:
         """
         Transforma y carga el contenido del menú en `menu_content`.
+
+        :param menu_content: El diccionario con la estructura de cada menú de la aplicación.
+        :type menu_content: dict
         """
 
         # se 'aplana' el diccionario con la estructura del menú
@@ -61,9 +68,10 @@ class GlobalContent:
         Distingue entre la carga inicial (creando nuevos StringVars) y las
         cargas posteriores (actualizando los existentes).
 
-        Args:
-            structure (dict): El diccionario de datos a cargar.
-            map_name (str): El nombre del atributo de clase a modificar.
+        :param structure: El diccionario de datos a cargar.
+        :type structure: dict
+        :param map_name: El nombre del atributo de clase a modificar
+        :type map_name: str
         """
         map_to_modify: dict = getattr(cls, map_name)
 
@@ -76,56 +84,46 @@ class GlobalContent:
         else:
 
             cls._update_content(structure, map_name)
-
+    
     @staticmethod
     def _map_menu(items: dict) -> dict:
         """
         Transforma una estructura de menú anidada en un mapa plano (diccionario).
 
-        Esta función recorre recursivamente el diccionario del menú para asignar
-        IDs únicos a los submenús (QMenu) (ej. 'menu_0', 'menu_1') y mantener los IDs
-        originales para las acciones (QAction).
+        :param: items: El diccionario anidado que representa la estructura del menú.
+        :type items: dict
 
-        Args:
-            items (dict): El diccionario anidado que representa la estructura del menú.
-
-        Returns:
-            dict: Un diccionario plano donde cada clave es un ID único y cada valor
-                  es el texto a mostrar.
+        :returns: Un diccionario plano donde cada clave es un ID único y cada valor es
+                  el texto a mostrar.
+        :rtype: dict
         """
 
         menu_map: dict = {}
 
-        def create_menu_map(items: dict, counter: int) -> int:
+        def create_menu_map(items: dict):
             """
-            Función anidada recursiva para gestionar el estado del contador.
+            Función anidada recursiva para mapear las opciones de menú en un diccionario.
+
+            Esta función recorre recursivamente el diccionario del menú para crear
+            uno nuevo en formato plano, donde cada opción se mapea con su ID que apunta a su 
+            TEXTO.
             """
 
-            for key, value in items.items():
+            for _id, menu_dict in items.items():
 
-                if isinstance(value, str):
+                text = menu_dict.get("text")
+                elements = menu_dict.get("elements")
 
-                    # Es una acción de menú o un separador.
-                    if value != "---":
-                        menu_map[key] = value
+                if text != "---":
+                    menu_map[_id] = text
 
-                elif isinstance(value, dict):
+                if elements:
 
-                    # Es un submenú, por lo que se genera una clave única.
-                    menu_key = f"menu_{counter}"
+                    create_menu_map(elements)
 
-                    # El valor es el título del submenú
-                    menu_map[menu_key] = key
+        for structure in items.values():
 
-                    counter += 1
-
-                    # Llamada recursiva, pasando el contador actualizado.
-                    counter = create_menu_map(value, counter)
-
-            return counter
-
-        # Se comienza a crear el menu map
-        create_menu_map(items, 0)
+            create_menu_map(structure)
 
         return menu_map
 
@@ -135,9 +133,10 @@ class GlobalContent:
         Actualiza la UI con un nuevo contenido `updated_content` al modificar
         el atributo `base_text` de un `StringVar`.
 
-        Args:
-            updated_content (dict): Un diccionario con los nuevos IDs y valores de texto..
-            map_name (str): El nombre del diccionario en GlobalContent a actualizar.
+        :param updated_content: El diccionario con los nuevos IDs y valores de texto.
+        :type updated_content: dict
+        :param map_name: El nombre del diccionario en `GlobalContent` a actualizar.
+        :type map_name: str
         """
 
         map_to_update = getattr(cls, map_name)

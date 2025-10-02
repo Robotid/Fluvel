@@ -1,7 +1,11 @@
-import click, subprocess, sys, importlib, os
+import click, subprocess, sys, importlib
 
 # Fluvel
-from fluvel.cli.paths import MAINPY_ROOT, PROJECT_ROOT, RELOADER_TEMPLATE
+from fluvel.cli.paths import MAINPY_ROOT
+from fluvel.cli.reloader.reloader_manager import HReloader
+
+# Expect Handler
+from fluvel.core.exceptions.expect_handler import expect
 
 @click.command()
 @click.option("--debug", "-d", is_flag=True, help="Enable hot-reloading")
@@ -9,6 +13,14 @@ def run(debug: bool) -> None:
     """
     Start the Fluvel application by running 'main.py'.
     """
+
+    if not MAINPY_ROOT.exists():
+        click.echo(
+            "Error: 'main.py' not found. Make sure the main script exists in the project root. "
+            "Run the 'fluvel check' command to create the file."
+        )
+        sys.exit(1)
+
 
     # Si se inicializa en modo debug/hot-reloading
     if debug:
@@ -18,20 +30,12 @@ def run(debug: bool) -> None:
 
     else:
 
-        # First check if the file exists
-        if not MAINPY_ROOT.exists():
-            click.echo(
-                "Error: 'main.py' not found. Make sure the main script exists in the project root. "
-                "Run the 'fluvel check' command to create the file."
-            )
-            sys.exit(1)
-
         # The command to run main.py
         command = [sys.executable, str(MAINPY_ROOT)]
 
         # Try to run main.py
         try:
-            click.echo("initializing...")
+            click.echo(f"initializing...")
             subprocess.run(command, check=True)
 
         except subprocess.CalledProcessError as e:
@@ -40,6 +44,11 @@ def run(debug: bool) -> None:
             click.echo("Details of the error from main.py:")
             click.echo(e.stderr)
 
+@expect.ErrorImportingModule(stop=True)
+@expect.MismatchedKey(
+    msg="Reloader Error: La instancia de <FluvelApp> $e no se encontró. Asegúrate de nombrarla $e en el módulo 'main.py' para poder usar el Hot-Reloader.",
+    stop=True
+)
 def start_monitoring() -> None:
     """
     Comienza la creación de una nueva ventana
@@ -47,17 +56,10 @@ def start_monitoring() -> None:
     `fluvel/cli/reloader/reloader_manager`
     """
 
-    reloader_file = PROJECT_ROOT / "reloader.py"
+    main_module = importlib.import_module("main")
 
-    if not reloader_file.exists():
+    app_root = main_module.__dict__["app"]
 
-        with open(reloader_file, "w", encoding="utf-8") as f:
-            f.write(RELOADER_TEMPLATE)
+    reloader = HReloader(app_root.main_window, app_root._app, app_root)
 
-    reloader_module = importlib.import_module("reloader")
-
-    # Al finalizar, se borra el archivo reloader.py
-    os.remove(reloader_file)
-
-    # Se llama a la función main del modulo
-    reloader_module.main()
+    app_root.run()

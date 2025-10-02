@@ -4,22 +4,25 @@ import sys, importlib
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
+# Fluvel
+from fluvel.cli.paths import PROJECT_ROOT
+from fluvel.core.Router import Router
+
 # PySide6
-from PySide6.QtCore import QObject, Signal
+from PySide6.QtCore import QObject, Signal, QTimer
 from PySide6.QtWidgets import QMainWindow, QApplication
 
 
-class ReloaderSignalEmitter(QObject):
+class ReloaderSignalEmmiter(QObject):
     """
     Emisor de señales para la recarga
     """
 
     fileModified = Signal()
 
-
 class FileChangeHandler(FileSystemEventHandler):
 
-    def __init__(self, emitter: ReloaderSignalEmitter):
+    def __init__(self, emitter: ReloaderSignalEmmiter):
         super().__init__()
         self.emitter = emitter
 
@@ -33,35 +36,31 @@ class FileChangeHandler(FileSystemEventHandler):
 
 class HReloader(QObject):
 
-    def __init__(self, root: QApplication, project_path: str):
+    def __init__(self, window: QMainWindow, root: QApplication, fluvel_app):
         super().__init__()
 
+        self.fluvel_app = fluvel_app
         self.app_root = root
-        self.project_path = project_path
+        self.main_window = window
 
-        self.main_window_instance: QMainWindow = None
-
-        # Objeto para monitorear archivos
         self.observer = Observer()
-
-        # Creamos el emisor de señales y conectamos su señal
-        self.signal_emitter = ReloaderSignalEmitter()
-        self.signal_emitter.fileModified.connect(self.on_file_changed)
-
-        # El manejador de eventos ahora recibe el emisor como argumento
+        self.signal_emitter = ReloaderSignalEmmiter()
+        self.signal_emitter.fileModified.connect(self.schedule_reload) # Cambiado de on_file_changed a schedule_reload
         self.event_handler = FileChangeHandler(self.signal_emitter)
 
-        # Se instancia la ventana principal por primera vez
-        self.initialize_main_window()
+        # Timer
+        self.reload_timer = QTimer(self)
+        self.reload_timer.setSingleShot(True)
+        self.reload_timer.setInterval(50)  
+        self.reload_timer.timeout.connect(self.on_file_changed) 
+        
+        self.show_window()
 
-    def initialize_main_window(self) -> None:
+    def show_window(self) -> None:
         """
         Instancia la ventana principal por primera vez y la muestra.
         """
-        main_window_module = importlib.import_module("window")
-
-        self.main_window_instance = main_window_module.MainWindow(root=self.app_root)
-        self.main_window_instance.show()
+        self.main_window.show()
 
         self.start_file_monitoring()
 
@@ -70,12 +69,12 @@ class HReloader(QObject):
         Inicia el monitoreo de archivos en el directorio 'views'.
         """
         try:
-            views_path = self.project_path / "views"
-            static_path = self.project_path / "static"
+            views_path = PROJECT_ROOT / "views"
+            static_path = PROJECT_ROOT / "static"
 
             self.observer.schedule(self.event_handler, str(views_path), recursive=True)
             self.observer.schedule(self.event_handler, str(static_path), recursive=True)
-
+            
             self.observer.start()
             print(f"Monitoring changes in: {views_path}")
             print(f"Monitoring changes in: {static_path}")
@@ -96,6 +95,13 @@ class HReloader(QObject):
             self.observer.join()
             print("File monitoring stopped.")
 
+    def schedule_reload(self) -> None:
+        """
+        Este nuevo slot se activa con cada evento de archivo.
+        En lugar de recargar inmediatamente, (re)inicia el temporizador.
+        """
+        self.reload_timer.start()
+
     def on_file_changed(self) -> None:
         """
         Slot que se llama cuando cambia un archivo.
@@ -108,6 +114,7 @@ class HReloader(QObject):
         Recarga los módulos de vistas y actualiza el contenido de la ventana.
         """
         modules_to_reload = [m for m in sys.modules.keys() if m.startswith("views")]
+        modules_to_reload.append("window")
 
         for module in modules_to_reload:
             if module in sys.modules:
@@ -117,10 +124,10 @@ class HReloader(QObject):
                     print(f"Error reloading module {module}: {e}")
 
         # Recargamos los qss
-        self.main_window_instance.root._set_theme()
+        self.fluvel_app._set_theme()
 
         # Recargamos el contenido de texto estático
-        self.main_window_instance.root._set_content()
+        self.fluvel_app._set_content()
 
         # Actualizamos la UI
-        self.main_window_instance.update_ui()
+        self.main_window.update_ui(Router)

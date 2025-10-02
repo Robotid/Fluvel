@@ -1,51 +1,44 @@
-from fluvel.core import ViewBuilder
-from fluvel.components import FButton, VBoxLayout
+from fluvel import Router, View
+from fluvel.components import FButton
 
+@Router.route("/demo-widgets")
+class Demo(View):
 
-class Demo(ViewBuilder):
+    def build_ui(self):
 
-    def view(self):
+        with self.Vertical(self.container) as hbody:
+            hbody.adjust(margins=(20, 20, 20, 20), alignment=hbody.TOP_LEFT)
 
-        main = VBoxLayout(self.parent)
-        main.adjust(
-            margins=(20, 20, 20, 20),
-            alignment=main.TOP_LEFT,
-        )
+            hbody.Label(text="Buttons", style="h1 bold", alignment=hbody.LEFT)
 
-        # BUTTONS
+            with self.Grid(hbody) as grid:
 
-        main.Label(text="Buttons", style="h1 bold", alignment=main.LEFT)
+                buttons = (
+                    "primary",
+                    "secondary",
+                    "info",
+                    "warning",
+                    "success",
+                    "danger",
+                    "dark",
+                    "light",
+                )
 
-        with self.Grid(main) as grid:
+                for i, button in enumerate(buttons, 1):
 
-            buttons = (
-                "primary",
-                "secondary",
-                "info",
-                "warning",
-                "success",
-                "danger",
-                "dark",
-                "light",
-            )
+                    normal = button.capitalize() + " Button"
+                    outlined = button.capitalize() + " Outlined"
 
-            for i, button in enumerate(buttons, 1):
+                    column = grid.Column(i)
 
-                normal = button.capitalize() + " Button"
-                outlined = button.capitalize() + " Outlined"
+                    column.add(FButton(text=normal, style=button))
+                    column.add(FButton(text=outlined, style=f"{button}-outlined"))
 
-                column = grid.Column(i)
+            hbody.Label(text="Labels", style="h1 bold", alignment=hbody.LEFT)
 
-                column.add(FButton(text=normal, style=button))
-                column.add(FButton(text=outlined, style=f"{button}-outlined"))
+            with self.Horizontal(hbody) as h1:
 
-        # LABELS
-
-        main.Label(text="Labels", style="h1 bold", alignment=main.LEFT)
-
-        with self.Horizontal(main) as h1:
-
-            h1.Label(text="Info", style="info")
-            h1.Label(text="Success", style="success")
-            h1.Label(text="Warning", style="warning")
-            h1.Label(text="Danger", style="danger")
+                h1.Label(text="Info", style="info")
+                h1.Label(text="Success", style="success")
+                h1.Label(text="Warning", style="warning")
+                h1.Label(text="Danger", style="danger")

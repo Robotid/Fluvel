@@ -1,10 +1,6 @@
 # Fluvel
 from fluvel.components.gui import StyledText, StringVar
 
-# PySide6
-from PySide6.QtWidgets import QLineEdit
-
-
 class FluvelTextWidget:
     """
     Clase que se encarga de obtener el contenido estático usando

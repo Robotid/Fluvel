@@ -3,7 +3,7 @@ import os
 # Fluvel
 from fluvel.controllers.ContentHandler import ContentHandler
 from fluvel.models.GlobalContent import GlobalContent
-from fluvel._user.Config import AppConfig
+from fluvel._user.GlobalConfig import AppConfig
 
 
 def init_content(lang: str) -> None:

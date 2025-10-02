@@ -8,7 +8,7 @@ from fluvel.core.abstract_models.FluvelTextWidget import FluvelTextWidget
 from PySide6.QtWidgets import QLineEdit
 
 # Fluvel core utils
-from fluvel.core.core_utils import configure_process
+from fluvel.core.tools import configure_process
 
 
 class FLineEditKwargs(TypedDict, total=False):

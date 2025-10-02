@@ -1,5 +1,6 @@
 import click
-from fluvel.cli.paths import MAINPY_ROOT, MAINPY_TEMPLATE
+from fluvel.cli.paths import MAINPY_ROOT
+from fluvel.cli.templates import MAINPY_TEMPLATE
 
 
 @click.command()

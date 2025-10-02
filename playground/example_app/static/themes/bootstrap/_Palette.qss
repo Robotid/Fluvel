@@ -1,3 +1,67 @@
-*[class="bg-primary"] {
-    background-color: #3a7bde;
+/* Base Colors */
+
+*[class~="bg-primary"] {
+    background: #0d6efd; /* Blue */
+}
+
+*[class~="bg-secondary"] {
+    background: #6c757d; /* Gray */
+}
+
+*[class~="bg-success"] {
+    background: #198754; /* Green */
+}
+
+*[class~="bg-danger"] {
+    background: #dc3545; /* Red */
+}
+
+*[class~="bg-warning"] {
+    background: #ffc107; /* Yellow */
+}
+
+*[class~="bg-info"] {
+    background: #0dcaf0; /* Cyan */
+}
+
+*[class~="bg-light"] {
+    background: #f8f9fa; /* Light Gray */
+}
+
+*[class~="bg-dark"] {
+    background: #212529; /* Dark Gray */
+}
+
+/* Text Colors */
+
+*[class~="fg-primary"] {
+    color: #0d6efd;
+}
+
+*[class~="fg-secondary"] {
+    color: #6c757d;
+}
+
+*[class~="fg-success"] {
+    color: #198754;
+}
+
+*[class~="fg-danger"] {
+    color: #dc3545;
+}
+
+*[class~="fg-warning"] {
+    color: #ffc107;
+}
+
+*[class~="fg-info"] {
+    color: #0dcaf0;
+}
+
+*[class~="fg-light"] {
+    color: #f8f9fa;
+}
+
+*[class~="fg-dark"] {
+    color: #212529;
 }

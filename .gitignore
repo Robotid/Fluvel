@@ -4,6 +4,7 @@ venv/
 
 # Directorios de configuración de IDEs
 .vscode/
+.idea/
 
 # Archivos de caché de Python
 __pycache__/
@@ -16,4 +17,8 @@ __pycache__/
 *.env
 .env.local
 
-fluvel/customizer
+# Prox
+fluvel/cli/translator
+
+# on dev
+docs/rst
