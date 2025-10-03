@@ -12,10 +12,8 @@
 
 <p align="center">A modern, declarative framework for creating user interfaces with PySide6</p>
 
-## ⚠️ Current Status: Beta Version (0.1.0b1)
-**Fluvel** is in an early stage of development.
-
-This is a preliminary version released for testing and feedback purposes. The API may change, and you may encounter bugs or incomplete features. It is not recommended for use in production environments.
+> [!Warning]
+> **Current Status: Beta Version (0.1.0b1)**: This is a preliminary version released for testing and feedback purposes. The API may change, and you may encounter bugs or incomplete features. It is not recommended for use in production environments.
 
 ## What is **Fluvel**?
 **Fluvel** is a framework built on **PySide6** that seeks to simplify and modernise the development of desktop applications in Python.
@@ -133,22 +131,11 @@ The `fluml` language and, consequently, its `.fluml` extension is a DSL specific
 | Link            | `{text \| url}`   | `Check our {GitHub \| https://www.github.com} page.` |[see result](assets/images/lbl-link.png)                    |
 | Placeholders    | `$0, $1, etc..`   | `Hello! my name is $0.`                              |[see result](assets/images/lbl-placeholder.gif)             |
 
-<table>
-
-<tr>
-<td>
-
 #### Example in `.fluml` files
 ```
 [combined-styles]:
     Hi! **$0**, this is *a* __demostration__. Don't forget to visit our *{GitHub | https://www.github.com}* page.
 ```
-</td>
-</tr>
-
-<tr>
-
-<td style="text-align: left; vertical-align: top; padding-right: 20px;">
 
 #### Use in Python `views`
 
@@ -178,17 +165,9 @@ class MyView(View):
 *a specific block of text from a `.fluml` file, so its first element corresponds*
 *to the content ID and the following elements replace the placeholders ($0, $1, etc.).*
 
-</td>
-</tr>
-
-<tr>
-<td style="vertical-align: top;">
-
   #### Result in a `Label`
   ![syled-text-result](assets/gifs/styled-text-example.gif)
-</td>
-</tr>
-</table>
+
 
 ## Roadmap
 With the base of core systems already developed ([key features](#key-features)), Fluvel now needs to expand them to encompass and expose the broad PySide6 ecosystem. 
@@ -200,7 +179,7 @@ Therefore, here are some of the goals in mind.
 
 * **Core API**
   * **Automatic Translation System**: Through the use of the google-cloud-translate or deepl translation APIs, a configuration file, and the translate command, the system will automatically generate complete, ready-to-use translations from your .fluml and .xml content, transforming i18n into a near zero-effort task.
-* Documentation
-  **Comprehensive Documentation**: Implementation of Sphinx-rST documentation, built directly from high-quality Docstrings, covering API references, in-depth tutorials, and best practices for developing scalable applications with Fluvel.
+* **Documentation**
+  * **Comprehensive Documentation**: Implementation of Sphinx-rST documentation, built directly from high-quality Docstrings, covering API references, in-depth tutorials, and best practices for developing scalable applications with Fluvel.
 ## Licence
 Fluvel is distributed under the MIT Licence.
