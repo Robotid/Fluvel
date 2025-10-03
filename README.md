@@ -179,7 +179,7 @@ Therefore, here are some of the goals in mind.
 
 * **Core API**
   * **Automatic Translation System**: Through the use of the google-cloud-translate or deepl translation APIs, a configuration file, and the translate command, the system will automatically generate complete, ready-to-use translations from your .fluml and .xml content, transforming i18n into a near zero-effort task.
-* Documentation
-  **Comprehensive Documentation**: Implementation of Sphinx-rST documentation, built directly from high-quality Docstrings, covering API references, in-depth tutorials, and best practices for developing scalable applications with Fluvel.
+* **Documentation**
+  * **Comprehensive Documentation**: Implementation of Sphinx-rST documentation, built directly from high-quality Docstrings, covering API references, in-depth tutorials, and best practices for developing scalable applications with Fluvel.
 ## Licence
 Fluvel is distributed under the MIT Licence.
