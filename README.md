@@ -182,4 +182,4 @@ Therefore, here are some of the goals in mind.
 * **Documentation**
   * **Comprehensive Documentation**: Implementation of Sphinx-rST documentation, built directly from high-quality Docstrings, covering API references, in-depth tutorials, and best practices for developing scalable applications with Fluvel.
 ## Licence
-Fluvel is distributed under the MIT Licence.
+Fluvel is an open-source project, licensed under the MIT Licence.

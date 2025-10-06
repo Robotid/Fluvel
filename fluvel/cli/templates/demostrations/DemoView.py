@@ -6,10 +6,10 @@ class Demo(View):
 
     def build_ui(self):
 
-        with self.Vertical(self.container) as hbody:
+        with self.Vertical(style="bg-slate-100") as hbody:
             hbody.adjust(margins=(20, 20, 20, 20), alignment=hbody.TOP_LEFT)
 
-            hbody.Label(text="Buttons", style="h1 bold", alignment=hbody.LEFT)
+            hbody.Label(text="Buttons", style="text-2xl", alignment=hbody.LEFT)
 
             with self.Grid(hbody) as grid:
 
@@ -34,7 +34,7 @@ class Demo(View):
                     column.add(FButton(text=normal, style=button))
                     column.add(FButton(text=outlined, style=f"{button}-outlined"))
 
-            hbody.Label(text="Labels", style="h1 bold", alignment=hbody.LEFT)
+            hbody.Label(text="Labels", style="text-2xl", alignment=hbody.LEFT)
 
             with self.Horizontal(hbody) as h1:
 

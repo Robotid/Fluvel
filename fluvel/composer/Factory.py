@@ -1,4 +1,4 @@
-import importlib
+import importlib, functools
 from typing import Type
 from PySide6.QtWidgets import QWidget
 
@@ -85,14 +85,15 @@ class Factory:
         
         object_target = cls.Target(target)
 
-        def decorator(config_function: callable):
-
+        def decorator(func):
+            
+            @functools.wraps(func)
             def component_wrapper(*args, **user_kwargs) -> QWidget:
 
-                base_config = config_function(*args, **user_kwargs) 
+                base_config = func(*args, **user_kwargs) 
 
                 return object_target.WidgetClass(**base_config)
-            
+
             return component_wrapper
-        
+
         return decorator

@@ -1,3 +1,8 @@
+
+*{
+    border-color: #9c9c9c;
+}
+
 /* BORDER RADIUS - Mapped to fixed pixel values */
 
 
@@ -69,9 +74,14 @@
 /* 7. BORDERS (border-*, border-t-*, border-style)                           */
 /* ========================================================================= */
 
+*[class~="border-basic"] {
+    border: 1px solid #adabab;
+    border-radius: 6px;
+}
+
 /* BORDER WIDTH ALL (border-*) */
 *[class~="border-0"] { border-width: 0px; }
-*[class~="border"] { border-width: 1px; } /* Equivalent to border-DEFAULT */
+*[class~="border"] { border-width: 1px; }
 *[class~="border-px"] { border-width: 1px; }
 *[class~="border-2"] { border-width: 2px; }
 *[class~="border-4"] { border-width: 4px; }
@@ -120,9 +130,3 @@
 *[class~="border-dashed"] { border-style: dashed; }
 *[class~="border-dotted"] { border-style: dotted; }
 *[class~="border-none"] { border-style: none; }
-
-
-/* Simulación de shadow-md */
-*[class~="shadow-md"] {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); 
-}

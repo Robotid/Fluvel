@@ -1,3 +1,4 @@
+import functools
 from typing import Unpack, overload, TypedDict, TypeVar, Callable
 
 # Flvuel Core
@@ -15,6 +16,7 @@ from PySide6.QtWidgets import QWidget, QLayout
 from PySide6.QtCore import Qt
 
 TWidget = TypeVar("TWidget", bound=QWidget)
+TFactory = TypeVar("TFactory", bound=Callable)
 
 class LayoutKwargs(TypedDict, total=False):
     """
@@ -153,18 +155,70 @@ class FluvelLayout:
     
     # --------------------------------- API ----------------------------------------------
 
-    def from_factory(self, factory_widget: Callable, returns: bool = False) -> Callable:
+    # Usamos TFactory para transferir la firma de la función.
+    def from_factory(self, factory_widget: TFactory, returns: bool = False) -> TFactory:
+        """
+        Converts a component factory function into a layout method.
 
+        This method takes a factory function created with :meth:`~fluvel.composer.Factory.Factory.compose` 
+        and returns a *wrapper* function that:
+
+        1. Preserves the original signature of the factory function for IDE **autocompletion**.
+        2. Creates the :class:`~PySide6.QtWidgets.QWidget` and automatically adds it to the layout.
+
+        This allows custom components to be added to the layout with concise syntax (Builder Pattern).
+
+        :param factory_widget: The widget factory function (already decorated by :meth:`~fluvel.composer.Factory.Factory.compose`).
+        :type factory_widget: TFactory (Callable)
+        :param returns: If :obj:`True`, the returned function will return the created :class:`~PySide6.QtWidgets.QWidget`. If :obj:`False` (default), it returns :obj:`None`.
+        :type returns: bool
+        :returns: A *wrapper* function with the same argument signature as ``factory_widget``, but which handles adding it to the layout.
+        :rtype: TFactory (Callable)
+
+        .. note::
+            Using `TFactory` with :func:`~functools.wraps` is crucial for preserving argument information
+            and code *tips* in environments such as VS Code.
+
+        Example
+        -------
+        .. code-block:: python
+
+            # 1. Factory definition (e.g. PrimaryButton)
+            @Factory.compose(target="FButton")
+            def PrimaryButton(text: str, route: str):
+                return {"text": text, "style": "primary font-bold"}
+
+            # 2. Use in the View
+            with self.Vertical() as v:
+                # Create a new method “v.PrimaryButton” with the signature (text, route)
+                v.PrimaryButton = v.from_factory(PrimaryButton) 
+
+                # When this new method is called, the button is automatically created and added:
+                v.PrimaryButton("Enter", route="login") 
+        """
+        
+        # El decorador @functools.wraps es esencial aquí para copiar la firma
+        # de factory_widget (que a su vez ya fue copiada de la función de configuración original).
+        @functools.wraps(factory_widget)
         def addWidgetToLayout(*args, **kwargs) -> QWidget | None:
 
+            # 1. Ejecuta la fábrica (esta retorna el QWidget, ya creado en Factory.compose)
             widget = factory_widget(*args, **kwargs)
 
+            # 2. Añade el widget al layout
             self.addWidget(widget)
 
+            # 3. Retorna si es solicitado, manteniendo la firma de la función.
             if returns:
                 return widget
+            # Aunque la factory original retorna un QWidget, este wrapper retorna None
+            # si returns=False, cumpliendo con la filosofía de 'builder pattern'
+            # y permitiendo que TFactory sea Callable genérico.
+            else: 
+                return None
 
-        return addWidgetToLayout
+        # La clave: retornar el wrapper tipado con TFactory, forzando la inferencia
+        return addWidgetToLayout # type: ignore [return-value]
     
     def Template(self, view_class) -> None:
 

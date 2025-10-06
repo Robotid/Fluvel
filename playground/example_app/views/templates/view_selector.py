@@ -1,21 +1,24 @@
 from fluvel import Template, Router
+from fluvel.composer import Factory
 
-"""
-@Base.wraps("/login")
-class Login(View):
-    def build_ui(self):
-        with self.Vertical(styles="bg-black") as vbody:
-            vbody.Label(text="Hola!")
-            
-"""
+@Factory.compose("FButton")
+def ViewButton(text: str, view_route: str) -> None:
+
+    return {
+        "text": text,
+        "style": "primary",
+        "on_click": lambda: Router.show(view_route)
+    }
 
 class ViewSelector(Template):
 
     def build_ui(self):
 
         with self.Horizontal() as h:
-            h.adjust(alignment=h.CENTER)
+            h.adjust(alignment=h.CENTER, margins=(50, 50, 50, 50))
 
-            h.Button(text="Login Page", on_click=lambda: Router.show("login"))
-            h.Button(text="Welcome Page", on_click=lambda: Router.show("home"))
-            h.Button(text="Hello World", on_click=lambda: Router.show("hello-world"))
+            h.ViewButton = h.from_factory(ViewButton, returns=True)
+            
+            h.ViewButton("Login Page", "login")
+            h.ViewButton("Welcome Page", "home")
+            h.ViewButton("Hello World", "hello-world")
