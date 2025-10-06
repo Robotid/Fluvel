@@ -69,15 +69,15 @@ class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
     def __init__(self, **kwargs: Unpack[FButtonKwargs]):
         super().__init__()
 
-        # Aplicando los estilos QSS
-        kwargs = self._apply_styles(**kwargs)
-
         # Aplicar el cursor de puntero
         self.setCursor(Qt.PointingHandCursor)
 
         self.configure(**kwargs)
 
     def configure(self, **kwargs: Unpack[FButtonKwargs]) -> None:
+
+        # Aplicando los estilos QSS
+        kwargs = self._apply_styles(**kwargs)
 
         kwargs = self.get_static_text(**kwargs)
 

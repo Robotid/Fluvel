@@ -9,7 +9,7 @@ class LoginPage(View):
 
     def build_ui(self):
 
-        with self.Vertical(style="bg-slate-100") as vbody:
+        with self.Vertical(style="bg-slate-200") as vbody:
 
             vbody.Label(text=["title-sign-in"], style="text-4xl font-bold m-8", alignment=vbody.CENTER)
 

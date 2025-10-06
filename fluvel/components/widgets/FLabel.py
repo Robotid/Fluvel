@@ -7,7 +7,7 @@ from fluvel.components.gui import StringVar
 
 # PySide6
 from PySide6.QtWidgets import QLabel
-from PySide6.QtCore import Qt, QTimer
+from PySide6.QtCore import Qt
 
 # Fluvel core utils
 from fluvel.core.tools import configure_process
@@ -36,12 +36,12 @@ class FLabel(QLabel, FluvelWidget, FluvelTextWidget):
         # Configurando las propiedades por defecto de un Label
         self._set_defaults()
 
-        # Aplicando los estilos QSS
-        kwargs = self._apply_styles(**kwargs)
-
         self.configure(**kwargs)
 
     def configure(self, **kwargs: Unpack[FLabelKwargs]) -> None:
+
+        # Aplicando los estilos QSS
+        kwargs = self._apply_styles(**kwargs)
 
         kwargs = self.get_static_text(**kwargs)
 

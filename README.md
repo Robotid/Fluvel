@@ -13,7 +13,7 @@
 <p align="center">A modern, declarative framework for creating user interfaces with PySide6</p>
 
 > [!Warning]
-> **Current Status: Beta Version (0.1.0b1)**: This is a preliminary version released for testing and feedback purposes. The API may change, and you may encounter bugs or incomplete features. It is not recommended for use in production environments.
+> **Current Status: Beta Version (0.1.1b1)**: This is a preliminary version released for testing and feedback purposes. The API may change, and you may encounter bugs or incomplete features. It is not recommended for use in production environments.
 
 ## What is **Fluvel**?
 **Fluvel** is a framework built on **PySide6** that seeks to simplify and modernise the development of desktop applications in Python.

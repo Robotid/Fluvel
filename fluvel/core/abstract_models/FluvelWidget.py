@@ -1,8 +1,3 @@
-# PySide6
-from PySide6.QtCore import Qt
-
-# Separar por propiedades de diseño y propiedades de estilo
-
 
 class FluvelWidget:
 
@@ -14,7 +9,15 @@ class FluvelWidget:
 
         if style := kwargs.get("style"):
 
-            self.setProperty("class", style)
+            if _property := self.property("class"):
+
+                full_style = "{} {}".format(_property, style)
+
+                self.setProperty("class", full_style)
+
+            else:
+
+                self.setProperty("class", style)
         
             kwargs.pop("style")
 
