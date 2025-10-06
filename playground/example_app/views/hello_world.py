@@ -9,7 +9,7 @@ class HelloWorld(View):
 
     def build_ui(self):
 
-        with self.Vertical(self.container) as v:
+        with self.Vertical(style="bg-pink-300") as v:
             v.adjust(alignment=v.CENTER)
 
             v.Label(text="Hello World", style="h1 w-200", alignment=v.CENTER)

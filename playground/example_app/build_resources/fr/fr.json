@@ -1,0 +1,10 @@
+{
+    "title-sign-in": "Se connecter",
+    "form-user-field": "Utilisateur:",
+    "form-user-field-behind": "Utilisateur",
+    "form-password-field": "Mot de passe :",
+    "form-password-field-behind": "Mot de passe",
+    "lbl-forgotten-password": "<a href='https://support.google.com/a/answer/33310?hl=es&co=DASHER._Family%3DDomain-verified';'>Mot de passe oublié ?</a>",
+    "btn-register": "S'inscrire",
+    "btn-sign-in": "Se connecter"
+}

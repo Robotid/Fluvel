@@ -14,9 +14,7 @@ from fluvel.components.widgets.FRadioButton import FRadioButton, FRadioButtonKwa
 from PySide6.QtWidgets import QWidget, QLayout
 from PySide6.QtCore import Qt
 
-
 TWidget = TypeVar("TWidget", bound=QWidget)
-
 
 class LayoutKwargs(TypedDict, total=False):
     """
@@ -42,6 +40,14 @@ class FluvelLayout:
     :cvar V_CENTER: Qt.AlignmentFlag.AlignVCenter.
     :cvar JUSTIFY: Qt.AlignmentFlag.AlignJustify.
     :cvar BASELINE: Qt.AlignmentFlag.AlignBaseline
+    :cvar TOP_LEFT: TOP | LEFT
+    :cvar TOP_RIGHT: TOP | RIGHT
+    :cvar BOTTOM_LEFT: BOTTOM | LEFT
+    :cvar BOTTOM_RIGHT: BOTTOM | RIGHT
+    :cvar CENTER_TOP: TOP | H_CENTER
+    :cvar CENTER_RIGHT: RIGHT | V_CENTER
+    :cvar CENTER_BOTTOM: BOTTOM | H_CENTER
+    :cvar CENTER_LEFT: LEFT | V_CENTER
     """
 
     # Alingment Flags

@@ -1,0 +1,106 @@
+{
+    "파일": {
+        "sep_1": "---",
+        "new_file": "새 파일",
+        "new_window": "새 창",
+        "new_from_template": "템플릿에서 새로 만들기",
+        "sep_2": "---",
+        "open_file": "열기...",
+        "open_recent": "최근 파일 열기",
+        "sep_3": "---",
+        "close_current": "닫기",
+        "close_all": "모두 닫기",
+        "sep_4": "---",
+        "save": "저장",
+        "save_as": "다른 이름으로 저장...",
+        "save_all": "모두 저장",
+        "sep_5": "---",
+        "browse_all_versions": "모든 버전 찾아보기...",
+        "sep_6": "---",
+        "print_dialog": "인쇄...",
+        "page_setup": "페이지 설정...",
+        "print_preview": "인쇄 미리보기",
+        "sep_7": "---",
+        "import": "가져오기...",
+        "export": "내보내기...",
+        "export_as": "다른 이름으로 내보내기...",
+        "share": "공유...",
+        "sep_8": "---",
+        "quit": "종료"
+    },
+    "편집": {
+        "undo": "실행 취소",
+        "redo": "다시 실행",
+        "cut": "잘라내기",
+        "copy": "복사",
+        "paste": "붙여넣기",
+        "paste_special": "선택하여 붙여넣기...",
+        "delete": "삭제",
+        "select_all": "모두 선택",
+        "deselect": "선택 취소",
+        "sep_9": "---",
+        "find": "찾기...",
+        "find_next": "다음 찾기",
+        "find_previous": "이전 찾기",
+        "replace": "바꾸기",
+        "sep_10": "---",
+        "check_document": "문서 검사",
+        "check_while_typing": "입력할 때 맞춤법 검사"
+    },
+    "보기": {
+        "zoom_in": "확대",
+        "zoom_out": "축소",
+        "actual_size": "실제 크기",
+        "fit_to_window": "창에 맞춤",
+        "full_screen": "전체 화면",
+        "sep_11": "---",
+        "창 숨기기": {
+            "toolbar": "도구 모음",
+            "sidebar": "사이드바",
+            "rulers": "눈금자",
+            "grid": "격자",
+            "status_bar": "상태 표시줄"
+        },
+        "sep_12": "---",
+        "single_pane": "단일 창",
+        "two_panes": "두 창",
+        "three_panes": "세 창",
+        "sep_13": "---",
+        "sort_by_name": "이름",
+        "sort_by_date_modified": "수정한 날짜",
+        "sort_by_size": "크기"
+    },
+    "창": {
+        "minimize": "최소화",
+        "zoom_maximize": "확대/최대화",
+        "bring_all_to_front": "모두 앞으로 가져오기",
+        "arrange": "정렬"
+    },
+    "설정": {
+        "preferences": "환경설정...",
+        "테마": {
+            "modern_dark_theme": "모던-다크",
+            "bootstrap_theme": "부트스트랩",
+            "clean_light_theme": "클린 라이트"
+        },
+        "언어": {
+            "es_language": "스페인어",
+            "en_language": "영어"
+        }
+    },
+    "도움말": {
+        "도움말 옵션": {
+            "help_docs": "도움말",
+            "keyboard_shortcuts": "키보드 단축키",
+            "tutorials": "튜토리얼",
+            "sep_14": "---",
+            "support": "지원",
+            "licence": "라이선스"
+        },
+        "sep_15": "---",
+        "version": "버전",
+        "web_page": "웹사이트 방문",
+        "check_for_updates": "업데이트 확인",
+        "about_app": "앱 정보"
+    }
+}

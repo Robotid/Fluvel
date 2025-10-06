@@ -1,0 +1,10 @@
+{
+    "title-sign-in": "تسجيل الدخول",
+    "form-user-field": "المستخدم:",
+    "form-user-field-behind": "المستخدم",
+    "form-password-field": "كلمة المرور:",
+    "form-password-field-behind": "كلمة المرور",
+    "lbl-forgotten-password": "<a href='https://support.google.com/a/answer/33310?hl=es&co=DASHER._Family%3DDomain-verified';'>هل نسيت كلمة المرور؟</a>",
+    "btn-register": "تسجيل",
+    "btn-sign-in": "تسجيل الدخول"
+}

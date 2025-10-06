@@ -13,7 +13,7 @@ class ViewSelector(Template):
 
     def build_ui(self):
 
-        with self.Horizontal(self.container) as h:
+        with self.Horizontal() as h:
             h.adjust(alignment=h.CENTER)
 
             h.Button(text="Login Page", on_click=lambda: Router.show("login"))

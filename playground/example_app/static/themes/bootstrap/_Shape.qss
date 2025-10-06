@@ -1,0 +1,11 @@
+*[class~="rounded-lg"] {
+    border-radius: 10px;
+}
+
+*[class~="rounded-md"]{
+    border-radius: 5px;
+}
+
+*[class~="rounded-sm"]{
+    border-radius: 2px;
+}

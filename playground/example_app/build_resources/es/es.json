@@ -1,0 +1,10 @@
+{
+    "title-sign-in": "Iniciar Sesión",
+    "form-user-field": "Usuario:",
+    "form-user-field-behind": "Usuario",
+    "form-password-field": "Contraseña:",
+    "form-password-field-behind": "Contraseña",
+    "lbl-forgotten-password": "<a href='https://support.google.com/a/answer/33310?hl=es&co=DASHER._Family%3DDomain-verified';'>¿Olvidaste la contraseña?</a>",
+    "btn-register": "Registrarse",
+    "btn-sign-in": "Iniciar Sesión"
+}

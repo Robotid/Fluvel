@@ -1,20 +1,18 @@
 """
-Este módulo contiene la lógica fundamental de Fluvel para la creación
-de Layouts.
-classes:
-    - LayoutBuilder: es la clase usada como context manager
-    - ViewBuilder: es el disparador de LayoutBuilder a través de sus
-    métodos y sirve como clase abstracta para la creación de Vistas.
+This module contains the fundamental logic for creating declarative layouts in Fluvel.
+
+It defines the core abstract class for all views and the context manager 
+responsible for building nested PySide6 layouts.
 """
 
-from typing import TypeVar, Generic
+from typing import TypeVar, Generic, Type, Unpack
 from abc import ABC, abstractmethod, ABCMeta
 
 # Fluvel
 from fluvel.components.layouts import FormLayout, HBoxLayout, VBoxLayout, GridLayout
 
 # PySide6
-from PySide6.QtWidgets import QWidget, QLayout
+from PySide6.QtWidgets import QLayout, QWidget
 from PySide6.QtCore import QObject
 
 from fluvel.core.AppWindow import AppWindow
@@ -24,99 +22,144 @@ TLayout = TypeVar("TLayout", bound=QLayout)
 
 class LayoutBuilder(Generic[TLayout]):
     """
-    Context manager para la creación declarativa de layouts de PySide6.
+    Context manager for the declarative creation of PySide6 layouts.
 
-    Esta clase permite a los desarrolladores construir layouts de manera intuitiva
-    usando la sintaxis `with`, manejando la adición de layouts a contenedores
-    existentes de forma automática.
+    This class allows developers to build nested layouts intuitively using the 
+    :keyword:`with` syntax, automatically handling the addition of the new layout 
+    to an existing container (:py:class:`PySide6.QtWidgets.QLayout` or :py:class:`PySide6.QtWidgets.QWidget`).
 
-    :ivar layout: La instancia de un QLayout (e.g. 'HBoxLayout')
+    :ivar layout: The instantiated :py:class:`PySide6.QtWidgets.QLayout`.
     :type layout: TLayout
     """
 
-    def __init__(self, container: QLayout | QWidget, type_layout: type[TLayout]):
+    def __init__(
+        self, 
+        container: QLayout | QWidget, 
+        type_layout: Type[TLayout],
+        style: str | None
+    ):
         """
-        Inicializador de la clase `LayoutBuilder`.
+        Initializes the :py:class:`~fluvel.core.abstract_models.ABCAbstractView.LayoutBuilder` instance.
 
-        :param container: El layout o widget al que se agregará el nuevo layout.
-        :type container: QLayout | QWidget
-        :param type_layout: La clase del layout a instanciar (ej. `HBoxLayout`).
+        :param container: The layout or widget to which the new layout will be added.
+        :type container: :py:class:`PySide6.QtWidgets.QLayout` or :py:class:`PySide6.QtWidgets.QWidget`
+        :param type_layout: The class of the layout to instantiate (e.g., :py:class:`~fluvel.components.layouts.VBoxLayout.VBoxLayout`).
         :type type_layout: type[TLayout]
+        :param style: The QSS-style class name(s) to apply to the layout's parent container :py:class:`PySide6.QtWidgets.QWidget`.
+        :type style: str or None
         """
 
-        # an instance of HBoxLayout, VBoxLayout, GridLayout or StackedLayout
-        self.layout: TLayout = type_layout()
-
+        parent_widget = None
+        
         # the container is a layout
         if isinstance(container, QLayout):
-            container.addLayout(self.layout)
+            parent_widget = QWidget()
+            container.addWidget(parent_widget)
+            self.layout: TLayout = type_layout(parent_widget) 
 
         # the container is a widget
         elif isinstance(container, QWidget):
-            container.setLayout(self.layout)
+            self.layout: TLayout = type_layout(container) 
+            parent_widget = container
 
+        else:
+            raise TypeError("El contenedor debe ser un QLayout o un QWidget.")
+
+        style: str = style if style else "bg-transparent"
+
+        parent_widget.setProperty("class", style)
+
+            
     def __enter__(self) -> TLayout:
         """
-        Método de entrada del context manager.
+        Context manager entry method.
         
-        Devuelve la instancia del layout para que pueda ser utilizada
-        dentro del bloque `with`.
+        Returns the layout instance so it can be used inside the :keyword:`with` block.
+        
+        :returns: The instantiated layout object.
+        :rtype: TLayout
         """
         return self.layout
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         """
-        Método de salida del context manager.
+        Context manager exit method.
+        
+        :returns: Always returns :py:obj:`False` to avoid suppressing exceptions.
+        :rtype: bool
         """
         return False
 
 class VBMeta(type(QObject), ABCMeta):
     """
-    Metaclase Unificada que resuelve los conflictos
-    entre las clases base QObject y ABCMeta al combinarlas.
+    Unified Metaclass that resolves conflicts when combining 
+    :py:class:`PySide6.QtCore.QObject` and :py:class:`abc.ABCMeta`.
+
+    All :py:class:`~fluvel.core.abstract_models.ABCAbstractView.AbstractView` subclasses inherit from this metaclass to ensure 
+    compatibility with both PySide6's signal/slot system and Python's abstract base classes.
     """
 
     pass
 
 class AbstractView(QObject, ABC, metaclass=VBMeta):
     """
-    Clase base abstracta para la creación de Vistas en Fluvel.
+    Abstract base class for creating Views (pages) in Fluvel.
 
-    Esta clase proporciona los métodos de ayuda (context managers) para
-    la construcción declarativa de layouts, como `Vertical`, `Horizontal`, etc.
+    This class provides the core declarative helper methods (context managers) 
+    for UI construction, such as :py:meth:`Vertical`, :py:meth:`Horizontal`, etc.
 
-    :cvar app_root: La instancia de la clase FluvelApp.
-    :type app_root: FluvelApp
-    :cvar main_window: La instancia de la clase MainWindow.
-    :type main_window: MainWindow
-    :ivar _container: El QWidget contenedor de la vista.
-    :type _container: QWidget
+    All application views must inherit from :py:class:`AbstractView` and implement
+    the :py:meth:`build_ui` method.
+
+    :cvar app_root: The instance of the main application class (:py:class:`~fluvel.core.FluvelApp.FluvelApp`).
+    :cvar main_window: The instance of the main window container (:py:class:`~fluvel.core.AppWindow.AppWindow`).
+    :ivar _container: The root :py:class:`PySide6.QtWidgets.QWidget` container for this view.
     """
 
     _container: QWidget
 
     def __init__(self, container: QWidget | QLayout | None) -> None:
         """
-        Inicializa una instancia de `AbstractView`.
+        Initializes an instance of :py:class:`AbstractView`.
 
-        :param container: El contenedor principal para la vista.
-        :type container: QWidget, QLayout o None
-        :raises TypeError: Si el contenedor no es un QWidget o QLayout.
+        It establishes the root :py:attr:`container` for the view. If :py:obj:`None` 
+        or a :py:class:`QLayout` is passed, a blank :py:class:`QWidget` is created as the container.
+
+        :param container: The initial container for the view.
+        :type container: :py:class:`PySide6.QtWidgets.QWidget`, :py:class:`PySide6.QtWidgets.QLayout` or :py:obj:`None`
+        :raises TypeError: If the container is neither a :py:class:`QWidget` nor a :py:class:`QLayout`.
         """
         super().__init__()
         self.container = container
 
     @classmethod
     def _set_globals(cls, app_root, main_window: AppWindow):
+        """
+        Sets global references to the application root and main window.
+
+        This is called internally by :py:class:`~fluvel.core.Router.Router.init`.
+
+        :param app_root: The root application instance.
+        :param main_window: The main application window instance.
+        :type main_window: :py:class:`~fluvel.core.AppWindow.AppWindow`
+        :rtype: None
+        """
         cls.app_root = app_root
         cls.main_window = main_window
 
     @property
     def container(self) -> QWidget:
+        """
+        The root :py:class:`QWidget` container of the view.
+        """
         return self._container
 
     @container.setter
     def container(self, container: QWidget | QLayout | None) -> None:
+        """
+        Setter for the root container. Automatically creates a blank QWidget
+        if the input is None or a QLayout.
+        """
 
         if isinstance(container, QWidget):
             self._container = container
@@ -130,62 +173,140 @@ class AbstractView(QObject, ABC, metaclass=VBMeta):
         else:
             raise TypeError("The container must be a QLayout or a QWidget.")
 
-    def Vertical(self, container: QLayout | QWidget) -> LayoutBuilder[VBoxLayout]:
+    def build_layout(
+        self, container: QLayout | QWidget | None, 
+        type_layout: Type[TLayout], 
+        style: str
+    ) -> LayoutBuilder[TLayout]:
         """
-        Crea un `VBoxLayout` usando un context manager.
+        Internal factory method for creating a :py:class:`LayoutBuilder`.
 
-        :param container: El contenedor para el layout.
-        :type container: QLayout | QWidget
-        :returns: Un `LayoutBuilder` para `VBoxLayout`.
+        :param container: The container for the layout. Defaults to the view's root :py:attr:`container`.
+        :type container: :py:class:`PySide6.QtWidgets.QLayout` or :py:class:`PySide6.QtWidgets.QWidget` or :py:obj:`None`
+        :param type_layout: The class of the layout to instantiate.
+        :type type_layout: type[TLayout]
+        :param style: The CSS-style class name(s) for the layout's parent widget.
+        :type style: str
+        :returns: A configured :py:class:`LayoutBuilder`.
+        :rtype: LayoutBuilder[TLayout]
+        """
+        
+        container = self.container if container is None else container
+
+        return LayoutBuilder(container, type_layout, style)
+
+    def Vertical(
+        self, 
+        container: QLayout | QWidget | None = None,
+        style: str | None = None
+    ) -> LayoutBuilder[VBoxLayout]:
+        """
+        Creates a vertical box layout (:py:class:`~fluvel.components.layouts.VBoxLayout.VBoxLayout`) 
+        using a context manager.
+
+        :param container: The container for the layout. Defaults to the view's root :py:attr:`container`.
+        :type container: :py:class:`PySide6.QtWidgets.QLayout` or :py:class:`PySide6.QtWidgets.QWidget` or :py:obj:`None`
+        :param style: The style for the layout's parent widget.
+        :type style: str or None
+        :returns: A :py:class:`LayoutBuilder` for :py:class:`~fluvel.components.layouts.VBoxLayout.VBoxLayout`.
         :rtype: LayoutBuilder[VBoxLayout]
         
-        Ejemplo:
+        Example:
         --------
         .. code-block:: python
             ...
-            with self.Vertical(container) as v:
+            with self.Vertical() as v:
                 v.Label(text="Hello")
         """
-        return LayoutBuilder(container, VBoxLayout)
 
-    def Horizontal(self, container: QLayout | QWidget) -> LayoutBuilder[HBoxLayout]:
+        return self.build_layout(container, VBoxLayout, style)
+
+    def Horizontal(
+        self, 
+        container: QLayout | QWidget | None = None, 
+        style: str | None = None
+    ) -> LayoutBuilder[HBoxLayout]:
         """
-        Crea un `HBoxLayout` usando un context manager.
+        Creates a horizontal box layout (:py:class:`~fluvel.components.layouts.HBoxLayout.HBoxLayout`) 
+        using a context manager.
 
-        :param container: El contenedor para el layout.
-        :type container: QLayout | QWidget
-        :returns: Un `LayoutBuilder` para `HBoxLayout`.
+        :param container: The container for the layout. Defaults to the view's root :py:attr:`container`.
+        :type container: :py:class:`PySide6.QtWidgets.QLayout` or :py:class:`PySide6.QtWidgets.QWidget` or :py:obj:`None`
+        :param style: The style for the layout's parent widget.
+        :type style: str or None
+        :returns: A :py:class:`LayoutBuilder` for :py:class:`~fluvel.components.layouts.HBoxLayout.HBoxLayout`.
         :rtype: LayoutBuilder[HBoxLayout]
         
-        Ejemplo:
+        Example:
         --------
         .. code-block:: python
             ...
-            with self.Horizontal(container) as h:
+            with self.Horizontal() as h:
                 h.Label(text="Hello")
         """
-        return LayoutBuilder(container, HBoxLayout)
 
-    def Form(self, container: QLayout | QWidget) -> LayoutBuilder[FormLayout]:
-        return LayoutBuilder(container, FormLayout)
+        return self.build_layout(container, HBoxLayout, style)
 
-    def Grid(self, container: QLayout | QWidget) -> LayoutBuilder[GridLayout]:
-        return LayoutBuilder(container, GridLayout)
+    def Form(
+        self, 
+        container: QLayout | QWidget | None = None,
+        style: str | None = None
+    ) -> LayoutBuilder[FormLayout]:
+        """
+        Creates a form layout (:py:class:`~fluvel.components.layouts.FormLayout.FormLayout`) 
+        using a context manager.
+
+        :param container: The container for the layout. Defaults to the view's root :py:attr:`container`.
+        :type container: :py:class:`PySide6.QtWidgets.QLayout` or :py:class:`PySide6.QtWidgets.QWidget` or :py:obj:`None`
+        :param style: The style for the layout's parent widget.
+        :type style: str or None
+        :returns: A :py:class:`LayoutBuilder` for :py:class:`~fluvel.components.layouts.FormLayout.FormLayout`.
+        :rtype: LayoutBuilder[FormLayout]
+        """
+        return self.build_layout(container, FormLayout, style)
+
+    def Grid(
+        self, 
+        container: QLayout | QWidget | None = None, 
+        style: str | None = None
+    ) -> LayoutBuilder[GridLayout]:
+        """
+        Creates a grid layout (:py:class:`~fluvel.components.layouts.GridLayout.GridLayout`) 
+        using a context manager.
+
+        :param container: The container for the layout. Defaults to the view's root :py:attr:`container`.
+        :type container: :py:class:`PySide6.QtWidgets.QLayout` or :py:class:`PySide6.QtWidgets.QWidget` or :py:obj:`None`
+        :param style: The style for the layout's parent widget.
+        :type style: str or None
+        :returns: A :py:class:`LayoutBuilder` for :py:class:`~fluvel.components.layouts.GridLayout.GridLayout`.
+        :rtype: LayoutBuilder[GridLayout]
+        """
+
+        return self.build_layout(container, GridLayout, style)
+
 
     def Stacked(self, container: QLayout | QWidget): ...
 
     @abstractmethod
     def build_ui(self) -> None:
         """
-        Método abstracto para construir la interfaz de usuario.
+        Abstract method for building the user interface.
         
-        Este método debe ser implementado por las clases que heredan de `AbstractView`
-        y es donde se definirá toda la lógica de la UI.
+        This method **must** be implemented by all classes inheriting from 
+        :py:class:`AbstractView` and is where the entire UI construction logic resides.
+        :rtype: None
         """
         pass
 
 class View(AbstractView):
+    """
+    Concrete class that inherits from :py:class:`AbstractView`.
+    """
     pass
 
 class Template(AbstractView):
+    """
+    Concrete class that inherits from :py:class:`AbstractView`, typically used 
+    for common view templates.
+    """
     pass

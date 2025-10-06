@@ -1,0 +1,106 @@
+{
+    "Fichier": {
+        "sep_1": "---",
+        "new_file": "Nouveau fichier",
+        "new_window": "Nouvelle fenêtre",
+        "new_from_template": "Nouveau à partir d'un modèle",
+        "sep_2": "---",
+        "open_file": "Ouvrir...",
+        "open_recent": "Ouvrir les éléments récents",
+        "sep_3": "---",
+        "close_current": "Fermer",
+        "close_all": "Tout fermer",
+        "sep_4": "---",
+        "save": "Enregistrer",
+        "save_as": "Enregistrer sous...",
+        "save_all": "Tout enregistrer",
+        "sep_5": "---",
+        "browse_all_versions": "Parcourir toutes les versions...",
+        "sep_6": "---",
+        "print_dialog": "Imprimer...",
+        "page_setup": "Mise en page...",
+        "print_preview": "Aperçu avant impression",
+        "sep_7": "---",
+        "import": "Importer...",
+        "export": "Exporter...",
+        "export_as": "Exporter sous...",
+        "share": "Partager...",
+        "sep_8": "---",
+        "quit": "Quitter"
+    },
+    "Édition": {
+        "undo": "Annuler",
+        "redo": "Rétablir",
+        "cut": "Couper",
+        "copy": "Copier",
+        "paste": "Coller",
+        "paste_special": "Collage spécial...",
+        "delete": "Supprimer",
+        "select_all": "Tout sélectionner",
+        "deselect": "Désélectionner",
+        "sep_9": "---",
+        "find": "Rechercher...",
+        "find_next": "Rechercher le suivant",
+        "find_previous": "Rechercher le précédent",
+        "replace": "Remplacer",
+        "sep_10": "---",
+        "check_document": "Vérifier le document",
+        "check_while_typing": "Vérifier l'orthographe pendant la frappe"
+    },
+    "Affichage": {
+        "zoom_in": "Zoom avant",
+        "zoom_out": "Zoom arrière",
+        "actual_size": "Taille réelle",
+        "fit_to_window": "Ajuster à la fenêtre",
+        "full_screen": "Plein écran",
+        "sep_11": "---",
+        "Afficher": {
+            "toolbar": "Barre d'outils",
+            "sidebar": "Barre latérale",
+            "rulers": "Règles",
+            "grid": "Grille",
+            "status_bar": "Barre d'état"
+        },
+        "sep_12": "---",
+        "single_pane": "Volet unique",
+        "two_panes": "Deux volets",
+        "three_panes": "Trois volets",
+        "sep_13": "---",
+        "sort_by_name": "Nom",
+        "sort_by_date_modified": "Date de modification",
+        "sort_by_size": "Taille"
+    },
+    "Fenêtre": {
+        "minimize": "Réduire",
+        "zoom_maximize": "Zoom/Agrandir",
+        "bring_all_to_front": "Tout ramener au premier plan",
+        "arrange": "Organiser"
+    },
+    "Paramètres": {
+        "preferences": "Préférences...",
+        "Thèmes": {
+            "modern_dark_theme": "Moderne-Sombre",
+            "bootstrap_theme": "Bootstrap",
+            "clean_light_theme": "Clair-Net"
+        },
+        "Langues": {
+            "es_language": "Espagnol",
+            "en_language": "Anglais"
+        }
+    },
+    "Aide": {
+        "Options d'aide": {
+            "help_docs": "Aide",
+            "keyboard_shortcuts": "Raccourcis clavier",
+            "tutorials": "Tutoriels",
+            "sep_14": "---",
+            "support": "Support",
+            "licence": "Licence"
+        },
+        "sep_15": "---",
+        "version": "Version",
+        "web_page": "Visitez notre site",
+        "check_for_updates": "Rechercher les mises à jour",
+        "about_app": "À propos de l'application"
+    }
+}

@@ -12,9 +12,10 @@ class FluvelWidget:
         configurado en el parámetro 'style' de cada uno.
         """
 
-        if "style" in kwargs:
+        if style := kwargs.get("style"):
 
-            self.setProperty("class", kwargs["style"])
+            self.setProperty("class", style)
+        
             kwargs.pop("style")
 
         return kwargs

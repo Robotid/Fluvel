@@ -14,7 +14,7 @@ class LanguageSelector(Template):
 
     def build_ui(self):
 
-        with self.Grid(self.container) as grid:
+        with self.Grid() as grid:
             grid.adjust(spacing=10, margins=(20, 20, 20, 20))
 
             c1, c2, c3, c4, c5, c6 = grid.Columns(6)

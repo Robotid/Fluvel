@@ -1,0 +1,106 @@
+{
+    "ملف": {
+        "sep_1": "---",
+        "new_file": "ملف جديد",
+        "new_window": "نافذة جديدة",
+        "new_from_template": "جديد من قالب",
+        "sep_2": "---",
+        "open_file": "فتح...",
+        "open_recent": "فتح الأخيرة",
+        "sep_3": "---",
+        "close_current": "إغلاق",
+        "close_all": "إغلاق الكل",
+        "sep_4": "---",
+        "save": "حفظ",
+        "save_as": "حفظ باسم...",
+        "save_all": "حفظ الكل",
+        "sep_5": "---",
+        "browse_all_versions": "تصفح جميع الإصدارات...",
+        "sep_6": "---",
+        "print_dialog": "طباعة...",
+        "page_setup": "إعداد الصفحة...",
+        "print_preview": "معاينة الطباعة",
+        "sep_7": "---",
+        "import": "استيراد...",
+        "export": "تصدير...",
+        "export_as": "تصدير باسم...",
+        "share": "مشاركة...",
+        "sep_8": "---",
+        "quit": "خروج"
+    },
+    "تحرير": {
+        "undo": "تراجع",
+        "redo": "إعادة",
+        "cut": "قص",
+        "copy": "نسخ",
+        "paste": "لصق",
+        "paste_special": "لصق خاص...",
+        "delete": "حذف",
+        "select_all": "تحديد الكل",
+        "deselect": "إلغاء التحديد",
+        "sep_9": "---",
+        "find": "بحث...",
+        "find_next": "بحث عن التالي",
+        "find_previous": "بحث عن السابق",
+        "replace": "استبدال",
+        "sep_10": "---",
+        "check_document": "فحص المستند",
+        "check_while_typing": "التدقيق الإملائي أثناء الكتابة"
+    },
+    "عرض": {
+        "zoom_in": "تكبير",
+        "zoom_out": "تصغير",
+        "actual_size": "الحجم الفعلي",
+        "fit_to_window": "ملائمة للنافذة",
+        "full_screen": "ملء الشاشة",
+        "sep_11": "---",
+        "إخفاء النوافذ": {
+            "toolbar": "شريط الأدوات",
+            "sidebar": "الشريط الجانبي",
+            "rulers": "المساطر",
+            "grid": "الشبكة",
+            "status_bar": "شريط الحالة"
+        },
+        "sep_12": "---",
+        "single_pane": "جزء واحد",
+        "two_panes": "جزأين",
+        "three_panes": "ثلاثة أجزاء",
+        "sep_13": "---",
+        "sort_by_name": "الاسم",
+        "sort_by_date_modified": "تاريخ التعديل",
+        "sort_by_size": "الحجم"
+    },
+    "نافذة": {
+        "minimize": "تصغير",
+        "zoom_maximize": "تكبير/تصغير",
+        "bring_all_to_front": "إحضار الكل إلى الأمام",
+        "arrange": "ترتيب"
+    },
+    "إعدادات": {
+        "preferences": "تفضيلات...",
+        "سمات": {
+            "modern_dark_theme": "حديث-داكن",
+            "bootstrap_theme": "بوتستراب",
+            "clean_light_theme": "فاتح نظيف"
+        },
+        "لغات": {
+            "es_language": "الإسبانية",
+            "en_language": "الإنجليزية"
+        }
+    },
+    "مساعدة": {
+        "خيارات المساعدة": {
+            "help_docs": "مساعدة",
+            "keyboard_shortcuts": "اختصارات لوحة المفاتيح",
+            "tutorials": "دروس",
+            "sep_14": "---",
+            "support": "الدعم",
+            "licence": "الترخيص"
+        },
+        "sep_15": "---",
+        "version": "الإصدار",
+        "web_page": "زورونا",
+        "check_for_updates": "التحقق من وجود تحديثات",
+        "about_app": "حول التطبيق"
+    }
+}
