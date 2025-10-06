@@ -1,59 +1,22 @@
-/* -------- Font Sizes -------- */
-*[class~="h1"] {
-    font-size: 24pt; /* 32px */
-}
-*[class~="h2"] {
-    font-size: 18pt; /* 24px */
-}
-*[class~="h3"] {
-    font-size: 13.5pt; /* 18px */
-}
-*[class~="h4"] {
-    font-size: 12pt; /* 16px */
-}
-*[class~="h5"] {
-    font-size: 10.5pt; /* 14px */
-}
-*[class~="h6"] {
-    font-size: 9pt; /* 12px */
-}
-*[class~="h7"] {
-    font-size: 7.5pt; /* 10px */
-}
+/* Font Size */
+*[class~="text-xs"] { font-size: 12px; }
+*[class~="text-sm"] { font-size: 14px; }
+*[class~="text-base"] { font-size: 16px; }
+*[class~="text-lg"] { font-size: 18px; }
+*[class~="text-xl"] { font-size: 20px; }
+*[class~="text-2xl"] { font-size: 24px; }
+*[class~="text-3xl"] { font-size: 28px; }
+*[class~="text-4xl"] { font-size: 32px; }
 
-/* -------- Font Weights -------- */
+/* Font Weight */
+*[class~="font-extralight"] { font-weight: 200; }
+*[class~="font-light"] { font-weight: 300; }
+*[class~="font-normal"] { font-weight: 400; }
+*[class~="font-medium"] { font-weight: 500; }
+*[class~="font-semibold"] { font-weight: 600; }
+*[class~="font-bold"] { font-weight: 700; }
 
-*[class~="w-100"] {
-    font-weight: 100;
-}
-
-*[class~="w-200"] {
-    font-weight: 200;
-}
-
-*[class~="w-300"] {
-    font-weight: 300;
-}
-
-*[class~="w-400"] {
-    font-weight: 400;
-}
-
-*[class~="w-500"] {
-    font-weight: 500;
-}
-
-*[class~="w-600"] {
-    font-weight: 600;
-}
-*[class~="w-700"] {
-    font-weight: 600;
-}
-
-*[class~="bold"]{
-    font-weight: bold;
-}
-
-*[class~="italic"]{
-    font-style: italic;
-}
+/* Text Alignment */
+*[class~="text-left"] { text-align: left; }
+*[class~="text-center"] { text-align: center; }
+*[class~="text-right"] { text-align: right; }

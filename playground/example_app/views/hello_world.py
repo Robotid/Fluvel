@@ -12,7 +12,7 @@ class HelloWorld(View):
         with self.Vertical(style="bg-pink-300") as v:
             v.adjust(alignment=v.CENTER)
 
-            v.Label(text="Hello World", style="h1 w-200", alignment=v.CENTER)
+            v.Label(text="Hello World", style="text-4xl font-extralight", alignment=v.CENTER)
 
             v.Template(LanguageSelector)
             v.Template(ViewSelector)

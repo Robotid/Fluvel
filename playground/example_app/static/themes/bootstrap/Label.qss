@@ -1,4 +1,3 @@
-
 QLabel {
     /* Estilos base del Label */
     color: #343a40;
@@ -6,45 +5,38 @@ QLabel {
     font-size: 14px; 
     font-weight: 400;
     margin: 5px;
-    border-radius: 3px 5px 5px 3px; 
 }
 
 
-/* Estilo para un Label tipo Info */
+/* ==================== Alertas y Tarjetas ==================== */
+
+QLabel[class~="info"], QLabel[class~="success"], QLabel[class~="warning"], QLabel[class~="danger"] {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border-left: 4px solid;
+    color: #f0f0f0;
+}
 
 QLabel[class~="info"] {
     background-color: #dbeafe;
-    border-left: 3px solid #60a5fa;
-    color: #508ef7;
-    padding: 5px 5px 5px 10px;
+    border-color: #60a5fa;
+    color: #508ef7
 }
-
-
-/* Estilo para un Label tipo Success */
 
 QLabel[class~="success"] {
     background-color: #DCFCE7;
-    border-left: 3px solid #86EFAC;
-    color: #15803D;
-    padding: 5px 5px 5px 10px;
+    border-color: 3px solid #62ca89;
+    color: #34bd66;
 }
-
-
-/* Estilo para un Label tipo Warning */
 
 QLabel[class~="warning"] {
     background-color: #faecdb;
     border-left: 3px solid #ff9800;
     color: #f18d54;
-    padding: 5px 5px 5px 10px;
 }
-
-
-/* Estilo para un Label tipo Warning */
 
 QLabel[class~="danger"] {
     background-color: #fdecea;
     border-left: 3px solid #f44336;
     color: #f44358;
-    padding: 5px 5px 5px 10px;
 }

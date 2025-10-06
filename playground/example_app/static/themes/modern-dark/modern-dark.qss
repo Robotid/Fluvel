@@ -488,6 +488,15 @@ QScrollBar::add-line, QScrollBar::sub-line, QScrollBar::add-page, QScrollBar::su
 }
 
 /* ==================== Alertas y Tarjetas ==================== */
+QLabel {
+    /* Estilos base del Label */
+    color: #343a40;
+    background-color: transparent;
+    font-size: 14px; 
+    font-weight: 400;
+    margin: 5px;
+}
+
 QLabel[class~="info"], QLabel[class~="success"], QLabel[class~="warning"], QLabel[class~="danger"] {
     padding: 10px 15px;
     border-radius: 5px;
