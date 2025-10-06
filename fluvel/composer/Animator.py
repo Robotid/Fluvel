@@ -1,4 +1,5 @@
-from PySide6.QtCore import QPropertyAnimation, QObject, QEasingCurve, QRect
+
+from PySide6.QtCore import QPropertyAnimation, QObject, QEasingCurve
 from PySide6.QtWidgets import QWidget, QGraphicsOpacityEffect
 
 class Animator:
@@ -8,7 +9,15 @@ class Animator:
     _active_animations: list[QPropertyAnimation] = []
 
     @classmethod
-    def animate(cls, target: QObject, property_name: bytes, start_value: float, end_value: float, duration: int = 400, easing: QEasingCurve = QEasingCurve.OutQuad) -> QPropertyAnimation:
+    def animate(
+        cls, 
+        target: QObject, 
+        property_name: bytes, 
+        start_value: float, 
+        end_value: float, 
+        duration: int = 400, 
+        easing: QEasingCurve = QEasingCurve.OutQuad
+    ) -> QPropertyAnimation:
         """
         Crea, configura e inicia un QPropertyAnimation para cualquier propiedad.
         """

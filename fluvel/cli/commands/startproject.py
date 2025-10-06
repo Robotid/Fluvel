@@ -1,5 +1,4 @@
 import click
-from pathlib import Path
 
 from fluvel.cli.paths import PROJECT_ROOT, MAINPY_ROOT
 from fluvel.cli.templates import MAINPY_TEMPLATE, WELCOME_VIEW, WINDOW_TEMPLATE, APPCONFIG_TEMPLATE, HOME_GREETING, COMPACT_BOOTSTRAP

@@ -23,10 +23,10 @@ class LayoutKwargs(TypedDict, total=False):
     Argumentos de palabra clave para la configuración de la distribución del layout.
     """
 
-    alignment: Qt.AlignmentFlag
-    spacing: int
-    margins: tuple[int, int, int, int]
-    size_constraint: QLayout.SizeConstraint
+    alignment       : Qt.AlignmentFlag
+    spacing         : int
+    margins         : tuple[int, int, int, int]
+    size_constraint : QLayout.SizeConstraint
     
 
 class FluvelLayout:
@@ -45,33 +45,33 @@ class FluvelLayout:
     """
 
     # Alingment Flags
-    TOP = Qt.AlignmentFlag.AlignTop
-    BOTTOM = Qt.AlignmentFlag.AlignBottom
-    RIGHT = Qt.AlignmentFlag.AlignRight
-    LEFT = Qt.AlignmentFlag.AlignLeft
-    CENTER = Qt.AlignmentFlag.AlignCenter
-    H_CENTER = Qt.AlignmentFlag.AlignHCenter
-    V_CENTER = Qt.AlignmentFlag.AlignVCenter
-    JUSTIFY = Qt.AlignmentFlag.AlignJustify
-    BASELINE = Qt.AlignmentFlag.AlignBaseline
+    TOP             = Qt.AlignmentFlag.AlignTop
+    BOTTOM          = Qt.AlignmentFlag.AlignBottom
+    RIGHT           = Qt.AlignmentFlag.AlignRight
+    LEFT            = Qt.AlignmentFlag.AlignLeft
+    CENTER          = Qt.AlignmentFlag.AlignCenter
+    H_CENTER        = Qt.AlignmentFlag.AlignHCenter
+    V_CENTER        = Qt.AlignmentFlag.AlignVCenter
+    JUSTIFY         = Qt.AlignmentFlag.AlignJustify
+    BASELINE        = Qt.AlignmentFlag.AlignBaseline
 
     # Combinations
-    TOP_LEFT = TOP | LEFT
-    TOP_RIGHT = TOP | RIGHT
-    BOTTOM_LEFT = BOTTOM | LEFT
-    BOTTOM_RIGHT = BOTTOM | RIGHT
-    CENTER_TOP = TOP | H_CENTER
-    CENTER_RIGHT = RIGHT | V_CENTER
-    CENTER_BOTTOM = BOTTOM | H_CENTER
-    CENTER_LEFT = LEFT | V_CENTER
+    TOP_LEFT        = TOP | LEFT
+    TOP_RIGHT       = TOP | RIGHT
+    BOTTOM_LEFT     = BOTTOM | LEFT
+    BOTTOM_RIGHT    = BOTTOM | RIGHT
+    CENTER_TOP      = TOP | H_CENTER
+    CENTER_RIGHT    = RIGHT | V_CENTER
+    CENTER_BOTTOM   = BOTTOM | H_CENTER
+    CENTER_LEFT     = LEFT | V_CENTER
 
     # Size Contraints
-    DEFAULT = QLayout.SizeConstraint.SetDefaultConstraint
-    FIXED = QLayout.SizeConstraint.SetFixedSize
-    MINIMUM = QLayout.SizeConstraint.SetMinimumSize
-    MAXIMUM = QLayout.SizeConstraint.SetMaximumSize
-    WITHOUT = QLayout.SizeConstraint.SetNoConstraint
-    MIN_AND_MAX = QLayout.SizeConstraint.SetMinAndMaxSize
+    DEFAULT         = QLayout.SizeConstraint.SetDefaultConstraint
+    FIXED           = QLayout.SizeConstraint.SetFixedSize
+    MINIMUM         = QLayout.SizeConstraint.SetMinimumSize
+    MAXIMUM         = QLayout.SizeConstraint.SetMaximumSize
+    WITHOUT         = QLayout.SizeConstraint.SetNoConstraint
+    MIN_AND_MAX     = QLayout.SizeConstraint.SetMinAndMaxSize
 
     _MAPPING_METHODS = {
         "alignment": "setAlignment",
@@ -266,3 +266,4 @@ class FluvelLayout:
         # create the RadioButton if it doesn't exist or just add it to the layout,
         # then return the FRadioButton instance or None if it's already a widget
         return self._process_kwargs(FRadioButton, *args, **kwargs)
+        

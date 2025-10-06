@@ -38,6 +38,9 @@ class FButtonKwargs(TypedDict, total=False):
     textvariable: StringVar
     style: ButtonStyles
     checkable: bool
+    
+    # Shape and behavior
+    size: tuple[int, int]
 
     # Signals
     on_click: callable
@@ -59,6 +62,8 @@ class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
         "on_pressed": "pressed",
         "on_released": "released",
         "on_toggled": "toggled",
+        # Shape and behavior
+        "size": "setFixedSize"
     }
 
     def __init__(self, **kwargs: Unpack[FButtonKwargs]):

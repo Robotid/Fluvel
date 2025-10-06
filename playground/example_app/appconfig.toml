@@ -16,4 +16,4 @@ language = "en"
 [window]
 title = "FluvelApp"
 size = [720, 500]
-window_flags = ["always-on-top"]
+flags = ["always-on-top"]
