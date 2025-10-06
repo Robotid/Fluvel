@@ -84,6 +84,7 @@ class FMenu(QMenu):
 
         # Opcional: añade icono si existe
         icon_path = element_dict.get("icon")
+
         if icon_path:
             action.setIcon(QIcon(icon_path))
             

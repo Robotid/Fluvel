@@ -2,7 +2,6 @@ import importlib
 from typing import Type
 from PySide6.QtWidgets import QWidget
 
-
 class Factory:
     """
     Manages the creation of reusable, customized QWidget components.
@@ -57,7 +56,7 @@ class Factory:
         :returns: A decorator that produces a QWidget component factory.
         :rtype: callable
 
-        Example:
+        Example
         --------
         .. code-block:: python
 

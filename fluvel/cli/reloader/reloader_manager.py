@@ -12,6 +12,8 @@ from fluvel.core.Router import Router
 from PySide6.QtCore import QObject, Signal, QTimer
 from PySide6.QtWidgets import QMainWindow, QApplication
 
+# Expect Handler
+from fluvel.core.exceptions.expect_handler import expect
 
 class ReloaderSignalEmmiter(QObject):
     """
@@ -109,6 +111,7 @@ class HReloader(QObject):
         print("Change detected. Reloading the application...")
         self.reload_and_update()
 
+    @expect.ErrorImportingModule(stop=True)
     def reload_and_update(self) -> None:
         """
         Recarga los módulos de vistas y actualiza el contenido de la ventana.
@@ -118,10 +121,7 @@ class HReloader(QObject):
 
         for module in modules_to_reload:
             if module in sys.modules:
-                try:
-                    importlib.reload(sys.modules[module])
-                except Exception as e:
-                    print(f"Error reloading module {module}: {e}")
+                importlib.reload(sys.modules[module])
 
         # Recargamos los qss
         self.fluvel_app._set_theme()
@@ -130,4 +130,4 @@ class HReloader(QObject):
         self.fluvel_app._set_content()
 
         # Actualizamos la UI
-        self.main_window.update_ui(Router)
+        self.main_window._update_ui(Router)

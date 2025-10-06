@@ -1,11 +1,12 @@
 from fluvel.core import AppWindow
 
+
 class MainWindow(AppWindow):
 
     def init_ui(self):
         """Display the `components` in the Main Window."""
-
-        # # configure menu options
+        
+        # configure menu options
         self.build_menu_bar()
 
     def build_menu_bar(self):
@@ -14,9 +15,7 @@ class MainWindow(AppWindow):
         change_language = self.root.change_language
 
         self.menu_bar.config(
-            shortcuts=[
-                ("quit", "Ctrl+Q", self.close)
-            ],
+            shortcuts=[("quit", "Ctrl+Q", self.close)],
             on_triggered=[
                 # -------------- Menu Settings ---------------------
                 # Themes

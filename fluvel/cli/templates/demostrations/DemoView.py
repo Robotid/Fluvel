@@ -1,7 +1,7 @@
-from fluvel import Router, View
+from fluvel import route, View
 from fluvel.components import FButton
 
-@Router.route("/demo-widgets")
+@route("/demo-widgets")
 class Demo(View):
 
     def build_ui(self):

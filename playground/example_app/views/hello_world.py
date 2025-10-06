@@ -1,9 +1,10 @@
-from fluvel import View, Router
+from fluvel import View, route
 
 from playground.example_app.views.templates.language_selector import LanguageSelector
 from playground.example_app.views.templates.view_selector import ViewSelector
 
-@Router.route("hello-world")
+
+@route("hello-world")
 class HelloWorld(View):
 
     def build_ui(self):

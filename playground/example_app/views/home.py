@@ -1,12 +1,11 @@
-from fluvel import View, Router
+from fluvel import View, route
 from views.templates.view_selector import ViewSelector
 
-@Router.route("home")
+@route("home")
 class Home(View):
 
     def build_ui(self):
-        self.container.setObjectName("home-container")
-    
+
         with self.Vertical(self.container) as v:
             v.adjust(alignment=v.CENTER)
 
