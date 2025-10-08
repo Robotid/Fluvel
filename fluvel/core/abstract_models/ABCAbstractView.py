@@ -5,7 +5,7 @@ It defines the core abstract class for all views and the context manager
 responsible for building nested PySide6 layouts.
 """
 
-from typing import TypeVar, Generic, Type, Unpack
+from typing import TypeVar, Generic, Type
 from abc import ABC, abstractmethod, ABCMeta
 
 # Fluvel

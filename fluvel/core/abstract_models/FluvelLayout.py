@@ -197,38 +197,51 @@ class FluvelLayout:
                 v.PrimaryButton("Enter", route="login") 
         """
         
-        # El decorador @functools.wraps es esencial aquí para copiar la firma
-        # de factory_widget (que a su vez ya fue copiada de la función de configuración original).
         @functools.wraps(factory_widget)
         def addWidgetToLayout(*args, **kwargs) -> QWidget | None:
 
-            # 1. Ejecuta la fábrica (esta retorna el QWidget, ya creado en Factory.compose)
             widget = factory_widget(*args, **kwargs)
 
-            # 2. Añade el widget al layout
             self.addWidget(widget)
 
-            # 3. Retorna si es solicitado, manteniendo la firma de la función.
             if returns:
                 return widget
-            # Aunque la factory original retorna un QWidget, este wrapper retorna None
-            # si returns=False, cumpliendo con la filosofía de 'builder pattern'
-            # y permitiendo que TFactory sea Callable genérico.
+
             else: 
                 return None
 
-        # La clave: retornar el wrapper tipado con TFactory, forzando la inferencia
-        return addWidgetToLayout # type: ignore [return-value]
-    
-    def Template(self, view_class) -> None:
+        return addWidgetToLayout
 
-        # view_class: Template -> fluvel/core/abstract_models/ABCAbstractView/Template
-        view_instance = view_class(self)
+    def Prefab(self, prefab_component):
+        """
+        Adds a Complex Component (@Prefab) to the current layout.
 
-        view_instance.build_ui()
-        
-        # Añado el QWidget contenedor de la clase vista
-        self.addWidget(view_instance.container)
+        This method integrates pre-fabricated components (functions decorated 
+        with `@Prefab`) into a Fluvel layout, extracting the component's 
+        main container and appending it to the parent widget hierarchy.
+
+        :param prefab_component: The pre-fabricated component.
+        :type prefab_component: :py:class:`~fluvel.core.abstract_models.ABCAbstractView.View` | Callable
+
+        Usage:
+        ------
+        .. code-block:: python
+            ...
+            with self.Vertical() as v:
+            
+                v.Prefab(ComponentName(arg="value"))
+                # or
+                v.Prefab(ComponentName) # This component does not require any arguments.
+    """
+
+        container = None
+
+        if isinstance(prefab_component, Callable):
+            container = prefab_component().container
+        else:
+            container = prefab_component.container
+
+        self.addWidget(container)
 
 
     @overload

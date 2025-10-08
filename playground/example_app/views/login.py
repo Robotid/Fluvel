@@ -1,7 +1,7 @@
 from fluvel import View, route
 
-from views.templates.view_selector import ViewSelector
-from views.templates.language_selector import LanguageSelector
+from views.prefabs.view_selector import ViewSelector
+from views.prefabs.language_selector import LanguageSelector
 
 
 @route("login")
@@ -29,5 +29,5 @@ class LoginPage(View):
 
             vbody.Label(text=["lbl-forgotten-password"], alignment=h.CENTER)
 
-            vbody.Template(LanguageSelector)
-            vbody.Template(ViewSelector)
+            vbody.Prefab(LanguageSelector)
+            vbody.Prefab(ViewSelector)

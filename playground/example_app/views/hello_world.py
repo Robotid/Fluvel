@@ -1,7 +1,7 @@
 from fluvel import View, route
 
-from playground.example_app.views.templates.language_selector import LanguageSelector
-from playground.example_app.views.templates.view_selector import ViewSelector
+from views.prefabs.language_selector import LanguageSelector
+from views.prefabs.view_selector import ViewSelector
 
 
 @route("hello-world")
@@ -14,5 +14,5 @@ class HelloWorld(View):
 
             v.Label(text="Hello World", style="text-4xl font-extralight", alignment=v.CENTER)
 
-            v.Template(LanguageSelector)
-            v.Template(ViewSelector)
+            v.Prefab(LanguageSelector)
+            v.Prefab(ViewSelector)
