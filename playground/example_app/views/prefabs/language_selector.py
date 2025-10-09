@@ -6,7 +6,7 @@ from fluvel.composer import Factory, Prefab
 def LangButton(text: str, change_to: str):
     return {
         "text": text,
-        "style": "dark-outlined font-light rounded-2xl",
+        "style": "light font-light rounded-2xl",
         "on_click": partial(View.app_root.change_language, change_to)
     }
 

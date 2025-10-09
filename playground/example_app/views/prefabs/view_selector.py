@@ -6,7 +6,7 @@ def ViewButton(text: str, view_route: str) -> None:
 
     return {
         "text": text,
-        "style": "primary",
+        "style": "light",
         "on_click": lambda: Router.show(view_route)
     }
 

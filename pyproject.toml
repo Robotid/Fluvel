@@ -1,6 +1,6 @@
 [project]
 name = "fluvel"
-version = "0.1.1b1"
+version = "0.1.2b1"
 description = "A Python framework for building modern and declarative UIs with PySide6."
 authors = [
     {name = "robotid7@outlook.es"}
