@@ -52,7 +52,7 @@ class FluvelApp:
            app.run()
     """
 
-    def __init__(self, window_module_path: Optional[str] = None, config_file: str = "appconfig.toml") -> None:
+    def __init__(self, window_module_path: Optional[str] = None, config_file: str = "config.toml") -> None:
         
         # The instance of QApplication
         self._app = QApplication()

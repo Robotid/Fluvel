@@ -11,12 +11,12 @@ from fluvel.core.exceptions.expect_handler import expect
 @click.option("--debug", "-d", is_flag=True, help="Enable hot-reloading")
 def run(debug: bool) -> None:
     """
-    Start the Fluvel application by running 'main.py'.
+    Start the Fluvel application by running 'app.py'.
     """
 
     if not MAINPY_ROOT.exists():
         click.echo(
-            "Error: 'main.py' not found. Make sure the main script exists in the project root. "
+            "Error: 'app.py' not found. Make sure the main script exists in the project root. "
             "Run the 'fluvel check' command to create the file."
         )
         sys.exit(1)
@@ -30,10 +30,10 @@ def run(debug: bool) -> None:
 
     else:
 
-        # The command to run main.py
+        # The command to run app.py
         command = [sys.executable, str(MAINPY_ROOT)]
 
-        # Try to run main.py
+        # Try to run app.py
         try:
             click.echo(f"initializing...")
             subprocess.run(command, check=True)
@@ -41,12 +41,12 @@ def run(debug: bool) -> None:
         except subprocess.CalledProcessError as e:
             click.echo(f"An error has occurred: {e}")
             click.echo("---")
-            click.echo("Details of the error from main.py:")
+            click.echo("Details of the error from app.py:")
             click.echo(e.stderr)
 
 @expect.ErrorImportingModule(stop=True)
 @expect.MismatchedKey(
-    msg="Reloader Error: La instancia de <FluvelApp> $e no se encontró. Asegúrate de nombrarla $e en el módulo 'main.py' para poder usar el Hot-Reloader.",
+    msg="Reloader Error: La instancia de <FluvelApp> $e no se encontró. Asegúrate de nombrarla $e en el módulo 'app.py' para poder usar el Hot-Reloader.",
     stop=True
 )
 def start_monitoring() -> None:
@@ -56,7 +56,7 @@ def start_monitoring() -> None:
     `fluvel/cli/reloader/reloader_manager`
     """
 
-    main_module = importlib.import_module("main")
+    main_module = importlib.import_module("app")
 
     app_root = main_module.__dict__["app"]
 

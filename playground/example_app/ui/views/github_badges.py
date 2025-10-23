@@ -37,7 +37,7 @@ def Badge(view: View, title: str, description: str, color: str) -> View:
     with view.Horizontal() as h:
         h.adjust(spacing=0, margins=(0, 0, 0, 0))
 
-        h.Label(text=title, style="bg-gray-500 m-0 p-1 fg-white br-left[5px]", alignment="right")
+        h.Label(text=title, style="bg-gray-500 m-0 p-1 bg-white fg-white br-left[5px]", alignment="right")
         h.Label(text=description, style=f"bg-{color}-400 m-0 p-1 fg-white br-right[5px]", alignment="left")
 
     return view

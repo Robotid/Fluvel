@@ -3,6 +3,7 @@ import re
 STYLE_TOKENS = {
     # --- Fondo
     "bg": "background-color: $value;",
+    "bg-lgradient": "background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 $value, stop: 1 #FFFFFF)",
     "bg-img": "background-image: $value;",
     "bg-repeat": "background-repeat: $value;",
     "bg-position": "background-position: $value;",

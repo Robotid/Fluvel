@@ -11,7 +11,7 @@ PROJECT_ROOT = Path(os.getcwd())
 # Añadimos el project_root al sys.path
 sys.path.append(str(PROJECT_ROOT))
 
-MAINPY_ROOT = PROJECT_ROOT / "main.py"
+MAINPY_ROOT = PROJECT_ROOT / "app.py"
 
 
 # TEMPLATES
