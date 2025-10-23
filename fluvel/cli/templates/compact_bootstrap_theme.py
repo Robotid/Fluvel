@@ -132,6 +132,16 @@ QLabel[class~="danger"] {
     color: #f44358;
 }/* styles_minimal.qss */
 
+/* * Colores base inspirados en Bootstrap
+ * Es importante que reemplaces manualmente `var(--nombre-variable)` con los valores hexadecimales.
+ */
+/* Puedes ajustarlos a tu paleta de colores específica. */
+/* --primary: #007bff; */         /* Azul */
+/* --dark: #343a40; */           /* Gris oscuro para el menubar */
+/* --light: #f8f9fa; */          /* Gris muy claro para el resaltado del menú */
+/* --body-bg: #fff; */           /* Fondo principal */
+/* --text-color: #212529; */     /* Color de texto oscuro */
+/* --border-radius: 0.25rem; */  /* Radio de borde pequeño */
 
 /* * Estilo general de la MainWindow
  */
@@ -141,7 +151,9 @@ QMainWindow {
     font-family: "Segoe UI", "Helvetica Neue", sans-serif;
     font-size: 14px; /* Tamaño de fuente base */
 }
-
+/* QWidget#central-wd {
+    background-color: #7136e0;
+} */
 /* ==================== QMenu, QMenuBar ==================== */
 QMenuBar {
     background-color: #e9ecef; /* Un gris claro para la barra de menú */
@@ -194,27 +206,19 @@ QToolTip {
     opacity: 200; /* Completamente opaco */
 }
 QPushButton {
-    /* Estilos base del Label */
-    background-color: #007bff;
+    /* Estilos base del PushButton */
     color: #fff;
     font-size: 14px;
     font-weight: 700; 
     text-align: center; 
-    border: 1px solid #007bff;
+    border: 1px solid;
     border-radius: 5px;
     padding: 8px 16px; 
     outline: none;
 }
 
-QPushButton:hover {
-    background-color: #0071eb;
-    border-color: #0071eb;
-}
-
 QPushButton:pressed {
     padding-bottom: 6px;
-    background-color: #0068d6;
-    border-color: #0068d6;
 }
 
 QPushButton:disabled {
@@ -225,7 +229,7 @@ QPushButton:disabled {
 }
 
 
-/* Estilo para un primary Button */
+/* Estilo para un Primary Button */
 
 QPushButton[class~="primary"] {
     background-color: #007bff;
@@ -255,7 +259,7 @@ QPushButton[class~="primary-outlined"]:pressed {
     border-color: #0068d6;
 }
     
-/* Estilo para un secondary Button */
+/* Estilo para un Secondary Button */
 
 QPushButton[class~="secondary"] {
     background-color: #858e96;
@@ -285,7 +289,7 @@ QPushButton[class~="secondary-outlined"]:pressed {
     border-color: #767a80;
 }
     
-/* Estilo para un info Button */
+/* Estilo para un Info Button */
 
 QPushButton[class~="info"] {
     background-color: #17a2b8;
@@ -315,7 +319,7 @@ QPushButton[class~="info-outlined"]:pressed {
     border-color: #138a9c;
 }
     
-/* Estilo para un success Button */
+/* Estilo para un Success Button */
 
 QPushButton[class~="success"] {
     background-color: #00a441;
@@ -345,7 +349,7 @@ QPushButton[class~="success-outlined"]:pressed {
     border-color: #008d38;
 }
     
-/* Estilo para un warning Button */
+/* Estilo para un Warning Button */
 
 QPushButton[class~="warning"] {
     background-color: #ffbe00;
@@ -375,7 +379,7 @@ QPushButton[class~="warning-outlined"]:pressed {
     border-color: #e6ac00;
 }
     
-/* Estilo para un danger Button */
+/* Estilo para un Danger Button */
 
 QPushButton[class~="danger"] {
     background-color: #e63a40;
@@ -405,9 +409,10 @@ QPushButton[class~="danger-outlined"]:pressed {
     border-color: #c93237;
 }
     
-/* Estilo para un dark Button */
+/* Estilo para un Dark Button */
 
 QPushButton[class~="dark"] {
+    color: #fff;
     background-color: #272923;
     border-color: #232629;
 }
@@ -435,7 +440,7 @@ QPushButton[class~="dark-outlined"]:pressed {
     border-color: #25292c;
 }
     
-/* Estilo para un light Button */
+/* Estilo para un Light Button */
 
 QPushButton[class~="light"] {
     color: #25292c;
@@ -835,6 +840,12 @@ QToolTip {
     border-top-left-radius: 6px; 
     border-top-right-radius: 6px; 
 }
+*[class~="rounded-t-2xl"] { 
+    border-top-left-radius: 16px; 
+    border-top-right-radius: 16px; 
+}
+
+
 *[class~="rounded-r-md"] { 
     border-top-right-radius: 6px; 
     border-bottom-right-radius: 6px; 
@@ -842,6 +853,10 @@ QToolTip {
 *[class~="rounded-b-md"] { 
     border-bottom-right-radius: 6px; 
     border-bottom-left-radius: 6px; 
+}
+*[class~="rounded-b-2xl"] { 
+    border-bottom-right-radius: 16px; 
+    border-bottom-left-radius: 16px; 
 }
 *[class~="rounded-l-md"] { 
     border-top-left-radius: 6px; 
@@ -940,8 +955,12 @@ QToolTip {
 *[class~="border-solid"] { border-style: solid; }
 *[class~="border-dashed"] { border-style: dashed; }
 *[class~="border-dotted"] { border-style: dotted; }
-*[class~="border-none"] { border-style: none; }/* Font Size */
-*[clsas~="text-2xs"] { font-size: 10px; }
+*[class~="border-none"] { border-style: none; }
+
+
+
+*[class~="bcolor-warning"] { border-color: #9a6700; }
+*[class~="alert-warning"] { color: #cd9533; }/* Font Size */
 *[class~="text-xs"] { font-size: 12px; }
 *[class~="text-sm"] { font-size: 14px; }
 *[class~="text-base"] { font-size: 16px; }
@@ -981,7 +1000,7 @@ QToolTip {
 *[class~="bg-slate-700"] { background-color: rgb(51, 65, 85); }
 *[class~="bg-slate-800"] { background-color: rgb(30, 41, 59); }
 *[class~="bg-slate-900"] { background-color: rgb(15, 23, 42); }
-*[class~="bg-slate-950"] { background-color: rgb(2, 6, 23); }
+*[class~="bg-slate-1000"] { background-color: rgb(2, 6, 23); }
 
 /* Gray */
 *[class~="bg-gray-50"] { background-color: rgb(249, 250, 251); }
@@ -994,7 +1013,7 @@ QToolTip {
 *[class~="bg-gray-700"] { background-color: rgb(55, 65, 81); }
 *[class~="bg-gray-800"] { background-color: rgb(31, 41, 55); }
 *[class~="bg-gray-900"] { background-color: rgb(17, 24, 39); }
-*[class~="bg-gray-950"] { background-color: rgb(3, 7, 18); }
+*[class~="bg-gray-1000"] { background-color: rgb(3, 7, 18); }
 
 /* Zinc */
 *[class~="bg-zinc-50"] { background-color: rgb(250, 250, 250); }
@@ -1007,7 +1026,7 @@ QToolTip {
 *[class~="bg-zinc-700"] { background-color: rgb(63, 63, 70); }
 *[class~="bg-zinc-800"] { background-color: rgb(39, 39, 42); }
 *[class~="bg-zinc-900"] { background-color: rgb(24, 24, 27); }
-*[class~="bg-zinc-950"] { background-color: rgb(9, 9, 11); }
+*[class~="bg-zinc-1000"] { background-color: rgb(9, 9, 11); }
 
 /* Neutral */
 *[class~="bg-neutral-50"] { background-color: rgb(250, 250, 250); }
@@ -1020,7 +1039,7 @@ QToolTip {
 *[class~="bg-neutral-700"] { background-color: rgb(64, 64, 64); }
 *[class~="bg-neutral-800"] { background-color: rgb(38, 38, 38); }
 *[class~="bg-neutral-900"] { background-color: rgb(23, 23, 23); }
-*[class~="bg-neutral-950"] { background-color: rgb(10, 10, 10); }
+*[class~="bg-neutral-1000"] { background-color: rgb(10, 10, 10); }
 
 /* Stone */
 *[class~="bg-stone-50"] { background-color: rgb(250, 250, 249); }
@@ -1033,7 +1052,7 @@ QToolTip {
 *[class~="bg-stone-700"] { background-color: rgb(68, 64, 60); }
 *[class~="bg-stone-800"] { background-color: rgb(41, 37, 36); }
 *[class~="bg-stone-900"] { background-color: rgb(28, 25, 23); }
-*[class~="bg-stone-950"] { background-color: rgb(12, 10, 9); }
+*[class~="bg-stone-1000"] { background-color: rgb(12, 10, 9); }
 
 /* Red */
 *[class~="bg-red-50"] { background-color: rgb(254, 242, 242); }
@@ -1046,7 +1065,7 @@ QToolTip {
 *[class~="bg-red-700"] { background-color: rgb(185, 28, 28); }
 *[class~="bg-red-800"] { background-color: rgb(153, 27, 27); }
 *[class~="bg-red-900"] { background-color: rgb(127, 29, 29); }
-*[class~="bg-red-950"] { background-color: rgb(69, 10, 10); }
+*[class~="bg-red-1000"] { background-color: rgb(69, 10, 10); }
 
 /* Orange */
 *[class~="bg-orange-50"] { background-color: rgb(255, 247, 237); }
@@ -1059,7 +1078,7 @@ QToolTip {
 *[class~="bg-orange-700"] { background-color: rgb(194, 65, 12); }
 *[class~="bg-orange-800"] { background-color: rgb(154, 52, 18); }
 *[class~="bg-orange-900"] { background-color: rgb(124, 45, 18); }
-*[class~="bg-orange-950"] { background-color: rgb(67, 20, 7); }
+*[class~="bg-orange-1000"] { background-color: rgb(67, 20, 7); }
 
 /* Amber */
 *[class~="bg-amber-50"] { background-color: rgb(255, 251, 235); }
@@ -1072,7 +1091,7 @@ QToolTip {
 *[class~="bg-amber-700"] { background-color: rgb(180, 83, 9); }
 *[class~="bg-amber-800"] { background-color: rgb(146, 64, 14); }
 *[class~="bg-amber-900"] { background-color: rgb(120, 53, 15); }
-*[class~="bg-amber-950"] { background-color: rgb(69, 26, 3); }
+*[class~="bg-amber-1000"] { background-color: rgb(69, 26, 3); }
 
 /* Yellow */
 *[class~="bg-yellow-50"] { background-color: rgb(254, 252, 232); }
@@ -1085,7 +1104,7 @@ QToolTip {
 *[class~="bg-yellow-700"] { background-color: rgb(161, 98, 7); }
 *[class~="bg-yellow-800"] { background-color: rgb(133, 77, 14); }
 *[class~="bg-yellow-900"] { background-color: rgb(113, 63, 18); }
-*[class~="bg-yellow-950"] { background-color: rgb(66, 32, 6); }
+*[class~="bg-yellow-1000"] { background-color: rgb(66, 32, 6); }
 
 /* Lime */
 *[class~="bg-lime-50"] { background-color: rgb(247, 254, 231); }
@@ -1098,7 +1117,7 @@ QToolTip {
 *[class~="bg-lime-700"] { background-color: rgb(77, 124, 15); }
 *[class~="bg-lime-800"] { background-color: rgb(63, 98, 18); }
 *[class~="bg-lime-900"] { background-color: rgb(54, 83, 20); }
-*[class~="bg-lime-950"] { background-color: rgb(26, 46, 5); }
+*[class~="bg-lime-1000"] { background-color: rgb(26, 46, 5); }
 
 /* Green */
 *[class~="bg-green-50"] { background-color: rgb(240, 253, 244); }
@@ -1111,7 +1130,7 @@ QToolTip {
 *[class~="bg-green-700"] { background-color: rgb(21, 128, 61); }
 *[class~="bg-green-800"] { background-color: rgb(22, 101, 52); }
 *[class~="bg-green-900"] { background-color: rgb(20, 83, 45); }
-*[class~="bg-green-950"] { background-color: rgb(5, 46, 22); }
+*[class~="bg-green-1000"] { background-color: rgb(5, 46, 22); }
 
 /* Emerald */
 *[class~="bg-emerald-50"] { background-color: rgb(236, 253, 245); }
@@ -1124,7 +1143,7 @@ QToolTip {
 *[class~="bg-emerald-700"] { background-color: rgb(4, 120, 87); }
 *[class~="bg-emerald-800"] { background-color: rgb(6, 95, 70); }
 *[class~="bg-emerald-900"] { background-color: rgb(6, 78, 59); }
-*[class~="bg-emerald-950"] { background-color: rgb(2, 44, 34); }
+*[class~="bg-emerald-1000"] { background-color: rgb(2, 44, 34); }
 
 /* Teal */
 *[class~="bg-teal-50"] { background-color: rgb(240, 253, 250); }
@@ -1137,7 +1156,7 @@ QToolTip {
 *[class~="bg-teal-700"] { background-color: rgb(15, 118, 110); }
 *[class~="bg-teal-800"] { background-color: rgb(17, 94, 89); }
 *[class~="bg-teal-900"] { background-color: rgb(19, 78, 74); }
-*[class~="bg-teal-950"] { background-color: rgb(4, 47, 46); }
+*[class~="bg-teal-1000"] { background-color: rgb(4, 47, 46); }
 
 /* Cyan */
 *[class~="bg-cyan-50"] { background-color: rgb(236, 254, 255); }
@@ -1150,7 +1169,7 @@ QToolTip {
 *[class~="bg-cyan-700"] { background-color: rgb(14, 116, 144); }
 *[class~="bg-cyan-800"] { background-color: rgb(21, 94, 117); }
 *[class~="bg-cyan-900"] { background-color: rgb(22, 78, 99); }
-*[class~="bg-cyan-950"] { background-color: rgb(8, 51, 68); }
+*[class~="bg-cyan-1000"] { background-color: rgb(8, 51, 68); }
 
 /* Sky */
 *[class~="bg-sky-50"] { background-color: rgb(240, 249, 255); }
@@ -1163,7 +1182,7 @@ QToolTip {
 *[class~="bg-sky-700"] { background-color: rgb(3, 105, 161); }
 *[class~="bg-sky-800"] { background-color: rgb(7, 89, 133); }
 *[class~="bg-sky-900"] { background-color: rgb(12, 74, 110); }
-*[class~="bg-sky-950"] { background-color: rgb(8, 47, 73); }
+*[class~="bg-sky-1000"] { background-color: rgb(8, 47, 73); }
 
 /* Blue */
 *[class~="bg-blue-50"] { background-color: rgb(239, 246, 255); }
@@ -1176,7 +1195,7 @@ QToolTip {
 *[class~="bg-blue-700"] { background-color: rgb(29, 78, 216); }
 *[class~="bg-blue-800"] { background-color: rgb(30, 64, 175); }
 *[class~="bg-blue-900"] { background-color: rgb(30, 58, 138); }
-*[class~="bg-blue-950"] { background-color: rgb(23, 37, 84); }
+*[class~="bg-blue-1000"] { background-color: rgb(23, 37, 84); }
 
 /* Indigo */
 *[class~="bg-indigo-50"] { background-color: rgb(238, 242, 255); }
@@ -1189,7 +1208,7 @@ QToolTip {
 *[class~="bg-indigo-700"] { background-color: rgb(67, 56, 202); }
 *[class~="bg-indigo-800"] { background-color: rgb(55, 48, 163); }
 *[class~="bg-indigo-900"] { background-color: rgb(49, 46, 129); }
-*[class~="bg-indigo-950"] { background-color: rgb(30, 27, 75); }
+*[class~="bg-indigo-1000"] { background-color: rgb(30, 27, 75); }
 
 /* Violet */
 *[class~="bg-violet-50"] { background-color: rgb(245, 243, 255); }
@@ -1202,7 +1221,7 @@ QToolTip {
 *[class~="bg-violet-700"] { background-color: rgb(109, 40, 217); }
 *[class~="bg-violet-800"] { background-color: rgb(91, 33, 182); }
 *[class~="bg-violet-900"] { background-color: rgb(76, 29, 149); }
-*[class~="bg-violet-950"] { background-color: rgb(46, 16, 101); }
+*[class~="bg-violet-1000"] { background-color: rgb(46, 16, 101); }
 
 /* Purple */
 *[class~="bg-purple-50"] { background-color: rgb(250, 245, 255); }
@@ -1215,7 +1234,7 @@ QToolTip {
 *[class~="bg-purple-700"] { background-color: rgb(126, 34, 206); }
 *[class~="bg-purple-800"] { background-color: rgb(107, 33, 168); }
 *[class~="bg-purple-900"] { background-color: rgb(88, 28, 135); }
-*[class~="bg-purple-950"] { background-color: rgb(59, 7, 100); }
+*[class~="bg-purple-1000"] { background-color: rgb(59, 7, 100); }
 
 /* Fuchsia */
 *[class~="bg-fuchsia-50"] { background-color: rgb(253, 244, 255); }
@@ -1228,7 +1247,7 @@ QToolTip {
 *[class~="bg-fuchsia-700"] { background-color: rgb(162, 28, 175); }
 *[class~="bg-fuchsia-800"] { background-color: rgb(134, 25, 143); }
 *[class~="bg-fuchsia-900"] { background-color: rgb(112, 26, 117); }
-*[class~="bg-fuchsia-950"] { background-color: rgb(74, 4, 78); }
+*[class~="bg-fuchsia-1000"] { background-color: rgb(74, 4, 78); }
 
 /* Pink */
 *[class~="bg-pink-50"] { background-color: rgb(253, 242, 248); }
@@ -1241,20 +1260,10 @@ QToolTip {
 *[class~="bg-pink-700"] { background-color: rgb(190, 24, 93); }
 *[class~="bg-pink-800"] { background-color: rgb(157, 23, 77); }
 *[class~="bg-pink-900"] { background-color: rgb(131, 24, 67); }
-*[class~="bg-pink-950"] { background-color: rgb(80, 7, 36); }
+*[class~="bg-pink-1000"] { background-color: rgb(80, 7, 36); }
 
-/* Rose */
-*[class~="bg-rose-50"] { background-color: rgb(255, 241, 242); }
-*[class~="bg-rose-100"] { background-color: rgb(255, 228, 230); }
-*[class~="bg-rose-200"] { background-color: rgb(254, 205, 211); }
-*[class~="bg-rose-300"] { background-color: rgb(253, 164, 175); }
-*[class~="bg-rose-400"] { background-color: rgb(251, 113, 133); }
-*[class~="bg-rose-500"] { background-color: rgb(244, 63, 94); }
-*[class~="bg-rose-600"] { background-color: rgb(225, 29, 72); }
-*[class~="bg-rose-700"] { background-color: rgb(190, 18, 60); }
-*[class~="bg-rose-800"] { background-color: rgb(159, 18, 57); }
-*[class~="bg-rose-900"] { background-color: rgb(136, 19, 55); }
-*[class~="bg-rose-950"] { background-color: rgb(76, 5, 25); }/* Width */
+*[class~="fg-white"] { color: white; }
+*[class~="fg-gray"] { color: grey; }/* Width */
 *[class~="w-full"] { width: 100%; }
 *[class~="w-1/2"] { width: 50%; }
 *[class~="w-1/4"] { width: 25%; }

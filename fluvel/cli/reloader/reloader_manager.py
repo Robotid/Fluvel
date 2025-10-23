@@ -5,8 +5,8 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 # Fluvel
-from fluvel.cli.paths import PROJECT_ROOT
 from fluvel.core.Router import Router
+from fluvel.utils.paths import VIEWS_DIR, STATIC_DIR
 
 # PySide6
 from PySide6.QtCore import QObject, Signal, QTimer
@@ -71,15 +71,13 @@ class HReloader(QObject):
         Inicia el monitoreo de archivos en el directorio 'views'.
         """
         try:
-            views_path = PROJECT_ROOT / "views"
-            static_path = PROJECT_ROOT / "static"
 
-            self.observer.schedule(self.event_handler, str(views_path), recursive=True)
-            self.observer.schedule(self.event_handler, str(static_path), recursive=True)
+            self.observer.schedule(self.event_handler, VIEWS_DIR, recursive=True)
+            self.observer.schedule(self.event_handler, STATIC_DIR, recursive=True)
             
             self.observer.start()
-            print(f"Monitoring changes in: {views_path}")
-            print(f"Monitoring changes in: {static_path}")
+            print(f"Monitoring changes in: {VIEWS_DIR}")
+            print(f"Monitoring changes in: {STATIC_DIR}")
 
         except FileNotFoundError:
             print(
@@ -116,9 +114,8 @@ class HReloader(QObject):
         """
         Recarga los módulos de vistas y actualiza el contenido de la ventana.
         """
-        modules_to_reload = [m for m in sys.modules.keys() if m.startswith("views")]
-        modules_to_reload.append("window")
-
+        modules_to_reload = [m for m in sys.modules.keys() if m.startswith("ui.views")]
+        
         for module in modules_to_reload:
             if module in sys.modules:
                 importlib.reload(sys.modules[module])

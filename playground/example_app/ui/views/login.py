@@ -1,7 +1,7 @@
 from fluvel import View, route
 
-from views.prefabs.view_selector import ViewSelector
-from views.prefabs.language_selector import LanguageSelector
+from ui.prefabs.view_selector import ViewSelector
+from ui.prefabs.language_selector import LanguageSelector
 
 
 @route("login")

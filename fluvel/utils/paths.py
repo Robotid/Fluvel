@@ -30,7 +30,9 @@ CONTENT_DIR: Path = STATIC_DIR / "content"
 
 THEMES_DIR: Path = STATIC_DIR / "themes"
 
-VIEWS_DIR: Path = APP_ROOT / "views"
+UI_DIR: Path = APP_ROOT / "ui"
+
+VIEWS_DIR: Path = UI_DIR / "views"
 
 # Paths on Prod
 

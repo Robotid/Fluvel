@@ -7,8 +7,8 @@ class HomeView(View):
     def build_ui(self):
     
         with self.Vertical(style="bg-slate-100") as v:
-            v.adjust(alignment=v.CENTER, spacing=0)
+            v.adjust(alignment="center", spacing=0)
 
             v.Label(text=["welcome-greeting"], style="text-4xl")
-            v.Label(text=AppConfig.app.copyright, style="text-2xs", alignment=v.CENTER)
+            v.Label(text=AppConfig.app.copyright, style="f-size[12px]", alignment="center")
 """

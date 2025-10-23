@@ -126,7 +126,7 @@ class FluvelApp:
         if initial_view is None:
             raise ValueError("The 'initial' argument is required in register() to show a first view.")
 
-        view_modules = views if views else [f"views.{m.stem}" for m in VIEWS_DIR.glob("*.py")]
+        view_modules = views if views else [f"ui.views.{m.stem}" for m in VIEWS_DIR.glob("*.py")]
         
         # Importing view modules
         for module in view_modules:
