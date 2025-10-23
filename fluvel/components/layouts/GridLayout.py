@@ -89,6 +89,8 @@ class GridLayout(QGridLayout, FluvelLayout):
     def __init__(self, parent: QWidget | None = None):
         super().__init__(parent)
 
+        self.parent = parent
+
     def Column(self, column_index: int) -> ColumnIndex:
         """
         Obtains a handler for a specific column in the grid.
@@ -164,13 +166,13 @@ class GridLayout(QGridLayout, FluvelLayout):
         column_span: int = 1,
     ) -> None:
         """
-        Adds a widget or layout to a grid cell.
+        Adds a widget, layout or prefab to a grid cell.
 
         This method is used to manually place a :class:`QWidget` or :class:`QLayout`
         into a specific cell of the grid.
 
-        :param widget_or_layout: The widget or layout to add to the cell.
-        :type widget_or_layout: QWidget or QLayout
+        :param widget_or_layout: The widget, layout or prefab to add to the cell.
+        :type widget_or_layout: QWidget or QLayout or :py:class:`~fluvel.core.abstract_models.ABCAbstractView.AbstractView`
         :param row_index: The row index of the cell.
         :type row_index: int
         :param column_index: The column index of the cell.
@@ -213,6 +215,10 @@ class GridLayout(QGridLayout, FluvelLayout):
 
         elif isinstance(widget_or_layout, QLayout):
             self.addLayout(*args)
+        
+        elif hasattr(widget_or_layout, "container"):
+            prefab, *params = args
+            self.addWidget(prefab.container, *params)
 
         else:
-            raise TypeError("The 'widget_or_layout' argument must be an instance of QWidget or QLayout")
+            raise TypeError("The 'widget_or_layout' argument must be an instance of QWidget, QLayout or View")

@@ -1,8 +1,9 @@
 import functools
-from typing import Unpack, overload, TypedDict, TypeVar, Callable
+from typing import Unpack, overload, TypedDict, TypeVar, Callable, Tuple, Type
 
 # Flvuel Core
 from fluvel.core.tools import configure_process
+from fluvel.core.enums.alignment import AlignmentTypes, Alignment
 
 # Fluvel Widgets
 from fluvel.components.widgets.FLabel import FLabel, FLabelKwargs
@@ -13,65 +14,35 @@ from fluvel.components.widgets.FRadioButton import FRadioButton, FRadioButtonKwa
 
 # PySide6
 from PySide6.QtWidgets import QWidget, QLayout
-from PySide6.QtCore import Qt
 
 TWidget = TypeVar("TWidget", bound=QWidget)
 TFactory = TypeVar("TFactory", bound=Callable)
 
 class LayoutKwargs(TypedDict, total=False):
     """
-    Argumentos de palabra clave para la configuración de la distribución del layout.
+    Keyword arguments for configuring the layout distribution.
     """
 
-    alignment       : Qt.AlignmentFlag
+    alignment       : AlignmentTypes
     spacing         : int
-    margins         : tuple[int, int, int, int]
+    margins         : Tuple[int, int, int, int]
     size_constraint : QLayout.SizeConstraint
-    
 
+    # container size management+
+    min_size        : Tuple[int, int]
+    max_size        : Tuple[int, int]
+    fixed_size      : Tuple[int, int]
+    fixed_width     : int
+    fixed_height    : int
+    min_width       : int
+    min_height      : int
+    max_width       : int
+    max_height      : int
+    
 class FluvelLayout:
     """
-    Clase propia de `Fluvel` que proporciona los métodos para la adición de QWidgets en QLayouts.
-
-    :cvar TOP: Qt.AlignmentFlag.AlignTop.
-    :cvar BOTTOM: Qt.AlignmentFlag.AlignBottom.
-    :cvar RIGHT: Qt.AlignmentFlag.AlignRight.
-    :cvar LEFT: Qt.AlignmentFlag.AlignLeft.
-    :cvar CENTER: Qt.AlignmentFlag.AlignCenter.
-    :cvar H_CENTER: Qt.AlignmentFlag.AlignHCenter.
-    :cvar V_CENTER: Qt.AlignmentFlag.AlignVCenter.
-    :cvar JUSTIFY: Qt.AlignmentFlag.AlignJustify.
-    :cvar BASELINE: Qt.AlignmentFlag.AlignBaseline
-    :cvar TOP_LEFT: TOP | LEFT
-    :cvar TOP_RIGHT: TOP | RIGHT
-    :cvar BOTTOM_LEFT: BOTTOM | LEFT
-    :cvar BOTTOM_RIGHT: BOTTOM | RIGHT
-    :cvar CENTER_TOP: TOP | H_CENTER
-    :cvar CENTER_RIGHT: RIGHT | V_CENTER
-    :cvar CENTER_BOTTOM: BOTTOM | H_CENTER
-    :cvar CENTER_LEFT: LEFT | V_CENTER
+    A class specific to `Fluvel` that provides methods for adding QWidgets to QLayouts.
     """
-
-    # Alingment Flags
-    TOP             = Qt.AlignmentFlag.AlignTop
-    BOTTOM          = Qt.AlignmentFlag.AlignBottom
-    RIGHT           = Qt.AlignmentFlag.AlignRight
-    LEFT            = Qt.AlignmentFlag.AlignLeft
-    CENTER          = Qt.AlignmentFlag.AlignCenter
-    H_CENTER        = Qt.AlignmentFlag.AlignHCenter
-    V_CENTER        = Qt.AlignmentFlag.AlignVCenter
-    JUSTIFY         = Qt.AlignmentFlag.AlignJustify
-    BASELINE        = Qt.AlignmentFlag.AlignBaseline
-
-    # Combinations
-    TOP_LEFT        = TOP | LEFT
-    TOP_RIGHT       = TOP | RIGHT
-    BOTTOM_LEFT     = BOTTOM | LEFT
-    BOTTOM_RIGHT    = BOTTOM | RIGHT
-    CENTER_TOP      = TOP | H_CENTER
-    CENTER_RIGHT    = RIGHT | V_CENTER
-    CENTER_BOTTOM   = BOTTOM | H_CENTER
-    CENTER_LEFT     = LEFT | V_CENTER
 
     # Size Contraints
     DEFAULT         = QLayout.SizeConstraint.SetDefaultConstraint
@@ -88,69 +59,106 @@ class FluvelLayout:
         "size_constraint": "setSizeConstraint",
     }
 
+    _CONTAINER_MAPPING_METHODS = {
+        "fixed_size": "setFixedSize",
+        "fixed_width": "setFixedWidth",
+        "fixed_height": "setFixedHeight",
+        "min_width": "setMinimumWidth",
+        "min_height": "setMinimumHeight",
+        "max_width": "setMaximumWidth",
+        "max_height": "setMaximumHeight",
+        "min_size": "setMinimumSize",
+        "max_size": "setMaximumSize",
+    }
+
     def adjust(self, **kwargs: Unpack[LayoutKwargs]) -> None:
         """
-        Este método ajusta la configuración de la distribución del layout, permitiendo
-        configurar varios atributos en una sola llamada.
+        Adjusts the main layout settings and size properties of its container.
 
-        Args:
-            alignment (Qt.AlignmentFlag): Alineación de los elementos.\n
-                Puede ser uno de los siguientes valores predefinidos:
-                Alineaciones Básicas
-                - `layout.TOP`
-                - `layout.RIGHT`
-                - `layout.BOTTOM`
-                - `layout.LEFT`
-                - `layout.JUSTIFY`
-                - `layout.BASELINE`
-                Centrado
-                - `layout.H_CENTER` (Centrado horizontal)
-                - `layout.V_CENTER` (Centrado vertical)
-                - `layout.CENTER` (Centrado horizontal y vertical)
-                Combinaciones Predefinidas
-                - `layout.TOP_RIGHT`
-                - `layout.TOP_LEFT`
-                - `layout.BOTTOM_RIGHT`
-                - `layout.BOTTOM_LEFT`
-                - `layout.CENTER_TOP `
-                - `layout.CENTER_RIGHT`
-                - `layout.CENTER_BOTTOM `
-                - `layout.CENTER_LEFT`
-            spacing (int): Espacio en píxeles entre los elementos.
-            margins (tuple[int, int, int, int]): Márgenes alrededor del layout.
-                Siguiendo el orden: `left`, `top`, `right`, `bottom`.
-            size_constraint (QLayout.SizeConstraint): Restricción de tamaño para el layout.\n
-                Puede ser uno de los siguientes valores predefinidos:
-                - `layout.DEFAULT`
-                - `layout.FIXED`
-                - `layout.MINIMUM`
-                - `layout.MAXIMUM`
-                - `layout.WITHOUT`
-                - `layout.MIN_AND_MAX`
+        This method provides a single declarative interface for configuring various 
+        layout attributes and dimensions of the parent :class:`~fluvel.components.widgets.FContainer` 
+        in a single call.
+
+        :param alignment: **(Layout)** Alignment of elements within the layout. 
+                          Uses the text strings defined in :class:`~fluvel.core.enums.alignment.AlignmentTypes`.
+        :type alignment: :class:`~fluvel.core.enums.alignment.AlignmentTypes`
+        :param spacing: **(Layout)** Space in pixels between layout elements.
+        :type spacing: int
+        :param margins: **(Layout)** Margins around the layout, in the order: (left, top, right, bottom).
+        :type margins: tuple[int, int, int, int]
+        :param size_constraint: **(Layout)** Size constraint for the layout. Use one of the 
+                                constants predefined in :class:`~PySide6.QtWidgets.QLayout`.
+        :type size_constraint: :class:`~PySide6.QtWidgets.QLayout.SizeConstraint`
+
+        :param min_size: **(Container)** Sets the minimum width and height of the container widget (width, height).
+        :type min_size: tuple[int, int]
+        :param max_size: **(Container)** Sets the maximum width and height of the container widget (width, height).
+        :type max_size: tuple[int, int]
+        :param fixed_size: **(Container)** Sets the fixed width and height of the container widget (width, height).
+        :type fixed_size: tuple[int, int]
+        :param fixed_width: **(Container)** Sets the fixed width of the container widget.
+        :type fixed_width: int
+        :param fixed_height: **(Container)** Sets the fixed height of the container widget.
+        :type fixed_height: int
+        :param min_width: **(Container)** Sets the minimum width of the container widget.
+        :type min_width: int
+        :param min_height: **(Container)** Sets the minimum height of the container widget.
+        :type min_height: int
+        :param max_width: **(Container)** Sets the maximum width of the container widget.
+        :type max_width: int
+        :param max_height: **(Container)** Sets the maximum height of the container widget.
+        :type max_height: int
+
+        .. note::
+            Properties marked as **(Container)** are applied directly to the parent widget 
+            :class:`~fluvel.components.widgets.FContainer.FContainer` (`self.parentWidget()`), while 
+            those marked as **(Layout)** are applied to the layout object.
         """
+
+        if alignment:=kwargs.get("alignment"):
+            kwargs["alignment"] = Alignment.get(alignment)
+
         configure_process(self, self._MAPPING_METHODS, **kwargs)
+        configure_process(self.parentWidget(), self._CONTAINER_MAPPING_METHODS, **kwargs)
 
-    def _process_kwargs(self, _type: type[TWidget], *args, **kwargs) -> TWidget | None:
+    
+    def add_widget(self, widget: QWidget, alignment: AlignmentTypes) -> None:
         """
-        This method determines whether or not to create a Widget, depending on the supplied arguments.\n
-        It then establishes parentage relationships and adds it to the Layout.
+        Adds an existing widget to the layout, optionally applying an alignment.
+
+        This is the low-level method used internally by all addition methods 
+        (e.g., :meth:`~FluvelLayout.Label`, :meth:`~FluvelLayout.Prefab`).
+
+        :param widget: The widget to add to the layout.
+        :type widget: :class:`~PySide6.QtWidgets.QWidget`
+        :param alignment: Alignment of the widget within the layout cell.
+        :type alignment: :class:`~fluvel.core.enums.alignment.AlignmentTypes` | None
         """
-        exists: bool = False
 
-        # If the supplied argument is already a widget
-        if args:
-            widget = args[0]
-            exists = True
-
+        if alignment:
+            self.addWidget(widget, alignment=Alignment.get(alignment))
         else:
-            # Create the widget
-            widget = _type(**kwargs)
-            
-        # Add to layout
-        self.addWidget(widget)
+            self.addWidget(widget)
 
-        # Return
-        return None if exists else widget
+    def _create_widget(self, widget_class: Type[TWidget], **kwargs) -> TWidget:
+        """
+        Internal utility method to instantiate a widget and immediately add it to the layout.
+
+        :param widget_class: The Fluvel widget class to instantiate (e.g., FLabel).
+        :type widget_class: Type[TWidget]
+        :param kwargs: Keyword arguments for the widget constructor.
+        :returns: The instance of the created widget.
+        :rtype: TWidget
+        """
+
+        # create the widget using the widget_class class provided
+        # then returns the instance
+        widget = widget_class(**kwargs)
+
+        self.add_widget(widget, kwargs.get("alignment"))
+
+        return widget
+
 
     
     # --------------------------------- API ----------------------------------------------
@@ -179,8 +187,8 @@ class FluvelLayout:
             Using `TFactory` with :func:`~functools.wraps` is crucial for preserving argument information
             and code *tips* in environments such as VS Code.
 
-        Example
-        -------
+        Usage:
+        ------
         .. code-block:: python
 
             # 1. Factory definition (e.g. PrimaryButton)
@@ -198,11 +206,11 @@ class FluvelLayout:
         """
         
         @functools.wraps(factory_widget)
-        def addWidgetToLayout(*args, **kwargs) -> QWidget | None:
+        def add_to_layout(*args, **kwargs) -> QWidget | None:
 
             widget = factory_widget(*args, **kwargs)
 
-            self.addWidget(widget)
+            self.add_widget(widget, kwargs.get("alignment"))
 
             if returns:
                 return widget
@@ -210,9 +218,9 @@ class FluvelLayout:
             else: 
                 return None
 
-        return addWidgetToLayout
+        return add_to_layout
 
-    def Prefab(self, prefab_component):
+    def Prefab(self, prefab_component, alignment: AlignmentTypes | None = None):
         """
         Adds a Complex Component (@Prefab) to the current layout.
 
@@ -232,7 +240,7 @@ class FluvelLayout:
                 v.Prefab(ComponentName(arg="value"))
                 # or
                 v.Prefab(ComponentName) # This component does not require any arguments.
-    """
+        """
 
         container = None
 
@@ -241,8 +249,7 @@ class FluvelLayout:
         else:
             container = prefab_component.container
 
-        self.addWidget(container)
-
+        self.add_widget(container, alignment)
 
     @overload
     def Label(self, **kwargs: Unpack[FLabelKwargs]) -> FLabel: ...
@@ -278,7 +285,7 @@ class FluvelLayout:
         --------
         .. code-block:: python
             ...
-            with self.Vertical(self.container) as v:
+            with self.Vertical() as v:
                 # Creates a new label
                 my_label = v.Label(text="Hello, Fluvel", style="h1 bold")
                 
@@ -287,11 +294,11 @@ class FluvelLayout:
                 v.Label(my_label_2)
         
         """
-
-        # create the label if it doesn't exist or just add it to the layout,
-        # then return the FLabel instance or None if the widget is already provided
-        return self._process_kwargs(FLabel, *args, **kwargs)
-
+        if args:
+            return self.add_widget(args[0], None)
+        
+        return self._create_widget(FLabel, **kwargs)
+    
     @overload
     def Button(self, **kwargs: Unpack[FButtonKwargs]) -> FButton: ...
 
@@ -300,9 +307,10 @@ class FluvelLayout:
 
     def Button(self, *args, **kwargs) -> FButton | None:
 
-        # create the button if it doesn't exist or just add it to the layout,
-        # then return the FButton instance or None if it's already a widget
-        return self._process_kwargs(FButton, *args, **kwargs)
+        if args:
+            return self.add_widget(args[0], None)
+        
+        return self._create_widget(FButton, **kwargs)
 
     @overload
     def LineEdit(self, **kwargs: Unpack[FLineEditKwargs]) -> FLineEdit: ...
@@ -312,9 +320,10 @@ class FluvelLayout:
 
     def LineEdit(self, *args, **kwargs) -> FLineEdit | None:
 
-        # create the line edit if it doesn't exist or just add it to the layout,
-        # then return the FLineEdit instance or None if it's already a widget
-        return self._process_kwargs(FLineEdit, *args, **kwargs)
+        if args:
+            return self.add_widget(args[0], None)
+        
+        return self._create_widget(FLineEdit, **kwargs)
     
     @overload
     def CheckBox(self, **kwargs: Unpack[FCheckBoxKwargs]) -> FCheckBox: ...
@@ -324,9 +333,10 @@ class FluvelLayout:
     
     def CheckBox(self, *args, **kwargs) -> FCheckBox | None:
         
-        # create the CheckBox if it doesn't exist or just add it to the layout,
-        # then return the FCheckBox instance or None if it's already a widget
-        return self._process_kwargs(FCheckBox, *args, **kwargs)
+        if args:
+            return self.add_widget(args[0], None)
+        
+        return self._create_widget(FCheckBox, **kwargs)
 
     @overload
     def RadioButton(self, **kwargs: Unpack[FRadioButtonKwargs]) -> FRadioButton: ...
@@ -336,7 +346,7 @@ class FluvelLayout:
     
     def RadioButton(self, *args, **kwargs) -> FRadioButton | None:
         
-        # create the RadioButton if it doesn't exist or just add it to the layout,
-        # then return the FRadioButton instance or None if it's already a widget
-        return self._process_kwargs(FRadioButton, *args, **kwargs)
+        if args:
+            return self.add_widget(args[0], None)
         
+        return self._create_widget(FRadioButton, **kwargs)

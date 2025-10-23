@@ -21,6 +21,9 @@ class Factory:
 
         This class handles the logic for dynamic importing and caching of
         QWidget classes, ensuring that each widget module is loaded only once.
+
+        :ivar WidgetClass: The imported QWidget class.
+        :type WidgetClass: Type[QWidget]
         """
         
         def __init__(self, widget_target: str):
@@ -29,9 +32,6 @@ class Factory:
 
             :param widget_target: The class name of the widget to import.
             :type widget_target: str
-
-            :ivar WidgetClass: The imported QWidget class.
-            :type WidgetClass: Type[QWidget]
             """
 
             if widget_target not in Factory._stock:
@@ -56,7 +56,7 @@ class Factory:
         :returns: A decorator that produces a QWidget component factory.
         :rtype: callable
 
-        Example
+        Example:
         --------
         .. code-block:: python
 
@@ -73,7 +73,7 @@ class Factory:
             # In a View
             from components.custom import PrimaryButton
             ...
-            with self.Vertical(self.container) as v:
+            with self.Vertical() as v:
         
                 # 1) Creates an FButton with text="Submit" and style="primary bold"
                 v.addWidget(PrimaryButton(text="Submit"))

@@ -1,9 +1,8 @@
-from fluvel.core import FluvelApp, Router, View, Template, route
+from fluvel.core import FluvelApp, Router, View, route
 
 __all__ = [
     "FluvelApp",
     "Router",
     "View",
-    "Template",
     "route"
 ]

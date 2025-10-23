@@ -1,6 +1,5 @@
 from fluvel.core import AppWindow
 
-from fluvel._user import AppConfig
 
 class MainWindow(AppWindow):
 

@@ -1,3 +1,4 @@
+from fluvel.src.QSSProcessor.qss_processor import process_qss
 
 class FluvelWidget:
 
@@ -18,7 +19,16 @@ class FluvelWidget:
             else:
 
                 self.setProperty("class", style)
-        
+
+            self.setStyleSheet(process_qss(style, self.WIDGET_TYPE, self.obj_name))
+
             kwargs.pop("style")
 
         return kwargs
+    
+    def _set_widget_defaults(self) -> None:
+
+        # Estableciendo el nombre del objeto para
+        # aplicar los estilos QSS
+        self.obj_name: str = str(id(self))
+        self.setObjectName(self.obj_name)

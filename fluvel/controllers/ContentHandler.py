@@ -5,7 +5,7 @@ import json
 from fluvel.utils.paths import CONTENT_DIR, PROD_CONTENT_DIR, THEMES_DIR, PROD_THEMES_DIR
 from fluvel.src import convert_FLUML_to_HTML
 from fluvel.core.tools.content_loader import load_fluml
-from fluvel.src.xml_menu_parser.xmlparsev3 import XMLMenuParser
+from fluvel.src.XmlMenuParser.xmlparsev3 import XMLMenuParser
 from fluvel.core.tools.theme_loader import load_theme, load_style_sheet
 from fluvel._user.GlobalConfig import AppConfig
 

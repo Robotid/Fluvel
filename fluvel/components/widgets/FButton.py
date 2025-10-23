@@ -54,6 +54,8 @@ class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
     Clase base de **`Fluvel`** para **`QPushButton`**.
     """
 
+    WIDGET_TYPE: str = "QPushButton"
+
     _MAPPING_METHODS: dict = {
         "text": "setText",
         "checkable": "setCheckable",
@@ -68,6 +70,8 @@ class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
 
     def __init__(self, **kwargs: Unpack[FButtonKwargs]):
         super().__init__()
+
+        self._set_widget_defaults()
 
         # Aplicar el cursor de puntero
         self.setCursor(Qt.PointingHandCursor)

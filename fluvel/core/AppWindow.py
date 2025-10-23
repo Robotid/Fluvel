@@ -194,7 +194,6 @@ class AppWindow(QMainWindow):
             else:
                 kwargs.pop("resizable")
             
-
         if flags := kwargs.get("flags"):
             previous_flag = Qt.WindowType.Window
             for flag in flags:

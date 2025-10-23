@@ -61,14 +61,14 @@ class FluvelTextWidget:
 
         return kwargs
 
-    def get_string_var(self, _id: str, flag: str, method: any, **kwargs) -> None:
+    def get_string_var(self, _id: str, flag: str, method: str, **kwargs) -> None:
         """
         Obtiene un StringVar para un ID de contenido y lo conecta a un método del widget.
 
         Args:
             _id (str | list): El ID de contenido o una lista que contiene el ID y marcadores de posición.
             flag (str): La clave del argumento ('text' o 'placeholder_text').
-            method (any): El método del widget al que se conectará (e.g., setText).
+            method (any): El nombre del método del widget al que se conectará (e.g., setText).
             **kwargs: Argumentos del constructor del widget.
         """
 
