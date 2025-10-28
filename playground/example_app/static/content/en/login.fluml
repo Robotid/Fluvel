@@ -5,10 +5,10 @@
 # SIGN IN - LEFT SIDE
 # ===================
 
-[login-title]:
+[title-sign-in]:
     **Sign In**
 
-[use-email]:
+[subtitle-sign-in]:
     or use your email password
 
 [email-field]:
@@ -30,10 +30,10 @@
 # SIGN IN - RIGHT SIDE
 # ====================
 
-[greeting]:
+[sign-in-greeting]:
     Hello, Friend!
 
-[sign-up-description]:
+[sign-in-description]:
     Register with your personal details to use all of app features
 
 [btn-sign-up]:
@@ -43,10 +43,10 @@
 # SIGN UP - RIGHT SIDE
 # ====================
 
-[welcome-back]:
+[sign-up-greeting]:
     Welcome back!
     
-[sign-in-description]:
+[sign-up-description]:
     Enter your personal details to use all of app features
 
 # ====================
@@ -56,7 +56,7 @@
 [title-sign-up]:
     Create Account
 
-[use-email-registration]:
+[subtitle-sign-up]:
     or use your email for registration
 
 [name-field]:

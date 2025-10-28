@@ -105,3 +105,7 @@ class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
 
         # Aplicar el cursor de puntero
         self.setCursor(Qt.PointingHandCursor)
+
+    def __setitem__(self, key, value: any):
+
+        self.configure(**{key: value})
