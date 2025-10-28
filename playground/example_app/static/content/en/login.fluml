@@ -1,0 +1,63 @@
+
+# Used in example_app/ui/pages/login/
+
+# ===================
+# SIGN IN - LEFT SIDE
+# ===================
+
+[login-title]:
+    **Sign In**
+
+[use-email]:
+    or use your email password
+
+[email-field]:
+    Email
+
+[password-field]:
+    Password
+
+[forget-password]:
+    Forget Your Password?
+
+[btn-sign-in]:
+    SIGN IN
+
+[asmr-prog-credits]:
+    *This interface was taken from the YouTube channel { @AsmrProg | https://www.youtube.com/watch?v=PlpM2LJWu-s&t=22s}*
+
+# ====================
+# SIGN IN - RIGHT SIDE
+# ====================
+
+[greeting]:
+    Hello, Friend!
+
+[sign-up-description]:
+    Register with your personal details to use all of app features
+
+[btn-sign-up]:
+    SIGN UP
+
+# ====================
+# SIGN UP - RIGHT SIDE
+# ====================
+
+[welcome-back]:
+    Welcome back!
+    
+[sign-in-description]:
+    Enter your personal details to use all of app features
+
+# ====================
+# SIGN UP - LEFT SIDE
+# ====================
+
+[title-sign-up]:
+    Create Account
+
+[use-email-registration]:
+    or use your email for registration
+
+[name-field]:
+    Name

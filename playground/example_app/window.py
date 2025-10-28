@@ -5,6 +5,11 @@ class MainWindow(AppWindow):
 
     def init_ui(self):
         """Display the `components` in the Main Window."""
+
+        self.configure(
+            flags=["frameless"],
+            attributes=["translucent-background"]
+        )
         
         # configure menu options
         self.build_menu_bar()

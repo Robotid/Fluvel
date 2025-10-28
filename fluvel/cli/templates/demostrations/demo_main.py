@@ -8,7 +8,7 @@ def demo_app(theme: str | None):
     app = FluvelApp(window_module_path="fluvel.cli.templates.demostrations.DemoWindow")
     app.register(
         initial="/demo-widgets",
-        views=[
+        pages=[
             "fluvel.cli.templates.demostrations.DemoView"
         ]
     )

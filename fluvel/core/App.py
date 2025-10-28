@@ -1,5 +1,6 @@
 from typing import Optional, List, TypedDict, Unpack
 import sys, importlib
+from pathlib import Path
 
 # Fluvel
 from fluvel.controllers.main_controller import init_content
@@ -8,7 +9,7 @@ from fluvel.core.Router import Router
 from fluvel.controllers.ContentHandler import ContentHandler
 
 # Utils
-from fluvel.utils.paths import VIEWS_DIR
+from fluvel.utils.paths import PAGES_DIR
 
 # PySide6
 from PySide6.QtWidgets import QApplication
@@ -18,7 +19,7 @@ from fluvel.core.exceptions.expect_handler import expect
 
 class AppRegisterKwargs(TypedDict, total=False):
     initial         : str
-    views           : Optional[List[str]]
+    pages           : Optional[List[str]]
     show_animation  : str
 
 class FluvelApp:
@@ -46,7 +47,7 @@ class FluvelApp:
        from window import MainWindow
 
        app = FluvelApp(MainWindow)
-       app.register(initial="home", views=["views.HomeView"])
+       app.register(initial="home", pages=["pages.home.Homepage"])
        
        if __name__ == "__main__":
            app.run()
@@ -56,6 +57,8 @@ class FluvelApp:
         
         # The instance of QApplication
         self._app = QApplication()
+
+        self._app.setDesktopFileName("FluvelApp")
         
         # Start initial config
         self._load(config_file)
@@ -80,7 +83,7 @@ class FluvelApp:
         AppConfig.init_config(filename)
 
         # Se cargan los contenidos estáticos de la ui
-        self.set_static_content()
+        self._set_static_content()
 
     def run(self) -> None:
         """
@@ -99,20 +102,20 @@ class FluvelApp:
     @expect.ErrorImportingModule(stop=True)
     def register(self, **kwargs: Unpack[AppRegisterKwargs]) -> None:
         """
-        Registers application views and initializes the :py:class:`~fluvel.core.Router.Router`.
+        Registers application pages and initializes the :py:class:`~fluvel.core.Router.Router`.
 
         This method dynamically imports the specified view modules, which allows
         their ``@route`` decorators to register them with the router.
 
-        If the ``views`` keyword argument is not provided, the method will automatically
-        scan the conventional ``views/`` directory for all Python files and import them.
+        If the ``pages`` keyword argument is not provided, the method will automatically
+        scan the conventional ``ui/pages/`` directory for all Python files and import them.
 
         :param initial: **(Required)** The name of the route (e.g., ``"login"``) to display first when the application starts.
         :type initial: str
 
-        :param views: A list of view modules to import (e.g., ``["views.Login", "views.Home"]``). 
-                      If omitted, all views in the conventional ``views/`` directory are automatically detected.
-        :type views: Optional[List[str]]
+        :param pages: A list of view modules to import (e.g., ``["ui.pages.login.SignInPage", "ui.pages.home.Homepage"]``). 
+                      If omitted, all pages in the conventional ``ui/pages/`` directory are automatically detected.
+        :type pages: Optional[List[str]]
 
         :param show_animation: The name of a pre-configured animation to use when displaying the initial view.
         :type show_animation: Optional[str]
@@ -120,17 +123,37 @@ class FluvelApp:
         :raises ValueError: If the required argument ``initial`` is not provided.
         """
         initial_view = kwargs.get("initial")
-        views = kwargs.get("views")
+        page_modules = kwargs.get("pages", [])
         animation = kwargs.get("show_animation")
 
         if initial_view is None:
             raise ValueError("The 'initial' argument is required in register() to show a first view.")
 
-        view_modules = views if views else [f"ui.views.{m.stem}" for m in VIEWS_DIR.glob("*.py")]
-        
-        # Importing view modules
-        for module in view_modules:
-            importlib.import_module(module)
+        if not page_modules:
+            
+            # Creamos una lista para las rutas de cada página
+            modules_to_import = []
+            
+            # Iteramos sobre las carpetas de características (ej. 'login', 'dashboard', 'home')
+            page_folders: list[Path] = [page_folder for page_folder in PAGES_DIR.iterdir() if page_folder.is_dir()]
+
+            for page_folder in page_folders:
+                
+                # Iteramos sobre los archivos .py dentro de cada carpeta, excluyendo __init__.py
+                for module_file in page_folder.glob("[!_]*.py"):
+                    
+                    # Construcctión del path al módulo
+                    module_path = f"ui.pages.{page_folder.name}.{module_file.stem}"
+
+                    # Se añade a la lista de módulos a importar
+                    modules_to_import.append(module_path)
+            
+            # Usamos la lista de módulos detectados
+            page_modules = modules_to_import
+
+        # Importando los módulos
+        for module_path in page_modules:
+            importlib.import_module(module_path)
 
         # Show initial view
         Router.show(initial_view, animation=animation)
@@ -162,10 +185,8 @@ class FluvelApp:
 
         # Return an instance of MainWindow(AppWindow)
         return window_module.MainWindow(self)
-
-
-                
-    def set_static_content(self) -> None:
+   
+    def _set_static_content(self) -> None:
         """
         Loads and applies all static content, including text and themes.
 

@@ -19,7 +19,7 @@ TWidget = TypeVar("TWidget", bound=QWidget)
 TFactory = TypeVar("TFactory", bound=Callable)
 
 class LayoutKwargs(TypedDict, total=False):
-    """
+    """gemi
     Keyword arguments for configuring the layout distribution.
     """
 
@@ -122,7 +122,7 @@ class FluvelLayout:
         configure_process(self.parentWidget(), self._CONTAINER_MAPPING_METHODS, **kwargs)
 
     
-    def add_widget(self, widget: QWidget, alignment: AlignmentTypes) -> None:
+    def add_widget(self, widget: QWidget, alignment: AlignmentTypes = None) -> None:
         """
         Adds an existing widget to the layout, optionally applying an alignment.
 
@@ -215,8 +215,7 @@ class FluvelLayout:
             if returns:
                 return widget
 
-            else: 
-                return None
+            return None
 
         return add_to_layout
 

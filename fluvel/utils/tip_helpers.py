@@ -1,11 +1,30 @@
 from typing import Literal
 
-# --------------- Generic Widget -----------------
+# ===============
+# Used in Factory
+# ===============
+
+AllWidgetsTypes = Literal[
+    "FLabel",
+    "FLineEdit",
+    "FButton",
+    "FLinkButton",
+    "FCheckBox",
+    "FRadioButton",
+]
+
+# ====================
+# Generics in QWidgets
+# ====================
+
 WidgetAttributes = Literal[
     "translucent-background"
 ]
 
-# --------------- Window -----------------
+# =================
+# Used in AppWindow
+# =================
+
 WindowFlags = Literal[
     "frameless", 
     "always-on-top",
@@ -27,7 +46,9 @@ WindowStates = Literal[
     "Active"
 ]
 
-# --------------- Menu Bar -----------------
+# =================
+# Used in MenuBar
+# =================
 
 ActionTypes = Literal[
     "triggered", 

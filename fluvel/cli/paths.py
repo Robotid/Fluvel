@@ -13,6 +13,5 @@ sys.path.append(str(PROJECT_ROOT))
 
 MAINPY_ROOT = PROJECT_ROOT / "app.py"
 
-
 # TEMPLATES
 CLI_TEMPLATES = Path(__file__).parent / "templates"

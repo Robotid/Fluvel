@@ -1,7 +1,6 @@
 # Fluvel
 from fluvel.components.gui.StringVar import StringVar
 
-
 class GlobalContent:
     """
     Gestor del contenido de texto dinámico de la aplicación obtenidos de arhivos

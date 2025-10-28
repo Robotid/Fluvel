@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Type
 
 # Fluvel
-from fluvel.core.abstract_models.ABCAbstractView import AbstractView
+from fluvel.core.abstract_models.ABCAbstractPage import AbstractPage
 from fluvel.core.AppWindow import AppWindow
 
 # Composer
@@ -35,13 +35,13 @@ class Router:
         :type view_instance: :py:class:`~fluvel.core.abstract_models.ABCAbstractView.AbstractView`
         
         """
-        name:           str
-        view_class:     Type[AbstractView]
-        view_instance:  AbstractView = None
+        name            : str
+        view_class      : Type[AbstractPage]
+        view_instance   : AbstractPage = None
 
-    _window:        AppWindow
-    _routes:        dict[str, Route] = {}
-    _current_route: Route = None
+    _window         : AppWindow
+    _routes         : dict[str, Route] = {}
+    _current_route  : Route = None
 
     @classmethod
     def init(cls, window: AppWindow) -> None:
@@ -57,10 +57,10 @@ class Router:
         :rtype: None
         """
         cls._window = window
-        AbstractView._set_globals(cls._window.root, cls._window)
+        AbstractPage._set_globals(cls._window.root, cls._window)
               
     @classmethod
-    def show(cls, name: str, animation: str | None = "fade_in") -> None:
+    def show(cls, name: str, animation: str | None = "fade_in", **kwargs) -> None:
         """
         Displays the view assigned to the given route name in the central widget 
         of the main window, optionally applying an animation.
@@ -108,7 +108,7 @@ class Router:
 
             # Set animation
             if animation:
-                anim = getattr(Animator, animation)(target_widget)
+                anim = getattr(Animator, animation)(target_widget, **kwargs)
                 anim.start()
 
 def route(name: str):
@@ -137,7 +137,7 @@ def route(name: str):
                 pass
     """
 
-    def wrapper(view_class: Type[AbstractView]):
+    def wrapper(view_class: Type[AbstractPage]):
         
         if name in Router._routes:
             Router._routes[name].view_class = view_class

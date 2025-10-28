@@ -2,7 +2,7 @@ import functools
 from typing import TypeVar, Callable, Any
 
 # Fluvel
-from fluvel.core.abstract_models.ABCAbstractView import View
+from fluvel.core.abstract_models.ABCAbstractPage import Page
 
 TFunc = TypeVar('TFunc', bound=Callable[..., Any])
 
@@ -54,7 +54,7 @@ def Prefab(func: TFunc) -> TFunc:
     def decorator(*args, **kwargs):
         
         # View with blank_container
-        view = View(None) 
+        view = Page(None) 
         
         return func(view, *args, **kwargs)
         

@@ -1,5 +1,5 @@
-from fluvel import View, Router
-from fluvel.composer import Factory, Prefab
+from fluvel import Router
+from fluvel.composer import Factory, Prefab, Canvas
 
 @Factory.compose("FButton")
 def ViewButton(text: str, view_route: str) -> None:
@@ -11,16 +11,16 @@ def ViewButton(text: str, view_route: str) -> None:
     }
 
 @Prefab
-def ViewSelector(view: View):
+def ViewSelector(canvas: Canvas):
 
-    with view.Horizontal() as h:
-        h.adjust(alignment=h.CENTER, margins=(50, 50, 50, 50))
+    with canvas.Horizontal() as h:
+        h.adjust(alignment="center", margins=(50, 50, 50, 50))
 
         h.ViewButton = h.from_factory(ViewButton, returns=True)
         
         h.ViewButton("Login Page", "login")
-        h.ViewButton("Welcome Page", "home")
-        h.ViewButton("Hello World", "hello-world")
+        h.ViewButton("Color Palette", "color-palette")
+        h.ViewButton("Github Badges", "github-badges")
 
+    return canvas
 
-    return view

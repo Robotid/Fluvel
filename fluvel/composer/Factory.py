@@ -2,6 +2,9 @@ import importlib, functools
 from typing import Type
 from PySide6.QtWidgets import QWidget
 
+# Tip-helpers
+from fluvel.utils.tip_helpers import AllWidgetsTypes
+
 class Factory:
     """
     Manages the creation of reusable, customized QWidget components.
@@ -43,7 +46,7 @@ class Factory:
             self.WidgetClass = Factory._stock[widget_target]
             
     @classmethod
-    def compose(cls, target: str):
+    def compose(cls, target: AllWidgetsTypes):
         """
         A decorator that turns a configuration function into a component factory.
 

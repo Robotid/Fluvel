@@ -1,5 +1,3 @@
-import os
-
 # Fluvel
 from fluvel.controllers.ContentHandler import ContentHandler
 from fluvel.models.GlobalContent import GlobalContent
@@ -14,10 +12,10 @@ def init_content(lang: str) -> None:
     (fluml/json) y qué carpeta se usará (CONTENT_DIR/PROD_CONTENT_DIR).
     2. Usa `ContentHandler` para cargar y parsear los datos desde los archivos.
     3. Entrega los diccionarios de datos limpios a `GlobalContent` para que
-    actualice el estado reactivo de la aplicación (`StringVars`).
+    actualice el estado reactivo de la aplicación (:py:class:`~fluvel.components.gui.StringVar.StringVar`).
 
-    Args:
-        lang (str): El código del idioma a cargar.
+    :param lang: El código del idioma a cargar.
+    :type lang: str
     """
 
     mode = "development" if AppConfig.fluvel.DEV_MODE else "production"

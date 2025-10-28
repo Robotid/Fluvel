@@ -1,5 +1,5 @@
 
-#### source: *[fluvel.src.fluvel_content_parser.fluml_parser](../../../fluvel/src/fluvel_content_parser/fluml_parser.py)*
+#### source: *[fluvel.src.fluvel_content_parser.fluml_parser](../../../fluvel/src/TextStyleParser/fluml_parser.py)*
 
 # Syntactic rules for declaring static text content application
 

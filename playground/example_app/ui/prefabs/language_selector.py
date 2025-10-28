@@ -1,19 +1,18 @@
 from functools import partial
-from fluvel import View
-from fluvel.composer import Factory, Prefab
+from fluvel.composer import Factory, Prefab, Canvas
 
 @Factory.compose("FButton")
 def LangButton(text: str, change_to: str):
     return {
         "text": text,
         "style": "light font-light rounded-2xl",
-        "on_click": partial(View.app_root.change_language, change_to)
+        "on_click": partial(Canvas.app_root.change_language, change_to)
     }
 
 @Prefab
-def LanguageSelector(view: View):
+def LanguageSelector(canvas: Canvas):
 
-    with view.Grid() as grid:
+    with canvas.Grid() as grid:
         grid.adjust(spacing=10, margins=(20, 20, 20, 20))
 
         c1, c2, c3, c4, c5, c6 = grid.Columns(6)
@@ -34,4 +33,4 @@ def LanguageSelector(view: View):
         c5.add(LangButton("ãõç Portuguese", "pt"))
         c6.add(LangButton("త Telugu", "te")) 
 
-    return view
+    return canvas

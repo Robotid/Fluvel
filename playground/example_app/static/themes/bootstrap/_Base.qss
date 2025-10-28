@@ -6,7 +6,7 @@
 /* ==================== Estilos Generales / Root ==================== */
 * {
     /* Fuente base */
-    font-family: "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
+    font-family: "Montserrat", "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
     font-size: 14px;
     color: #343a40; 
     
@@ -20,9 +20,9 @@ QWidget {
 
 /* ==================== QLineEdit, QTextEdit, QPlainTextEdit ==================== */
 QLineEdit, QTextEdit, QPlainTextEdit {
-    background-color: #ffffff;
-    border: 1px solid #ced4da; /* Borde de Bootstrap input-border-color */
-    border-radius: 4px;
+    background-color: #ededed;
+    /* border: 1px solid #ced4da; Borde de Bootstrap input-border-color */
+    border-radius: 6px;
     padding: 6px 12px;
     selection-background-color: #80bdff; /* Color de selección azul de Bootstrap */
     selection-color: #ffffff; /* Texto blanco en la selección */

@@ -8,21 +8,21 @@ a welcome view, and the default QSS theme.
 Proposed architecture generated:
 
 root:
-├───assets                # Binary resources (images, fonts, etc.)
-├───static
-│   ├───content           # Fluml and i18n content files
-│   │   └───en            # (Example) Language files for English
-│   └───themes            # QSS stylesheets (.qss)
-│       └───bootstrap     # Initial theme (e.g., compact-bootstrap.qss)
-├───ui                    # UI source code
-│   ├───components        # Simple, reusable widgets @Factory.compose
-│   ├───prefabs           # Complex components decorated with @Prefab
-│   └───views             # Main application views (pages)
-│       └───home.py       # Example view (HomeView)
-│   appconfig.toml        # Global application configuration file
-│   main.py               # Application entry point
-│   window.py             # Custom AppWindow(QMainWindow) class
-|
+├───assets                  # Binary resources (images, fonts, etc.)
+├───static  
+│   ├───content             # Fluml and i18n content files
+│   │   └───en              # (Example) Language files for English
+│   └───themes              # QSS stylesheets (.qss)
+│       └───bootstrap       # Initial theme (e.g., compact-bootstrap.qss)
+├───ui                      # UI source code
+│   ├───components          # Simple, reusable widgets @Factory.compose
+│   ├───prefabs             # Complex components decorated with @Prefab
+│   └───pages               # Main application pages       
+│       └───home            # Dedicated directory for the composition of the home page
+|           └───HomePage.py # Example page (Home) 
+│   appconfig.toml          # Global application configuration file
+│   main.py                 # Application entry point
+│   window.py               # Custom AppWindow(QMainWindow) class
 """
 
 from typing import List, Tuple
@@ -34,7 +34,7 @@ from fluvel.cli.paths import PROJECT_ROOT, MAINPY_ROOT
 from fluvel.cli.templates import MAINPY_TEMPLATE, WELCOME_VIEW, WINDOW_TEMPLATE, APPCONFIG_TEMPLATE, HOME_GREETING, COMPACT_BOOTSTRAP
 
 # Folders
-from fluvel.utils.paths import CONTENT_DIR, THEMES_DIR, VIEWS_DIR, STATIC_DIR, UI_DIR
+from fluvel.utils.paths import CONTENT_DIR, THEMES_DIR, PAGES_DIR, STATIC_DIR, UI_DIR
 
 FOLDERS: List[Path] = [
     STATIC_DIR,
@@ -44,15 +44,16 @@ FOLDERS: List[Path] = [
     UI_DIR,
     UI_DIR / "components",
     UI_DIR / "prefabs",
-    VIEWS_DIR,
+    PAGES_DIR,
+    PAGES_DIR / "home",
     THEMES_DIR / "bootstrap"
 ]
 
 FILE_TEMPLATES: List[Tuple[Path, str]] = [
     (MAINPY_ROOT, MAINPY_TEMPLATE),
-    (VIEWS_DIR / "home.py", WELCOME_VIEW),
+    (PAGES_DIR / "home" / "HomePage.py", WELCOME_VIEW),
     (PROJECT_ROOT / "window.py", WINDOW_TEMPLATE),
-    (PROJECT_ROOT / "appconfig.toml", APPCONFIG_TEMPLATE),
+    (PROJECT_ROOT / "config.toml", APPCONFIG_TEMPLATE),
     (CONTENT_DIR / "en" / "homepage.fluml", HOME_GREETING),
     (THEMES_DIR / "bootstrap" / "compact-bootstrap.qss", COMPACT_BOOTSTRAP),
 ]
@@ -91,20 +92,21 @@ def display_welcome_message() -> None:
 
     project_path = PROJECT_ROOT.resolve()
     TREE_STRUCTURE = """root:
-├───assets                # Binary resources (images, fonts, etc.)
-├───static
-│   ├───content           # Fluml and i18n content files
-│   │   └───en            # (Example) Language files for English
-│   └───themes            # QSS stylesheets (.qss)
-│       └───bootstrap     # Initial theme (e.g., compact-bootstrap.qss)
-├───ui                    # UI source code
-│   ├───components        # Simple, reusable widgets @Factory.compose
-│   ├───prefabs           # Complex components decorated with @Prefab
-│   └───views             # Main application views (pages)
-│       └───home.py       # Example view (HomeView)
-│   appconfig.toml        # Global application configuration file
-│   main.py               # Application entry point
-│   window.py             # Custom AppWindow(QMainWindow) class
+├───assets                  # Binary resources (images, fonts, etc.)
+├───static  
+│   ├───content             # Fluml and i18n content files
+│   │   └───en              # (Example) Language files for English
+│   └───themes              # QSS stylesheets (.qss)
+│       └───bootstrap       # Initial theme (e.g., compact-bootstrap.qss)
+├───ui                      # UI source code
+│   ├───components          # Simple, reusable widgets @Factory.compose
+│   ├───prefabs             # Complex components decorated with @Prefab
+│   └───pages               # Main application pages       
+│       └───home            # Dedicated directory for the composition of the home page
+│           └───homepage.py # Example page (Home) 
+│   appconfig.toml          # Global application configuration file
+│   main.py                 # Application entry point
+│   window.py               # Custom AppWindow(QMainWindow) class
 """
 
     # Mensaje Final Estilizado
@@ -126,8 +128,7 @@ def display_welcome_message() -> None:
     # Usaremos 'blue' para directorios lógicos y 'white' para comentarios/archivos.
     styled_tree = TREE_STRUCTURE.replace("├───", click.style("├───", fg='blue'))
     styled_tree = styled_tree.replace("└───", click.style("└───", fg='blue'))
-    styled_tree = styled_tree.replace("│   ", click.style("│   ", fg='blue'))
-    styled_tree = styled_tree.replace("│ ", click.style("│ ", fg='blue'))
+    styled_tree = styled_tree.replace("│", click.style("│", fg='blue'))
     styled_tree = styled_tree.replace("root:", click.style("root:", fg='blue', bold=True))
     
     click.echo(styled_tree)

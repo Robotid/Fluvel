@@ -7,3 +7,8 @@ __all__ = [
     "Animator",
     "Prefab"
 ]
+
+from typing import TypeAlias
+from fluvel.core.abstract_models.ABCAbstractPage import Page
+
+Canvas: TypeAlias = Page

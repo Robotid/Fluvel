@@ -60,14 +60,3 @@ class XMLMenuParser:
                 node_dict["elements"][child_id] = self._build_dict_from_element(child)
         
         return node_dict
-
-# import json, pathlib
-
-# folder = Path(__file__).parent
-# files = folder.rglob("*.xml")
-
-# for file in files:
-#     menu_xml = XMLMenuParser(file)
-#     with open(folder / f"{file.stem}.json", "w", encoding="utf-8") as f:
-
-#         json.dump(menu_xml.parse(), f, indent=4, ensure_ascii=False)

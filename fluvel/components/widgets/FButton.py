@@ -5,13 +5,16 @@ from fluvel.core.abstract_models.FluvelWidget import FluvelWidget
 from fluvel.core.abstract_models.FluvelTextWidget import FluvelTextWidget
 from fluvel.components.gui import StringVar
 
+from fluvel.core.enums.alignment import AlignmentTypes
+
 # PySide6
 from PySide6.QtWidgets import QPushButton
-from PySide6.QtCore import Qt, QUrl
-from PySide6.QtGui import QDesktopServices
+from PySide6.QtCore import Qt, QSize
+from PySide6.QtGui import QIcon
 
 # Fluvel core utils
 from fluvel.core.tools import configure_process
+
 
 ButtonStyles = Literal[
     "primary",
@@ -34,19 +37,24 @@ ButtonStyles = Literal[
 
 
 class FButtonKwargs(TypedDict, total=False):
-    text: str | list
-    textvariable: StringVar
-    style: ButtonStyles
-    checkable: bool
+    text            : str | list
+    textvariable    : StringVar
+    style           : ButtonStyles
+    checkable       : bool
+    icon            : QIcon
+    icon_size       : tuple[int, int]
     
     # Shape and behavior
-    size: tuple[int, int]
+    size            : tuple[int, int]
 
     # Signals
-    on_click: callable
-    on_pressed: callable
-    on_released: callable
-    on_toggled: callable
+    on_click        : callable
+    on_pressed      : callable
+    on_released     : callable
+    on_toggled      : callable
+
+    # Layout alignment
+    alignment       : AlignmentTypes 
 
 
 class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
@@ -59,6 +67,8 @@ class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
     _MAPPING_METHODS: dict = {
         "text": "setText",
         "checkable": "setCheckable",
+        "icon": "setIcon",
+        "icon_size": "setIconSize",
         # Signals
         "on_click": "clicked",
         "on_pressed": "pressed",
@@ -71,10 +81,7 @@ class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
     def __init__(self, **kwargs: Unpack[FButtonKwargs]):
         super().__init__()
 
-        self._set_widget_defaults()
-
-        # Aplicar el cursor de puntero
-        self.setCursor(Qt.PointingHandCursor)
+        self._set_defaults()
 
         self.configure(**kwargs)
 
@@ -85,14 +92,16 @@ class FButton(QPushButton, FluvelWidget, FluvelTextWidget):
 
         kwargs = self.get_static_text(**kwargs)
 
+        if icon_size:=kwargs.get("icon_size"):
+
+            kwargs["icon_size"] = QSize(*icon_size)
+
         configure_process(self, self._MAPPING_METHODS, **kwargs)
 
 
-class FLinkButton(FButton):
-    def __init__(self, url: str, **kwargs: Unpack[FButtonKwargs]):
-        super().__init__(**kwargs)
-        self.url = url
-        self.clicked.connect(self.open_link)
+    def _set_defaults(self) -> None:
 
-    def open_link(self):
-        QDesktopServices.openUrl(QUrl(self.url))
+        self._set_widget_defaults()
+
+        # Aplicar el cursor de puntero
+        self.setCursor(Qt.PointingHandCursor)

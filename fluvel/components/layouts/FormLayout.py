@@ -2,13 +2,14 @@
 from fluvel.components.widgets import FLabel
 from fluvel.components.widgets import FLineEdit
 from fluvel.core.abstract_models.FluvelLayout import FluvelLayout
+from fluvel.components.widgets.FContainer import FContainer
 
 # PySide6
-from PySide6.QtWidgets import QFormLayout, QWidget
+from PySide6.QtWidgets import QFormLayout
 
 
 class FormLayout(QFormLayout, FluvelLayout):
-    def __init__(self, parent: QWidget | None = None):
+    def __init__(self, parent: FContainer | None = None):
         super().__init__(parent)
 
     def Row(

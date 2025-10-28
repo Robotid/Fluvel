@@ -30,6 +30,7 @@ class ContentHandler:
 
         :param mode: El modo de ejecución ('production' o 'development').
         :type mode: str
+        
         :param lang: El código del idioma a cargar (e.g. 'es', 'en', etc.)
         :type lang: str
         """
@@ -57,6 +58,7 @@ class ContentHandler:
 
         :param extension: La extensión del archivo a buscar.
         :type extension: str
+
         :param content_folder: La carpeta raíz del contenido para un idioma.
         :type content_folder: Path
         """
@@ -137,6 +139,7 @@ class ContentHandler:
 
         :param content_folder: La carpeta donde buscar los archivos.
         :type content_folder: Path
+
         :param extension: La extensión de los archivos a buscar.
         :type extension: str
 

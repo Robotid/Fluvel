@@ -3,7 +3,8 @@ This module import all Fluvel Widgets Compontents
 """
 
 # Input Widgets
-from fluvel.components.widgets.FButton import FButton, FLinkButton
+from fluvel.components.widgets.FButton import FButton
+from fluvel.components.widgets.FLinkButton import FLinkButton
 from fluvel.components.widgets.FLineEdit import FLineEdit
 from fluvel.components.widgets.FCheckBox import FCheckBox
 from fluvel.components.widgets.FRadioButton import FRadioButton

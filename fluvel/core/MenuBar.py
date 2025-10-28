@@ -39,9 +39,6 @@ class MenuBar(QMenuBar):
         """
         super().__init__(parent)
 
-        # The names of all menu options will be added to this list.
-        self.all_menu_options: list = []
-
         self.menu = FMenu(self, menu_structure=structure)
         
         # Generate the literal that contains all menu options

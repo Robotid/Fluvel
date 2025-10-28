@@ -3,11 +3,11 @@ QPushButton {
     /* Estilos base del PushButton */
     color: #fff;
     font-size: 14px;
-    font-weight: 700; 
-    text-align: center; 
+    font-weight: 700;
+    text-align: center;
     border: 1px solid;
     border-radius: 2px;
-    padding: 8px 16px; 
+    padding: 8px 16px;
     outline: none;
 }
 
@@ -17,9 +17,9 @@ QPushButton:pressed {
 
 QPushButton:disabled {
     /* Estilos para el botón deshabilitado */
-    background-color: #e9ecef; 
+    background-color: #e9ecef;
     color: #6c757d;
-    border: 1px solid #ced4da; 
+    border: 1px solid #ced4da;
 }
 
 
@@ -52,7 +52,7 @@ QPushButton[class~="primary-outlined"]:pressed {
     background-color: transparent;
     border-color: #0068d6;
 }
-    
+
 /* Estilo para un Secondary Button */
 
 QPushButton[class~="secondary"] {
@@ -82,7 +82,7 @@ QPushButton[class~="secondary-outlined"]:pressed {
     background-color: transparent;
     border-color: #767a80;
 }
-    
+
 /* Estilo para un Info Button */
 
 QPushButton[class~="info"] {
@@ -112,7 +112,7 @@ QPushButton[class~="info-outlined"]:pressed {
     background-color: transparent;
     border-color: #138a9c;
 }
-    
+
 /* Estilo para un Success Button */
 
 QPushButton[class~="success"] {
@@ -142,7 +142,7 @@ QPushButton[class~="success-outlined"]:pressed {
     background-color: transparent;
     border-color: #008d38;
 }
-    
+
 /* Estilo para un Warning Button */
 
 QPushButton[class~="warning"] {
@@ -172,7 +172,7 @@ QPushButton[class~="warning-outlined"]:pressed {
     background-color: transparent;
     border-color: #e6ac00;
 }
-    
+
 /* Estilo para un Danger Button */
 
 QPushButton[class~="danger"] {
@@ -202,7 +202,7 @@ QPushButton[class~="danger-outlined"]:pressed {
     background-color: transparent;
     border-color: #c93237;
 }
-    
+
 /* Estilo para un Dark Button */
 
 QPushButton[class~="dark"] {
@@ -233,7 +233,7 @@ QPushButton[class~="dark-outlined"]:pressed {
     background-color: transparent;
     border-color: #25292c;
 }
-    
+
 /* Estilo para un Light Button */
 
 QPushButton[class~="light"] {

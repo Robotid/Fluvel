@@ -1,5 +1,6 @@
 # Fluvel
 from fluvel.core.abstract_models.FluvelLayout import FluvelLayout
+from fluvel.components.widgets.FContainer import FContainer
 
 # PySide6
 from PySide6.QtWidgets import QGridLayout, QWidget, QLayout
@@ -86,7 +87,7 @@ class GridLayout(QGridLayout, FluvelLayout):
     helper methods to simplify the addition of widgets and layouts.
     """
 
-    def __init__(self, parent: QWidget | None = None):
+    def __init__(self, parent: FContainer | None = None):
         super().__init__(parent)
 
         self.parent = parent
@@ -110,7 +111,7 @@ class GridLayout(QGridLayout, FluvelLayout):
         --------
         .. code-block:: python
             ...
-            with self.Grid(container) as grid:
+            with self.Grid() as grid:
                 c1 = grid.Column(0) # first column
                 c2 = grid.Column(1) # second column
 
@@ -141,7 +142,7 @@ class GridLayout(QGridLayout, FluvelLayout):
         --------
         .. code-block:: python
             ...
-            with self.Grid(container) as grid:
+            with self.Grid() as grid:
 
                 c1, c2 = grid.Columns(2) 
                 
@@ -197,7 +198,7 @@ class GridLayout(QGridLayout, FluvelLayout):
         --------
         .. code-block:: python
             ...
-            with my_view.Grid(container) as grid:
+            with my_view.Grid() as grid:
                 # Adds a button to row 0, column 0
                 grid.addCell(FButton(text="button"), 0, 0)
 

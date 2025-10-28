@@ -18,11 +18,19 @@ def get_root_path() -> Path:
         return Path(os.getcwd())
 
 
+# =========
+# ROOT PATH
+# =========
 
 APP_ROOT = get_root_path()
 
+# ===================================
+# PATHS ON PRODUCTION (DEV_MODE=true)
+# ===================================
 
-# Common project routes
+# ==========
+# STATIC DIR
+# ==========
 
 STATIC_DIR = APP_ROOT / "static"
 
@@ -30,12 +38,20 @@ CONTENT_DIR: Path = STATIC_DIR / "content"
 
 THEMES_DIR: Path = STATIC_DIR / "themes"
 
+# ======
+# UI DIR
+# ======
+
 UI_DIR: Path = APP_ROOT / "ui"
 
-VIEWS_DIR: Path = UI_DIR / "views"
+PAGES_DIR: Path = UI_DIR / "pages"
 
-# Paths on Prod
+# ====================================
+# PATHS ON PRODUCTION (DEV_MODE=false)
+# ====================================
 
+# Text content
 PROD_CONTENT_DIR: Path = APP_ROOT / "build_resources"
 
+# Themes
 PROD_THEMES_DIR: Path = PROD_CONTENT_DIR / "_themes"

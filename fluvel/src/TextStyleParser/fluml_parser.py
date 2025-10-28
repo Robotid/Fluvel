@@ -24,8 +24,8 @@ class StyledTextParser:
                 current_id = _match.group(1).strip()
                 continue
 
-            if current_id and raw_line.startswith(" "):
-                self.blocks[current_id].append(raw_line.strip())
+            if current_id:
+                self.blocks[current_id].append(clean_line)
 
     def _apply_styles(self, text):
         """

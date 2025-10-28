@@ -1,8 +1,8 @@
-WELCOME_VIEW = """from fluvel import View, route
+WELCOME_VIEW = """from fluvel import Page, route
 from fluvel._user import AppConfig
 
 @route("home")
-class HomeView(View):
+class HomeView(Page):
 
     def build_ui(self):
     

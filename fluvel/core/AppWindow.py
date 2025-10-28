@@ -143,7 +143,7 @@ class AppWindow(QMainWindow):
         Configures multiple window properties from a single call.
 
         This high-level method allows setting various window attributes using
-        keyword arguments, which are typically loaded from the ``appconfig.toml``
+        keyword arguments, which are typically loaded from the ``config.toml``
         file but can also be set programmatically.
         
         :param title: Sets the window title.
@@ -189,7 +189,7 @@ class AppWindow(QMainWindow):
         """
 
         if "resizable" in kwargs:
-            if kwargs["resizable"] is False:
+            if not kwargs["resizable"]:
                 kwargs["resizable"] = (self.width(), self.height())
             else:
                 kwargs.pop("resizable")
@@ -207,7 +207,7 @@ class AppWindow(QMainWindow):
             for attr in attributes:
                 attribute = getattr(Qt.WidgetAttribute, self._ATTRIBUTES[attr])
                 self.setAttribute(attribute, True)
-            kwargs.pop("window_attributes")
+            kwargs.pop("attributes")
 
         configure_process(self, self._MAPPING_METHODS, **kwargs)
 

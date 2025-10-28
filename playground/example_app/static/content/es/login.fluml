@@ -1,23 +1,44 @@
-[title-sign-in]:
-    Iniciar Sesión
-    
-[form-user-field]:
-    Usuario:
+[login-title]:
+    **Iniciar Sesión**
 
-[form-user-field-behind]:
-    Usuario
+[use-email]:
+    o usa tu contraseña de correo electrónico
 
-[form-password-field]:
-    Contraseña:
+[email-field]:
+    Correo Electrónico
 
-[form-password-field-behind]:
-    Contraseña
+[password-field]:
+    Contraseña
 
-[lbl-forgotten-password]:
-    {¿Olvidaste la contraseña? | https://support.google.com/a/answer/33310?hl=es&co=DASHER._Family%3DDomain-verified}
-
-[btn-register]:
-    Registrarse
+[forget-password]:
+    ¿Olvidaste tu Contraseña?
 
 [btn-sign-in]:
-    Iniciar Sesión
+    INICIAR SESIÓN
+
+[asmr-prog-credits]:
+    *Esta interfaz fue tomada del canal de YouTube { @AsmrProg | https://www.youtube.com/watch?v=PlpM2LJWu-s&t=22s}*
+
+[greeting]:
+    ¡Hola, Amigo!
+
+[sign-up-description]:
+    Regístrate con tus datos personales para usar todas las funciones de la aplicación
+
+[btn-sign-up]:
+    REGISTRARSE
+
+[welcome-back]:
+    ¡Bienvenido de nuevo!
+
+[sign-in-description]:
+    Ingresa tus datos personales para usar todas las funciones de la aplicación
+
+[title-sign-up]:
+    Crear Cuenta
+
+[use-email-registration]:
+    o usa tu correo electrónico para registrarte
+
+[name-field]:
+    Nombre

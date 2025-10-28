@@ -1,8 +1,8 @@
-from fluvel import route, View
+from fluvel import route, Page
 from fluvel.components import FButton
 
 @route("/demo-widgets")
-class Demo(View):
+class Demo(Page):
 
     def build_ui(self):
 

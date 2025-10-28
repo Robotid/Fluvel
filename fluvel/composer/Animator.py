@@ -1,5 +1,5 @@
 
-from PySide6.QtCore import QPropertyAnimation, QObject, QEasingCurve
+from PySide6.QtCore import QPropertyAnimation, QObject, QEasingCurve, QPoint
 from PySide6.QtWidgets import QWidget, QGraphicsOpacityEffect
 
 class Animator:
@@ -76,4 +76,48 @@ class Animator:
         # Una vez que la animación termina, ocultamos el widget saliente
         animation.finished.connect(lambda: widget.setHidden(True))
         animation.finished.connect(lambda: widget.setGraphicsEffect(None))
+        return animation
+    
+    @classmethod
+    def slide_in(
+        cls, 
+        widget: QWidget, 
+        direction: str = "right", 
+        duration: int = 300
+    ) -> QPropertyAnimation:
+        """
+        Anima la posición (pos) del widget para que se deslice desde un borde 
+        del contenedor padre hasta su posición de layout final.
+
+        :param direction: 'right' para deslizar desde la derecha, 'left' para deslizar desde la izquierda.
+        """
+        
+        end_pos = widget.pos()
+        parent = widget.parentWidget()
+        
+        if not parent:
+            raise RuntimeError("slide_in requiere que el widget tenga un padre.")
+        
+        if direction == 'right':
+            start_pos_x = parent.width() 
+        elif direction == 'left':
+            start_pos_x = -widget.width()
+        else:
+            raise ValueError("La dirección debe ser 'right' o 'left'.")
+
+        start_pos = QPoint(start_pos_x, end_pos.y())
+        
+        widget.setVisible(True)
+
+        widget.move(start_pos) 
+
+        animation = cls.animate(
+            target=widget,
+            property_name=b"pos",
+            start_value=start_pos,
+            end_value=end_pos,
+            duration=duration,
+            easing=QEasingCurve.OutCubic
+        )
+        
         return animation
