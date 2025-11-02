@@ -12,23 +12,6 @@ class StringVar(QObject):
     # con la declaración de señales de PySide6
     valueChanged = Signal(str)
 
-    # Este atributo almacena el texto que se usará
-    # en los Widgets
-    _value: str = ""
-
-    # Este atributo almacena el texto original
-    # con sus respectivos marcadores de posición
-    # (si los contiene)
-    _base_text: str = ""
-
-    # Este atributo almacena un diccionario con los
-    # objetos StringVar o 'str' que sustituyen a los
-    # marcadores de posición en el texto, por los que
-    # son mapeados según su posición.
-    # ejemplo:
-    # {0: StringVar, 1: str, 2: StringVar, 3: StringVar} y así...
-    _MAPPING_MARKERS: dict = {}
-
     def __init__(self, value: str = ""):
         """
         Inicializa una instancia de StringVar.
@@ -37,6 +20,23 @@ class StringVar(QObject):
             value (str): El valor inicial de la cadena.
         """
         super().__init__()
+
+        # Este atributo almacena el texto que se usará
+        # en los Widgets
+        self._value: str = ""
+
+        # Este atributo almacena el texto original
+        # con sus respectivos marcadores de posición
+        # (si los contiene)
+        self._base_text: str = ""
+
+        # Este atributo almacena un diccionario con los
+        # objetos StringVar o 'str' que sustituyen a los
+        # marcadores de posición en el texto, por los que
+        # son mapeados según su posición.
+        # ejemplo:
+        # {0: StringVar, 1: str, 2: StringVar, 3: StringVar} y así...
+        self._MAPPING_MARKERS: dict = {}
 
         self.value = value
 

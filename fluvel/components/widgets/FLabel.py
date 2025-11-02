@@ -13,6 +13,14 @@ from PySide6.QtCore import Qt
 from fluvel.core.tools import configure_process
 from fluvel.core.enums.alignment import Alignment, AlignmentTypes
 
+FLabelKeys = Literal[
+    "text",
+    "textvariable",
+    "style",
+    "wordwrap",
+    "align"
+]
+
 class FLabelKwargs(TypedDict, total=False):
     text            : str | list
     textvariable    : StringVar
@@ -27,8 +35,6 @@ class FLabel(QLabel, FluvelWidget, FluvelTextWidget):
     """
     Clase base de **`Fluvel`** para **`QLabel`**.
     """
-
-    WIDGET_TYPE: str = "QLabel"
 
     _MAPPING_METHODS = {
         "text": "setText", 
@@ -60,7 +66,6 @@ class FLabel(QLabel, FluvelWidget, FluvelTextWidget):
 
     def _set_defaults(self) -> None:
 
-
         self._set_widget_defaults()
 
         # Por defecto acepta la apertura de
@@ -70,3 +75,14 @@ class FLabel(QLabel, FluvelWidget, FluvelTextWidget):
         # Por defecto su formato de texto es RichText
         self.setTextFormat(Qt.TextFormat.RichText)
 
+    def __setitem__(self, key: FLabelKeys, value: any):
+
+        self.configure(**{key: value})
+    
+    def __getitem__(self, key: FLabelKeys):
+         
+        if key=="text":
+            return self.text()
+        
+        if key=="align":
+            return self.alignment()

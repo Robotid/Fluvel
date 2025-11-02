@@ -50,7 +50,7 @@ WindowStates = Literal[
 # Used in MenuBar
 # =================
 
-ActionTypes = Literal[
+ActionSignalTypes = Literal[
     "triggered", 
     "toggled", 
     "changed", 

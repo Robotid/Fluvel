@@ -1,6 +1,5 @@
 from fluvel.core.exceptions import ContentNotFoundError
 
-
 def get_content_by_id(content_id: str) -> str:
     """
     Este controlador se comunica con el modelo `GlobalContent`

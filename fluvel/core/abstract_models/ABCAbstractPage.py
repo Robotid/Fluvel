@@ -261,6 +261,8 @@ class AbstractPage(QObject, ABC, metaclass=VBMeta):
         :type style: str or None
         
         :param drag_window: Enable dragging of the Main Window.
+                            Allows you to drag the Main Window
+                            from the design area.
         :type drag_window: bool
 
         :returns: A :py:class:`LayoutBuilder` for :py:class:`~fluvel.components.layouts.HBoxLayout.HBoxLayout`.

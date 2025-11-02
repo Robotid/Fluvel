@@ -256,7 +256,7 @@ class AppWindow(QMainWindow):
         if menu := ContentHandler.MENU_CONTENT.get("main-menu", {}):
             
             # This is an instance of QMenuBar
-            self.menu_bar = MenuBar(self, menu)
+            self.menu_bar = MenuBar(parent=self, structure=menu)
 
             # Adding the Menu Bar to the Window
             self.setMenuBar(self.menu_bar)

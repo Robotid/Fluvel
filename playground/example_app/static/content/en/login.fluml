@@ -40,7 +40,7 @@
     SIGN UP
 
 # ====================
-# SIGN UP - RIGHT SIDE
+# SIGN UP - LEFT SIDE
 # ====================
 
 [sign-up-greeting]:
@@ -50,7 +50,7 @@
     Enter your personal details to use all of app features
 
 # ====================
-# SIGN UP - LEFT SIDE
+# SIGN UP - RIGHT SIDE
 # ====================
 
 [title-sign-up]:

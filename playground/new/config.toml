@@ -5,7 +5,7 @@ DEV_MODE = true
 name = "Fluvel Framework"
 version = "0.1.0"
 author = "Robotid"
-homepage = "https://www.example.com"
+homepage = "https://ww.example.com"
 licence = "MIT"
 copyright = "© 2025 Robotid"
 
@@ -14,5 +14,5 @@ theme = "bootstrap"
 language = "en"
 
 [window]
-title = "FluvelApp"
-
+title = "MyApp"
+size = [1280, 720]

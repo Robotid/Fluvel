@@ -12,13 +12,14 @@ from PySide6.QtGui import QIcon
 
 class FMenuKwargs(TypedDict, total=False):
 
-    title: str | StringVar
-    menu_structure: dict
+    parent          : QMenu | QMenuBar | None
+    title           : str | StringVar
+    menu_structure  : dict
 
 class FMenu(QMenu):
 
-    def __init__(self, parent: QMenu | QMenuBar | None = None, **kwargs: Unpack[FMenuKwargs]) -> None:
-        super().__init__(parent)
+    def __init__(self, **kwargs: Unpack[FMenuKwargs]) -> None:
+        super().__init__(kwargs.get("parent"))
 
         self.all_menu_options: list = []
 
@@ -26,7 +27,7 @@ class FMenu(QMenu):
 
         if "menu_structure" in kwargs:
 
-            self._create_menu(parent, kwargs["menu_structure"])
+            self._create_menu(kwargs.get("parent"), kwargs.get("menu_structure"))
 
     def configure(self, **kwargs: Unpack[FMenuKwargs]) -> None:
 
@@ -72,7 +73,7 @@ class FMenu(QMenu):
 
     def _add_menu(self, parent_menu: QMenu, element_id, element_dict: dict) -> QMenu:
         text = GlobalContent.menu_content[element_id]
-        menu = FMenu(parent_menu, title=text)
+        menu = FMenu(parent=parent_menu, title=text)
         parent_menu.addMenu(menu)
 
         return menu

@@ -1,5 +1,6 @@
 from fluvel.core import AppWindow
 
+import qtawesome as qta
 
 class MainWindow(AppWindow):
 
@@ -7,6 +8,7 @@ class MainWindow(AppWindow):
         """Display the `components` in the Main Window."""
 
         self.configure(
+            size=(920, 605),
             flags=["frameless"],
             attributes=["translucent-background"]
         )
@@ -19,15 +21,27 @@ class MainWindow(AppWindow):
         change_theme = self.root.change_theme
         change_language = self.root.change_language
 
-        self.menu_bar.config(
-            shortcuts=[("quit", "Ctrl+Q", self.close)],
-            on_triggered=[
-                # -------------- Menu Settings ---------------------
-                # Themes
-                ("bootstrap_theme", change_theme, "bootstrap"),
-                ("modern_dark_theme", change_theme, "modern-dark"),
-                # Languages
-                ("es_language", change_language, "es"),
-                ("en_language", change_language, "en"),
-            ]
+        self.menu_bar.configure(
+            controls={
+                # -------------- FILE ---------------------
+                "quit": {
+                    "triggered": self.close,
+                    "Shortcut": "Ctrl+Q"
+                },
+                # -------------- SETTINGS ----------------
+                "bootstrap_theme": {
+                    "triggered": lambda: change_theme("bootstrap"),
+                    "Icon": qta.icon(f"fa5b.github", color="black", options=[{"scale_factor": 0.9}])
+                },
+                "modern_dark_theme": {
+                    "triggered": lambda: change_theme("modern-dark")
+                },
+                "es_language": {
+                    "triggered": lambda: change_language("es")
+                },
+                "en_language": {
+                    "triggered": lambda: change_language("en")
+                },
+            }
         )
+

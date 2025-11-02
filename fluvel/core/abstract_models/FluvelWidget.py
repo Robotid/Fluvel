@@ -28,6 +28,8 @@ class FluvelWidget:
     
     def _set_widget_defaults(self) -> None:
 
+        self.WIDGET_TYPE = type(self).__name__
+
         # Estableciendo el nombre del objeto para
         # aplicar los estilos QSS
         self.obj_name: str = str(id(self))

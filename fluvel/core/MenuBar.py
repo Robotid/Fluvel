@@ -1,21 +1,50 @@
 # fluvel.core.MenuBar
-from typing import Callable, Any, Tuple, List, Optional, Literal
+from typing import Callable, Any, Tuple, List, Optional, Literal, TypedDict, Dict, Unpack
 from functools import partial
 
 # Fluvel
+from fluvel.core.abstract_models.FluvelWidget import FluvelWidget
 from fluvel.components.gui.FAction import FAction
 from fluvel.components.widgets.FMenu import FMenu
 from fluvel._user.GlobalConfig import AppConfig
 
 # PySide6
-from PySide6.QtWidgets import QMenuBar, QMainWindow
+from PySide6.QtWidgets import QMenuBar
+from PySide6.QtGui import QIcon
 
 # Utils
 from fluvel._user.MenuOptions import MenuOptions
 from fluvel.core.tools.generate_menu_options import set_dynamic_menu_keys
-from fluvel.utils.tip_helpers import ActionProperties, ActionTypes, StandardActionShortcut
+from fluvel.utils.tip_helpers import ActionProperties, ActionSignalTypes, StandardActionShortcut
 
-class MenuBar(QMenuBar):
+ACTION_SIGNALS = ["hovered", "triggered", "changed", "toggled"]
+
+class MenuBarProperties(TypedDict):
+
+    # ActionProperties
+    Text            : str
+    Icon            : QIcon
+    Shortcut        : StandardActionShortcut
+    StatusTip       : str
+    Enabled         : bool
+    Visible         : bool
+    Checkable       : bool
+    MenuRole        : FAction.MenuRole
+    Data            : Any
+
+    # Signals
+    triggered       : Callable
+    hovered         : Callable
+    changed         : Callable
+    toggled         : Callable
+
+class MenuBarKwargs(TypedDict, total=False):
+
+    structure   : Dict
+    style       : str
+    controls    : Dict[MenuOptions, MenuBarProperties]
+
+class MenuBar(QMenuBar, FluvelWidget):
     """
     A high-level wrapper around :py:class:`PySide6.QtWidgets.QMenuBar` for Fluvel applications.
 
@@ -27,19 +56,23 @@ class MenuBar(QMenuBar):
     by :py:class:`~fluvel.components.widgets.FMenu` based on content files.
     """
 
-    def __init__(self, parent: QMainWindow, structure: dict):
+    def __init__(self, **kwargs: Unpack[MenuBarKwargs]):
         """
         Initializes the MenuBar and builds its structure.
 
         :param parent: The parent window, typically an :py:class:`~fluvel.core.AppWindow` instance.
-        :type parent: :py:class:`PySide6.QtWidgets.QMainWindow`
+        :type parent: :py:class:`PySide6.QtWidgets.QWidget`
         :param structure: A dictionary representing the hierarchical structure of the menu 
                           (loaded from a configuration file).
         :type structure: dict
         """
-        super().__init__(parent)
+        super().__init__()
 
-        self.menu = FMenu(self, menu_structure=structure)
+        self._set_widget_defaults()
+
+        self.menu = FMenu(parent=self, menu_structure=kwargs.get("structure"))
+
+        self.configure(**kwargs)
         
         # Generate the literal that contains all menu options
         if AppConfig.fluvel.DEV_MODE:
@@ -59,7 +92,7 @@ class MenuBar(QMenuBar):
         return getattr(self, item_name)
     
     def bind(
-        self, menu_option: MenuOptions, action: ActionTypes, controller: Callable
+        self, menu_option: MenuOptions, action: ActionSignalTypes, controller: Callable
     ) -> None:
         """
         Connects a controller (callback function) to a specific signal of a menu item.
@@ -68,13 +101,17 @@ class MenuBar(QMenuBar):
 
         :param menu_option: The name of the menu action.
         :type menu_option: :py:class:`~fluvel._user.MenuOptions`
+
         :param action: The name of the signal/action method to connect to (e.g., ``"triggered"``, ``"hovered"``).
         :type action: :py:class:`~fluvel.utils.tip_helpers.ActionTypes`
+
         :param controller: The callable function or method to execute when the action is fired.
         :type controller: :py:class:`typing.Callable`
+
         :rtype: None
         """
         menu_item = self.get_item(menu_option)
+
         getattr(menu_item, action).connect(controller)
 
     def set_property(
@@ -91,156 +128,76 @@ class MenuBar(QMenuBar):
 
         :param menu_option: The name of the menu action.
         :type menu_option: :py:class:`~fluvel._user.MenuOptions`
+
         :param property_to_change: The property to change (e.g., ``"Text"``, ``"Enabled"``).
         :type property_to_change: :py:class:`~fluvel.utils.tip_helpers.ActionProperties`
+
         :param new_value: The new value for the property.
         :type new_value: any
+
         :rtype: None
         """
         property_method = f"set{property_to_change}"
         menu_item = self.get_item(menu_option)
         getattr(menu_item, property_method)(new_value)
-    
-    def add_shortcut(
+  
+    def configure(
         self,
-        menu_option: MenuOptions,
-        new_shortcut: StandardActionShortcut,
-        controller: Callable,
-        *args,
-        **kwargs
+        **kwargs: Unpack[MenuBarKwargs]
     ) -> None:
         """
-        Assigns a keyboard shortcut and connects a controller to the action's ``triggered`` signal.
+        Provides a unified, declarative interface for configuring menu actions
+        and styling the menu bar.
 
-        :param menu_option: The name of the menu action.
-        :type menu_option: :py:class:`~fluvel._user.MenuOptions`
-        :param new_shortcut: The shortcut string (e.g., ``"Ctrl+S"``).
-        :type new_shortcut: :py:class:`~fluvel.utils.tip_helpers.StandardActionShortcut`
-        :param controller: The callable function or method to execute when the shortcut is used.
-        :type controller: :py:class:`typing.Callable`
-        :param args: Positional arguments to be passed to the controller.
-        :param kwargs: Keyword arguments to be passed to the controller.
+        :param controls: A dictionary mapping menu action IDs to their
+                         configuration. The configuration is a
+                         `MenuBarProperties` dictionary defining properties
+                         (e.g., "Text", "Icon", "Shortcut") and signals
+                         (e.g., "triggered", "hovered").
+        :type controls: dict[:py:class:`~fluvel._user.MenuOptions`, :py:class:`~fluvel.core.MenuBar.MenuBarProperties`]
+
+        :param style: A string containing Fluvel style rules (e.g., "bg[white]")
+                      to be applied to the MenuBar itself.
+        :type style: str
+
         :rtype: None
-        """
-        self.set_property(menu_option, "Shortcut", new_shortcut)
 
-        command = partial(controller, *args, **kwargs)
+        Example
+        -------
+        .. code-block:: python
 
-        self.bind(menu_option, "triggered", command)
+            def on_open_file():
+                print("Opening file...")
 
-    def on_triggered(self, menu_option: MenuOptions, controller: Callable, *args, **kwargs) -> None:
-        """
-        Connects a controller to the action's ``triggered`` signal (when the item is clicked/activated).
+            def on_exit_app():
+                self.main_window.close()
 
-        :param menu_option: The name of the menu action.
-        :type menu_option: :py:class:`~fluvel._user.MenuOptions`
-        :param controller: The callable function or method to execute.
-        :type controller: :py:class:`typing.Callable`
-        :param args: Positional arguments to be passed to the controller.
-        :param kwargs: Keyword arguments to be passed to the controller.
-        :rtype: None
-        """
-        command = partial(controller, *args, **kwargs)  
-
-        self.bind(menu_option, "triggered", command)
-
-    def on_hovered(self, menu_option: MenuOptions, controller: Callable, *args, **kwargs) -> None:
-        """
-        Connects a controller to the action's ``hovered`` signal (when the mouse moves over the item).
-
-        :param menu_option: The name of the menu action.
-        :type menu_option: :py:class:`~fluvel._user.MenuOptions`
-        :param controller: The callable function or method to execute.
-        :type controller: :py:class:`typing.Callable`
-        :param args: Positional arguments to be passed to the controller.
-        :param kwargs: Keyword arguments to be passed to the controller.
-        :rtype: None
-        """
-        command = partial(controller, *args, **kwargs) if kwargs else partial(controller, *args)
-
-        self.bind(menu_option, "hovered", command)
-
-    def on_changed(self, menu_option: MenuOptions, controller: Callable, *args, **kwargs) -> None:
-        """
-        Connects a controller to the action's ``changed`` signal (typically used for checked/unchecked states).
-
-        :param menu_option: The name of the menu action.
-        :type menu_option: :py:class:`~fluvel._user.MenuOptions`
-        :param controller: The callable function or method to execute.
-        :type controller: :py:class:`typing.Callable`
-        :param args: Positional arguments to be passed to the controller.
-        :param kwargs: Keyword arguments to be passed to the controller.
-        :rtype: None
+            # Get the menu_bar instance (e.g., self.main_window.menu_bar)
+            menu_bar.configure(
+                controls={
+                    "file_open": {
+                        "Text": "Open...",
+                        "Shortcut": "Ctrl+O",
+                        "StatusTip": "Open a new file",
+                        "triggered": on_open_file
+                    },
+                    "file_exit": {
+                        "Text": "Exit",
+                        "Shortcut": "Ctrl+Q",
+                        "StatusTip": "Exit the application",
+                        "triggered": on_exit_app
+                    }
+                },
+                style="bg[#333] f-color[white]"
+            )
         """
 
-        command = partial(controller, *args, **kwargs)
+        kwargs = self._apply_styles(**kwargs)
 
-        self.bind(menu_option, "changed", command)
-
-    def config(
-        self,
-        properties: List[Tuple[MenuOptions, ActionProperties, MenuOptions]] | None = None,
-        on_triggered: Optional[List[Tuple[MenuOptions, Callable, Any]]] = None,
-        shortcuts: List[Tuple[MenuOptions, StandardActionShortcut, Callable, Any]] | None = None,
-        on_hovered: List[Tuple[Literal[MenuOptions], Callable, Any]] | None= None,
-        on_changed: List[Tuple[Literal[MenuOptions], Callable, Any]] | None = None
-    ) -> None:
-        """
-        Provides a single, declarative interface to configure multiple properties, 
-        shortcuts, and event handlers for the menu bar.
-
-        All parameters accept a list of tuples, where each tuple defines the action 
-        or binding for a specific menu item. This is the recommended high-level method 
-        for menu configuration.
-
-        :param properties: A list of tuples: ``(menu_option, property_to_set, new_value)`` to change item properties.
-        :type properties: list[tuple[:py:class:`~fluvel._user.MenuOptions`, :py:class:`~fluvel.utils.tip_helpers.ActionProperties`, :py:class:`typing.Any`]]
-        :param on_triggered: A list of tuples: ``(menu_option, controller_function, *args, **kwargs)`` to bind to the ``triggered`` signal.
-        :type on_triggered: list[tuple[:py:class:`~fluvel._user.MenuOptions`, :py:class:`typing.Callable`, :py:class:`typing.Any`]]
-        :param shortcuts: A list of tuples: ``(menu_option, shortcut_string, controller_function, *args, **kwargs)`` to assign a shortcut and bind the action.
-        :type shortcuts: list[tuple[:py:class:`~fluvel._user.MenuOptions`, :py:class:`~fluvel.utils.tip_helpers.StandardActionShortcut`, :py:class:`typing.Callable`, :py:class:`typing.Any`]]
-        :param on_hovered: A list of tuples to bind to the ``hovered`` signal.
-        :type on_hovered: list[tuple[:py:class:`~fluvel._user.MenuOptions`, :py:class:`typing.Callable`, :py:class:`typing.Any`]]
-        :param on_changed: A list of tuples to bind to the ``changed`` signal.
-        :type on_changed: list[tuple[:py:class:`~fluvel._user.MenuOptions`, :py:class:`typing.Callable`, :py:class:`typing.Any`]]
-        :rtype: None
-        """
-        if properties:
-            for menu_option, new_property, new_value in properties:
-                self.set_property(menu_option, new_property, new_value)
-
-        if shortcuts:
-            for menu_option, shortcut, function, *args in shortcuts:
-                _args, _kwargs = self._get_config_arguments(args)
-                self.add_shortcut(menu_option, shortcut, function, *_args, **_kwargs)
-
-        if on_triggered:
-            for menu_option, function, *args in on_triggered:
-                _args, _kwargs = self._get_config_arguments(args)
-                self.on_triggered(menu_option, function, *_args, **_kwargs)
-
-        if on_hovered:
-            for menu_option, function, *args in on_hovered:
-                _args, _kwargs = self._get_config_arguments(args)
-                self.on_hovered(menu_option, function, *_args, **_kwargs)
-
-        if on_changed:
-            for menu_option, function, *args in on_changed:
-                _args, _kwargs = self._get_config_arguments(args)
-                self.on_changed(menu_option, function, *_args, **_kwargs)
-
-    @staticmethod
-    def _get_config_arguments(args: tuple) -> tuple[list, dict[str, Any]]:
-        """
-        Internal static method to separate positional and keyword arguments 
-        from a list passed by the :py:meth:`config` method.
-
-        This method should not be called directly.
-        """
-        _args = [arg for arg in args if not isinstance(arg, dict)]
-        try:
-            _kwargs = args[len(_args)]
-        except IndexError:
-            _kwargs = {}
-
-        return _args, _kwargs
+        if controls:=kwargs.get("controls"):
+            for action, properties in controls.items():
+                for prop_name, value in properties.items():
+                    if prop_name in ACTION_SIGNALS:
+                        self.bind(action, prop_name, value)
+                    else:
+                        self.set_property(action, prop_name, value)

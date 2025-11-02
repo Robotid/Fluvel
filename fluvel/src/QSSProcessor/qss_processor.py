@@ -15,7 +15,7 @@ class QSSProcessor:
         "b-color": "border-color: $value;",
         "b-style": "border-style: $value;",
         "b-width": "border-width: $value;",
-        "b-radius": "border-radius: $value;",
+        "br": "border-radius: $value;",
         
         # Bordes por lado
         "b-left": "border-left: $value;",

@@ -8,9 +8,10 @@ from PySide6.QtWidgets import QWidget
 from PySide6.QtGui import QAction
 
 
+
 class FActionKwargs(TypedDict, total=False):
 
-    text: str | StringVar | None
+    text: str | StringVar
 
 class FAction(QAction):
 
@@ -23,7 +24,10 @@ class FAction(QAction):
 
     def configure(self, **kwargs: Unpack[FActionKwargs]) -> None:
 
-        if "text" in kwargs:
-            string_var = kwargs["text"]
-            string_var.valueChanged.connect(self.setText)
-            self.setText(string_var.value)
+        if text:=kwargs.get("text"):
+
+            if isinstance(text, StringVar):
+                text.valueChanged.connect(self.setText)
+                text = text.value
+            
+            self.setText(text)
