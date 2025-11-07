@@ -11,7 +11,6 @@ from abc import ABC, abstractmethod, ABCMeta
 # Fluvel
 from fluvel.components.layouts import FormLayout, HBoxLayout, VBoxLayout, GridLayout
 from fluvel.components.widgets.FContainer import FContainer
-from fluvel.components.widgets.FMovableContainer import FMovableContainer
 from fluvel.core.AppWindow import AppWindow
 
 # PySide6
@@ -19,7 +18,7 @@ from PySide6.QtWidgets import QLayout
 from PySide6.QtCore import QObject
 
 
-# Definir una variable de tipo para los layouts
+# Define a type variable for layouts
 TLayout = TypeVar("TLayout", bound=QLayout)
 
 class LayoutBuilder(Generic[TLayout]):
@@ -59,13 +58,25 @@ class LayoutBuilder(Generic[TLayout]):
 
         parent_widget = None
         
-        # the container is a layout
+        # The container is a QLayout, 
+        # which means that an FContainer must be created and added 
+        # to the current QLayout (container parameter) 
+        # for it to function as a new container for the requested QLayout.
         if isinstance(container, QLayout):
-            parent_widget = FContainer() if not drag_window else FMovableContainer()
+            
+            # Based on the “drag_window” parameter, 
+            # it decides whether the container is 
+            # capable of dragging the main window.
+            parent_widget = FContainer(movable=drag_window)
+
+            # Then add the widget to the layout
             container.addWidget(parent_widget)
+
+            # Finally, the requested layout is instantiated 
+            # as a child of the newly created FContainer.
             self.layout: TLayout = type_layout(parent_widget) 
 
-        # the container is a FContainer
+        # The container is a FContainer
         elif isinstance(container, FContainer):
             self.layout: TLayout = type_layout(container) 
             parent_widget = container
@@ -73,8 +84,9 @@ class LayoutBuilder(Generic[TLayout]):
         else:
             raise TypeError("The container must be a QLayout or an FContainer.")
 
+        # Apply styles to the container
+        # By default, a transparent background is assigned.
         style: str = style if style else "bg-transparent"
-
         parent_widget.configure(style=style)
 
             
@@ -103,13 +115,12 @@ class VBMeta(type(QObject), ABCMeta):
     Unified Metaclass that resolves conflicts when combining 
     :py:class:`PySide6.QtCore.QObject` and :py:class:`abc.ABCMeta`.
 
-    All :py:class:`~fluvel.core.abstract_models.ABCAbstractView.~fluvel.core.abstract_models.ABCAbstractPage.AbstractPage` subclasses inherit from this metaclass to ensure 
+    All :py:class:`~fluvel.core.abstract_models.ABCAbstractPage.AbstractPage` subclasses inherit from this metaclass to ensure 
     compatibility with both PySide6's signal/slot system and Python's abstract base classes.
     """
-
     pass
 
-class AbstractPage(QObject, ABC, metaclass=VBMeta):
+class AbstractPage(FContainer, ABC, metaclass=VBMeta):
     """
     Abstract base class for creating Views (pages) in Fluvel.
 
@@ -121,24 +132,14 @@ class AbstractPage(QObject, ABC, metaclass=VBMeta):
 
     :cvar app_root: The instance of the main application class (:py:class:`~fluvel.core.FluvelApp.FluvelApp`).
     :cvar main_window: The instance of the main window container (:py:class:`~fluvel.core.AppWindow.AppWindow`).
-    :ivar _container: The root :py:class:`~fluvel.components.widgets.FContainer.FContainer` container for this view.
     """
 
-    _container: FContainer
-
-    def __init__(self, container: FContainer | QLayout | None) -> None:
+    def __init__(self) -> None:
         """
         Initializes an instance of :py:class:`~fluvel.core.abstract_models.ABCAbstractPage.AbstractPage`.
-
-        It establishes the root :py:attr:`container` for the view. If :py:obj:`None` 
-        or a :py:class:`QLayout` is passed, a blank :py:class:`FContainer` is created as the container.
-
-        :param container: The initial container for the view.
-        :type container: :py:class:`~fluvel.components.widgets.FContainer.FContainer`, :py:class:`PySide6.QtWidgets.QLayout` or :py:obj:`None`
-        :raises TypeError: If the container is neither a :py:class:`FContainer` nor a :py:class:`QLayout`.
         """
         super().__init__()
-        self.container = container
+        
 
     @classmethod
     def _set_globals(cls, app_root, main_window: AppWindow):
@@ -148,40 +149,20 @@ class AbstractPage(QObject, ABC, metaclass=VBMeta):
         This is called internally by :py:class:`~fluvel.core.Router.Router.init`.
 
         :param app_root: The root application instance.
+        :type app_root: :py:class:`~fluvel.core.App.FluvelApp`
         :param main_window: The main application window instance.
         :type main_window: :py:class:`~fluvel.core.AppWindow.AppWindow`
         :rtype: None
         """
+        # The FluvelApp instance
         cls.app_root = app_root
+
+        # The MainWindow instance
         cls.main_window = main_window
 
-    @property
-    def container(self) -> FContainer:
-        """
-        The root :py:class:`FContainer` container of the view.
-        """
-        return self._container
-
-    @container.setter
-    def container(self, container: FContainer | QLayout | None) -> None:
-        """
-        Setter for the root container. Automatically creates a blank FContainer
-        if the input is None or a QLayout.
-        """
-
-        if isinstance(container, FContainer):
-            self._container = container
-
-        # If the container is None or a QLayout, a blank FContainer is automatically
-        # created to serve as the view's root widget.
-        elif container is None or isinstance(container, QLayout):
-            self._container = FContainer()
-
-        else:
-            raise TypeError("The container must be a QLayout or a FContainer.")
-
     def build_layout(
-        self, container: QLayout | FContainer | None, 
+        self, 
+        container: QLayout | FContainer | None, 
         type_layout: Type[TLayout], 
         style: str,
         drag_window: bool
@@ -195,7 +176,7 @@ class AbstractPage(QObject, ABC, metaclass=VBMeta):
         :param type_layout: The class of the layout to instantiate.
         :type type_layout: type[TLayout]
 
-        :param style: The CSS-style class name(s) for the layout's parent widget.
+        :param style: The QSS-style class name(s) for the layout's parent widget.
         :type style: str
 
         :param drag_window: Enable dragging of the Main Window.
@@ -204,13 +185,20 @@ class AbstractPage(QObject, ABC, metaclass=VBMeta):
         :returns: A configured :py:class:`LayoutBuilder`.
         :rtype: LayoutBuilder[TLayout]
         """
+        
+        # Si el contenedor es 'None', significa que el layout
+        # debe adjuntarse a la propia Página (self).
+        if container is None:
+            layout_container = self
 
-        if drag_window and container is None:
-            self.container = FMovableContainer()
+            # Si se pide 'drag_window' en el layout raíz,
+            # hacemos que la Página (self) sea arrastrable.
+            if drag_window:
+                self.isMovable = True
+        else:
+            layout_container = container
 
-        container = self.container if container is None else container
-
-        return LayoutBuilder(container, type_layout, style, drag_window)
+        return LayoutBuilder(layout_container, type_layout, style, drag_window)
 
     def Vertical(
         self, 
@@ -328,6 +316,45 @@ class AbstractPage(QObject, ABC, metaclass=VBMeta):
         return self.build_layout(container, GridLayout, style, drag_window)
 
     def Stacked(self, container: QLayout | FContainer): ...
+
+    def DockSection(
+        self, 
+        title: str,
+        layout: str = "vertical",
+        side: str = "left",
+        style: str | None = None
+    ) -> LayoutBuilder[VBoxLayout | HBoxLayout]:
+        """
+        TO DO: Esta es una funcionalidad aún no implementada
+        """
+
+        from PySide6.QtWidgets import QDockWidget
+        from PySide6.QtCore import Qt
+
+        layouts: dict[str, Type[QLayout]] = {
+            "vertical": VBoxLayout,
+            "horizontal": HBoxLayout 
+        }
+
+        dock_areas = {
+            "right": Qt.DockWidgetArea.RightDockWidgetArea,
+            "left": Qt.DockWidgetArea.LeftDockWidgetArea,
+            "top": Qt.DockWidgetArea.TopDockWidgetArea,
+            "bottom": Qt.DockWidgetArea.BottomDockWidgetArea
+        }
+
+        dock_widget = QDockWidget(title, self.main_window)
+
+        dock_container = FContainer()
+
+        dock_widget.setWidget(dock_container)
+
+        dock_layout = layouts.get(layout)
+
+        self.main_window.addDockWidget(dock_areas.get(side), dock_widget)
+
+        return self.build_layout(dock_container, dock_layout, style, False)
+
 
     @abstractmethod
     def build_ui(self) -> None:

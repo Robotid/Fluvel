@@ -29,10 +29,10 @@ class Router:
         :type name: str
 
         :ivar view_class: The uninstantiated class of the view, decorated by :py:func:`route`.
-        :type view_class: Type[:py:class:`~fluvel.core.abstract_models.ABCAbstractView.AbstractView`]
+        :type view_class: Type[:py:class:`~fluvel.core.abstract_models.ABCAbstractPage.AbstractPage`]
 
         :ivar view_instance: The actual instance of the view after it has been shown for the first time.
-        :type view_instance: :py:class:`~fluvel.core.abstract_models.ABCAbstractView.AbstractView`
+        :type view_instance: :py:class:`~fluvel.core.abstract_models.ABCAbstractPage.AbstractPage`
         
         """
         name            : str
@@ -49,7 +49,7 @@ class Router:
         Initializes the router by linking it to the main application window.
         
         This method must be called before registering or showing any routes.
-        It also sets global variables on the :py:class:`~fluvel.core.abstract_models.ABCAbstractView.AbstractView`
+        It also sets global variables on the :py:class:`~fluvel.core.abstract_models.ABCAbstractPage.AbstractPage`
         base class for access to the root window components.
 
         :param window: The main application window instance containing the central widget.
@@ -91,11 +91,11 @@ class Router:
         if not route.view_instance:
 
             # Instantiate the view
-            route.view_instance = route.view_class(None) 
+            route.view_instance = route.view_class() 
             route.view_instance.build_ui()
 
             # Add view container to QStackedWidget stack
-            central_widget.addWidget(route.view_instance.container)
+            central_widget.addWidget(route.view_instance)
 
         if cls._current_route != route:
 
@@ -103,7 +103,7 @@ class Router:
             cls._current_route = route
 
             # Show the view in the central widget
-            target_widget = route.view_instance.container
+            target_widget = route.view_instance
             central_widget.setCurrentWidget(target_widget)
 
             # Set animation

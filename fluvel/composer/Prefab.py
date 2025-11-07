@@ -54,7 +54,7 @@ def Prefab(func: TFunc) -> TFunc:
     def decorator(*args, **kwargs):
         
         # View with blank_container
-        view = Page(None) 
+        view = Page() 
         
         return func(view, *args, **kwargs)
         
