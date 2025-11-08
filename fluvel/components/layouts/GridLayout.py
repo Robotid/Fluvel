@@ -1,6 +1,7 @@
 # Fluvel
 from fluvel.core.abstract_models.FluvelLayout import FluvelLayout
 from fluvel.components.widgets.FContainer import FContainer
+from fluvel.core.abstract_models.Builder import Builder
 
 # PySide6
 from PySide6.QtWidgets import QGridLayout, QWidget, QLayout
@@ -79,7 +80,7 @@ class ColumnIndex:
         self._current_row += row_span
 
 
-class GridLayout(QGridLayout, FluvelLayout):
+class GridLayout(QGridLayout, FluvelLayout, Builder):
     """
     Base class for handling GridLayouts in Fluvel.
     

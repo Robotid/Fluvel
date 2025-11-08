@@ -26,7 +26,7 @@ class FluvelWidget:
 
         return kwargs
     
-    def _set_widget_defaults(self) -> None:
+    def _set_widget_base_defaults(self) -> None:
 
         self.WIDGET_TYPE = type(self).__name__
 

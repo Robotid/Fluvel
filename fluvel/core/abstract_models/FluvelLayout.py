@@ -170,8 +170,6 @@ class FluvelLayout:
         self.add_widget(widget, kwargs.get("alignment"), kwargs.get("stretch", 0))
 
         return widget
-
-
     
     # --------------------------------- API ----------------------------------------------
 
@@ -273,7 +271,6 @@ class FluvelLayout:
 
         self.add_widget(container, alignment, stretch)
 
-        
 
     def Label(self, **kwargs: Unpack[FLabelKwargs]) -> FLabel:
         """
