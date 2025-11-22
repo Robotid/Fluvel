@@ -6,7 +6,14 @@ from PySide6.QtWidgets import QWidget
 from PySide6.QtCore import QObject, Signal
 
 # Exceptions
-from fluvel.core.exceptions.state_manager import SilkBindingError, SilkStateError
+from fluvel.core.exceptions.state_manager import FluvelBindingError, FluvelStateError
+
+class ComputedPayload(TypedDict):
+    """
+    Internal structure for storing the logic of a computed property.
+    """
+    deps: List[str]
+    func: Callable
 
 class CreateStateKwargs(TypedDict):
     group           : str
@@ -35,9 +42,9 @@ class StateGroup(QObject):
         """
         Initializes a new instance of StateGroup.
 
-        :param group_name: Full name of the state group (e.g., 'HomeState').
+        :param group_name: Full name of the state group (e.g., "HomeState").
         :type group_name: str
-        :param alias: Unique, short alias to reference the group in bindings (e.g., “vm”).
+        :param alias: Unique, short alias to reference the group in bindings (e.g., "vm").
         :type alias: str
         :param description: Brief description of the purpose of the state group.
         :type description: str
@@ -52,9 +59,18 @@ class StateGroup(QObject):
 
         # State Maps
         self._definitions       : Dict[str, Any] = {}
-        self._computed_funcs    : Dict[str, Dict[str, List, Any]] = {} # Se almacena la lógica (dependencias y funciones)
-        self._computed_cache    : Dict[str, Any] = {} # Se guardan los valores computados/calculados
-        self._subscriptions     : Dict[str, Any] = {}
+        self._computed_funcs    : Dict[str, ComputedPayload] = {}
+        """
+        Stores the logic of computed properties defined with :py:meth:`StateGroup.computed`.
+
+        The structure is a dictionary where:
+        * **External key (str):** The name of the computed property (e.g., 'volume_icon').
+        * **Value (ComputedPayload):** A dictionary containing:
+            * **'deps' (List[str]):** The keys of the base state (:py:attr:`_definitions`) that act as dependencies.
+            * **'func' (Callable):** The Python function that is executed when any of the dependencies change to calculate the new value.
+        """
+        self._computed_cache    : Dict[str, Any] = {}
+        self._subscriptions     : Dict[str, List[Callable]] = {}
 
     def get(self, key: str) -> Any:
         """
@@ -74,44 +90,70 @@ class StateGroup(QObject):
 
         return self._definitions.get(key)
 
-    def set(self, name: str, value: any) -> None:
+    def set(self, key: str, value: any) -> None:
         """
-        Sets a new value for a defined state and notifies subscribers.
+        Sets a new value for a defined base state and initiates the reactive flow.
 
-        If the value is different from the current value, it updates the definition,
-        emits the :py:attr:`state_changed` signal (which triggers the recalculation
-        of computed properties), and executes all subscribed *callbacks*.
+        This method performs three main actions if the `value` differs from the current state:
+        1. **Mutates** the base state definition (:py:attr:`_definitions`).
+        2. **Propagates** the change by emitting the :py:attr:`state_changed` signal, which
+        triggers the recalculation of all dependent computed properties and updates UI bindings.
+        3. **Executes** all *side effect* callbacks subscribed to the key (via :py:meth:`subscribe`).
 
-        :param name: The name of the state key to modify.
-        :type name: str
+        This method is the primary way to change the mutable state of the group.
+
+        :param key: The key of the state to modify.
+        :type key: str
         :param value: The new value to assign to the key.
-        :type value: any
+        :type value: :py:class:`~typing.Any`
         :rtype: None
+        
+        :raises FluvelStateError: If the key has not been previously defined in the base state
+                                (i.e., it must be declared using :py:meth:`define`).
+        
+        Example
+        -------
+        .. code-block:: python
+        
+            # st is an instance of StateGroup
+            st.set("volume", "new_user") 
+            # or using dunder method
+            st["volume"] = "new_user"
         """
 
-        old_value = self._definitions.get(name)
+        # Validar si la 'key' existe
+        if key not in self._definitions:
+            raise FluvelStateError(
+                f"Cannot set value for key '{key}'. Key must be defined with st.define() first."
+            )
+
+        old_value = self._definitions.get(key)
 
         if old_value != value:
             
-            # Actualizando la definición
-            self._definitions[name] = value
+            # Updating the definition
+            self._definitions[key] = value
 
-            # Luego emitir la señal para que las
-            # propiedades computadas puedan actualizarse
-            self.state_changed.emit(name)
+            # Then emit the signal so that the
+            # computed properties can be updated
+            self.state_changed.emit(key)
 
-            # Finalmente, Ejecutar cada callback suscrito
-            # Esto debe ejecutarse después de que el estado ha cambiado.
-            if name in self._subscriptions:
+            # Finally, execute each subscribed callback
+            # This must be executed after the state has changed.
+            self._execute_subscriptions(key, value, old_value)
+            
+    def _execute_subscriptions(self, key: str, new_value: Any, old_value: Any) -> None:
+        """
+        Executes all callbacks subscribed to a specific key.
+        """
 
-                # Obteniendo el nuevo valor del estado (ya cambiado)
-                new_value = value
-                
-                # Ejecutar cada callback suscrito
-                for callback in self._subscriptions[name]:
-                    
-                    # La callback recibe la nueva y antigua clave como argumentos
-                    callback(new_value, old_value)
+        if key in self._subscriptions:
+
+            # Execute each subscribed callback
+            for callback in self._subscriptions[key]:
+
+                # The callback receives the new and old keys as arguments
+                callback(new_value, old_value)
 
     def define(self, **definitions):
         """
@@ -122,11 +164,11 @@ class StateGroup(QObject):
 
         :param definitions: A dictionary of keyword arguments where the key is the
                             name of the state and the value is its initial value.
-        :type definitions: Any
+        :type definitions: Dict[str, Any]
         :rtype: None
         """
         
-        # Mapeamos las Definiciones (ej. username="")
+        # We map the definitions (e.g., username="")
         self._definitions = definitions
 
     def computed(self, key: str, dependencies: List[str], func: Callable):
@@ -149,49 +191,77 @@ class StateGroup(QObject):
                     arguments as it has dependencies.
         :type func: :py:class:`~typing.Callable`
 
-        :raises SilkStateError: If the key is already defined in the base state (:py:meth:`define`).
+        :raises FluvelStateError: If the key is already defined in the base state (:py:meth:`define`).
         :rtype: None
         """
 
         # The key is already in use,
-        # so a SilkStateError is thrown
+        # so a FluvelStateError is thrown
         if key in self._definitions:
-            raise SilkStateError(f"Computed key '{key}' cannot be defined because it already exists in _definitions.")
+            raise FluvelStateError(f"Computed key '{key}' cannot be defined because it already exists in _definitions.")
         
-        # Guardar la función y dependencias
-        self._computed_funcs[key] = {
-            'deps': dependencies,
-            'func': func 
-        }
+        # Save the function and dependencies
+        self._computed_funcs[key] = ComputedPayload(deps=dependencies, func=func)
         
-        def recalculate_and_emit(changed_attr: str) -> None:
-            """Recalculate the property if the attribute that changed is in its dependencies.”"""
+        self.state_changed.connect(
+            lambda changed_attr: self._recalculate_and_emit(key, changed_attr, dependencies, func)
+        )
+
+        # Inicializar el valor de la propiedad computada
+        dep_values = [self.get(dep_key) for dep_key in dependencies]
+        initial_value = func(*dep_values)
+        self._computed_cache[key] = initial_value
+
+    def _recalculate_and_emit(
+        self, 
+        key: str, 
+        changed_attr: str, 
+        dependencies: List[str],
+        func: Callable
+    ) -> None:
+        """
+        Quick response method that handles the recalculation logic for a computed property.
+    
+        This method is the final *slot* called by the :py:attr:`state_changed` signal
+        and receives its necessary parameters from :py:meth:`computed` to
+        maximize performance. It executes the calculation and, if the value changes, 
+        emits the change signal and executes any subscription callbacks (:py:meth:`subscribe`).
+
+        :param key: The key of the computed property being recalculated.
+        :type key: str
+        
+        :param changed_attr: The key of the base property that just changed and triggered this event.
+        :type changed_attr: str
+        
+        :param dependencies: The list of dependencies for the computed property.
+        :type dependencies: List[str]
+        
+        :param func: The actual calculation function (the body of the computed logic).
+        :type func: :py:class:`~typing.Callable`
+        
+        :rtype: None
+        """
+    
+        if changed_attr in dependencies:
             
-            # Solo recalcular si la clave que cambió es una dependencia
-            if changed_attr in dependencies:
+            # Obtener los valores actuales de las dependencias
+            dep_values = [self.get(dep_key) for dep_key in dependencies]
+            
+            # Ejecutar la función de cálculo
+            new_value = func(*dep_values)
+            
+            # Si el valor ha cambiado, actualizar el caché, emitir y ejecutar side effects
+            if (old_value:=self._computed_cache.get(key)) != new_value:
                 
-                # Obtener los valores actuales de las dependencias
-                dep_values = [self.get(dep_key) for dep_key in dependencies]
+                # Actualizar el caché con el nuevo valor
+                self._computed_cache[key] = new_value
+
+                # Emitir la señal para que los componentes dependientes
+                # se actualicen
+                self.state_changed.emit(key)
                 
-                # Ejecutar la función de cálculo
-                # Pasándole como argumentos los valores de las dependencias
-                new_value = func(*dep_values)
-                
-                # Si el valor ha cambiado, actualizar el caché y emitir la señal
-                if self._computed_cache.get(key) != new_value:
-                    
-                    # Actualizar el caché con el nuevo valor
-                    self._computed_cache[key] = new_value
-                    
-                    # Emitir la señal para que los componentes dependientes
-                    # se actualicen
-                    self.state_changed.emit(key)
-        
-        # Conectando la función a state_changed
-        self.state_changed.connect(recalculate_and_emit)
-        
-        # Establecer el valor inicial (ejecutar la función por primera vez)
-        recalculate_and_emit(dependencies[0])
+                # Ejecutar los side effects suscritos
+                self._execute_subscriptions(key, new_value, old_value)
 
     def subscribe(self, key: str, callback: Callable):
         """
@@ -204,12 +274,12 @@ class StateGroup(QObject):
         :param callback: The function to execute. Receives (new_value, old_value).
         :type callback: :py:class:`~typing.Callable`
 
-        :raises SilkStateError: If the key is not defined in :py:meth:`define` or :py:meth:`computed`.
+        :raises FluvelStateError: If the key is not defined in :py:meth:`define` or :py:meth:`computed`.
         :rtype: None
         """
 
         if key not in self._definitions and key not in self._computed_funcs:
-            raise SilkStateError(f"Cannot subscribe to key '{key}'. Key must be defined with st.define() or st.computed().")
+            raise FluvelStateError(f"Cannot subscribe to key '{key}'. Key must be defined with st.define() or st.computed().")
         
         if key not in self._subscriptions:
             self._subscriptions[key] = []
@@ -219,27 +289,63 @@ class StateGroup(QObject):
 
     def has_key(self, key: str) -> bool:
         """
-        Checks whether a key exists as a definition, computed property, or subscription.
+        Checks whether a key exists as a base state or as a computed property.
+    
+        This method is used to validate whether a key is valid before attempting to
+        establish a subscription (:py:meth:`subscribe`) or a binding.
 
         :param key: The key to search for.
         :type key: str
-        :returns: :py:obj:`True` if the key is registered in any of the state structures, otherwise :py:obj:`False`.
+        :returns: :py:obj:`True` if the key is defined or computed, otherwise :py:obj:`False`.
         :rtype: bool
         """
 
-        hasKey: bool = True if key in self._definitions \
-                                or key in self._computed_funcs \
-                                or key in self._subscriptions \
-                                else False
-        
-        return hasKey
+        return key in self._definitions or key in self._computed_funcs
+    
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.set(key, value)
+
+    def __getitem__(self, key: str) -> Any:
+        return self.get(key)
+    
+    def toggle(self, key: str):
+        """
+        Reverses the value of a Boolean state key (True to False, and vice versa).
+
+        This method obtains the current value of the key using :py:meth:`~StateGroup.get`,
+        applies logical negation (`not`), and then updates the state using
+        :py:meth:`~StateGroup.set`.
+
+        The update process will trigger the reactive chain: the signal
+        :py:attr:`~StateGroup.state_changed` will be emitted, and all computed properties
+        and subscriptions that depend on this key will be executed.
+
+        :param key: The key of the Boolean state to invert.
+        :type key: str
+        :raises FluvelStateError: If the key has not been previously defined in the base state.
+        :raises TypeError: If the current value associated with the key is not of type boolean.
+                           (Although Python handles it, the logical use is for booleans).
+        :rtype: None
+
+        Example
+        -------
+        Suppose the state "darkMode" is defined as ``False``.
+
+        .. code-block:: python
+
+            # st is an instance of StateGroup
+            st.toggle("darkMode") # Now "darkMode" is True
+            st.toggle("darkMode") # Now "darkMode" is False (returns to True if called again)
+        """
+        current_value = self.get(key)
+        self.set(key, not current_value)
 
 class State:
     """
     Static utility class that manages the creation and binding
     of all :py:class:`StateGroup` in the application.
     
-    It is the entry point for Silk's reactive state system.
+    It is the entry point for Fluvel's reactive state system.
     """
 
     BIND_REGEX: Pattern[str] = re.compile(r"""
@@ -254,7 +360,7 @@ class State:
         $                            # Ends at the end of the string
     """, re.VERBOSE)
     """
-    Regular expression for analyzing Silk *binding* syntax.
+    Regular expression for analyzing Fluvel *binding* syntax.
 
     Expected format::
     
@@ -262,9 +368,9 @@ class State:
 
     Examples:
     
-    * ``@vm.username`` (Default unidirectional/bidirectional binding. Depends on the SKWidget)
-    * ``text:@vm.username`` (Explicit unidirectional binding)
-    * ``text:textChanged:@vm.username`` (Bidirectional binding)
+    * ``@vm.username`` (**Level 1**: Default unidirectional/bidirectional binding. Depends on the Widget)
+    * ``text:@vm.username`` (**Level 2**: Explicit unidirectional binding)
+    * ``text:textChanged:@vm.username`` (**Level 3**: Explicit Bidirectional binding)
 
     :type: :py:class:`~typing.Pattern`
     """
@@ -297,7 +403,7 @@ class State:
         -------
         .. code-block:: py
 
-            @State.create(group=“LoginViewModel”, alias="vm")
+            @State.create(group="LoginViewModel", alias="lvm")
             def login_state(st: StateGroup):
             
                 st.define(
@@ -333,13 +439,13 @@ class State:
         # Decorator
         def decorator(func: Callable) -> None:
             
-            # Ejecutamos la función que decora State.create
-            # Para poder procesar el estado
+            # We execute the function that decorates State.create
+            # In order to process the state
             func(state_group_instance)
 
-            # La función decorada es manejada por la clase State,
-            # por lo que no es necesario su Retorno ni ejecución posterior a 
-            # su definición
+            # The decorated function is handled by the State class,
+            # so it is not necessary to return it or execute it after 
+            # its definition.
             return None
     
         return decorator
@@ -378,15 +484,15 @@ class State:
         :param bind_string: The binding string with the format ``[prop][:signal]:@alias.key``.
                 :type bind_string: str
 
-        :raises SilkBindingError: If the syntax of the binding string is invalid.
-        :raises SilkStateError: If the alias or state key is not found.
+        :raises FluvelBindingError: If the syntax of the binding string is invalid.
+        :raises FluvelStateError: If the alias or state key is not found.
         :rtype: None
         """
 
         _match = re.match(cls.BIND_REGEX, bind_string)
 
         if not _match:
-            raise SilkBindingError(
+            raise FluvelBindingError(
                 f"Invalid binding syntax: '{bind_string}'. "
                 "Expected format: 'property:signal:@alias.key'."
                 "Ex: '@vm.volume' or 'text:@h.username' or 'value:rangeChanged:@global.theme'."
@@ -397,21 +503,21 @@ class State:
         alias = parsed_binding.get("alias")
         key = parsed_binding.get("key")
         
-        state_group: StateGroup = cls.get_state_group(bind_string, alias, key)
+        state_group: StateGroup = cls._get_state_group(bind_string, alias, key)
         
         # Obtenendo la propiedad y señal a vincular del widget 
         prop_from_regex = parsed_binding.get("property")
         signal_from_regex = parsed_binding.get("signal")
         
-        # Level 1
+        # Level 1 Binding
         if not prop_from_regex and not signal_from_regex:
             prop_name = widget._BINDABLE_PROPERTY
             signal_name = widget._BINDABLE_SIGNAL
-        # Level 2
+        # Level 2 Binding
         elif prop_from_regex and not signal_from_regex:
             prop_name = prop_from_regex
             signal_name = None
-        # Level 3
+        # Level 3 Binding
         else:
             prop_name = prop_from_regex
             signal_name = signal_from_regex
@@ -425,7 +531,7 @@ class State:
             cls.set_bidirectional_binding(widget, state_group, key, signal_name, prop_name)
 
     @classmethod
-    def get_state_group(cls, bind_string: str, alias: str, key: str) -> StateGroup:
+    def _get_state_group(cls, bind_string: str, alias: str, key: str) -> StateGroup:
         """
         Searches for and validates the existence of the StateGroup and the state key.
 
@@ -438,11 +544,11 @@ class State:
         :returns: The instance of :py:class:`StateGroup` found.
         :rtype: :py:class:`StateGroup`
 
-        :raises SilkStateError: If the StateGroup alias or key does not exist.
+        :raises FluvelStateError: If the StateGroup alias or key does not exist.
         """
 
         if alias not in cls._groups:
-            raise SilkStateError(    
+            raise FluvelStateError(    
                 f"StateGroup alias '{alias}' not found for binding '{bind_string}'."
                 "Make sure the StateGroup is defined with @State.create."
             )
@@ -450,7 +556,7 @@ class State:
         state_group_instance = cls._groups[alias]
 
         if not state_group_instance.has_key(key):
-            raise SilkStateError(
+            raise FluvelStateError(
                 f"Key '{key}' not found in StateGroup '{alias}' for binding '{bind_string}'."
                 "Make sure the key is defined with st.define() or st.computed()."
             )
@@ -476,31 +582,31 @@ class State:
         :rtype: None
         """
         
-        # El valor inicial de la propiedad se aplica por primera vez de forma inmediata
-        # Esto asegura que el widget se sincronice con el estado desde el principio.
+        # The initial value of the property is applied immediately for the first time.
+        # This ensures that the widget is synchronized with the state from the beginning.
         initial_value = state_obj.get(key)
         widget.setProperty(prop_name, initial_value)
         
-        # Definimos la función reactiva encargada de actualizar el widget cuando
-        # el estado de las 'definitions' o 'computed properties' cambie.
+        # We define the reactive function responsible for updating the widget when
+        # the state of the ‘definitions’ or ‘computed properties’ changes.
         def update_widget_from_state(changed_attr: str) -> None:
 
             if changed_attr == key:
                 
-                # El Nuevo valor de la propiedad 'prop_name' del widget,
-                # obtenido mediante StateGroup.get() a través de su 'key'
+                # The new value of the widget's ‘prop_name’ property,
+                # obtained using StateGroup.get() through its ‘key’
                 new_value = state_obj.get(key)
 
-                # Esto es un mecanismo de control
-                # para evitar bucles infinitos
+                # This is a control mechanism
+                # to avoid infinite loops
                 if widget.property(prop_name) != new_value:
 
                     # Establishing the new property value
                     widget.setProperty(prop_name, new_value)
         
-        # Por último, enlazamos la función reactiva definida arriba
-        # a la señal 'state_changed' del StateGroup 'state_obj' para que
-        # se ejecute cuando haya un cambio de estado
+        # Finally, we link the reactive function defined above
+        # to the ‘state_changed’ signal of the StateGroup ‘state_obj’ so that
+        # it is executed when there is a state change
         state_obj.state_changed.connect(update_widget_from_state)
 
     @classmethod
@@ -532,8 +638,9 @@ class State:
             def update_state_from_widget(*args):
 
                 if args:
-                    # Si la señal emite un valor
-                    widget_value = args[0] 
+                    # Si la señal emite valores
+                    widget_value = args[0]
+                    print(args)
 
                 else:
                     widget_value = widget.property(prop_name)
@@ -545,26 +652,40 @@ class State:
             widget_signal.connect(update_state_from_widget)
 
     @classmethod
-    def get(cls, group_alias: str, state: str) -> Any:
+    def get_group(cls, group_alias: str) -> StateGroup:
         """
-        Convenience access method to obtain a state value
-        from anywhere in the application.
+        Get the full instance of a :py:class:`StateGroup` using its alias.
 
-        Equivalent to calling ``State.get_state_group(alias).get(state)``.
+        This method provides access to the state management of a specific group
+        from anywhere in the application, allowing direct interaction
+        with methods such as :py:meth:`StateGroup.get` and :py:meth:`StateGroup.set`.
 
-        :param group_alias: The alias of the state group.
+        :param group_alias: The short, unique alias of the state group (e.g., ``“vm”``).
         :type group_alias: str
-        :param state: The state key to obtain.
-        :type state: str
-        :returns: The current value of the state or computed property.
-        :rtype: Any
+        :returns: The instance of :py:class:`StateGroup` associated with the alias.
+        :rtype: :py:class:`StateGroup`
 
-        :raises SilkStateError: If the StateGroup alias is not found.
+        :raises FluvelStateError: If the group alias is not registered in the system.
+        
+        Example
+        -------
+        .. code-block:: python
+
+            # Get the value of a state:
+            volume_state = State.get_group("vm")
+
+            # Getting a state value
+            current_volume = volume_state.get("volume")
+            # or
+            current_volume = volume_state["volume"]
+
+            # Modify a state:
+            volume_state.set("is_muted", True)
+            # or
+            volume_state["is_muted"] = True
         """
 
-        group = cls._groups.get(group_alias)
+        if group:=cls._groups.get(group_alias):
+            return group
 
-        if not group:
-            raise SilkStateError(f"StateGroup alias '{group_alias}' not found.")
-            
-        return group.get(state)
+        raise FluvelStateError(f"StateGroup alias '{group_alias}' not found.")
